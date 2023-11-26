@@ -63,8 +63,8 @@
                                         <div><label class="w-checkbox checkbox-field"><input type="checkbox" id="checkbox"
                                                     name="checkbox" data-name="Checkbox" class="w-checkbox-input" /><span
                                                     class="w-form-label" for="checkbox">Zapamti me</span></label></div>
-                                        <input type="submit" value="Prijavi se" data-wait="Please wait..."
-                                            class="submit-button-2 w-button" />
+                                        <input type="submit" value="Prijavi se" data-value="Prijavi se" data-wait="../public/src/loading.gif"
+                                            class="submit-button-2 w-button" id="login-submit"/>
 
                                         <div class="div-block-77" id="login-error-div" style="display: none">
                                             <div style="" id="login-error-div2"
@@ -117,8 +117,8 @@
                                             <div class="text-block-18">Vaši lični podaci će se koristiti radi poboljšanja
                                                 vašeg iskustva na ovoj veb stranici, upravljanja pristupom vašem nalogu i u
                                                 skladu s našom politikom privatnosti</div>
-                                        </div><input type="submit" value="Registruj se" data-wait="Please wait..."
-                                            class="submit-button-2 w-button" />
+                                        </div><input type="submit" value="Registruj se" data-value="Registruj se" data-wait="../public/src/loading.gif"
+                                            class="submit-button-2 w-button" id="register-submit"/>
                                     </form>
                                     <div class="w-form-done"></div>
                                     <div class="w-form-fail"></div>

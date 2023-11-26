@@ -17,7 +17,8 @@ class User{
         $stmt->store_result();
         return $stmt->num_rows > 0;
     }
-    public function isUsernameTaken($username){
+
+    private function isUsernameTaken($username){
         $sql = "SELECT * FROM users WHERE username = ?";
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("s", $username);
@@ -40,7 +41,7 @@ class User{
                 $result = $stmt->execute();
         
                 if($result){
-                    $_SESSION['user_id'] = $result->insert_id;
+                    // $_SESSION['user_id'] = $result->insert_id;
                     return true;
                 }
                 else{

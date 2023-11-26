@@ -2,6 +2,8 @@ const registerForm = document.querySelector('#email-form-2');
 registerForm.addEventListener('submit', function(e){
     e.preventDefault();
 
+    startLoadingAnimation();
+
     const registerErrorDiv = document.querySelector('#register-error-div');
     const registerErrorDiv2 = registerErrorDiv.querySelector('#register-error-div2');
     registerErrorDiv2.classList.remove("animate");
@@ -16,7 +18,24 @@ registerForm.addEventListener('submit', function(e){
         register(username, email, password, repeatedPassword);
     }
 });
+function startLoadingAnimation(){
+    var submitButton = document.querySelector("#register-submit");
+    const originalValue = submitButton.value;
+    const waitImage = new Image();
+    waitImage.src = submitButton.getAttribute('data-wait');
 
+    submitButton.value = '';
+
+    submitButton.style.backgroundImage = `url('${waitImage.src}')`;
+    submitButton.style.backgroundSize = '7%';
+    submitButton.style.backgroundRepeat = 'no-repeat';
+    submitButton.style.backgroundPosition = 'center';
+}
+function stopLoadingAnimation(){
+    var submitButton = document.querySelector("#register-submit");
+    submitButton.value = submitButton.getAttribute('data-value');
+    submitButton.style.backgroundImage = 'none';
+}
 function register(username, email, password, repeatedPassword){
     fetch('../app/controllers/userController.php',{
         method: 'POST',
@@ -40,26 +59,39 @@ function register(username, email, password, repeatedPassword){
     })
     .then(data => { 
         console.log(data);
+        stopLoadingAnimation();
         if(data.status === 'error'){
             console.log(data.message);
-            const registerErrorDiv = document.querySelector('#register-error-div');
-            registerErrorDiv.style.display = 'block';
-            setTimeout(()=>{
-                const registerErrorDiv2 = registerErrorDiv.querySelector('#register-error-div2');
-                const registerError = registerErrorDiv.querySelector('#register-error');
-                const errorText = registerError.querySelector('span');
-                errorText.innerHTML = data.message;
-                registerErrorDiv2.classList.toggle('animate');
-            }, 50)
-            console.log(data.message);
+            showNotification(1, data.message);
         }else{
             console.log('Uspesna registracija');
-            window.location.href = "../views/index.php";
+            //window.location.href = "../views/index.php";
+            showNotification(2, email);
         }
     })
     .catch(error => {
         console.log('Greska:', error);
     });
+}
+
+function showNotification(action, data){
+    const registerErrorDiv = document.querySelector('#register-error-div');
+    registerErrorDiv.style.display = 'block';
+    setTimeout(()=>{
+        const registerErrorDiv2 = registerErrorDiv.querySelector('#register-error-div2');
+        const registerError = registerErrorDiv.querySelector('#register-error');
+        const boldText= registerError.querySelector('b');
+        const errorText = registerError.querySelector('span');
+
+        if(action === 1){
+            errorText.innerHTML = data;
+        }else{
+            boldText.innerHTML = "Obaveštenje";
+            errorText.innerHTML = `Uspešno ste se registrovali. Na Vašu email adresu (${data}) smo poslasli verifikacioni link. Molimo vas da verifikujete email adresu a nakon toga ćete moći da se prijavite.`;
+        }
+
+        registerErrorDiv2.classList.toggle('animate');
+    }, 50);
 }
 
 const registerShowPassword = document.querySelector('#register-show-password');
