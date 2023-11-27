@@ -8,10 +8,7 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Webflow" name="generator" />
         <link
-            href="../public/css/header-footer.css?v=<?php echo time(); ?>"
-            rel="stylesheet" type="text/css" />
-        <link
-            href="../public/css/login.css?v=<?php echo time(); ?>"
+            href="../public/css/style.css?v=<?php echo time(); ?>"
             rel="stylesheet" type="text/css" />
         <script
             type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
