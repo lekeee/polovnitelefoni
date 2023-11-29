@@ -1,20 +1,13 @@
+<?php
+    include_once "../app/auth/checkAuthState.php";
+?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
     data-wf-site="655506e07faa7f82a5f25610">
 
-<head>
-    <meta charset="utf-8" />
-    <title>Polovni Telefoni</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="Webflow" name="generator" />
-    <link
-        href="../public/css/style.css?v=<?php echo time(); ?>"
-        rel="stylesheet" type="text/css" />
-    <script
-        type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
-    <link href="https://assets-global.website-files.com/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href="https://assets-global.website-files.com/img/webclip.png" rel="apple-touch-icon" />
-</head>
+<?php
+    require_once "../inc/headTag.php";
+?>
 
 <body class="body">
 
@@ -23,11 +16,12 @@
         require_once "../inc/bottomNavigator.php";
         require_once "../inc/mobileMenu.php";
     ?>
-
+    <script src="../public/js/signOut.js?v=<?php echo time(); ?>"
+        type="text/javascript"></script>
     <section class="dashboard">
         <div class="div-block-676">
             <div class="div-block-677">
-                <div class="div-block-678"><a href="#" class="dashboardlinks active w-inline-block">
+                <div class="div-block-678"><a href="dashboard.php" class="dashboardlinks active w-inline-block">
                         <div>Kontrolna tabla</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Narudžbine</div>
@@ -35,13 +29,13 @@
                         <div>Preuzimanja</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Adrese</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
+                    </a><a href="edit-account.php" class="dashboardlinks w-inline-block">
                         <div>Podaci o nalogu</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Upoređivanja</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Omiljeni oglasi</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
+                    </a><a href="#" class="dashboardlinks w-inline-block" onclick="signOut()">
                         <div>Odjavi se</div>
                     </a></div>
                 <div class="div-block-679">
