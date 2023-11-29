@@ -57,6 +57,7 @@ class User{
         
     }
 
+    /* ne koristi se
     public function create($name, $lastname, $username, $email, $password, $phone, $city, $address){
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
@@ -74,7 +75,7 @@ class User{
         else{
             return false;
         }
-    }
+    }*/
 
     public function login($emailOrUsername, $password){
         $sql = "SELECT user_id, password FROM users WHERE email = ? OR username = ?";
@@ -96,6 +97,68 @@ class User{
         return false;
     }
 
+    public function returnUser(){ 
+        $user_id = $this->getId();
+        $sql = "SELECT * FROM users WHERE user_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $user = $result->fetch_assoc();
+        
+        //ako kojim slucajem nema user vraca null
+        return $user ? json_encode($user) : null;
+    }
+
+    public function updateUser($name, $lastname, $username, $email, $password, $phone, $city, $address){
+        $user_id = $this->getId();
+        $sql = "UPDATE users SET 
+        name = ?, 
+        lastname = ?, 
+        username = ?, 
+        email = ?,  
+        phone = ?, 
+        city = ?, 
+        address = ? 
+        WHERE user_id = ?";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("sssssssi", $name, $lastname, $username, $email, $phone, $city, $address, $user_id);
+
+        // Izvršavanje upita
+        $stmt->execute();
+        $results = $stmt->get_result();
+
+        if($password){
+            if($this->updatePassword())
+                return true;
+            else
+                return false;
+        }
+
+        if($results)
+            return true;
+        else 
+            return false;
+    }
+
+    public function updatePassword() {
+        $user_id = $this->getId();
+
+        $sql = "UPDATE users SET 
+        password = ? 
+        WHERE user_id = ?";
+
+        $stmt->execute();
+        $results = $stmt->get_result();
+
+        if($results) 
+            return true;
+        else
+            return false;
+    }
+
     public function isLogged(){
         if(isset($_SESSION['user_id'])){
             return true;
@@ -108,6 +171,9 @@ class User{
     }
 
     public function getId(){
-        return $_SESSION['user_id'];
+        if(isset($_SESSION['user_id'])){
+            return $_SESSION['user_id'];
+        }
+        else return false;
     }
 }
