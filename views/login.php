@@ -19,7 +19,9 @@
 
     <body class="body">
 
-
+        <link
+            href="../public/css/login.css?v=<?php echo time(); ?>"
+            rel="stylesheet" type="text/css" />
         <?php
             require_once "../inc/header.php";
             require_once "../inc/bottomNavigator.php";
