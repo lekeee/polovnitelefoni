@@ -58,7 +58,7 @@ function login(email, password){
         stopLoadingAnimation();
         if(data.status === 'error'){
             console.log(data.message);
-            showNotification(1, data.message);
+            showNotification2(1, data.message);
         }else{
             console.log('Uspesno ste se prijavili.');
             window.location.href = "../views/index.php";
@@ -70,7 +70,7 @@ function login(email, password){
     });
 }
 
-function showNotification(action, data){
+function showNotification2(action, data){
     const loginErrorDiv = document.querySelector('#login-error-div');
     loginErrorDiv.style.display = 'block';
     setTimeout(()=>{
@@ -87,7 +87,7 @@ function showNotification(action, data){
         }
 
         loginErrorDiv2.classList.toggle('animate');
-    }, 50);
+    }, 100);
 }
 
 const showPassword = document.querySelector('#login-show-password');
