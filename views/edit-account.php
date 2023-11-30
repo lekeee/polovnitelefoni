@@ -1,6 +1,7 @@
 
 <?php
     include_once "../app/auth/checkAuthState.php";
+    $userData = json_decode($user->returnUser(), true);
 ?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
@@ -45,25 +46,29 @@
                             <div class="div-block-681">
                                 <div class="div-block-682 inputupdate"><label for="UserName" class="field-label">Ime
                                         *</label><input type="text" class="updateinput w-input" maxlength="256"
-                                        name="UserName" data-name="UserName" placeholder="" id="UserName" required="" />
+                                        name="UserName" data-name="UserName" placeholder="" id="UserName" required=""
+                                        value="<?php echo $userData['name'] ?? ''; ?>"/>
                                 </div>
-                                <div class="div-block-683"><label for="UserSurname" class="field-label-2">Prezime
+                                <div class="div-block-682"><label for="UserSurname" class="field-label-2">Prezime
                                         *</label><input type="text" class="updateinput w-input" maxlength="256"
                                         name="UserSurname" data-name="UserSurname" placeholder="" id="UserSurname"
-                                        required="" /></div>
+                                        required="" value="<?php echo $userData['lastname'] ?? ''; ?>"/></div>
                             </div>
                             <div class="div-block-684"></div>
                             <div class="div-block-682 inputupdate pdtop"><label for="UserUsername"
                                     class="field-label-3">Korisničko ime *</label><input type="text"
                                     class="updateinput w-input" maxlength="256" name="UserUsername"
-                                    data-name="UserUsername" placeholder="" id="UserUsername" required="" />
+                                    data-name="UserUsername" placeholder="" id="UserUsername" required="" 
+                                    value="<?php echo $userData['username'] ?? ''; ?>"/>
                                 <div class="text-block-44">Ovo ime će se prikazivati u sekciji naloga i recenzijama
                                 </div>
                             </div>
                             <div class="div-block-682 inputupdate pdtop"><label for="UserEmail"
                                     class="field-label-3">Email adresa (Ne moze se promeniti)</label><input type="email"
                                     class="updateinput w-input" maxlength="256" name="UserEmail" data-name="UserEmail"
-                                    placeholder="" id="UserEmail" /></div>
+                                    placeholder="" id="UserEmail" 
+                                    value="<?php echo $userData['email'] ?? ''; ?>"
+                                    disabled/></div>
                             <div class="div-block-681">
                                 <div class="div-block-682 inputupdate pdtop"><label for="UserCity"
                                         class="field-label">Grad *</label><select id="UserCity" name="UserCity"
