@@ -1,5 +1,7 @@
 <?php
 
+include_once '../exceptions/userExceptions.php';
+
 class User{
 
     protected $con;
@@ -111,52 +113,71 @@ class User{
         return $user ? json_encode($user) : null;
     }
 
-    public function updateUser($name, $lastname, $username, $email, $password, $phone, $city, $address){
+    public function updateUser($name, $lastname, $username, $oldPassword, $password, $phone, $city, $address){
         $user_id = $this->getId();
         $sql = "UPDATE users SET 
         name = ?, 
         lastname = ?, 
-        username = ?, 
-        email = ?,  
         phone = ?, 
         city = ?, 
         address = ? 
         WHERE user_id = ?";
 
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("sssssssi", $name, $lastname, $username, $email, $phone, $city, $address, $user_id);
+        $stmt->bind_param("sssssi", $name, $lastname, $phone, $city, $address, $user_id);
 
         // Izvršavanje upita
         $stmt->execute();
-        $results = $stmt->get_result();
-
-        if($password){
-            if($this->updatePassword())
-                return true;
-            else
-                return false;
+        $results = $stmt->affected_rows;
+        
+        $userData = $this->returnUser();
+        if($oldPassword){
+            $hashed_password = json_decode($userData, true)['password'];
+            if(password_verify($oldPassword, $hashed_password)){
+                if($password){
+                    if($this->updatePassword($password)){
+                        return isset($results);
+                    }
+                    else
+                        return false;
+                }
+            }else
+                throw new WRONG_PASSWORD();
         }
 
-        if($results)
-            return true;
-        else 
-            return false;
+        if($username !== json_decode($userData, true)['username'] && $this->isUsernameTaken($username)){
+            throw new USERNAME_TAKEN_EXCEPTION();
+            return 'USRNAME_TAKEN';
+        }
+        return $this->updateUsername($username) && isset($results);
     }
 
-    public function updatePassword() {
-        $user_id = $this->getId();
+    private function updateUsername($username){
+        $sql = "UPDATE users SET 
+        username = ?
+        WHERE user_id = ?";
 
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("si", $username, $this->getId());
+
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+
+        return isset($results);
+    }
+
+    private function updatePassword($password) {
         $sql = "UPDATE users SET 
         password = ? 
         WHERE user_id = ?";
 
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("si", password_hash($password, PASSWORD_DEFAULT), $this->getId());
+        
         $stmt->execute();
-        $results = $stmt->get_result();
+        $results = $stmt->affected_rows;
 
-        if($results) 
-            return true;
-        else
-            return false;
+        return isset($results);
     }
 
     public function isLogged(){

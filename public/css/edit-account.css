@@ -1,0 +1,8 @@
+@import url('../css/variables.css');
+.edit-account-error{
+    margin: 0px 10px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: none;
+}
