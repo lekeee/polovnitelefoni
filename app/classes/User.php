@@ -176,4 +176,8 @@ class User{
         }
         else return false;
     }
+
+    public function sendEmailVeificationCode(){
+        
+    }
 }
