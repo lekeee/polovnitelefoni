@@ -67,6 +67,12 @@
                         'message' => 'Došlo je do greške. Molimo pokušajte kasnije'
                     );
                 }
+            }else if($data['action'] === 'signout'){
+                $user->logout();
+                $response = array(
+                    'status' => 'success',
+                    'message' => "Uspesno ste se odjavili"
+                );
             }
         }
     }else{

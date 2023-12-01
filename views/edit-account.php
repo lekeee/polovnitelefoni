@@ -1,22 +1,14 @@
+
+<?php
+    include_once "../app/auth/checkAuthState.php";
+    $userData = json_decode($user->returnUser(), true);
+?>
 <!DOCTYPE html>
-<!-- This site was created in Webflow. https://www.webflow.com --><!-- Last Published: Mon Nov 27 2023 15:21:49 GMT+0000 (Coordinated Universal Time) -->
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
     data-wf-site="655506e07faa7f82a5f25610">
-
-<head>
-    <meta charset="utf-8" />
-    <title>Polovni Telefoni</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="Webflow" name="generator" />
-    <link
-        href="../public/css/style.css?v=<?php echo time(); ?>"
-        rel="stylesheet" type="text/css" />
-    <script
-        type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
-    <link href="https://assets-global.website-files.com/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href="https://assets-global.website-files.com/img/webclip.png" rel="apple-touch-icon" />
-</head>
-
+<?php
+    require_once "../inc/headTag.php";
+?>
 <body class="body">
 
     <?php
@@ -28,7 +20,7 @@
     <section class="dashboard">
         <div class="div-block-676">
             <div class="div-block-677">
-                <div class="div-block-678"><a href="#" class="dashboardlinks w-inline-block">
+                <div class="div-block-678"><a href="dashboard.php" class="dashboardlinks w-inline-block">
                         <div>Kontrolna tabla</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Narudžbine</div>
@@ -36,7 +28,7 @@
                         <div>Preuzimanja</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Adrese</div>
-                    </a><a href="#" class="dashboardlinks active w-inline-block">
+                    </a><a href="edit-account.php" class="dashboardlinks active w-inline-block">
                         <div>Podaci o nalogu</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Upoređivanja</div>
@@ -54,25 +46,29 @@
                             <div class="div-block-681">
                                 <div class="div-block-682 inputupdate"><label for="UserName" class="field-label">Ime
                                         *</label><input type="text" class="updateinput w-input" maxlength="256"
-                                        name="UserName" data-name="UserName" placeholder="" id="UserName" required="" />
+                                        name="UserName" data-name="UserName" placeholder="" id="UserName" required=""
+                                        value="<?php echo $userData['name'] ?? ''; ?>"/>
                                 </div>
-                                <div class="div-block-683"><label for="UserSurname" class="field-label-2">Prezime
+                                <div class="div-block-682"><label for="UserSurname" class="field-label-2">Prezime
                                         *</label><input type="text" class="updateinput w-input" maxlength="256"
                                         name="UserSurname" data-name="UserSurname" placeholder="" id="UserSurname"
-                                        required="" /></div>
+                                        required="" value="<?php echo $userData['lastname'] ?? ''; ?>"/></div>
                             </div>
                             <div class="div-block-684"></div>
                             <div class="div-block-682 inputupdate pdtop"><label for="UserUsername"
                                     class="field-label-3">Korisničko ime *</label><input type="text"
                                     class="updateinput w-input" maxlength="256" name="UserUsername"
-                                    data-name="UserUsername" placeholder="" id="UserUsername" required="" />
+                                    data-name="UserUsername" placeholder="" id="UserUsername" required="" 
+                                    value="<?php echo $userData['username'] ?? ''; ?>"/>
                                 <div class="text-block-44">Ovo ime će se prikazivati u sekciji naloga i recenzijama
                                 </div>
                             </div>
                             <div class="div-block-682 inputupdate pdtop"><label for="UserEmail"
                                     class="field-label-3">Email adresa (Ne moze se promeniti)</label><input type="email"
                                     class="updateinput w-input" maxlength="256" name="UserEmail" data-name="UserEmail"
-                                    placeholder="" id="UserEmail" /></div>
+                                    placeholder="" id="UserEmail" 
+                                    value="<?php echo $userData['email'] ?? ''; ?>"
+                                    disabled/></div>
                             <div class="div-block-681">
                                 <div class="div-block-682 inputupdate pdtop"><label for="UserCity"
                                         class="field-label">Grad *</label><select id="UserCity" name="UserCity"

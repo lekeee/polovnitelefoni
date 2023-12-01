@@ -4592,7 +4592,7 @@ textarea.w-input, textarea.w-select {
   }
 
   .div-block-682.inputupdate {
-    padding-left: 0;
+    padding-left: 10;
   }
 
   .div-block-683 {
@@ -4767,13 +4767,16 @@ textarea.w-input, textarea.w-select {
     flex-direction: column;
     justify-content: center;
   }
-
+  .div-block-682{
+    padding-right: 0;
+    display: block;
+  }
   .div-block-682.inputupdate {
     padding-right: 0;
     display: block;
   }
 
-  .div-block-683 {
+  .div-block-682 {
     padding-top: 10px;
     padding-left: 0;
   }
