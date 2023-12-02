@@ -57,6 +57,7 @@ editAccountForm.addEventListener('submit', function(e){
 });
 
 function showErrorNotification(status, message){
+    stopLoadingAnimation("saveButton");
     console.log(`${status} ${message}`);
     const errorDiv = document.querySelector('#edit-account-message');
     const errorText = errorDiv.querySelector('div');
