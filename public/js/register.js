@@ -2,7 +2,7 @@ const registerForm = document.querySelector('#email-form-2');
 registerForm.addEventListener('submit', function(e){
     e.preventDefault();
 
-    startLoadingAnimation();
+    startLoadingAnimation("register-submit");
 
     const registerErrorDiv = document.querySelector('#register-error-div');
     const registerErrorDiv2 = registerErrorDiv.querySelector('#register-error-div2');
@@ -18,24 +18,6 @@ registerForm.addEventListener('submit', function(e){
         register(username, email, password, repeatedPassword);
     }
 });
-function startLoadingAnimation(){
-    var submitButton = document.querySelector("#register-submit");
-    const originalValue = submitButton.value;
-    const waitImage = new Image();
-    waitImage.src = submitButton.getAttribute('data-wait');
-
-    submitButton.value = '';
-
-    submitButton.style.backgroundImage = `url('${waitImage.src}')`;
-    submitButton.style.backgroundSize = '7%';
-    submitButton.style.backgroundRepeat = 'no-repeat';
-    submitButton.style.backgroundPosition = 'center';
-}
-function stopLoadingAnimation(){
-    var submitButton = document.querySelector("#register-submit");
-    submitButton.value = submitButton.getAttribute('data-value');
-    submitButton.style.backgroundImage = 'none';
-}
 function register(username, email, password, repeatedPassword){
     fetch('../app/controllers/userController.php',{
         method: 'POST',
@@ -59,7 +41,7 @@ function register(username, email, password, repeatedPassword){
     })
     .then(data => { 
         console.log(data);
-        stopLoadingAnimation();
+        stopLoadingAnimation("register-submit");
         if(data.status === 'error'){
             console.log(data.message);
             showNotification(1, data.message);

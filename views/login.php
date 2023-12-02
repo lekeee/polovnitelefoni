@@ -140,7 +140,7 @@
         type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
     </script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
-    <!-- <script src="../public/js/animation.js?v=<?php echo time(); ?>"></script> -->
+    <script src="../public/js/animation.js?v=<?php echo time(); ?>"></script>
     <script src="../public/js/login.js?v=<?php echo time(); ?>"></script>
     <script src="../public/js/register.js?v=<?php echo time(); ?>"></script>
 </body>

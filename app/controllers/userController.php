@@ -39,12 +39,12 @@
 
                     if($password === $repeatedPassword){
                         $result = $user->createPrimary($username, $email, $password);
-                        if($result === true){
+                        if($result === TRUE){
                             $response = array(
                                 'status' => 'success',
                                 'message' => 'Uspešno ste se registrovali'
                             );
-                        }else if($result === false){
+                        }else if($result === FALSE){
                             $response = array(
                                 'status' => 'error',
                                 'message' => 'Došlo je do greške prilikom registracije'
