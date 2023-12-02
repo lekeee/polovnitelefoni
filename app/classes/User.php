@@ -42,15 +42,10 @@ class User{
         
                 $stmt->bind_param("sss", $username, $email, $hashed_password);
         
-                $result = $stmt->execute();
-        
-                if($result){
-                    // $_SESSION['user_id'] = $result->insert_id;
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                $stmt->execute();
+                $results = $stmt->affected_rows;
+
+                return isset($results);
             }else{
                 return "Korisničko ime je zauzeto.";
             }

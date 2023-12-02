@@ -57,7 +57,7 @@ editAccountForm.addEventListener('submit', function(e){
 });
 
 function showErrorNotification(status, message){
-    console.log(`${status} ${message}`);
+    stopLoadingAnimation("saveButton");
     const errorDiv = document.querySelector('#edit-account-message');
     const errorText = errorDiv.querySelector('div');
     errorText.innerHTML = message;
@@ -100,8 +100,7 @@ function updateUserData(name, lastname, username, oldPassword, newPassword, mobi
             throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
         }
     })
-    .then(data => { 
-        console.log(data);
+    .then(data => {
         stopLoadingAnimation("saveButton");
         showErrorNotification(data.status, data.message);
     })
