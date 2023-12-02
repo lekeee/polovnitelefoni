@@ -1,4 +1,6 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 include_once '../exceptions/userExceptions.php';
 
@@ -196,5 +198,93 @@ class User{
             return $_SESSION['user_id'];
         }
         else return false;
+    }
+
+    public function generateVerificationCode(){
+        $length = 24; //duzina koda
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $code = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $code .= $characters[$index];
+        }
+
+        return $code;
+    }
+
+    public function saveVerificationCode($code){
+        $user_id = $this->getId();
+
+        $sql = "INSERT INTO verifikacioni_kodovi (user_id, verification_code) 
+                VALUES (?,?)";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("ss", $user_id, $code);
+
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+        
+        return isset($results);
+    }
+
+    public function updateVerificationCode($code){
+        $user_id = $this->getId();
+
+        $sql = "UPDATE verifikacioni_kodovi SET 
+                verification_code = ?
+                WHERE user_id = ?";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("ss", $code, $user_id);
+
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+        
+        return isset($results);
+    }
+
+    public function verifyUser(){
+        $user_id = $this->getId();
+        $sql = "UPDATE users SET 
+        verified = '1'
+        WHERE user_id = ?";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("s", $user_id);
+
+        // Izvršavanje upita
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+        
+        return isset($results);
+    }
+
+    public function sendVerificationEmail($email){
+        require "PHPMailer/src/Exception.php";
+        require "PHPMailer/src/PHPMailer.php";
+        require "PHPMailer/src/SMTP.php";
+
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = "smtp.gmail.com";
+        $mail->SMTPAuth = true;
+        $mail->Username = 'polovnitelefoni383@gmail.com';
+        $mail->Password = 'oava ufgw rplr zhbq';
+        $mail->SMTPSecure = "ssl";
+        $mail->Port = 465;
+
+        $mail->setFrom("polovnitelefoni383@gmail.com");
+        $mail->addAddress($email);
+        $mail->isHTML(true);
+
+        $mail->Subject = "Verifikacija naloga";
+        $mail->Body = " Otvorite prosledjenu stranicu i nalog ce biti verifikovan:
+                        http://localhost/polovnitelefoni/app/verification/verification_page.php?uid=.$uid
+                    
+                        Polovni telefoni"; //link
+        $mail->send();
+
+        return true;
     }
 }
