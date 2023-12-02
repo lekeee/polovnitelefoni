@@ -2,7 +2,7 @@
     require_once "../classes/User.php";
     require_once "../config/config.php";
     require_once "../classes/Phone.php";
-    
+    include_once '../exceptions/userExceptions.php';
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $data = json_decode(file_get_contents('php://input'), true);
@@ -73,6 +73,72 @@
                     'status' => 'success',
                     'message' => "Uspesno ste se odjavili"
                 );
+            }else if($data['action'] === 'edit-account'){
+                $name = $data['name'];
+                $lastname = $data['lastname'];
+                $username = $data['username'];
+                $oldPassword = $data['oldPassword'];
+                $newPassword = $data['newPassword'];
+                $mobilePhone = $data['mobilePhone'];
+                $city = $data['city'];
+                $address = $data['address'];
+
+                if(empty($name)){
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Polje Ime je obavezno!'
+                    );
+                }else if(empty($lastname)){
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Polje Prezime je obavezno!'
+                    );
+                }else if(empty($username)){
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Polje Korisnicko Ime je obavezno!'
+                    );
+                }else if(strlen($username) < 6 || strlen($username) > 20){
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Korisnicko ime nije adekvatno! (mora imati više od 6 a manje od 20 karaktera)'
+                    );
+                }else if(empty($city)){
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Polje Grad je obavezno!'
+                    );
+                }else if(empty($address)){
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Polje Adresa je obavezno!'
+                    );
+                }else{
+                    try{
+                        $result = $user->updateUser($name, $lastname, $username, $oldPassword, $newPassword, $mobilePhone, $city, $address);
+                        if($result === TRUE){
+                            $response = array(
+                                'status' => 'success',
+                                'message' => 'Uspesno ste ažurirali Vaše podatke!'
+                            );
+                        }else{
+                            $response = array(
+                                'status' => 'error',
+                                'message' => $result
+                            );
+                        }
+                    }catch(USERNAME_TAKEN_EXCEPTION $e){
+                        $response = array(
+                            'status' => 'error',
+                            'message' => 'Korisničko ime koje ste uneli je zauzeto!'
+                        );
+                    }catch(WRONG_PASSWORD $e){
+                        $response = array(
+                            'status' => 'error',
+                            'message' => 'Vaša stara lozinka je neispravna!'
+                        );
+                    }
+                }
             }
         }
     }else{

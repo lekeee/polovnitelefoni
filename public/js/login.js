@@ -2,7 +2,7 @@ const loginForm = document.querySelector('#wf-form-Email-Form-1');
 loginForm.addEventListener('submit', function(e){
     e.preventDefault();
 
-    startLoadingAnimation();
+    startLoadingAnimation("login-submit");
 
     const loginErrorDiv = document.querySelector('#login-error-div');
     const loginErrorDiv2 = loginErrorDiv.querySelector('#login-error-div2');
@@ -13,26 +13,6 @@ loginForm.addEventListener('submit', function(e){
     const password = loginForm.querySelector('#login-password').value;
     login(email, password);
 });
-
-function startLoadingAnimation(){
-    var submitButton = document.querySelector("#login-submit");
-    const originalValue = submitButton.value;
-    const waitImage = new Image();
-    waitImage.src = submitButton.getAttribute('data-wait');
-
-    submitButton.value = '';
-
-    submitButton.style.backgroundImage = `url('${waitImage.src}')`;
-    submitButton.style.backgroundSize = '7%';
-    submitButton.style.backgroundRepeat = 'no-repeat';
-    submitButton.style.backgroundPosition = 'center';
-}
-
-function stopLoadingAnimation(){
-    var submitButton = document.querySelector("#login-submit");
-    submitButton.value = submitButton.getAttribute('data-value');
-    submitButton.style.backgroundImage = 'none';
-}
 
 function login(email, password){
     fetch('../app/controllers/userController.php',{
@@ -55,7 +35,7 @@ function login(email, password){
     })
     .then(data => { 
         console.log(data);
-        stopLoadingAnimation();
+        stopLoadingAnimation("login-submit");
         if(data.status === 'error'){
             console.log(data.message);
             showNotification2(1, data.message);

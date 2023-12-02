@@ -1,7 +1,9 @@
+@import url('../css/variables.css');
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   font-family: sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -2085,16 +2087,6 @@ textarea.w-input, textarea.w-select {
 
 .wf-layout-layout {
   display: grid;
-}
-
-:root {
-  --border-color: #ddd;
-  --blue-color: #0086e6;
-  --third-color: #041e42;
-  --main-color: #ed6969;
-  --fourth-color: #fbbd28;
-  --background-light: #f7f8f9;
-  --greytext: #818ea0;
 }
 
 .container {
