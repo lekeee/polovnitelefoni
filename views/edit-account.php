@@ -16,6 +16,7 @@
         require_once "../inc/bottomNavigator.php";
         require_once "../inc/mobileMenu.php";
     ?>
+    <script src="../public/js/signOut.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <link href="../public/css/edit-account.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <section class="dashboard">
         <div class="div-block-676">
@@ -34,7 +35,7 @@
                         <div>Upoređivanja</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Omiljeni oglasi</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
+                    </a><a href="#" class="dashboardlinks w-inline-block" onclick="signOut()">
                         <div>Odjavi se</div>
                     </a></div>
                 <div class="div-block-679">
