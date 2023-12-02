@@ -1,6 +1,9 @@
 const editAccountForm = document.querySelector('#edit-account-form');
 editAccountForm.addEventListener('submit', function(e){
     e.preventDefault();
+
+    startLoadingAnimation("saveButton");
+
     const userName = editAccountForm.querySelector('#UserName');
     const userSurname = editAccountForm.querySelector('#UserSurname');
     const userUsername = editAccountForm.querySelector('#UserUsername');
@@ -21,7 +24,7 @@ editAccountForm.addEventListener('submit', function(e){
         showErrorNotification('error', 'Polje Korisnicko Ime je obavezno!');
         return;
     }else if(userUsername.value.length < 6 || userUsername.value.length > 20){
-        showErrorNotification('error', 'Korisnicko ime nije adekvatno');
+        showErrorNotification('error', 'Korisnicko ime nije adekvatno! (mora imati više od 6 a manje od 20 karaktera)' );
         return;
     }else if(userCity.value.trim() === ''){
         showErrorNotification('error', 'Polje Grad je obavezno!');
@@ -55,6 +58,20 @@ editAccountForm.addEventListener('submit', function(e){
 
 function showErrorNotification(status, message){
     console.log(`${status} ${message}`);
+    const errorDiv = document.querySelector('#edit-account-message');
+    const errorText = errorDiv.querySelector('div');
+    errorText.innerHTML = message;
+
+    if(status === 'success'){
+        errorDiv.classList.remove('edit-error');
+        errorDiv.classList.add('edit-success');
+    }else{
+        errorDiv.classList.remove('edit-success');
+        errorDiv.classList.add('edit-error');
+
+    }
+
+    window.location.href = "#edit-account-message";
 }
 
 function updateUserData(name, lastname, username, oldPassword, newPassword, mobilePhone, city, address){
@@ -85,21 +102,8 @@ function updateUserData(name, lastname, username, oldPassword, newPassword, mobi
     })
     .then(data => { 
         console.log(data);
-        if(data.status === 'error'){
-            console.log(typeof data.message);
-            switch(data.message){
-                case 'PASSWORD_ERROR':
-                    console.log('greska lozinke');
-                    break;
-                case 'USERNAME_TAKEN':
-                    console.log('greska username');
-                    break;
-                default:
-                    break;
-            }
-        }else{
-
-        }
+        stopLoadingAnimation("saveButton");
+        showErrorNotification(data.status, data.message);
     })
     .catch(error => {
         console.log('Greska:', error);
@@ -110,6 +114,31 @@ showMyCity();
 function showMyCity(){
     const citySelect = document.querySelector('#UserCity');
     const myCity = citySelect.getAttribute('value');
-    const cityOption = citySelect.querySelector(`option[value=${myCity}]`);
-    cityOption.setAttribute('selected', 'selected');
+    if(myCity !== ''){
+        const cityOption = citySelect.querySelector(`option[value=${myCity}]`);
+        cityOption.setAttribute('selected', 'selected');
+    }
+}
+
+function showPassword(x){
+    const showPasswordElement = document.querySelector(`#show${x}`);
+    const hidePasswordElement = document.querySelector(`#hide${x}`);
+
+    showPasswordElement.style.display = "none";
+    hidePasswordElement.style.display = "block";
+
+    const passwordInputID = showPasswordElement.getAttribute('input-id');
+    const password = document.querySelector(`#${passwordInputID}`);
+    password.type = "text";
+}
+function hidePassword(x){
+    const showPasswordElement = document.querySelector(`#show${x}`);
+    const hidePasswordElement = document.querySelector(`#hide${x}`);
+
+    hidePasswordElement.style.display = "none";
+    showPasswordElement.style.display = "block";
+
+    const passwordInputID = hidePasswordElement.getAttribute('input-id');
+    const password = document.querySelector(`#${passwordInputID}`);
+    password.type = "password";
 }

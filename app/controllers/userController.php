@@ -101,7 +101,7 @@
                 }else if(strlen($username) < 6 || strlen($username) > 20){
                     $response = array(
                         'status' => 'error',
-                        'message' => 'Korisnicko ime nije adekvatno!'
+                        'message' => 'Korisnicko ime nije adekvatno! (mora imati više od 6 a manje od 20 karaktera)'
                     );
                 }else if(empty($city)){
                     $response = array(
