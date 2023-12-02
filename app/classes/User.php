@@ -2,7 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-include_once '../exceptions/userExceptions.php';
+include_once(__DIR__ . '/../exceptions/userExceptions.php');
 
 class User{
 
