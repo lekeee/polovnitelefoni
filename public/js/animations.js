@@ -7,7 +7,7 @@ function startLoadingAnimation(buttonID){
     submitButton.value = '';
 
     submitButton.style.backgroundImage = `url('${waitImage.src}')`;
-    submitButton.style.backgroundSize = '20%';
+    submitButton.style.backgroundSize = '7%';
     submitButton.style.backgroundRepeat = 'no-repeat';
     submitButton.style.backgroundPosition = 'center';
     submitButton.disabled = true;

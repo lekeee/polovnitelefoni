@@ -4,10 +4,7 @@ registerForm.addEventListener('submit', function(e){
 
     startLoadingAnimation("register-submit");
 
-    const registerErrorDiv = document.querySelector('#register-error-div');
-    const registerErrorDiv2 = registerErrorDiv.querySelector('#register-error-div2');
-    registerErrorDiv2.classList.remove("animate");
-    registerErrorDiv.style.display = "none";
+    removeNotification();
 
     const username = registerForm.querySelector('#signup-username').value;
     const email = registerForm.querySelector('#signup-email').value;
@@ -16,9 +13,20 @@ registerForm.addEventListener('submit', function(e){
 
     if(password === repeatedPassword){
         register(username, email, password, repeatedPassword);
+    }else{
+        showNotification(error, "Morate potvrditi novu lozinku!");
     }
 });
+
+function removeNotification(){
+    const registerErrorDiv = document.querySelector('#register-error-div');
+    const registerErrorDiv2 = registerErrorDiv.querySelector('#register-error-div2');
+    registerErrorDiv2.classList.remove("animate");
+    registerErrorDiv.style.display = "none";
+}
+
 function register(username, email, password, repeatedPassword){
+
     fetch('../app/controllers/userController.php',{
         method: 'POST',
         headers: {
@@ -52,6 +60,7 @@ function register(username, email, password, repeatedPassword){
         }
     })
     .catch(error => {
+        stopLoadingAnimation("register-submit");
         console.log('Greska:', error);
     });
 }
@@ -67,9 +76,12 @@ function showNotification(action, data){
 
         if(action === 1){
             errorText.innerHTML = data;
-        }else{
+        }else if(action === 2){
             boldText.innerHTML = "Obaveštenje";
-            errorText.innerHTML = `Uspešno ste se registrovali. Na Vašu email adresu (${data}) smo poslasli verifikacioni link. Molimo vas da verifikujete email adresu a nakon toga ćete moći da se prijavite.`;
+            errorText.innerHTML = `Uspešno ste se registrovali. Na Vašu email adresu (${data}) smo poslasli verifikacioni link. Molimo vas da verifikujete email adresu a nakon toga ćete moći da se prijavite.<br><span onclick='resendVerificationLink("${data}")' style="color: var(--blue-color); text-decoration: none; cursor: pointer;">Ponovo posalji verifikacioni link</span>`;
+        }else if(action === 3){
+            boldText.innerHTML = "Obaveštenje";
+            errorText.innerHTML = `Na Vašu email adresu (${data}) smo poslasli verifikacioni link. Molimo vas da verifikujete email adresu a nakon toga ćete moći da se prijavite.<br><span onclick='resendVerificationLink("${data}")' style="color: var(--blue-color); text-decoration: none; cursor: pointer;">Ponovo posalji verifikacioni link</span>`;
         }
 
         registerErrorDiv2.classList.toggle('animate');
@@ -105,3 +117,38 @@ registerHideRepeatedPassword.addEventListener('click', function(){
     registerShowRepeatedPassword.style.display = "block";
     repeatedPassword.type = "password";
 });
+
+function resendVerificationLink(email){
+    removeNotification();
+    startLoadingAnimation("register-submit");
+    fetch('../app/controllers/verificationController.php',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'resend',
+            email: email
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+        }
+    })
+    .then(data => { 
+        console.log(data);
+        stopLoadingAnimation("register-submit");
+        if(data.status === 'error'){
+            showNotification(1, data.message);
+        }else{
+            showNotification(3, email);
+        }
+    })
+    .catch(error => {
+        stopLoadingAnimation("register-submit");
+        console.log('Greska:', error);
+    });
+}

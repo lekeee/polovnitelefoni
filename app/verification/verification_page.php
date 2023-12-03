@@ -7,11 +7,11 @@
 
     
     $ver = new Verification();
-    $isCodeValid = json_decode($ver->findCode($uid));
-    //var_dump($isCodeValid);
+    $isCodeValid = $ver->findCode($uid);
 
     if($isCodeValid){
-        $user->verifyUser();
+        $user->verifyUser($isCodeValid);
+        echo "USPESNO VERIFIKOVANO";
     }
     else{
         echo "Greska";

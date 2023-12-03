@@ -12,16 +12,23 @@
                 if(isset($data['email']) && isset($data['password'])){
                     $email = $data['email'];
                     $password = $data['password'];
-                    $result = $user->login($email, $password);
-                    if($result){
-                        $response = array(
-                            'status' => 'success',
-                            'message' => 'Uspešno ste se prijavili'
-                        );
-                    }else{
+                    try{
+                        $result = $user->login($email, $password);
+                        if($result === TRUE){
+                            $response = array(
+                                'status' => 'success',
+                                'message' => 'Uspešno ste se prijavili'
+                            );
+                        }else if($result === FALSE){
+                            $response = array(
+                                'status' => 'error',
+                                'message' => 'Pogrešna email adresa ili lozinka'
+                            );
+                        }
+                    }catch(ACCOUNT_NOT_VERIFIED $e){
                         $response = array(
                             'status' => 'error',
-                            'message' => 'Pogrešna email adresa ili lozinka'
+                            'message' => 'Nalog mora biti verifikovan da biste mogli da se prijavite!'
                         );
                     }
                 }else{
@@ -36,7 +43,7 @@
                     $email = $data['email'];
                     $password = $data['password'];
                     $repeatedPassword = $data['repeatedPassword'];
-
+                
                     if($password === $repeatedPassword){
                         $result = $user->createPrimary($username, $email, $password);
                         if($result === TRUE){
