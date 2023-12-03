@@ -1,6 +1,5 @@
 function startLoadingAnimation(buttonID){
     var submitButton = document.querySelector(`#${buttonID}`);
-    const originalValue = submitButton.value;
     const waitImage = new Image();
     waitImage.src = submitButton.getAttribute('data-wait');
 

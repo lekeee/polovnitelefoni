@@ -225,7 +225,7 @@ class User{
         if($this->checkVerificationUserExist($email)){
             $this->updateVerificationCode($code, $email);
         }else{
-            $this->updateVerificationCode($code, $email);
+            $this->saveVerificationCode($code, $email);
         }
         return $code;
     }
@@ -251,7 +251,7 @@ class User{
         $stmt->execute();
         $results = $stmt->affected_rows;
         
-        return $result > 0 ? true : false;
+        return $results > 0 ? true : false;
     }
 
     public function updateChangePasswordCode($code, $email){
@@ -281,7 +281,7 @@ class User{
 
         $stmt->execute();
         $results = $stmt->affected_rows;
-        return $result > 0 ? true : false;
+        return $results > 0 ? true : false;
     }
 
     public function verifyUser($user_id){
@@ -323,7 +323,7 @@ class User{
 
             $mail->Subject = "Verifikacija naloga";
             $mail->Body = " Otvorite prosledjenu stranicu i nalog ce biti verifikovan:
-                            http://localhost:81/polovnitelefoni/polovnitelefoni/app/verification/verification_page.php?uid=$uid
+                            http://localhost:81/polovnitelefoni/polovnitelefoni/views/verification.php?uid=$uid
                         
                             Polovni telefoni"; //link TREBA DA SE PROMENI
             $mail->send();
@@ -357,7 +357,7 @@ class User{
 
             $mail->Subject = "Verifikacija naloga";
             $mail->Body = " Otvorite prosledjenu stranicu i promenite svoju lozinku:
-                            http://localhost/polovnitelefoni/app/verification/change_password.php?uid=$uid
+                            http://localhost/polovnitelefoni/changePassword.php?uid=$uid
 
                             Polovni telefoni"; //link
             $mail->send();
