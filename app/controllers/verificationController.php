@@ -22,6 +22,27 @@
                         'message' => 'Došlo je do greške prilikom slanja verifikacionog mail-a, molimo pokušajte kasnije!'
                     );
                 }
+            }else if($data['action'] === 'verify'){
+                $user_id = $data['user_id'];
+                try{
+                    $result = $user->verifyUser($user_id);
+                    if($result){
+                        $response = array(
+                            'status' => 'success',
+                            'message' => 'Uspesno ste se verifikovali'
+                        );
+                    }else{
+                        $response = array(
+                            'status' => 'error',
+                            'message' => 'Došlo je do greške prilikom verifikacije, molimo pokušajte kasnije!'
+                        );
+                    }
+                }catch(Exception $e){
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Došlo je do greške prilikom verifikacije, molimo pokušajte kasnije!'
+                    );
+                }
             }
         }
     }

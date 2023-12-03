@@ -323,7 +323,9 @@ class User{
 
             $mail->Subject = "Verifikacija naloga";
             $mail->Body = " Otvorite prosledjenu stranicu i nalog ce biti verifikovan:
-                            http://localhost/polovnitelefoni/views/verification.php?uid=$uid
+
+                            http://localhost:81/polovnitelefoni/polovnitelefoni/views/verification.php?uid=$uid
+
                         
                             Polovni telefoni"; //link TREBA DA SE PROMENI
             $mail->send();
@@ -358,7 +360,7 @@ class User{
 
             $mail->Subject = "Verifikacija naloga";
             $mail->Body = " Otvorite prosledjenu stranicu i promenite svoju lozinku:
-                            http://localhost/polovnitelefoni/views/resetPassword.php?uid=$uid
+                            http://localhost/polovnitelefoni/changePassword.php?uid=$uid
 
                             Polovni telefoni"; //i ovde se menja
             $mail->send();
