@@ -4,6 +4,7 @@ use PHPMailer\PHPMailer\Exception;
 
 include_once(__DIR__ . '/../exceptions/userExceptions.php');
 
+
 class User{
 
     protected $con;
@@ -32,23 +33,24 @@ class User{
     }
 
     public function createPrimary($username, $email, $password){
-
         if(!$this->isEmailTaken($email)){
             if(!$this->isUsernameTaken($username)){
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        
+                
                 $sql = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
                 $stmt = $this->con->prepare($sql);
-        
+                
                 $stmt->bind_param("sss", $username, $email, $hashed_password);
-        
                 $result = $stmt->execute();
-        
-                if($result){
-                    // $_SESSION['user_id'] = $result->insert_id;
-                    return true;
+                
+        	    if ($stmt->error) {
+                    return false;
                 }
-                else{
+                
+                if ($result) {
+                    $this->sendVerificationEmail($email);
+                    return true;
+                } else {
                     return false;
                 }
             }else{
@@ -61,28 +63,24 @@ class User{
         
     }
 
-    /* ne koristi se
-    public function create($name, $lastname, $username, $email, $password, $phone, $city, $address){
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        
-        $sql = "INSERT INTO users (name, lastname, username, email, password, phone, city, address) VALUES (?,?,?,?,?,?,?,?)";
+    private function getIdRegister($email){
+        $sql = "SELECT user_id FROM users WHERE email = ?";
         $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
 
-        $stmt->bind_param("ssssssss", $name, $lastname, $username, $email, $hashed_password, $phone, $city, $address);
+        $results = $stmt->get_result();
 
-        $result = $stmt->execute();
-
-        if($result){
-            $_SESSION['user_id'] = $result->insert_id;
-            return true;
+        if($results->num_rows == 1){
+            $user = $results->fetch_assoc();
+            return $user["user_id"];
         }
-        else{
-            return false;
-        }
-    }*/
 
+        return NULL;
+    }
+    
     public function login($emailOrUsername, $password){
-        $sql = "SELECT user_id, password FROM users WHERE email = ? OR username = ?";
+        $sql = "SELECT user_id, password, verified FROM users WHERE email = ? OR username = ?";
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
         $stmt->execute();
@@ -91,7 +89,10 @@ class User{
 
         if($results->num_rows == 1){
             $user = $results->fetch_assoc();
-
+            if($user["verified"] == 0){
+                throw new ACCOUNT_NOT_VERIFIED();
+                
+            }
             if(password_verify($password, $user['password'])){
                 $_SESSION['user_id'] = $user['user_id'];
                 return true;
@@ -149,7 +150,7 @@ class User{
 
         if($username !== json_decode($userData, true)['username'] && $this->isUsernameTaken($username)){
             throw new USERNAME_TAKEN_EXCEPTION();
-            return 'USRNAME_TAKEN';
+            return 'USERNAME_TAKEN';
         }
         return $this->updateUsername($username) && isset($results);
     }
@@ -200,7 +201,7 @@ class User{
         else return false;
     }
 
-    public function generateVerificationCode(){
+    public function generateChangePasswordCode($email){
         $length = 24; //duzina koda
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $code = '';
@@ -209,49 +210,89 @@ class User{
             $index = rand(0, strlen($characters) - 1);
             $code .= $characters[$index];
         }
-
+        $this->updateChangePasswordCode($code, $email);
         return $code;
     }
 
-    public function saveVerificationCode($code){
-        $user_id = $this->getId();
+    public function generateVerificationCode($email){
+        $length = 24; //duzina koda
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $code = '';
 
+        for ($i = 0; $i < $length; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $code .= $characters[$index];
+        }
+        if($this->checkVerificationUserExist($email)){
+            $this->updateVerificationCode($code, $email);
+        }else{
+            $this->saveVerificationCode($code, $email);
+        }
+        return $code;
+    }
+
+    private function checkVerificationUserExist($email){
+        $user_id = $this->getIdRegister($email);
+        $sql = "SELECT * FROM verifikacioni_kodovi WHERE user_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows == 1;
+    }
+
+    public function saveVerificationCode($code, $email){
+        $id_val = $this->getIdRegister($email);
         $sql = "INSERT INTO verifikacioni_kodovi (user_id, verification_code) 
                 VALUES (?,?)";
 
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("ss", $user_id, $code);
+        $stmt->bind_param("is", $id_val, $code);
 
         $stmt->execute();
         $results = $stmt->affected_rows;
-        
-        return isset($results);
+
+        return $result > 0 ? true : false;
     }
 
-    public function updateVerificationCode($code){
-        $user_id = $this->getId();
+    public function updateChangePasswordCode($code, $email){
+        $id_val = $this->getIdRegister($email);
+
+        $sql = "UPDATE verifikacioni_kodovi SET 
+        cahngepw_code = ?
+        WHERE user_id = ?";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("is", $id_val, $code);
+
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+
+        return $result > 0 ? true : false;
+    }
+
+    public function updateVerificationCode($code, $email){
+        $id_val = $this->getIdRegister($email);
 
         $sql = "UPDATE verifikacioni_kodovi SET 
                 verification_code = ?
                 WHERE user_id = ?";
 
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("ss", $code, $user_id);
+        $stmt->bind_param("si", $code, $id_val);
 
         $stmt->execute();
         $results = $stmt->affected_rows;
-        
-        return isset($results);
+        return $result > 0 ? true : false;
     }
 
-    public function verifyUser(){
-        $user_id = $this->getId();
+    public function verifyUser($user_id){
         $sql = "UPDATE users SET 
         verified = '1'
         WHERE user_id = ?";
 
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("s", $user_id);
+        $stmt->bind_param("i", $user_id);
 
         // Izvršavanje upita
         $stmt->execute();
@@ -261,30 +302,71 @@ class User{
     }
 
     public function sendVerificationEmail($email){
-        require "PHPMailer/src/Exception.php";
-        require "PHPMailer/src/PHPMailer.php";
-        require "PHPMailer/src/SMTP.php";
+        require "../../PHPMailer/src/Exception.php";
+        require "../../PHPMailer/src/PHPMailer.php";
+        require "../../PHPMailer/src/SMTP.php";
+        try{
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;
+            $mail->Username = 'polovnitelefoni383@gmail.com';
+            $mail->Password = 'oava ufgw rplr zhbq';
+            $mail->SMTPSecure = "ssl";
+            $mail->Port = 465;
 
-        $mail = new PHPMailer(true);
-        $mail->isSMTP();
-        $mail->Host = "smtp.gmail.com";
-        $mail->SMTPAuth = true;
-        $mail->Username = 'polovnitelefoni383@gmail.com';
-        $mail->Password = 'oava ufgw rplr zhbq';
-        $mail->SMTPSecure = "ssl";
-        $mail->Port = 465;
+            $mail->setFrom("polovnitelefoni383@gmail.com");
+            $mail->addAddress($email);
+            $mail->isHTML(true);
 
-        $mail->setFrom("polovnitelefoni383@gmail.com");
-        $mail->addAddress($email);
-        $mail->isHTML(true);
+            $uid = $this->generateVerificationCode($email);
 
-        $mail->Subject = "Verifikacija naloga";
-        $mail->Body = " Otvorite prosledjenu stranicu i nalog ce biti verifikovan:
-                        http://localhost/polovnitelefoni/app/verification/verification_page.php?uid=.$uid
-                    
-                        Polovni telefoni"; //link
-        $mail->send();
+            $mail->Subject = "Verifikacija naloga";
+            $mail->Body = " Otvorite prosledjenu stranicu i nalog ce biti verifikovan:
+                            http://localhost:81/polovnitelefoni/polovnitelefoni/app/verification/verification_page.php?uid=$uid
+                        
+                            Polovni telefoni"; //link TREBA DA SE PROMENI
+            $mail->send();
 
-        return true;
+            return true;
+        }
+        catch(Exception $e){
+            throw new EMAIL_NOT_SENDED;
+        }
+    }
+
+    public function sendChangePasswordMail($email){
+        require "../../PHPMailer/src/Exception.php";
+        require "../../PHPMailer/src/PHPMailer.php";
+        require "../../PHPMailer/src/SMTP.php";
+
+        try{
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth = true;
+            $mail->Username = 'polovnitelefoni383@gmail.com';
+            $mail->Password = 'oava ufgw rplr zhbq';
+            $mail->SMTPSecure = "ssl";
+            $mail->Port = 465;
+
+            $mail->setFrom("polovnitelefoni383@gmail.com");
+            $mail->addAddress($email);
+            $mail->isHTML(true);
+
+            $uid = $this->generateChangePasswordCode($email);
+
+            $mail->Subject = "Verifikacija naloga";
+            $mail->Body = " Otvorite prosledjenu stranicu i promenite svoju lozinku:
+                            http://localhost/polovnitelefoni/app/verification/change_password.php?uid=$uid
+                        
+                            Polovni telefoni"; //link
+            $mail->send();
+
+            return true;
+        }
+        catch(Exception $e){
+            throw new EMAIL_NOT_SENDED;
+        }
     }
 }
