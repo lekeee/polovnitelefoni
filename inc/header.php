@@ -38,7 +38,7 @@
         <div class="div-block"><a data-w-id="dececed3-f170-003e-2db2-631e28dd94b9" href="#" class="w-inline-block"><img
                     src="../public/src/hamburger_menu.png"
                     loading="lazy" width="30" height="30" alt="Hamburger Menu" class="image-6" /></a>
-            <div class="div-block-57"><img
+            <div class="div-block-57" style="cursor: pointer;" onclick="window.location.href='index.php'"><img
                     src="../public/src/polovnitelefoni.svg"
                     loading="lazy" height="60" alt="Logo" class="image" /></div>
             <div class="div-block-2">
@@ -77,12 +77,12 @@
             </div>
             <div class="div-block-5">
                 <div class="div-block-6 div-block-7">
-                    <div class="div-block-8"><img
+                    <div class="div-block-8" onclick="window.location.href='<?php echo $user->isLogged() ? 'dashboard.php' : 'login.php' ?>'"><img
                             src="../public/src/user_icon.png"
                             loading="lazy" height="35" alt="User Icon" width="35" class="image-27" />
                         <div>
-                            <div class="text-block-7">Prijavi se na</div>
-                            <div class="text-block-8">Profil</div>
+                            <div class="text-block-7" style="color: grey"><?php echo $user->isLogged() ? "Dobrodošli" : "Prijavi se na"?></div>
+                            <div class="text-block-8"><?php echo json_decode($user->returnUser(), true)['username'] ?  : "Profil"?></div>
                         </div>
                     </div>
                     <div class="div-block-9"><a href="#" class="link-block-3 w-inline-block"><img
