@@ -81,9 +81,9 @@
                                     data-wf-page-id="655506e07faa7f82a5f25613"
                                     data-wf-element-id="dbd58ca1-f8dc-b409-ed3a-9c036c632d34"><label
                                         for="signup-username" class="field-label2">Korisničko ime *</label><input
-                                        type="text" class="text-field-2 w-input" maxlength="256" name="signup-username"
+                                        type="text" class="text-field-2 w-input" pattern=".{8,20}" title="Korisničko ime mora da ima od 8 do 20 karaktera" maxlength="256" name="signup-username"
                                         data-name="signup-username" placeholder="" id="signup-username" required="" />
-                                    <div class="div-block-22"><label for="email-3" class="field-label2">Email adresa
+                                    <div class="div-block-22" ><label for="email-3" class="field-label2">Email adresa
                                             *</label></div><input type="email"
                                         class="text-field-2 textfieldpassword w-input" maxlength="256"
                                         name="signup-email" data-name="signup-email" placeholder="" id="signup-email"
