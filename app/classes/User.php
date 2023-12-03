@@ -91,7 +91,6 @@ class User{
             $user = $results->fetch_assoc();
             if($user["verified"] == 0){
                 throw new ACCOUNT_NOT_VERIFIED();
-                
             }
             if(password_verify($password, $user['password'])){
                 $_SESSION['user_id'] = $user['user_id'];
@@ -150,7 +149,7 @@ class User{
 
         if($username !== json_decode($userData, true)['username'] && $this->isUsernameTaken($username)){
             throw new USERNAME_TAKEN_EXCEPTION();
-            return 'USERNAME_TAKEN';
+            return 'USRNAME_TAKEN';
         }
         return $this->updateUsername($username) && isset($results);
     }
@@ -210,7 +209,7 @@ class User{
             $index = rand(0, strlen($characters) - 1);
             $code .= $characters[$index];
         }
-        $this->updateChangePasswordCode($code, $email);
+        $this->saveChangePasswordCode($code, $email);
         return $code;
     }
 
@@ -226,7 +225,7 @@ class User{
         if($this->checkVerificationUserExist($email)){
             $this->updateVerificationCode($code, $email);
         }else{
-            $this->saveVerificationCode($code, $email);
+            $this->updateVerificationCode($code, $email);
         }
         return $code;
     }
@@ -251,7 +250,7 @@ class User{
 
         $stmt->execute();
         $results = $stmt->affected_rows;
-
+        
         return $result > 0 ? true : false;
     }
 
@@ -270,7 +269,6 @@ class User{
 
         return $result > 0 ? true : false;
     }
-
     public function updateVerificationCode($code, $email){
         $id_val = $this->getIdRegister($email);
 
@@ -305,6 +303,7 @@ class User{
         require "../../PHPMailer/src/Exception.php";
         require "../../PHPMailer/src/PHPMailer.php";
         require "../../PHPMailer/src/SMTP.php";
+
         try{
             $mail = new PHPMailer(true);
             $mail->isSMTP();
@@ -321,6 +320,7 @@ class User{
 
             $uid = $this->generateVerificationCode($email);
 
+
             $mail->Subject = "Verifikacija naloga";
             $mail->Body = " Otvorite prosledjenu stranicu i nalog ce biti verifikovan:
                             http://localhost:81/polovnitelefoni/polovnitelefoni/app/verification/verification_page.php?uid=$uid
@@ -329,12 +329,11 @@ class User{
             $mail->send();
 
             return true;
-        }
-        catch(Exception $e){
-            throw new EMAIL_NOT_SENDED;
+        }catch(Exception $e){
+            throw new EMAIL_NOT_SENDED();
         }
     }
-
+    
     public function sendChangePasswordMail($email){
         require "../../PHPMailer/src/Exception.php";
         require "../../PHPMailer/src/PHPMailer.php";
@@ -359,7 +358,7 @@ class User{
             $mail->Subject = "Verifikacija naloga";
             $mail->Body = " Otvorite prosledjenu stranicu i promenite svoju lozinku:
                             http://localhost/polovnitelefoni/app/verification/change_password.php?uid=$uid
-                        
+
                             Polovni telefoni"; //link
             $mail->send();
 
