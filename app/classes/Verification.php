@@ -16,7 +16,12 @@ class Verification{
         $results = $stmt->get_result();
         $user = $results->fetch_assoc();
         
-        return json_encode($user);
+        if ($user) {
+            $user_id = $user['user_id'];
+            return $user_id;
+        } else {
+            return null;
+        }
     }
 
     

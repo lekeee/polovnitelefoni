@@ -4772,3 +4772,12 @@ textarea.w-input, textarea.w-select {
     padding-left: 0;
   }
 }
+.div-block-77 {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+.resend_verifikation_link{
+  color: var(--blue-color);
+  text-decoration: none;
+}
