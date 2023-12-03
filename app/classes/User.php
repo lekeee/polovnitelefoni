@@ -267,7 +267,7 @@ class User{
         $stmt->execute();
         $results = $stmt->affected_rows;
 
-        return $result > 0 ? true : false;
+        return $results > 0 ? true : false;
     }
     public function updateVerificationCode($code, $email){
         $id_val = $this->getIdRegister($email);
@@ -300,9 +300,9 @@ class User{
     }
 
     public function sendVerificationEmail($email){
-        require "../../PHPMailer/src/Exception.php";
-        require "../../PHPMailer/src/PHPMailer.php";
-        require "../../PHPMailer/src/SMTP.php";
+        require __DIR__ .  "/../../PHPMailer/src/Exception.php";
+        require __DIR__ . "/../../PHPMailer/src/PHPMailer.php";
+        require __DIR__ . "/../../PHPMailer/src/SMTP.php";
 
         try{
             $mail = new PHPMailer(true);
@@ -323,13 +323,16 @@ class User{
 
             $mail->Subject = "Verifikacija naloga";
             $mail->Body = " Otvorite prosledjenu stranicu i nalog ce biti verifikovan:
+
                             http://localhost:81/polovnitelefoni/polovnitelefoni/views/verification.php?uid=$uid
+
                         
                             Polovni telefoni"; //link TREBA DA SE PROMENI
             $mail->send();
 
             return true;
         }catch(Exception $e){
+            echo $e;
             throw new EMAIL_NOT_SENDED();
         }
     }
@@ -359,7 +362,7 @@ class User{
             $mail->Body = " Otvorite prosledjenu stranicu i promenite svoju lozinku:
                             http://localhost/polovnitelefoni/changePassword.php?uid=$uid
 
-                            Polovni telefoni"; //link
+                            Polovni telefoni"; //i ovde se menja
             $mail->send();
 
             return true;

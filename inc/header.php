@@ -83,6 +83,7 @@
                         <div>
                             <div class="text-block-7" style="color: grey"><?php echo $user !== NULL && $user->isLogged() ? "Dobrodošli" : "Prijavi se na"?></div>
                             <div class="text-block-8"><?php echo $user !== NULL && $user->isLogged() ? json_decode($user->returnUser(), true)['username']  : "Profil"?></div>
+
                         </div>
                     </div>
                     <div class="div-block-9"><a href="#" class="link-block-3 w-inline-block"><img
