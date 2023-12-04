@@ -31,8 +31,9 @@ verifyBtn.addEventListener('click', function(e){
         }
     })
     .catch(error => {
-        //stopLoadingAnimation("register-submit");
-        console.log('Greska:', error);
+        stopLoadingAnimation();
+        alert("Došlo je do greške, molimo Vas pokušajte kasnije!");
+        //console.log('Greska:', error);
     });
 });
 

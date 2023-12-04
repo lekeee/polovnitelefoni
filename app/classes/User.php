@@ -114,7 +114,21 @@ class User{
         //ako kojim slucajem nema user vraca null
         return $user ? json_encode($user) : null;
     }
+    public function getEmail($emailOrUsername){
+        $sql = "SELECT email FROM users WHERE email = ? OR username = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
+        $stmt->execute();
 
+        $results = $stmt->get_result();
+
+        if($results->num_rows == 1){
+            $user = $results->fetch_assoc();
+            return $user["email"];
+        }
+
+        return NULL;
+    }
     public function updateUser($name, $lastname, $username, $oldPassword, $password, $phone, $city, $address){
         $user_id = $this->getId();
         $sql = "UPDATE users SET 
@@ -167,6 +181,33 @@ class User{
 
         return isset($results);
     }
+    public function resetPassword($uid, $password){
+        $sql = "UPDATE users SET 
+        password = ? 
+        WHERE user_id = ?";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("si", password_hash($password, PASSWORD_DEFAULT), $uid);
+        
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+
+        return $results > 0 && $this->deleteResetPasswordCode($uid) > 0;
+    }
+
+    public function deleteResetPasswordCode($uid){
+        $sql = "UPDATE verifikacioni_kodovi SET 
+        changepw_code=NULL 
+        WHERE user_id=?";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $uid);
+        
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+
+        return $results > 0 ? true : false;
+    }
 
     private function updatePassword($password) {
         $sql = "UPDATE users SET 
@@ -209,7 +250,7 @@ class User{
             $index = rand(0, strlen($characters) - 1);
             $code .= $characters[$index];
         }
-        $this->saveChangePasswordCode($code, $email);
+        $this->updateChangePasswordCode($code, $email);
         return $code;
     }
 
@@ -258,11 +299,11 @@ class User{
         $id_val = $this->getIdRegister($email);
 
         $sql = "UPDATE verifikacioni_kodovi SET 
-        cahngepw_code = ?
+        changepw_code = ?
         WHERE user_id = ?";
 
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("is", $id_val, $code);
+        $stmt->bind_param("si", $code, $id_val);
 
         $stmt->execute();
         $results = $stmt->affected_rows;
@@ -360,7 +401,7 @@ class User{
 
             $mail->Subject = "Verifikacija naloga";
             $mail->Body = " Otvorite prosledjenu stranicu i promenite svoju lozinku:
-                            http://localhost/polovnitelefoni/changePassword.php?uid=$uid
+                            http://localhost:81/polovnitelefoni/polovnitelefoni/views/resetPassword.php?uid=$uid
 
                             Polovni telefoni"; //i ovde se menja
             $mail->send();
