@@ -1,17 +1,10 @@
-if uslovi za title 
-promena headera za dodavanje oglasa
-verified slanje mejla (URADJENO)
-upload za slike moze bolje i da se menja redosled
+verified slanje mejla(URADJENO)
+azuriranje podataka o korisniku (URADJENO)
+azuriranje lozinke (URADJENO)
+dobijanje podataka o korisniku (URADJENO)
+ozdvajanje header tag-a(URADJENO)
 
-- azuriranje podataka o korisniku (URADJENO)
-- azuriranje lozinke (URADJENO)
-- dobijanje podataka o korisniku (URADJENO)
-
-- ozdvajanje header tag-a (URADJENO)
-
-
--dizajnirati email poruku
-
+DIZAJNIRANJE EMAILA
 OGLASI
     -stara/nova cena
     -ocena
@@ -19,3 +12,9 @@ OGLASI
     -dal je prodat dal nije
     -ostecenja biranje
     -dodatna oprema biranje
+
+BRISANJE NALOGA
+    -da se obrisu svi oglasi na nalogu
+
+BRISANJE OGLASA
+    -da se obrisu sve veze sa oglasom iz baze
