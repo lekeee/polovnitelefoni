@@ -53,7 +53,7 @@
                                         id="login-password" required="" />
                                     <div><label class="w-checkbox checkbox-field"><input type="checkbox" id="checkbox"
                                                 name="checkbox" data-name="Checkbox" class="w-checkbox-input" /><span
-                                                class="w-form-label" for="checkbox">Zapamti me</span></label></div>
+                                                class="w-form-label" for="checkbox" style="margin:0; padding: 0;margin-left: 5px">Zapamti me</span></label></div>
                                     <input type="submit" value="Prijavi se" data-value="Prijavi se"
                                         data-wait="../public/src/loading.gif" class="submit-button-2 w-button"
                                         id="login-submit" />
@@ -64,7 +64,7 @@
                                                     email adresa ili lozinka</span></div>
                                         </div>
                                     </div>
-                                    <a href="#" class="link-block-6 w-inline-block">
+                                    <a href="#" class="link-block-6 w-inline-block" id="forgotPassword">
                                         <div data-w-id="eacab9bd-492a-1551-d636-2c4483ed8476"
                                             style="-webkit-transform:translate3d(0, -90px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, -90px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, -90px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, -90px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
                                             class="text-block-17">Zaboravili ste lozinku?</div>
@@ -143,6 +143,7 @@
     <script src="../public/js/animations.js?v=<?php echo time(); ?>"></script>
     <script src="../public/js/login.js?v=<?php echo time(); ?>"></script>
     <script src="../public/js/register.js?v=<?php echo time(); ?>"></script>
+    <!-- <script src="../public/js/resetPassword.js?v=<?php echo time(); ?>"></script> -->
 </body>
 
 </html>

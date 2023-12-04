@@ -61,6 +61,12 @@ function showNotification2(action, data){
 
         if(action === 1){
             errorText.innerHTML = data;
+        }else if(action === 4){
+            boldText.innerHTML = "Obaveštenje";
+            errorText.innerHTML = data;
+        }else if(action === 5){
+            boldText.innerHTML = "Greška";
+            errorText.innerHTML = data;
         }else{
             boldText.innerHTML = "Obaveštenje";
             errorText.innerHTML = `Uspešno ste se registrovali. Na Vašu email adresu ('${data}') smo poslasli verifikacioni link. Molimo vas da verifikujete email adresu da biste mogli da koristite nalog.`;
@@ -84,4 +90,53 @@ hidePassword.addEventListener('click', function(){
     showPassword.style.display = 'block';
     const password = loginForm.querySelector('#login-password');
     password.type = 'password';
+});
+
+
+const forgotPassword = document.querySelector("#forgotPassword");
+forgotPassword.addEventListener("click", async function(e){
+    if(this.getAttribute('href')){
+        e.preventDefault();
+        const email = document.querySelector('#login-email').value;
+        if(email.trim() === ''){
+            showNotification2(5, "Morate uneti vaše korisničko ime ili email adresu da biste resetovali lozinku");
+            return;
+        }else{
+            const loginErrorDiv = document.querySelector('#login-error-div');
+            const loginErrorDiv2 = loginErrorDiv.querySelector('#login-error-div2');
+            loginErrorDiv2.classList.remove("animate");
+            loginErrorDiv.style.display = "none";
+            this.removeAttribute("href");
+            this.querySelector('div').innerHTML = "Molimo sačekajte...";
+        }
+
+        await fetch('../app/controllers/resetPasswordController.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                action: 'sendReset',
+                email: email
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            this.querySelector('div').innerHTML = "Zaboravili ste lozinku?";
+            if(data.status === 'success'){
+                showNotification2(4, "Na Vašu email adresu smo poslali link za resetovanje lozinke. Nakon što resetujete lozinku moći ćete da se prijavite!");
+            }else{
+                showNotification2(5, "Došlo je do greške, molimo Vas pokušajte kasnije!");
+            }
+        })
+        .catch(error => {
+            alert("Došlo je do greške, molimo Vas pokušajte kasnije!");
+        });
+    }
 });

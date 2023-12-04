@@ -10,24 +10,9 @@
 <html data-wf-domain="verification-e726f8.webflow.io" data-wf-page="656c6d51d7f4528e475023c0"
     data-wf-site="656c6d51d7f4528e475023bc">
 
-<head>
-    <meta charset="utf-8" />
-    <title>Verification</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="Webflow" name="generator" />
-    <link href="../public/css/verification.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
-    <script type="text/javascript">
-    ! function(o, c) {
-        var n = c.documentElement,
-            t = " w-mod-";
-        n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n
-            .className += t + "touch")
-    }(window, document);
-    </script>
-    <link href="../public/src/polovnitelefonilogosmall.svg?v=<?php echo time(); ?>" rel="shortcut icon"
-        type="image/x-icon" />
-    <link href="../public/src/polovnitelefonilogobig.svg?v=<?php echo time(); ?>" rel="apple-touch-icon" />
-</head>
+<?php
+    include_once "../inc/verificationAndResetHeader.php";
+?>
 
 <body class="body">
     <div class="div-block-2">
