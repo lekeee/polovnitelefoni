@@ -23,7 +23,7 @@ abstract class Ad{
         $this->damage = $damage;
     }
     
-    abstract public function create();
+    abstract public function create($user_id, $brand, $model, $title, $state, $description, $price, $new_price, $images, $availability, $damage, $accessories);
     abstract public function select24();
     abstract public function read($user_id);
     abstract public function rating();
