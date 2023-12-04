@@ -258,11 +258,11 @@ class User{
         $id_val = $this->getIdRegister($email);
 
         $sql = "UPDATE verifikacioni_kodovi SET 
-        cahngepw_code = ?
+        changepw_code = ?
         WHERE user_id = ?";
 
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("is", $id_val, $code);
+        $stmt->bind_param("si", $code, $id_val);
 
         $stmt->execute();
         $results = $stmt->affected_rows;
