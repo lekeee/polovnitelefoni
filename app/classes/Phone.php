@@ -31,16 +31,110 @@ class Phone extends Ad{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
     
-    public function read($user_id){
+    public function read($ad_id){
         $sql = "SELECT * FROM oglasi WHERE ad_id=?";
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("i", $user_id);
+        $stmt->bind_param("i", $ad_id);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
 
-    public function rating(){
-        //logika za ocenu
+    public function checkIsRated($user_id){
+        $sql = "SELECT * FROM ocene WHERE rater_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->num_rows == 0 ? false : true;
+    }
+
+    public function saveRate($user_id, $ad_id, $ocena){
+        $sql = "INSERT INTO ocene (user_id, ad_id, ocena) 
+                VALUES (?,?,?)";
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("iii", $user_id, $ad_id, $ocena);
+
+            $stmt->execute();
+            $results = $stmt->affected_rows;
+            
+        return $results > 0 ? true : false;
+    }
+
+    public function updateRate($user_id, $ad_id, $ocena){
+        $sql = "UPDATE ocene SET 
+                ocena = ?
+                WHERE user_id = ? AND ad_id=?";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("iii", $ocnea, $user_id, $ad_id);
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+
+        return $results > 0 ? true : false;
+    }
+
+    public function rate($user_id, $ad_id, $ocena){
+        if($this->checkIsRated($user_id)){
+            return $this->updateRate($user_id, $ad_id, $ocena);
+        }
+        else{
+            return $this->saveRate($user_id, $ad_id, $ocena);
+        }
+    }
+
+    public function rating($ad_id){
+        $sql = "SELECT ocena FROM ocene WHERE ad_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $ad_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $totalRating = 0;
+        $numberOfRatings = 0;
+    
+        while ($row = $result->fetch_assoc()) {
+            $totalRating += $row['ocena'];
+            $numberOfRatings++;
+        }
+
+        if ($numberOfRatings > 0) {
+            $averageRating = $totalRating / $numberOfRatings;
+            return $averageRating;
+        } else {
+            return 0;
+        }
+    }
+
+    public function checkVisit($ip, $ad_id){
+        $sql = "SELECT * FROM visitors WHERE ip_address=? AND ad_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("si", $ip, $ad_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->num_rows == 0 ? true : false;
+    }
+
+    public function addVisit($ip, $ad_id){
+        if($this->checkVisit($ip, $ad_id)){
+            $sql = "INSERT INTO visitors (ip_address, ad_id) 
+                VALUES (?,?)";
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("si", $ip, $ad_id);
+
+            $stmt->execute();
+            $results = $stmt->affected_rows;
+            
+            return $results > 0 ? true : false;
+        }
+        return false;
+    }
+
+    public function totalVisits($ad_id){
+        //logika
     }
 }

@@ -412,4 +412,17 @@ class User{
             throw new EMAIL_NOT_SENDED;
         }
     }
+
+    function getIP() {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            // Provera za deljenje internet konekcije
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            // Provera za proxy servere
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
 }
