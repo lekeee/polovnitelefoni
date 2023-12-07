@@ -1,4 +1,5 @@
 <?php
+include_once(__DIR__ . '/../exceptions/adExceptions.php');
 
 abstract class Ad{
     protected $con;
@@ -24,8 +25,17 @@ abstract class Ad{
     }
     
     abstract public function create($user_id, $brand, $model, $title, $state, $description, $price, $new_price, $images, $availability, $damage, $accessories);
+    abstract public function saveImages($images, $user_id);
     abstract public function select24();
+    abstract public function select24UserAds($user_id, $offset = 0, $limit = 24);
     abstract public function read($user_id);
-    abstract public function rating();
+    abstract public function checkIsRated($user_id);
+    abstract public function saveRate($user_id, $ad_id, $ocena);
+    abstract public function updateRate($user_id, $ad_id, $ocena);
+    abstract public function rate($user_id, $ad_id, $ocena);
+    abstract public function averageRating($ad_id);
+    abstract public function checkVisit($ip, $ad_id);
+    abstract public function addVisit($ip, $ad_id);
+    abstract public function totalVisits($ad_id);
 
 }
