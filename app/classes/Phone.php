@@ -1,5 +1,7 @@
 <?php
 include_once(__DIR__ . '/Ad.php');
+include_once(__DIR__ . '/../exceptions/adExceptions.php');
+
 
 class Phone extends Ad{
     public $accessories;
@@ -25,19 +27,49 @@ class Phone extends Ad{
         return $result > 0 ? true : false;
     }
 
+    public function saveImages($images, $user_id){
+        $folderName = uniqid($user_id."_"); // Generiše jedinstveno ime foldera za slike
+        $uploadDirectory = "uploads/" . $folderName; // Putanja do foldera za smeštaj slika
+        mkdir($uploadDirectory); // Kreira folder
+
+        foreach ($images['tmp_name'] as $key => $tmp_name) {
+            $originalFileName = basename($images['name'][$key]);
+            $targetFile = $uploadDirectory . '/' . $originalFileName;
+            
+            move_uploaded_file($tmp_name, $targetFile);
+        }
+    }
+
     public function select24($offset = 0, $limit = 24){
         $sql = "SELECT * FROM oglasi LIMIT $limit OFFSET $offset";
         $result = $this->con->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
-    public function read($ad_id){
-        $sql = "SELECT * FROM oglasi WHERE ad_id=?";
+
+    public function select24UserAds($user_id, $offset = 0, $limit = 24){
+        $sql = "SELECT * FROM oglasi WHERE user_id=? LIMIT $limit OFFSET $offset";
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("i", $ad_id);
         $stmt->execute();
         $result = $stmt->get_result();
-        return $result->fetch_assoc();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    public function read($ad_id){
+        try{
+            $sql = "SELECT * FROM oglasi WHERE ad_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $ad_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if($result->num_rows == 0)
+                return $result->fetch_assoc();
+            return false;
+        }
+        catch(Exception $e){
+            throw new AD_CANNOT_BE_READ();
+        }
     }
 
     public function checkIsRated($user_id){
@@ -85,7 +117,7 @@ class Phone extends Ad{
         }
     }
 
-    public function rating($ad_id){
+    public function averageRating($ad_id){
         $sql = "SELECT ocena FROM ocene WHERE ad_id=?";
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("i", $ad_id);
@@ -135,6 +167,13 @@ class Phone extends Ad{
     }
 
     public function totalVisits($ad_id){
-        //logika
+        $sql = "SELECT COUNT(*) as count FROM visitors WHERE ad_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("s", $ad_id); 
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        return $row['count'];
     }
 }

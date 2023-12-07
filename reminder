@@ -4,7 +4,7 @@ azuriranje lozinke (URADJENO)
 dobijanje podataka o korisniku (URADJENO)
 ozdvajanje header tag-a(URADJENO)
 
-DIZAJNIRANJE EMAILA
+DIZAJNIRANJE EMAILA(URADJENO)
 OGLASI
     -stara/nova cena
     -ocena
@@ -12,6 +12,11 @@ OGLASI
     -dal je prodat dal nije
     -ostecenja biranje
     -dodatna oprema biranje
+
+PROFIL KORISNIKA
+    -da se vide svi njegovi oglasi
+    -da se oceni korisnik
+    -da se vidi njegova statistika(ocene, broj oglasa, licni podaci)
 
 BRISANJE NALOGA
     -da se obrisu svi oglasi na nalogu
@@ -23,4 +28,7 @@ REGISTRACIJA
     -Prilikom registracije, slazem se sa uslovima korsicenja 
     na sajtu polovni telefoni
 
-TRAJANJE STRANICA ZA VERIFIKACIJU redirect na index
+GOOGLE REGISTRACIJA
+
+TERMS OF SERVICES 
+    -na formi za registraciju
