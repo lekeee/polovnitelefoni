@@ -386,7 +386,7 @@ class User{
                 </div>
 
                 <div style='text-align: center; padding: 20px;'>
-                    <a href='http://localhost/polovnitelefoni/views/verification.php?uid=$uid' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>Stranica za verifikaciju</a>
+                    <a href='http://localhost:81/polovnitelefoni/polovnitelefoni/views/verification.php?uid=$uid' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>Stranica za verifikaciju</a>
                 </div>
 
                 <hr style='margin: 20px 0; border: 0; border-top: 2px solid #ccc;'>
@@ -457,7 +457,7 @@ class User{
                 </div>
 
                 <div style='text-align: center; padding: 20px;'>
-                    <a href='http://localhost/polovnitelefoni/views/resetPassword.php?uid=$uid' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>Stranica za promenu lozinke</a>
+                    <a href='http://localhost:81/polovnitelefoni/polovnitelefoni/views/resetPassword.php?uid=$uid' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>Stranica za promenu lozinke</a>
                 </div>
 
                 <hr style='margin: 20px 0; border: 0; border-top: 2px solid #ccc;'>
