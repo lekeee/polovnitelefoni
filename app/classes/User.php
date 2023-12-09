@@ -59,8 +59,6 @@ class User{
         }else{
             return "Već postoji nalog sa unetom email adresom.";
         }
-
-        
     }
 
     private function getIdRegister($email){
