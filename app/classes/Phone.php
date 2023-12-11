@@ -63,8 +63,8 @@ class Phone extends Ad{
             $stmt->bind_param("i", $ad_id);
             $stmt->execute();
             $result = $stmt->get_result();
-            if($result->num_rows == 0)
-                return $result->fetch_assoc();
+            if($result->num_rows == 1)
+                return json_decode($result->fetch_assoc());
             return false;
         }
         catch(Exception $e){

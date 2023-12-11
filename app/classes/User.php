@@ -61,7 +61,25 @@ class User{
         }
     }
 
-    private function getIdRegister($email){
+    public function createGoogle($name, $lastname, $email, $oauth_provider, $oauth_uid = NULL){
+        try{
+            $sql = "INSERT INTO users (name, lastname, email, oauth_uid, oauth_provider) VALUES (?,?,?,?,?)";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("sssss", $name, $lastname, $email, $oauth_uid, $oauth_provider);
+            $result = $stmt->execute();
+                
+            if (!$result) {
+                throw new ERROR_FROM_QUERY();
+            }
+            return true;
+        }
+        catch (Exception $e){
+            throw new ACCOUNT_NOT_CREATED();
+        }
+        
+    }
+
+    public function getIdRegister($email){
         $sql = "SELECT user_id FROM users WHERE email = ?";
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("s", $email);
@@ -73,7 +91,6 @@ class User{
             $user = $results->fetch_assoc();
             return $user["user_id"];
         }
-
         return NULL;
     }
     
@@ -97,6 +114,18 @@ class User{
         }
 
         return false;
+    }
+
+    public function checkUserByOauthId($oauth_uid){
+        $sql = "SELECT * FROM users WHERE oauth_uid=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("s", $oauth_uid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $user = $result->fetch_assoc();
+
+        return $user ? true: null;
     }
 
     public function returnUser(){ 
@@ -228,8 +257,23 @@ class User{
         return false;
     }
 
+    public function isLoggedWithGoogle(){
+        if(isset($_SESSION['user_id']) && isset($_SESSION['token'])){
+            return true;
+        }
+        return false;
+    }
+
     public function logout(){
-        unset($_SESSION['user_id']);
+        if(isset($_SESSION['user_id']) && isset($_SESSION['token'])){
+            unset($_SESSION['user_id']);
+            unset($_SESSION['token']);
+            $client->revokeToken(); 
+        }
+        else if(isset($_SESSION['user_id'])){
+            unset($_SESSION['user_id']);
+        }
+        
     }
 
     public function getId(){

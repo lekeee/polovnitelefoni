@@ -18,6 +18,9 @@
             require_once "../inc/mobileMenu.php";
         ?>
 
+        <?php
+        ?>
+
     <!-- PRIJAVA I REGISTRACIJA -->
 
     <section class="section">
@@ -57,6 +60,7 @@
                                     <input type="submit" value="Prijavi se" data-value="Prijavi se"
                                         data-wait="../public/src/loading.gif" class="submit-button-2 w-button"
                                         id="login-submit" />
+                                        <a href="<?php echo $loginUrl?>">Prijavi se preko google</a>
 
                                     <div class="div-block-77" id="login-error-div" style="display: none">
                                         <div style="" id="login-error-div2" class="div-block-266">
