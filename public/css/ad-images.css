@@ -1,0 +1,111 @@
+@import url('../css/variables.css');
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
+  }
+  
+  .slider {
+    display: flex;
+    height: 100%;
+  }
+  
+  .slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slides div {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+  }
+  .slides div a img{
+    object-fit: contain;
+    height: 100%;
+  }
+  .controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    background-color: red;
+  }
+  .prev{
+    left: 0;
+  }
+  .next{
+    right: 0%;
+  }
+  .prev,
+  .next {
+    font-size: 2em;
+    cursor: pointer;
+    width: 20%;
+    max-width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .prev_svg{
+    fill: red;
+  }
+
+  .prev img, .next img{
+    width: 50%;
+    fill: #000;
+  }
+
+  .thumbnails-container {
+    width: 100%;
+    height: 120px;
+    margin: auto;
+    overflow: hidden;
+    margin-top: 15px;
+    scroll-behavior: smooth;
+  }
+  
+  .thumbnails {
+    height: 100%;
+    display: flex;
+  }
+  
+  .thumbnail {
+    flex: 0 0 100%;
+    margin-right: 10px;
+    max-width: 120px;
+    cursor: pointer;
+    float: left;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .thumbnail img {
+    width: 100%;
+    object-fit: contain;
+  }
+  
+  .thumbnail.selected {
+    filter:brightness(50%);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+@media screen and (max-width: 479px){
+  .thumbnail{
+    max-width: 80px;
+    height: 80px;
+  }
+}

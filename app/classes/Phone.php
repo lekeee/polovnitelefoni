@@ -1,6 +1,8 @@
 <?php
 include_once(__DIR__ . '/Ad.php');
 include_once(__DIR__ . '/../exceptions/adExceptions.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 
 class Phone extends Ad{
@@ -63,9 +65,9 @@ class Phone extends Ad{
             $stmt->bind_param("i", $ad_id);
             $stmt->execute();
             $result = $stmt->get_result();
-            if($result->num_rows == 1)
-                return json_decode($result->fetch_assoc());
-            return false;
+            if($result->num_rows === 1)
+                return json_encode($result->fetch_assoc());
+            return NULL;
         }
         catch(Exception $e){
             throw new AD_CANNOT_BE_READ();
@@ -169,7 +171,7 @@ class Phone extends Ad{
     public function totalVisits($ad_id){
         $sql = "SELECT COUNT(*) as count FROM visitors WHERE ad_id=?";
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("s", $ad_id); 
+        $stmt->bind_param("i", $ad_id); 
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();

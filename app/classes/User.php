@@ -382,6 +382,19 @@ class User{
         return isset($results);
     }
 
+    public function getUserDataFromId($user_id){
+        $sql = "SELECT name, lastname, username, email, phone, city, address FROM users WHERE user_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $user = $result->fetch_assoc();
+        
+        //ako kojim slucajem nema user vraca null
+        return $user ? json_encode($user) : null;
+    }
+
     public function sendVerificationEmail($email){
         require __DIR__ .  "/../../PHPMailer/src/Exception.php";
         require __DIR__ . "/../../PHPMailer/src/PHPMailer.php";
@@ -428,7 +441,7 @@ class User{
                 </div>
 
                 <div style='text-align: center; padding: 20px;'>
-                    <a href='http://localhost/polovnitelefoni/views/verification.php?uid=$uid' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>Stranica za verifikaciju</a>
+                    <a href='http://localhost:81/polovnitelefoni/polovnitelefoni/views/verification.php?uid=$uid' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>Stranica za verifikaciju</a>
                 </div>
 
                 <hr style='margin: 20px 0; border: 0; border-top: 2px solid #ccc;'>
@@ -453,6 +466,7 @@ class User{
             throw new EMAIL_NOT_SENDED();
         }
     }
+    
     
     public function sendChangePasswordMail($email){
         require "../../PHPMailer/src/Exception.php";
@@ -499,7 +513,7 @@ class User{
                 </div>
 
                 <div style='text-align: center; padding: 20px;'>
-                    <a href='http://localhost/polovnitelefoni/views/resetPassword.php?uid=$uid' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>Stranica za promenu lozinke</a>
+                    <a href='http://localhost:81/polovnitelefoni/polovnitelefoni/views/resetPassword.php?uid=$uid' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>Stranica za promenu lozinke</a>
                 </div>
 
                 <hr style='margin: 20px 0; border: 0; border-top: 2px solid #ccc;'>

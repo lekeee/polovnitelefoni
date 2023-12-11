@@ -20,7 +20,7 @@
     <section class="dashboard">
         <div class="div-block-676">
             <div class="div-block-677">
-                <div class="div-block-678"><a href="dashboard.php" class="dashboardlinks active w-inline-block">
+                <div class="div-block-678"><a href="dashboard.php" class="dashboardlinks w-inline-block">
                         <div>Kontrolna tabla</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Narudžbine</div>
