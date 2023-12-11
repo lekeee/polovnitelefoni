@@ -63,9 +63,14 @@ class User{
 
     public function createGoogle($name, $lastname, $email, $oauth_provider, $oauth_uid = NULL){
         try{
-            $sql = "INSERT INTO users (name, lastname, email, oauth_uid, oauth_provider) VALUES (?,?,?,?,?)";
+            $verified = 1;
+            $sql = "INSERT INTO users (name, lastname, email, verified, oauth_uid, oauth_provider) VALUES (?,?,?,?,?,?)";
             $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("sssss", $name, $lastname, $email, $oauth_uid, $oauth_provider);
+            if (!$stmt) {
+                // Dodajte ovde kod za rukovanje greškom u pripremi upita
+                die('Greška prilikom pripreme upita: ' . $this->con->error);
+            }
+            $stmt->bind_param("sssiss", $name, $lastname, $email, $verified, $oauth_uid, $oauth_provider);
             $result = $stmt->execute();
                 
             if (!$result) {
@@ -196,12 +201,13 @@ class User{
     }
 
     private function updateUsername($username){
+        $user_id =  $this->getId();
         $sql = "UPDATE users SET 
         username = ?
         WHERE user_id = ?";
 
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("si", $username, $this->getId());
+        $stmt->bind_param("si", $username, $user_id);
 
         $stmt->execute();
         $results = $stmt->affected_rows;
@@ -257,18 +263,18 @@ class User{
         return false;
     }
 
-    public function isLoggedWithGoogle(){
+    /*public function isLoggedWithGoogle(){
         if(isset($_SESSION['user_id']) && isset($_SESSION['token'])){
             return true;
         }
         return false;
-    }
+    }*/
 
     public function logout(){
         if(isset($_SESSION['user_id']) && isset($_SESSION['token'])){
             unset($_SESSION['user_id']);
             unset($_SESSION['token']);
-            $client->revokeToken(); 
+            //$client->revokeToken(); 
         }
         else if(isset($_SESSION['user_id'])){
             unset($_SESSION['user_id']);
