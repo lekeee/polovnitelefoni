@@ -340,6 +340,19 @@ class User{
         return isset($results);
     }
 
+    public function getUserDataFromId($user_id){
+        $sql = "SELECT name, lastname, username, email, phone, city, address FROM users WHERE user_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $user = $result->fetch_assoc();
+        
+        //ako kojim slucajem nema user vraca null
+        return $user ? json_encode($user) : null;
+    }
+
     public function sendVerificationEmail($email){
         require __DIR__ .  "/../../PHPMailer/src/Exception.php";
         require __DIR__ . "/../../PHPMailer/src/PHPMailer.php";
@@ -411,6 +424,7 @@ class User{
             throw new EMAIL_NOT_SENDED();
         }
     }
+    
     
     public function sendChangePasswordMail($email){
         require "../../PHPMailer/src/Exception.php";
