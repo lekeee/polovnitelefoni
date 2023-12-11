@@ -1,8 +1,10 @@
-<option value="aleksandrovac">Aleksandrovac</option>
-<option value="aleksinac">Aleksinac</option>
-<option value="arandjelovac">Aranđelovac</option>
-<option value="backa-palanka">Bačka Palanka</option>
-<option value="backa-topola">Bačka Topola</option>
+<!-- PREPRAVITI DA VALUE POCINJE SA VELIKIM SLOVOM I DA BUDE NA SRPSKOJ LATINICI -->
+
+<option value="Aleksandrovac">Aleksandrovac</option>
+<option value="Aleksinac">Aleksinac</option>
+<option value="Arandjelovac">Aranđelovac</option>
+<option value="Backa Palanka">Bačka Palanka</option>
+<option value="Backa Topola">Bačka Topola</option>
 <option value="bajina-basta">Bajina Bašta</option>
 <option value="becej">Bečej</option>
 <option value="beograd">Beograd</option>

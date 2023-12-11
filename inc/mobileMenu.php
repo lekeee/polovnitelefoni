@@ -36,8 +36,7 @@
                 </a><a href="#" class="link-block-10 w-inline-block">
                     <div class="div-block-63">
                         <div class="div-block-82"><img
-                                src="../public/src/headphones_iconmobile_phone
-mobile_phone.png"
+                                src="../public/src/headphones_icon.png"
                                 loading="lazy" alt="Headphones Icon" class="image-20" />
                             <div class="text-block-36">Slušalice</div>
                         </div>
