@@ -142,7 +142,7 @@
                                     id="UserConfirmedNewPassword" />
                             </div><input type="submit" value="Sačuvaj promene" data-value="Sacuvaj Promene"
                                 data-wait="../public/src/loading.gif" class="submit-button-5 w-button" id="saveButton"
-                                style="width: 146px; height: 50px" />
+                                style="color:#fff; width: 146px; height: 50px" />
                         </form>
 
                     </div>

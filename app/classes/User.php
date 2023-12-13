@@ -14,7 +14,7 @@ class User{
         $this->con = $con;
     }
 
-    private function isEmailTaken($email){
+    public function isEmailTaken($email){
         $sql = "SELECT * FROM users WHERE email = ?";
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("s", $email);
@@ -84,6 +84,23 @@ class User{
         
     }
 
+    public function setOauthUid($email, $oauth_uid){
+        $user_id =  $this->getId();
+        $sql = "UPDATE users SET 
+        oauth_uid = ?,
+        oauth_provider= ?
+        WHERE email = ?";
+
+        $oauth_provider = "google";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("sss", $oauth_uid, $oauth_provider, $email);
+
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+
+        return isset($results);
+    }
+
     public function getIdRegister($email){
         $sql = "SELECT user_id FROM users WHERE email = ?";
         $stmt = $this->con->prepare($sql);
@@ -121,7 +138,7 @@ class User{
         return false;
     }
 
-    public function checkUserByOauthId($oauth_uid){
+    public function checkUserByOauthUid($oauth_uid){
         $sql = "SELECT * FROM users WHERE oauth_uid=?";
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("s", $oauth_uid);
@@ -131,6 +148,22 @@ class User{
         $user = $result->fetch_assoc();
 
         return $user ? true: null;
+    }
+
+    public function returnOauthUid(){
+        $user_id = $this->getIdRegister();
+        $sql = "SELECT ouath_uid FROM users WHERE user_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+
+        $results = $stmt->get_result();
+
+        if($results->num_rows == 1){
+            $user = $results->fetch_assoc();
+            return $user["oauth_uid"];
+        }
+        else return false;
     }
 
     public function returnUser(){ 

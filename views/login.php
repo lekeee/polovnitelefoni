@@ -60,7 +60,10 @@
                                     <input type="submit" value="Prijavi se" data-value="Prijavi se"
                                         data-wait="../public/src/loading.gif" class="submit-button-2 w-button"
                                         id="login-submit" />
-                                        <a href="<?php echo $loginUrl?>">Prijavi se preko google</a>
+                                        <a href="<?php echo $loginUrl?>">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo" style="width: 25px; height: 25px;">
+                                        </a>
+                                        
 
                                     <div class="div-block-77" id="login-error-div" style="display: none">
                                         <div style="" id="login-error-div2" class="div-block-266">
@@ -74,6 +77,7 @@
                                             class="text-block-17">Zaboravili ste lozinku?</div>
                                     </a>
                                 </form>
+
                                 <div class="w-form-done"></div>
                                 <div class="w-form-fail"></div>
                             </div>
