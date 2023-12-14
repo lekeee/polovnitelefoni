@@ -190,12 +190,13 @@ class User{
 
         if($username !== json_decode($userData, true)['username'] && $this->isUsernameTaken($username)){
             throw new USERNAME_TAKEN_EXCEPTION();
-            return 'USRNAME_TAKEN';
+            //return 'USRNAME_TAKEN';
         }
         return $this->updateUsername($username) && isset($results);
     }
 
     private function updateUsername($username){
+        $user_id = $this->getId();
         $sql = "UPDATE users SET 
         username = ?
         WHERE user_id = ?";
@@ -205,7 +206,6 @@ class User{
 
         $stmt->execute();
         $results = $stmt->affected_rows;
-
         return isset($results);
     }
     public function resetPassword($uid, $password){
@@ -268,7 +268,7 @@ class User{
         if(isset($_SESSION['user_id']) && isset($_SESSION['token'])){
             unset($_SESSION['user_id']);
             unset($_SESSION['token']);
-            $client->revokeToken(); 
+            // $client->revokeToken(); 
         }
         else if(isset($_SESSION['user_id'])){
             unset($_SESSION['user_id']);

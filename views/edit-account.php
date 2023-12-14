@@ -128,7 +128,7 @@
                             </div>
                             <div class="div-block-682 inputupdate pdtop">
                                 <div class="passwordLabel">
-                                    <label for="UserConfirmedNewPassword" class="field-label-3">Potvrdite novu
+                                    <label for="UserConfirmedNewPassword" class="field-label-3" >Potvrdite novu
                                         lozinku</label>
                                     <img width="20" loading="lazy" alt="Show Password Icon"
                                         src="../public/src/show_password_icon.png" class="image-8"
@@ -142,7 +142,7 @@
                                     id="UserConfirmedNewPassword" />
                             </div><input type="submit" value="Sačuvaj promene" data-value="Sacuvaj Promene"
                                 data-wait="../public/src/loading.gif" class="submit-button-5 w-button" id="saveButton"
-                                style="width: 146px; height: 50px" />
+                                style="width: 146px; height: 50px; color: white;" />
                         </form>
 
                     </div>

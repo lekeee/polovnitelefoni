@@ -82,7 +82,20 @@
                             loading="lazy" height="35" alt="User Icon" width="35" class="image-27" />
                         <div>
                             <div class="text-block-7" style="color: grey"><?php echo $user !== NULL && $user->isLogged() ? "Dobrodošli" : "Prijavi se na"?></div>
-                            <div class="text-block-8"><?php echo $user !== NULL && $user->isLogged() ? json_decode($user->returnUser(), true)['username']  : "Profil"?></div>
+                            <div class="text-block-8">
+                                <?php 
+                                //echo $user !== NULL && $user->isLogged() ? json_decode($user->returnUser(), true)['username']  : "Profil"
+                                if($user !== NULL && $user->isLogged()){
+                                    if(!empty(json_decode($user->returnUser(), true)['username'])){
+                                        echo json_decode($user->returnUser(), true)['username'];
+                                    }else{
+                                        echo json_decode($user->returnUser(), true)['name'] . ' ' . json_decode($user->returnUser(), true)['lastname'];
+                                    }
+                                }else{
+                                    echo "Profil";
+                                }
+                                ?> 
+                            </div>
 
                         </div>
                     </div>
