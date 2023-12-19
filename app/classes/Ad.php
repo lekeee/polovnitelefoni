@@ -24,8 +24,8 @@ abstract class Ad{
         $this->damage = $damage;
     }
     
-    abstract public function create($user_id, $brand, $model, $title, $state, $description, $price, $new_price, $images, $availability, $damage, $accessories);
-    abstract public function saveImages($images, $user_id);
+    abstract public function create($user_id, $brand, $model, $title, $state, $stateRange ,$description, $price, $images, $availability, $damage, $accessories);
+    abstract public function saveImages($uploadDirectory, $imageSrcArray, $user_id);
     abstract public function select24();
     abstract public function select24UserAds($user_id, $offset = 0, $limit = 24);
     abstract public function read($user_id);

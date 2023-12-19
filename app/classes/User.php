@@ -284,7 +284,7 @@ class User{
     }
 
     public function generateChangePasswordCode($email){
-        $length = 24; //duzina koda
+        $length = 24; 
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $code = '';
 

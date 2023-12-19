@@ -155,12 +155,13 @@
   }
   
   .div-block-749 {
-    width: 120px;
-    height: 120px;
+    width: 105px;
+    height: 105px;
+    margin-right: 5px;
     margin-bottom: 15px;
-    margin-right: 15px;
     display: inline-block;
     overflow: hidden;
+    float: left;
   }
   
   .div-block-750 {
@@ -170,6 +171,7 @@
     background-image: url("https://assets-global.website-files.com/655506e07faa7f82a5f25610/657a21788fcc96a57220bcdf_add-image.svg");
     background-position: 50%;
     background-size: contain;
+    background-repeat: no-repeat;
   }
   
   .div-block-751 {
@@ -1877,10 +1879,10 @@
       font-size: 16px;
     }
   
-    .div-block-749 {
+    /* .div-block-749 {
       width: 90px;
       height: 90px;
-    }
+    } */
   
     .submit-button-6 {
       height: 45px;
@@ -1891,3 +1893,79 @@
       font-size: 13px;
     }
   }
+
+  #image-container {
+    position: relative;
+}
+
+
+.preview-image{
+  display: inline-block;
+  padding: 5px;
+  margin: 0;
+  width: 50%;
+  max-width: 105px;
+  height: 105px;
+  margin-bottom: 15px;
+  /* margin-top: 5px; */
+  margin-right: 5px;
+  border: 1px solid var(--border-color);
+}
+.preview-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.div-block-7477{
+  width: 100%;
+}
+.main-div{
+  border: 1px solid #ddd;
+  width: 100%;
+}
+#price{
+  font-weight: bold;
+  font-size: 20px;
+}
+#price:focus{
+  border: 1px solid black;
+  border-right: none;
+}
+#price.focused + .div-block-756 {
+  border: 1px solid black;
+  border-left: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.termscheck {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  width: 15px;
+  height: 15px;
+  border: 1px solid #818ea0;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+.termscheck:checked {
+  background-color: #041e42;
+  border-color: #041e42;
+}
+
+.termscheck label {
+  margin-left: 5px;
+}

@@ -8,39 +8,69 @@ ini_set('display_errors', 1);
 class Phone extends Ad{
     public $accessories;
 
-    public function __construct($user_id = null, $brand = null, $model = null, $title = null, $state = null, $description = null, $images = null, $price = null, $new_price = null, $views = null, $availability = null, $damage = null, $accessories = null) {
+    public function __construct($user_id = null, $brand = null, $model = null, $title = null, $state = null, $stateRange = null ,$description = null, $images = null, $price = null, $new_price = null, $views = null, $availability = null, $damage = null, $accessories = null) {
         
-        parent::__construct($user_id, $brand, $model, $title, $state, $description, $images, $price, $new_price, $views, $availability, $damage);
+        parent::__construct($user_id, $brand, $model, $title, $state, $stateRange ,$description, $images, $price, $new_price, $views, $availability, $damage);
 
         $this->accessories = $accessories;
     }
 
-    public function create($user_id, $brand, $model, $title, $state, $description, $price, $new_price, $images, $availability, $damage, $accessories){
+    public function create($user_id, $brand, $model, $title, $state, $stateRange ,$description, $price, $images, $availability, $damage, $accessories){
+        try{
+            $sql = "INSERT INTO oglasi (user_id, brand, model, title, state, stateRange, description, price, images, availability, damage, accessories)
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            $stmt = $this->con->prepare($sql);
+                if (!$stmt) {
+                die('Error in SQL query: ' . $this->con->error);
+            }
+            $imageFolder = $this->createImageFolder($user_id);
+            $isVerified = 1;
+            $stmt->bind_param("isssssssssss", $user_id, $brand, $model, $title, $state, $stateRange ,$description, $price, $imageFolder, $isVerified, $damage, $accessories);
 
-        $sql = "INSERT INTO oglasi (user_id, brand, model, title, state, description, price, new_price, images, availability, damage, accessories)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-        $stmt = $this->con->prepare($sql);
+            $result = $stmt->execute();
+            $result = $stmt->affected_rows;
 
-        $stmt->bind_param("isssssssssss", $user_id, $brand, $model, $title, $state, $description, $price, $new_price, $images, $availability, $damage, $accessories);
-
-        $result = $stmt->execute();
-        $result = $stmt->affected_rows;
-        
-        return $result > 0 ? true : false;
-    }
-
-    public function saveImages($images, $user_id){
-        $folderName = uniqid($user_id."_"); // Generiše jedinstveno ime foldera za slike
-        $uploadDirectory = "uploads/" . $folderName; // Putanja do foldera za smeštaj slika
-        mkdir($uploadDirectory); // Kreira folder
-
-        foreach ($images['tmp_name'] as $key => $tmp_name) {
-            $originalFileName = basename($images['name'][$key]);
-            $targetFile = $uploadDirectory . '/' . $originalFileName;
+            $imagesUploaded = $this->saveImages($imageFolder, $images, $user_id);
             
-            move_uploaded_file($tmp_name, $targetFile);
+            return $imagesUploaded && ($result > 0 ? true : false);
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
         }
     }
+
+    public function createImageFolder($user_id){
+        $folderName = uniqid($user_id."_");
+        $uploadDirectory = "../../uploads/" . $folderName;
+        mkdir($uploadDirectory, 0777, true);
+        return $uploadDirectory;
+    }
+    
+
+    public function saveImages($uploadDirectory, $imageSrcArray, $user_id){
+        try{
+            $brojac = 0;
+            foreach ($imageSrcArray as $key => $imageSrc) {
+                $base64String = $imageSrc;
+                list($type, $data) = explode(';', $base64String);
+                list(, $data) = explode(',', $data);
+    
+                $imageData = base64_decode($data);
+                if($brojac === 0){
+                    $imageName = 'main-image.png';
+                }else{
+                    $imageName = uniqid('image_' . $brojac . '_') . '.png';
+                }
+                $targetFile = $uploadDirectory . '/' . $imageName;
+                file_put_contents($targetFile, $imageData);
+                $brojac++;
+            }
+            return true;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+    
+    
 
     public function select24($offset = 0, $limit = 24){
         $sql = "SELECT * FROM oglasi LIMIT $limit OFFSET $offset";
