@@ -3,10 +3,10 @@ include_once(__DIR__ . '/../exceptions/adExceptions.php');
 
 abstract class Ad{
     protected $con;
-    protected $user_id, $brand, $model, $title, $state, $state_rate, $description, $images;
+    protected $user_id, $brand, $model, $title, $state, $description, $images;
     protected $price, $new_price, $views, $availability, $damage;
 
-    public function __construct($user_id = null, $brand = null, $model = null, $title = null, $state = null, $state_rate = null, $description = null, $images = null, $price = null, $new_price = null, $views = null, $availability = null, $damage = null){
+    public function __construct($user_id = null, $brand = null, $model = null, $title = null, $state = null, $description = null, $images = null, $price = null, $new_price = null, $views = null, $availability = null, $damage = null){
         global $con;
         $this->con = $con;
     
@@ -15,7 +15,6 @@ abstract class Ad{
         $this->model = $model;
         $this->title = $title;
         $this->state = $state;
-        $this->state_rate = $state_rate;
         $this->description = $description;
         $this->images = $images;
         $this->price = $price;
@@ -25,8 +24,8 @@ abstract class Ad{
         $this->damage = $damage;
     }
     
-    abstract public function create($user_id, $brand, $model, $title, $state, $state_rate, $description, $price, $new_price, $images, $availability, $damage, $accessories);
-    abstract public function saveImages($images, $user_id);
+    abstract public function create($user_id, $brand, $model, $title, $state, $stateRange ,$description, $price, $images, $availability, $damage, $accessories);
+    abstract public function saveImages($uploadDirectory, $imageSrcArray, $user_id);
     abstract public function select24();
     abstract public function select24UserAds($user_id, $offset = 0, $limit = 24);
     abstract public function read($user_id);

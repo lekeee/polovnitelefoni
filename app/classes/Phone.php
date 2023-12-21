@@ -19,45 +19,60 @@ class Phone extends Ad{
         }
     }
 
-    public function create($user_id, $brand, $model, $title, $state, $state_rate, $description, $price, $new_price, $images, $availability, $damage, $accessories){
+    public function create($user_id, $brand, $model, $title, $state, $stateRange ,$description, $price, $images, $availability, $damage, $accessories){
         try{
-            $sql = "INSERT INTO oglasi (user_id, brand, model, title, state, state_rate, description, price, new_price, images, availability, damage, accessories)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO oglasi (user_id, brand, model, title, state, stateRange, description, price, images, availability, damage, accessories)
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $this->con->prepare($sql);
-
-            $stmt->bind_param("issssssssssss", $user_id, $brand, $model, $title, $state, $state_rate, $description, $price, $new_price, $images, $availability, $damage, $accessories);
+                if (!$stmt) {
+                die('Error in SQL query: ' . $this->con->error);
+            }
+            $imageFolder = $this->createImageFolder($user_id);
+            $isVerified = 1;
+            $stmt->bind_param("isssssssssss", $user_id, $brand, $model, $title, $state, $stateRange ,$description, $price, $imageFolder, $isVerified, $damage, $accessories);
 
             $result = $stmt->execute();
             $result = $stmt->affected_rows;
+
+            $imagesUploaded = $this->saveImages($imageFolder, $images, $user_id);
             
-            return $result > 0 ? true : false;
-        }
-        catch (Exception $e){
+            return $imagesUploaded && ($result > 0 ? true : false);
+        }catch(Exception $e){
             throw new AD_CANNOT_BE_CREATED();
         }
-        
     }
 
-    public function saveImages($images, $user_id){
+    public function createImageFolder($user_id){
+        $folderName = uniqid($user_id."_");
+        $uploadDirectory = "../../uploads/" . $folderName;
+        mkdir($uploadDirectory, 0777, true);
+        return $uploadDirectory;
+    }
+    
 
+    public function saveImages($uploadDirectory, $imageSrcArray, $user_id){
         try{
-            $folderName = uniqid($user_id."_"); // Generiše jedinstveno ime foldera za slike
-            $uploadDirectory = "uploads/" . $folderName; // Putanja do foldera za smeštaj slika
-            mkdir($uploadDirectory); // Kreira folder
-
-            foreach ($images['tmp_name'] as $key => $tmp_name) {
-                $originalFileName = basename($images['name'][$key]);
-                $targetFile = $uploadDirectory . '/' . $originalFileName;
-                
-                move_uploaded_file($tmp_name, $targetFile);
+            $brojac = 0;
+            foreach ($imageSrcArray as $key => $imageSrc) {
+                $base64String = $imageSrc;
+                list($type, $data) = explode(';', $base64String);
+                list(, $data) = explode(',', $data);
+    
+                $imageData = base64_decode($data);
+                if($brojac === 0){
+                    $imageName = 'main-image.png';
+                }else{
+                    $imageName = uniqid('image_' . $brojac . '_') . '.png';
+                }
+                $targetFile = $uploadDirectory . '/' . $imageName;
+                file_put_contents($targetFile, $imageData);
+                $brojac++;
             }
-        }
-        catch(Exception $e){
+            return true;
+        } catch (Exception $e) {
             throw new IMAGES_NOT_SAVED();
         }
-        
     }
-
     public function select24($offset = 0, $limit = 24){
         try{
             $sql = "SELECT * FROM oglasi LIMIT $limit OFFSET $offset";
