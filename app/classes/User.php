@@ -10,62 +10,88 @@ class User{
     protected $con;
 
     public function __construct(){
-        global $con;
-        $this->con = $con;
+        try{
+            global $con;
+            $this->con = $con;
+        }
+        catch(Exception $e){
+            throw new OBJECT_USER_NOT_CREATED();
+        }
     }
 
-    private function isEmailTaken($email){
-        $sql = "SELECT * FROM users WHERE email = ?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->store_result();
-        return $stmt->num_rows > 0;
+    public function isEmailTaken($email){
+        try{
+            $sql = "SELECT * FROM users WHERE email = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->store_result();
+            return $stmt->num_rows > 0;
+        }
+        catch(Exception $e){
+            throw new IS_EMAIL_TAKEN_ERROR();
+        }
+        
     }
 
     private function isUsernameTaken($username){
-        $sql = "SELECT * FROM users WHERE username = ?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->store_result();
-        return $stmt->num_rows > 0;
+        try{
+            $sql = "SELECT * FROM users WHERE username = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $stmt->store_result();
+            return $stmt->num_rows > 0;
+        }
+        catch(Exception $e){
+            throw new IS_USERNAME_TAKEN_ERROR();
+        }
     }
 
     public function createPrimary($username, $email, $password){
-        if(!$this->isEmailTaken($email)){
-            if(!$this->isUsernameTaken($username)){
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                
-                $sql = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
-                $stmt = $this->con->prepare($sql);
-                
-                $stmt->bind_param("sss", $username, $email, $hashed_password);
-                $result = $stmt->execute();
-                
-        	    if ($stmt->error) {
-                    return false;
-                }
-                
-                if ($result) {
-                    $this->sendVerificationEmail($email);
-                    return true;
-                } else {
-                    return false;
+        try{
+            if(!$this->isEmailTaken($email)){
+                if(!$this->isUsernameTaken($username)){
+                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                    
+                    $sql = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
+                    $stmt = $this->con->prepare($sql);
+                    
+                    $stmt->bind_param("sss", $username, $email, $hashed_password);
+                    $result = $stmt->execute();
+                    
+                    if ($stmt->error) {
+                        return false;
+                    }
+                    
+                    if ($result) {
+                        $this->sendVerificationEmail($email);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }else{
+                    return "Korisničko ime je zauzeto.";
                 }
             }else{
-                return "Korisničko ime je zauzeto.";
+                return "Već postoji nalog sa unetom email adresom.";
             }
-        }else{
-            return "Već postoji nalog sa unetom email adresom.";
+        }
+        catch(Exception $e){
+            throw new CREATE_PRIMARY_ERROR();
         }
     }
 
     public function createGoogle($name, $lastname, $email, $oauth_provider, $oauth_uid = NULL){
         try{
-            $sql = "INSERT INTO users (name, lastname, email, oauth_uid, oauth_provider) VALUES (?,?,?,?,?)";
+            $verified = 1;
+            $sql = "INSERT INTO users (name, lastname, email, verified, oauth_uid, oauth_provider) VALUES (?,?,?,?,?,?)";
             $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("sssss", $name, $lastname, $email, $oauth_uid, $oauth_provider);
+            if (!$stmt) {
+                // Dodajte ovde kod za rukovanje greškom u pripremi upita
+                die('Greška prilikom pripreme upita: ' . $this->con->error);
+            }
+            $stmt->bind_param("sssiss", $name, $lastname, $email, $verified, $oauth_uid, $oauth_provider);
             $result = $stmt->execute();
                 
             if (!$result) {
@@ -79,82 +105,152 @@ class User{
         
     }
 
-    public function getIdRegister($email){
-        $sql = "SELECT user_id FROM users WHERE email = ?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
+    public function setOauthUid($email, $oauth_uid){
+        try{
+            $user_id =  $this->getId();
+            $sql = "UPDATE users SET 
+            oauth_uid = ?,
+            oauth_provider= ?
+            WHERE email = ?";
 
-        $results = $stmt->get_result();
+            $oauth_provider = "google";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("sss", $oauth_uid, $oauth_provider, $email);
 
-        if($results->num_rows == 1){
-            $user = $results->fetch_assoc();
-            return $user["user_id"];
+            $stmt->execute();
+            $results = $stmt->affected_rows;
+
+            return isset($results);
         }
-        return NULL;
+        catch (Exception $e){
+            throw new SET_OAUTH_UID_ERROR();
+        }
+    }
+
+    public function getIdRegister($email){
+        try{
+            $sql = "SELECT user_id FROM users WHERE email = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+
+            $results = $stmt->get_result();
+
+            if($results->num_rows == 1){
+                $user = $results->fetch_assoc();
+                return $user["user_id"];
+            }
+            return NULL;
+        }
+        catch (Exception $e){
+            throw new GET_ID_REGISTER_ERROR();
+        }
     }
     
     public function login($emailOrUsername, $password){
-        $sql = "SELECT user_id, password, verified FROM users WHERE email = ? OR username = ?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
-        $stmt->execute();
-
-        $results = $stmt->get_result();
-
-        if($results->num_rows == 1){
-            $user = $results->fetch_assoc();
-            if($user["verified"] == 0){
-                throw new ACCOUNT_NOT_VERIFIED();
+        try{
+            $sql = "SELECT user_id, password, verified FROM users WHERE email = ? OR username = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
+            $stmt->execute();
+    
+            $results = $stmt->get_result();
+    
+            if($results->num_rows == 1){
+                $user = $results->fetch_assoc();
+                if($user["verified"] == 0){
+                    throw new ACCOUNT_NOT_VERIFIED();
+                }
+                if(password_verify($password, $user['password'])){
+                    $_SESSION['user_id'] = $user['user_id'];
+                    return true;
+                }
             }
-            if(password_verify($password, $user['password'])){
-                $_SESSION['user_id'] = $user['user_id'];
-                return true;
-            }
+    
+            return false;
         }
-
-        return false;
+        catch(Exception $e){
+            throw new LOGIN_ERROR();
+        }
+       
     }
 
-    public function checkUserByOauthId($oauth_uid){
-        $sql = "SELECT * FROM users WHERE oauth_uid=?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("s", $oauth_uid);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    
-        $user = $result->fetch_assoc();
+    public function checkUserByOauthUid($oauth_uid){
+        try{
+            $sql = "SELECT * FROM users WHERE oauth_uid=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("s", $oauth_uid);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            $user = $result->fetch_assoc();
 
-        return $user ? true: null;
+            return $user ? true: null;
+        }
+        catch(Exception $e){
+            throw new CHECK_USER_BY_OAUTH_UID_ERROR();
+        }
+        
+    }
+
+    public function returnOauthUid(){
+        try{
+            $user_id = $this->getIdRegister();
+            $sql = "SELECT ouath_uid FROM users WHERE user_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+
+            $results = $stmt->get_result();
+
+            if($results->num_rows == 1){
+                $user = $results->fetch_assoc();
+                return $user["oauth_uid"];
+            }
+            else return false;
+        }
+        catch(Exception $e){
+            throw new RETURN_OAUTH_UID_ERROR();
+        }
     }
 
     public function returnUser(){ 
-        $user_id = $this->getId();
-        $sql = "SELECT * FROM users WHERE user_id=?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("s", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    
-        $user = $result->fetch_assoc();
+        try{
+            $user_id = $this->getId();
+            $sql = "SELECT * FROM users WHERE user_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("s", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
         
-        //ako kojim slucajem nema user vraca null
-        return $user ? json_encode($user) : null;
+            $user = $result->fetch_assoc();
+            
+            //ako kojim slucajem nema user vraca null
+            return $user ? json_encode($user) : null;
+        }
+        catch(Exception $e){
+            throw new RETURN_USER_ERROR();
+        }
     }
     public function getEmail($emailOrUsername){
-        $sql = "SELECT email FROM users WHERE email = ? OR username = ?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
-        $stmt->execute();
+        try{
+            $sql = "SELECT email FROM users WHERE email = ? OR username = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
+            $stmt->execute();
 
-        $results = $stmt->get_result();
+            $results = $stmt->get_result();
 
-        if($results->num_rows == 1){
-            $user = $results->fetch_assoc();
-            return $user["email"];
+            if($results->num_rows == 1){
+                $user = $results->fetch_assoc();
+                return $user["email"];
+            }
+
+            return NULL;
         }
-
-        return NULL;
+        catch(Exception $e){
+            throw new GET_EMAIL_ERROR();
+        }
     }
     public function updateUser($name, $lastname, $username, $oldPassword, $password, $phone, $city, $address){
         $user_id = $this->getId();
@@ -190,64 +286,85 @@ class User{
 
         if($username !== json_decode($userData, true)['username'] && $this->isUsernameTaken($username)){
             throw new USERNAME_TAKEN_EXCEPTION();
-            //return 'USRNAME_TAKEN';
+            return 'USRNAME_TAKEN';
         }
         return $this->updateUsername($username) && isset($results);
     }
 
     private function updateUsername($username){
-        $user_id = $this->getId();
-        $sql = "UPDATE users SET 
-        username = ?
-        WHERE user_id = ?";
+        try{
+            $user_id =  $this->getId();
+            $sql = "UPDATE users SET 
+            username = ?
+            WHERE user_id = ?";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("si", $username, $this->getId());
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("si", $username, $user_id);
 
-        $stmt->execute();
-        $results = $stmt->affected_rows;
-        return isset($results);
+            $stmt->execute();
+            $results = $stmt->affected_rows;
+
+            return isset($results);
+        }
+        catch(Exception $e){
+            throw new UPDATE_USERNAME_ERROR();
+        }
     }
     public function resetPassword($uid, $password){
-        $sql = "UPDATE users SET 
-        password = ? 
-        WHERE user_id = ?";
+        try{
+            $sql = "UPDATE users SET 
+            password = ? 
+            WHERE user_id = ?";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("si", password_hash($password, PASSWORD_DEFAULT), $uid);
-        
-        $stmt->execute();
-        $results = $stmt->affected_rows;
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("si", password_hash($password, PASSWORD_DEFAULT), $uid);
+            
+            $stmt->execute();
+            $results = $stmt->affected_rows;
 
-        return $results > 0 && $this->deleteResetPasswordCode($uid) > 0;
+            return $results > 0 && $this->deleteResetPasswordCode($uid) > 0;
+        }
+        catch(Exception $e){
+            throw new RESET_PASSWORD_ERROR();
+        }
     }
 
     public function deleteResetPasswordCode($uid){
-        $sql = "UPDATE verifikacioni_kodovi SET 
-        changepw_code=NULL 
-        WHERE user_id=?";
+        try{
+            $sql = "UPDATE verifikacioni_kodovi SET 
+            changepw_code=NULL 
+            WHERE user_id=?";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("i", $uid);
-        
-        $stmt->execute();
-        $results = $stmt->affected_rows;
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $uid);
+            
+            $stmt->execute();
+            $results = $stmt->affected_rows;
 
-        return $results > 0 ? true : false;
+            return $results > 0 ? true : false;
+        }
+        catch(Exception $e){
+            throw new DELETE_RESET_PW_CODE_ERROR();
+        }
     }
 
     private function updatePassword($password) {
-        $sql = "UPDATE users SET 
-        password = ? 
-        WHERE user_id = ?";
+        try{
+            $sql = "UPDATE users SET 
+            password = ? 
+            WHERE user_id = ?";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("si", password_hash($password, PASSWORD_DEFAULT), $this->getId());
-        
-        $stmt->execute();
-        $results = $stmt->affected_rows;
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("si", password_hash($password, PASSWORD_DEFAULT), $this->getId());
+            
+            $stmt->execute();
+            $results = $stmt->affected_rows;
 
-        return isset($results);
+            return isset($results);
+        }
+        catch(Exception $e){
+            throw new UPDATE_PASSWORD_ERROR();
+        }
     }
 
     public function isLogged(){
@@ -257,18 +374,18 @@ class User{
         return false;
     }
 
-    public function isLoggedWithGoogle(){
+    /*public function isLoggedWithGoogle(){
         if(isset($_SESSION['user_id']) && isset($_SESSION['token'])){
             return true;
         }
         return false;
-    }
+    }*/
 
     public function logout(){
         if(isset($_SESSION['user_id']) && isset($_SESSION['token'])){
             unset($_SESSION['user_id']);
             unset($_SESSION['token']);
-            // $client->revokeToken(); 
+            //$client->revokeToken(); 
         }
         else if(isset($_SESSION['user_id'])){
             unset($_SESSION['user_id']);
@@ -284,7 +401,7 @@ class User{
     }
 
     public function generateChangePasswordCode($email){
-        $length = 24; 
+        $length = 24; //duzina koda
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $code = '';
 
@@ -314,75 +431,103 @@ class User{
     }
 
     private function checkVerificationUserExist($email){
-        $user_id = $this->getIdRegister($email);
-        $sql = "SELECT * FROM verifikacioni_kodovi WHERE user_id=?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->num_rows == 1;
+        try{
+            $user_id = $this->getIdRegister($email);
+            $sql = "SELECT * FROM verifikacioni_kodovi WHERE user_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->num_rows == 1;
+        }
+        catch(Exception $e){
+            throw new CHECK_VERIFICATION_USER_EXIST();
+        }
+        
     }
 
     public function saveVerificationCode($code, $email){
-        $id_val = $this->getIdRegister($email);
-        $sql = "INSERT INTO verifikacioni_kodovi (user_id, verification_code) 
-                VALUES (?,?)";
+        try{
+            $id_val = $this->getIdRegister($email);
+            $sql = "INSERT INTO verifikacioni_kodovi (user_id, verification_code) 
+                    VALUES (?,?)";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("is", $id_val, $code);
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("is", $id_val, $code);
 
-        $stmt->execute();
-        $results = $stmt->affected_rows;
-        
-        return $results > 0 ? true : false;
+            $stmt->execute();
+            $results = $stmt->affected_rows;
+            
+            return $results > 0 ? true : false;
+        }
+        catch(Exception $e){
+            throw new SAVE_VERIFICATION_CODE_ERROR();
+        }
     }
 
     public function updateChangePasswordCode($code, $email){
-        $id_val = $this->getIdRegister($email);
+        try{
+            $id_val = $this->getIdRegister($email);
 
-        $sql = "UPDATE verifikacioni_kodovi SET 
-        changepw_code = ?
-        WHERE user_id = ?";
+            $sql = "UPDATE verifikacioni_kodovi SET 
+            changepw_code = ?
+            WHERE user_id = ?";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("si", $code, $id_val);
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("si", $code, $id_val);
 
-        $stmt->execute();
-        $results = $stmt->affected_rows;
+            $stmt->execute();
+            $results = $stmt->affected_rows;
 
-        return $results > 0 ? true : false;
+            return $results > 0 ? true : false;
+        }
+        catch(Exception $e){
+            throw new UPDATE_CHANGE_PW_CODE_ERROR();
+        }
     }
+
     public function updateVerificationCode($code, $email){
-        $id_val = $this->getIdRegister($email);
+        try{
+            $id_val = $this->getIdRegister($email);
 
-        $sql = "UPDATE verifikacioni_kodovi SET 
-                verification_code = ?
-                WHERE user_id = ?";
+            $sql = "UPDATE verifikacioni_kodovi SET 
+                    verification_code = ?
+                    WHERE user_id = ?";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("si", $code, $id_val);
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("si", $code, $id_val);
 
-        $stmt->execute();
-        $results = $stmt->affected_rows;
-        return $results > 0 ? true : false;
+            $stmt->execute();
+            $results = $stmt->affected_rows;
+            return $results > 0 ? true : false;
+        }
+        catch(Exception $e){
+            throw new UPDATE_VERIFICATION_CODE_ERROR();
+        }
     }
 
     public function verifyUser($user_id){
-        $sql = "UPDATE users SET 
-        verified = '1'
-        WHERE user_id = ?";
+        try{
+            $sql = "UPDATE users SET 
+            verified = '1'
+            WHERE user_id = ?";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("i", $user_id);
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $user_id);
 
-        // Izvršavanje upita
-        $stmt->execute();
-        $results = $stmt->affected_rows;
-        
-        return isset($results);
+            // Izvršavanje upita
+            $stmt->execute();
+            $results = $stmt->affected_rows;
+            
+            return isset($results);
+        }
+        catch(Exception $e){
+            throw new VERIFY_USER_ERROR();
+        }
     }
 
     public function getUserDataFromId($user_id){
+        try{
         $sql = "SELECT name, lastname, username, email, phone, city, address FROM users WHERE user_id=?";
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("i", $user_id);
@@ -393,6 +538,10 @@ class User{
         
         //ako kojim slucajem nema user vraca null
         return $user ? json_encode($user) : null;
+        }
+        catch(Exception $e){
+            throw new GET_USER_DATA_FROM_ID_ERROR();
+        }
     }
 
     public function sendVerificationEmail($email){
@@ -540,15 +689,20 @@ class User{
     }
 
     function getIP() {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            // Provera za deljenje internet konekcije
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            // Provera za proxy servere
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
+        try{
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                // Provera za deljenje internet konekcije
+                $ip = $_SERVER['HTTP_CLIENT_IP'];
+            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                // Provera za proxy servere
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            } else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+            return $ip;
         }
-        return $ip;
+        catch(Exception $e){
+            throw new GET_IP_ERROR();
+        }
     }
 }
