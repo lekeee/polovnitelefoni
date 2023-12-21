@@ -34,7 +34,7 @@ class Phone extends Ad{
             
             return $imagesUploaded && ($result > 0 ? true : false);
         }catch(Exception $e){
-            throw new Exception($e->getMessage());
+            throw new AD_CANNOT_BE_CREATED();
         }
     }
 
@@ -66,7 +66,7 @@ class Phone extends Ad{
             }
             return true;
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new IMAGES_NOT_SAVED();
         }
     }
     
