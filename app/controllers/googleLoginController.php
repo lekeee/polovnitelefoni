@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 require_once "../config/config.php";
 require_once "../classes/User.php";
@@ -20,14 +20,27 @@ if(isset($_SESSION['token']) && isset($_SESSION['user_id'])){
 } 
 
 $oAuth = new Google_Service_Oauth2($client);
-$userData = $oAuth->userinfo->get(); 
-
-if($user->checkUserByOauthId($userData['id']) === null){
+$userData = $oAuth->userinfo->get();
+if($user->isEmailTaken($userData['email'])){
+    if($user->checkUserByOauthUid($userData['id']) === null){
+        $user->setOauthUid($userData['email'], $userData['id']);
+        $_SESSION['user_id'] = $user->getIdRegister($userData['email']);
+        header('Location: ../../views/index.php');
+        exit();
+    }
+    else{
+        $_SESSION['user_id'] = $user->getIdRegister($userData['email']);
+        header('Location: ../../views/index.php');
+        exit();
+    }
+    
+}
+else if($user->checkUserByOauthUid($userData['id']) === null){
     $user->createGoogle($userData['givenName'], $userData['familyName'], $userData['email'], "google",  $userData['id']);
     $_SESSION['user_id'] = $user->getIdRegister($userData['email']);
     header('Location: ../../views/index.php');
-}else{
-    $_SESSION['user_id'] = $user->getIdRegister($userData['email']);
-    header('Location: ../../views/index.php');
     exit();
+}
+else{
+    echo "Greska pri registraciji";
 }

@@ -140,3 +140,33 @@ forgotPassword.addEventListener("click", async function(e){
         });
     }
 });
+
+// function openGoogleLoginPopup(googleLoginURL) {
+//     // Parametri za prozor
+//     var popupWidth = 500;
+//     var popupHeight = 600;
+
+//     // Računanje pozicije prozora
+//     var popupLeft = window.innerWidth / 2 - popupWidth / 2;
+//     var popupTop = window.innerHeight / 2 - popupHeight / 2;
+
+//     // Otvorite prozor u pop-upu
+//     var popup = window.open(googleLoginURL, 'GoogleLogin', 'width=' + popupWidth + ', height=' + popupHeight + ', left=' + popupLeft + ', top=' + popupTop);
+
+//     // var checkChildWindowInterval = setInterval(function() {
+//     //     // Proveri da li je child window zatvoren
+//     //     if (popup.closed) {
+//     //       // Ako jeste, prekini interval
+//     //       clearInterval(checkChildWindowInterval);
+//     //     } else {
+//     //       // Ako nije, proveri da li je došlo do promene URL-a
+//     //       if (popup.location.href === '../views/index.php') {
+//     //         // Ako jeste, zatvori child window
+//     //         popup.close();
+//     //         // Prekini interval
+//     //         clearInterval(checkChildWindowInterval);
+//     //       }
+//     //     }
+//     //   }, 500);
+// }
+
