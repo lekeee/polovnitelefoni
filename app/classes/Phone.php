@@ -8,15 +8,11 @@ ini_set('display_errors', 1);
 class Phone extends Ad{
     public $accessories;
 
-    public function __construct($user_id = null, $brand = null, $model = null, $title = null, $state = null, $state_rate = null, $description = null, $images = null, $price = null, $new_price = null, $views = null, $availability = null, $damage = null, $accessories = null) {
-        try{
-            parent::__construct($user_id, $brand, $model, $title, $state, $state_rate, $description, $images, $price, $new_price, $views, $availability, $damage);
+    public function __construct($user_id = null, $brand = null, $model = null, $title = null, $state = null, $stateRange = null ,$description = null, $images = null, $price = null, $new_price = null, $views = null, $availability = null, $damage = null, $accessories = null) {
+        
+        parent::__construct($user_id, $brand, $model, $title, $state, $stateRange ,$description, $images, $price, $new_price, $views, $availability, $damage);
 
-            $this->accessories = $accessories;
-        }
-        catch(Exception $e){
-            throw new OBJECT_NOT_CREATED();
-        }
+        $this->accessories = $accessories;
     }
 
     public function create($user_id, $brand, $model, $title, $state, $stateRange ,$description, $price, $images, $availability, $damage, $accessories){
