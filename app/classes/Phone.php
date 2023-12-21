@@ -69,23 +69,30 @@ class Phone extends Ad{
             throw new IMAGES_NOT_SAVED();
         }
     }
-    
-    
-
     public function select24($offset = 0, $limit = 24){
-        $sql = "SELECT * FROM oglasi LIMIT $limit OFFSET $offset";
-        $result = $this->con->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        try{
+            $sql = "SELECT * FROM oglasi LIMIT $limit OFFSET $offset";
+            $result = $this->con->query($sql);
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        catch(Exception $e){
+            throw new ADS_NOT_SELECTED();
+        }
     }
 
     public function select24UserAds($user_id, $offset = 0, $limit = 24){
-        $sql = "SELECT * FROM oglasi WHERE user_id=? LIMIT $limit OFFSET $offset";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("i", $ad_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        try{
+            $sql = "SELECT * FROM oglasi WHERE user_id=? LIMIT $limit OFFSET $offset";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $ad_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        catch(Exception $e){
+            throw new ADS_NOT_SELECTED();
+        }
     }
     
     public function read($ad_id){
@@ -105,107 +112,148 @@ class Phone extends Ad{
     }
 
     public function checkIsRated($user_id){
-        $sql = "SELECT * FROM ocene WHERE rater_id=?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        try{
+            $sql = "SELECT * FROM ocene WHERE rater_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        return $result->num_rows == 0 ? false : true;
+            return $result->num_rows == 0 ? false : true;
+        }
+        catch(Exception $e){
+            throw new CHECK_RATE_ERROR();
+        }
     }
 
     public function saveRate($user_id, $ad_id, $ocena){
-        $sql = "INSERT INTO ocene (user_id, ad_id, ocena) 
-                VALUES (?,?,?)";
+        try{
+            $sql = "INSERT INTO ocene (user_id, ad_id, ocena) 
+            VALUES (?,?,?)";
 
             $stmt = $this->con->prepare($sql);
             $stmt->bind_param("iii", $user_id, $ad_id, $ocena);
 
             $stmt->execute();
             $results = $stmt->affected_rows;
-            
-        return $results > 0 ? true : false;
+                
+            return $results > 0 ? true : false;
+        }
+        catch(Exception $e){
+            throw new SAVE_RATE_ERROR();
+        }
+        
     }
 
     public function updateRate($user_id, $ad_id, $ocena){
-        $sql = "UPDATE ocene SET 
+        try{
+            $sql = "UPDATE ocene SET 
                 ocena = ?
                 WHERE user_id = ? AND ad_id=?";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("iii", $ocnea, $user_id, $ad_id);
-        $stmt->execute();
-        $results = $stmt->affected_rows;
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("iii", $ocena, $user_id, $ad_id);
+            $stmt->execute();
+            $results = $stmt->affected_rows;
 
-        return $results > 0 ? true : false;
+            return $results > 0 ? true : false;
+        }
+        catch(Exception $e){
+            throw new UPDATE_RATE_ERROR();
+        }
     }
 
     public function rate($user_id, $ad_id, $ocena){
-        if($this->checkIsRated($user_id)){
-            return $this->updateRate($user_id, $ad_id, $ocena);
+        try{
+            if($this->checkIsRated($user_id)){
+                return $this->updateRate($user_id, $ad_id, $ocena);
+            }
+            else{
+                return $this->saveRate($user_id, $ad_id, $ocena);
+            }
         }
-        else{
-            return $this->saveRate($user_id, $ad_id, $ocena);
+        catch(Exception $e){
+            throw new RATE_ERROR();
         }
     }
 
     public function averageRating($ad_id){
-        $sql = "SELECT ocena FROM ocene WHERE ad_id=?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("i", $ad_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        try{
+            $sql = "SELECT ocena FROM ocene WHERE ad_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $ad_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        $totalRating = 0;
-        $numberOfRatings = 0;
-    
-        while ($row = $result->fetch_assoc()) {
-            $totalRating += $row['ocena'];
-            $numberOfRatings++;
+            $totalRating = 0;
+            $numberOfRatings = 0;
+        
+            while ($row = $result->fetch_assoc()) {
+                $totalRating += $row['ocena'];
+                $numberOfRatings++;
+            }
+
+            if ($numberOfRatings > 0) {
+                $averageRating = $totalRating / $numberOfRatings;
+                return $averageRating;
+            } else {
+                return 0;
+            }
         }
-
-        if ($numberOfRatings > 0) {
-            $averageRating = $totalRating / $numberOfRatings;
-            return $averageRating;
-        } else {
-            return 0;
+        catch(Exception $e){
+            throw new AVERAGE_RATING_ERROR();
         }
     }
 
     public function checkVisit($ip, $ad_id){
-        $sql = "SELECT * FROM visitors WHERE ip_address=? AND ad_id=?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("si", $ip, $ad_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        try{
+            $sql = "SELECT * FROM visitors WHERE ip_address=? AND ad_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("si", $ip, $ad_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        return $result->num_rows == 0 ? true : false;
+            return $result->num_rows == 0 ? true : false;
+        }
+        catch(Exception $e){
+            throw new CHECK_VISIT_ERROR();
+        }
     }
 
     public function addVisit($ip, $ad_id){
-        if($this->checkVisit($ip, $ad_id)){
-            $sql = "INSERT INTO visitors (ip_address, ad_id) 
-                VALUES (?,?)";
+        try{
+            if($this->checkVisit($ip, $ad_id)){
+                $sql = "INSERT INTO visitors (ip_address, ad_id) 
+                    VALUES (?,?)";
 
-            $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("si", $ip, $ad_id);
+                $stmt = $this->con->prepare($sql);
+                $stmt->bind_param("si", $ip, $ad_id);
 
-            $stmt->execute();
-            $results = $stmt->affected_rows;
-            
-            return $results > 0 ? true : false;
+                $stmt->execute();
+                $results = $stmt->affected_rows;
+                
+                return $results > 0 ? true : false;
+            }
+            return false;
         }
-        return false;
+        catch(Exception $e){
+            throw new ADD_VISIT_ERROR();
+        }
     }
 
     public function totalVisits($ad_id){
-        $sql = "SELECT COUNT(*) as count FROM visitors WHERE ad_id=?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("i", $ad_id); 
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
+        try{
+            $sql = "SELECT COUNT(*) as count FROM visitors WHERE ad_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $ad_id); 
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
 
-        return $row['count'];
+            return $row['count'];
+        }
+        catch(Exception $e){
+            throw new TOTAL_VISIT_ERROR();
+        }
     }
 }
