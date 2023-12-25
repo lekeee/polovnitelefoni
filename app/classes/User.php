@@ -705,4 +705,24 @@ class User{
             throw new GET_IP_ERROR();
         }
     }
+
+    public function mySaves(){
+        try{
+            $user_id = $this->getIdRegister();
+            $sql = "SELECT * FROM sacuvani_oglasi INNER JOIN oglasi 
+            ON sacuvani_oglasi.ad_id = oglasi.ad_id
+            WHERE sacuvani_oglasi.user_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if($result->num_rows > 0) {
+                return json_encode($result->fetch_all(MYSQLI_ASSOC));
+            }
+            return NULL;
+        }
+        catch(Exception $e){
+            throw new MY_SAVES_ERROR();
+        }
+    }
 }

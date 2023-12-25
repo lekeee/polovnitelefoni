@@ -11,7 +11,7 @@
             $phoneAd = $phone->read($adId);
             $adData = json_decode($phoneAd, true);
             $visitorsData = $phone->totalVisits($adId);
-            $averageRate = $phone->averageRating($adId);
+            //$averageRate = $phone->averageRating($adId);
             $userData = json_decode($user->getUserDataFromId($adData['user_id']), true);
         }catch(AD_CANNOT_BE_READ $e){
             header('Location: index.php');
