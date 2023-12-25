@@ -11,9 +11,9 @@
             $phoneAd = $phone->read($adId);
             $adData = json_decode($phoneAd, true);
             $visitorsData = $phone->totalVisits($adId);
-            $averageRate = $phone->averageRating($adId);
             $userData = json_decode($user->getUserDataFromId($adData['user_id']), true);
-        }catch(AD_CANNOT_BE_READ $e){
+            $savesCount = $phone->countSaves($adId);
+        }catch(Exception $e){
             header('Location: index.php');
         }
     }
@@ -46,7 +46,7 @@
             <div class="div-block-689">
                 <div class="div-block-690">
                     <div class="div-block-692">
-                        <div class="slider-container">
+                        <div class="slider-container" style="position: relative">
                             <div class="slider">
                                 <div class="slides">
                                     <?php $folderPath = "../uploads/" . $adData['images'];
@@ -94,6 +94,40 @@
                                         srcset="../public/src/arrow_right_icon.svg">
                                 </div>
                             </div>
+                            <div class="deviceState">
+                                <?php
+                                    if($adData['state'] === 0){
+                                        echo "<p>Polovan uređaj <b>" . $adData['stateRange'] . " / 10</b></p>";
+                                        if($adData['stateRange'] <= 3){
+                                            echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "red";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#fff4f4";
+                                            </script>';
+                                        }else if($adData['stateRange'] <= 5){
+                                            echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "orange";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#fff8ec";
+                                            </script>';
+                                        }else if($adData['stateRange'] <= 7){
+                                            echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "blue";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#f2f2ff";
+                                            </script>';
+                                        }else if($adData['stateRange'] <= 9){
+                                            echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "#90eeea";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#edfffe";
+                                            </script>';
+                                        }else{
+                                            echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "lightgreen";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#f4faf6";
+                                            </script>';
+                                        }
+                                    }
+                                ?>
+                                
+                            </div>
                         </div>
                     </div>
                     <div class="thumbnails-container">
@@ -132,53 +166,36 @@
                                 <div class="div-block-695">
                                     <div class="div-block-734">
                                         <img src="<?php 
-                                                    if($averageRate  < 1.5){
+                                                    if($adData['stateRange']  < 2){
                                                         echo "../public/src/start-rating1.png";
-                                                    }else if($averageRate < 2.5){
+                                                    }else if($adData['stateRange']  < 4){
                                                         echo "../public/src/start-rating2.png";
-                                                    }else if($averageRate < 3.5){
+                                                    }else if($adData['stateRange'] < 6){
                                                         echo "../public/src/start-rating3.png";
-                                                    }else if($averageRate < 4.5){
+                                                    }else if($adData['stateRange'] < 8){
                                                         echo "../public/src/start-rating4.png";
                                                     }else{
                                                         echo "../public/src/start-rating5.png";
                                                     }
                                                 ?>" loading="lazy" data-w-id="7be535bf-1c91-1e9c-1d34-3ebf71a74e93"
                                             sizes="(max-width: 479px) 100vw, (max-width: 767px) 23vw, 120px"
-                                            alt="Star Rating <?php echo $averageRate ?> of 5" class="image-30" />
-                                        
-                                        <div class="w-layout-blockcontainer container-5 w-container">
-                                            <div class="div-block-735">
-                                                <h1 class="heading-12">Vaša ocena</h1><img
-                                                    src="../public/src/close_icon.png" loading="lazy"
-                                                    data-w-id="a5bfa589-9420-1deb-e4ec-47f37619712d" alt="Close Icon"
-                                                    class="image-46" />
-                                            </div>
-                                            <img src="../public/src/start-rating1.png" loading="lazy" sizes="100vw"
-                                                srcset="../public/src/start-rating1.png 500w, ../public/src/start-rating1.png 800w, ../public/src/start-rating1.png 890w"
-                                                alt="Star Rating 1 of 5" class="image-45" /><img
-                                                src="../public/src/start-rating2.png" loading="lazy" sizes="100vw"
-                                                srcset="../public/src/start-rating2.png 500w, ../public/src/start-rating2.png 800w, ../public/src/start-rating2.png 892w"
-                                                alt="Star Rating 2 of 5" class="image-45" /><img
-                                                src="../public/src/start-rating3.png" loading="lazy" sizes="100vw"
-                                                srcset="../public/src/start-rating3.png 500w, ../public/src/start-rating3.png 800w, ../public/src/start-rating3.png 893w"
-                                                alt="Star Rating 3 of 5" class="image-45" /><img
-                                                src="../public/src/start-rating4.png" loading="lazy" sizes="100vw"
-                                                srcset="../public/src/start-rating4.png 500w, ../public/src/start-rating4.png 800w, ../public/src/start-rating4.png 887w"
-                                                alt="Star Rating 4 of 5" class="image-45 selected" /><img
-                                                src="../public/src/start-rating5.png" loading="lazy" sizes="100vw"
-                                                srcset="../public/src/start-rating5.png 500w, ../public/src/start-rating5.png 800w, ../public/src/start-rating5.png 892w"
-                                                alt="Star Rating 5 of 5" class="image-45" />
+                                            alt="Star Rating of 5" class="image-30" />
+                                    </div>
+                                    <div class="div-block-696">
+                                        <div class="text-block-47">
+                                            <?php
+                                                echo '<p>' . $visitorsData . '</p>'; 
+                                            ?>
+                                            <img src="../public/src/eye-icon.svg" alt="Eye" srcset="">
                                         </div>
                                     </div>
                                     <div class="div-block-696">
-                                        <div class="text-block-47"><?php
-                                            if($visitorsData == 1){
-                                                echo "1 Pregled";
-                                            }else{
-                                                echo $visitorsData . " Pregleda"; 
-                                            }
-                                        ?></div>
+                                        <div class="text-block-47">
+                                            <?php
+                                                echo '<p>' . $savesCount . '</p>'; 
+                                            ?>
+                                            <img src="../public/src/favourite_icon.png" alt="Eye" srcset="" style="width: 20px">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="div-block-700">
@@ -194,10 +211,22 @@
                                 </div>
                                 <div class="div-block-701">
                                     <h2 class="heading-8">
-                                        €<?php echo empty($adData['new_price']) ? $adData['price'] : $adData['new_price']?>
+                                        <?php 
+                                            if(empty($adData['price'])){
+                                                echo "Dogovor";
+                                            }else{
+                                                echo '€' . $adData['price'];
+                                            }
+                                        ?>
                                     </h2>
                                     <h2 class="heading-9">
-                                        <?php echo empty($adData['new_price']) ? NULL : '€'.$adData['new_price']  ?>
+                                        <?php 
+                                            if(!empty($adData['old_price'])){
+                                                if(!empty($adData['price'])){
+                                                    echo '€' . $adData['old_price'];
+                                                }
+                                            } 
+                                        ?>
                                     </h2>
                                 </div>
                             </div>
@@ -237,7 +266,7 @@
                                     <div class="div-block-721">
                                         <div class="div-block-705"><img src="../public/src/heart-grey.png"
                                                 loading="lazy" width="20" alt="Favourite" />
-                                            <div class="text-block-51">Dodaj u omiljene</div>
+                                            <div class="text-block-51">Sačuvaj oglas</div>
                                         </div>
                                     </div>
                                     <div class="div-block-722">
@@ -257,7 +286,16 @@
                                 class="image-40" />
                             <div>
                                 <div class="text-block-53">Drugi ljudi žele ovaj proizvod. </div>
-                                <div class="text-block-54">11 ljudi ima ovaj proizvod u svojoj listi želja.</div>
+                                <div class="text-block-54"><?php 
+                                if($savesCount === 0){
+                                    echo "Još uvek niko nema ovaj proizvod u svojoj listi sačuvanih oglasa.";
+                                }else if($savesCount === 1){
+                                    echo $savesCount . ' korisnik ima ovaj proizvod u svojoj listi sačuvanih oglasa.'; 
+                                }else{
+                                    echo $savesCount . ' ljudi ima ovaj proizvod u svojoj listi sačuvanih oglasa.'; 
+                                }
+                                
+                                ?> </div>
                             </div>
                         </div>
                         <div class="div-block-708">
@@ -267,12 +305,12 @@
                     </div>
                     <div class="div-block-724">
                         <?php if(!empty($adData['accessories'])){ ?>
-                        <div class="text-block-58">Dodatna oprema: <strong><?php echo $adData['accessories'] ?></strong>
+                        <div class="text-block-58">Dodatna oprema: <strong><?php echo substr($adData['accessories'], 0, -2) ?></strong>
                         </div>
                         <?php } ?>
                         <?php if(!empty($adData['damage'])){ ?>
                         <div class="text-block-59">Oštećenja: <span
-                                class="text-span-4"><?php echo $adData['damage'] ?></span></div>
+                                class="text-span-4"><?php echo substr($adData['damage'], 0, -2) ?></span></div>
                         <?php }?>
                     </div>
                 </div>

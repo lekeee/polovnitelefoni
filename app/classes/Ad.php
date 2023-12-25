@@ -29,13 +29,10 @@ abstract class Ad{
     abstract public function select24();
     abstract public function select24UserAds($user_id, $offset = 0, $limit = 24);
     abstract public function read($user_id);
-    abstract public function checkIsRated($user_id);
-    abstract public function saveRate($user_id, $ad_id, $ocena);
-    abstract public function updateRate($user_id, $ad_id, $ocena);
-    abstract public function rate($user_id, $ad_id, $ocena);
-    abstract public function averageRating($ad_id);
     abstract public function checkVisit($ip, $ad_id);
     abstract public function addVisit($ip, $ad_id);
     abstract public function totalVisits($ad_id);
-
+    abstract public function countSaves($ad_id);
+    abstract public function save($user_id, $ad_id);
+    abstract public function deleteSave($user_id, $ad_id);
 }

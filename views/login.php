@@ -10,7 +10,7 @@
 ?>
 
 <body class="body">
-    
+
     <link href="../public/css/login.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <?php
             require_once "../inc/header.php";
@@ -18,7 +18,7 @@
             require_once "../inc/mobileMenu.php";
         ?>
 
-        <?php
+    <?php
         ?>
 
     <!-- PRIJAVA I REGISTRACIJA -->
@@ -56,14 +56,23 @@
                                         id="login-password" required="" />
                                     <div><label class="w-checkbox checkbox-field"><input type="checkbox" id="checkbox"
                                                 name="checkbox" data-name="Checkbox" class="w-checkbox-input" /><span
-                                                class="w-form-label" for="checkbox" style="margin:0; padding: 0;margin-left: 5px">Zapamti me</span></label></div>
-                                    <input type="submit" value="Prijavi se" data-value="Prijavi se"
-                                        data-wait="../public/src/loading.gif" class="submit-button-2 w-button"
-                                        id="login-submit" />
-                                        <a href="<?php echo $loginUrl?>">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo" style="width: 25px; height: 25px;">
-                                        </a>
-                                        
+                                                class="w-form-label" for="checkbox"
+                                                style="margin:0; padding: 0;margin-left: 5px">Zapamti me</span></label>
+                                    </div>
+
+                                    <div class="submitBtnAndGoogle">
+                                        <input type="submit" value="Prijavi se" data-value="Prijavi se"
+                                            data-wait="../public/src/loading.gif" class="submit-button-2 w-button"
+                                            id="login-submit" />
+                                        <div class="googleIconContainer">
+                                            <div class="googleWideContainer">
+                                                <a href="<?php echo $loginUrl?>" class="googleIcon">
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                                                        alt="Google Logo">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="div-block-77" id="login-error-div" style="display: none">
                                         <div style="" id="login-error-div2" class="div-block-266">
@@ -89,9 +98,11 @@
                                     data-wf-page-id="655506e07faa7f82a5f25613"
                                     data-wf-element-id="dbd58ca1-f8dc-b409-ed3a-9c036c632d34"><label
                                         for="signup-username" class="field-label2">Korisničko ime *</label><input
-                                        type="text" class="text-field-2 w-input" pattern=".{8,20}" title="Korisničko ime mora da ima od 8 do 20 karaktera" maxlength="256" name="signup-username"
-                                        data-name="signup-username" placeholder="" id="signup-username" required="" />
-                                    <div class="div-block-22" ><label for="email-3" class="field-label2">Email adresa
+                                        type="text" class="text-field-2 w-input" pattern=".{8,20}"
+                                        title="Korisničko ime mora da ima od 8 do 20 karaktera" maxlength="256"
+                                        name="signup-username" data-name="signup-username" placeholder=""
+                                        id="signup-username" required="" />
+                                    <div class="div-block-22"><label for="email-3" class="field-label2">Email adresa
                                             *</label></div><input type="email"
                                         class="text-field-2 textfieldpassword w-input" maxlength="256"
                                         name="signup-email" data-name="signup-email" placeholder="" id="signup-email"
@@ -121,7 +132,7 @@
                                             skladu s našom politikom privatnosti</div>
                                     </div><input type="submit" value="Registruj se" data-value="Registruj se"
                                         data-wait="../public/src/loading.gif" class="submit-button-2 w-button"
-                                        id="register-submit" />
+                                        id="register-submit" style="width: 100%; margin-top: 20px"/>
                                 </form>
                                 <div class="w-form-done"></div>
                                 <div class="w-form-fail"></div>

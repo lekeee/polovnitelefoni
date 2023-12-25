@@ -213,7 +213,7 @@
             </div>
             <div class="div-block-47">
                 <div class="text-block-34">© 2023 Polovni Telefoni. Sva prava zadržana. Napravljeno od strane
-                    <strong>FlaminqoCompany</strong></div>
+                    <strong>PolovniTelefoni Team</strong></div>
                 <div class="div-block-51">
                     <div class="div-block-48">
                         <div class="div-block-50"><img

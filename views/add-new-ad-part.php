@@ -2,6 +2,7 @@
 <link href="../public/css/slider.css?v=<?php echo time()?>" rel="stylesheet" type="text/css" />
 <link href="../public/css/imageupload.css?v=<?php echo time()?>" rel="stylesheet" type="text/css" />
 <link href="../public/css/text-editor.css?v=<?php echo time()?>" rel="stylesheet" type="text/css" />
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <div class="div-block-742">
@@ -54,7 +55,7 @@
                     <h5 class="heading-14">Stanje uređaja</h5>
                     <div class="text-block-65">U kom stanju je uređaj koji prodajete?</div>
                 </div>
-                <div class="div-block-747 twoinrow deviceState">
+                <div class="div-block-747 twoinrow">
                     <label id="newState" data-w-id="bc18a5ea-5841-bf10-8f85-d037b0bf372d"
                         class="radio-button-field w-radio">
                         <input type="radio" id="newState" name="deviceState" value="newState" data-name="newState"

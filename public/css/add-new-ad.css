@@ -1,5 +1,5 @@
 .div-block-742 {
-    width: 70%;
+    width: 100%;
     border-left: 1px solid var(--border-color);
   }
   
@@ -1168,6 +1168,7 @@
   }
   
   @media screen and (max-width: 991px) {
+    
     .image {
       width: 240px;
     }
@@ -1335,7 +1336,7 @@
       width: 100%;
       border-top: 1px solid var(--border-color);
       border-bottom: 1px solid var(--border-color);
-      border-right-style: none;
+      border-right: none;
       padding-top: 20px;
       padding-bottom: 20px;
     }
@@ -1392,8 +1393,18 @@
     .div-block-742 {
       width: 100%;
     }
+    .noUserData{
+      padding-left: 0px;
+      padding-right: 0px;
+    }
   }
-  
+  .div-block-678 {
+    border-right: 1px solid var(--border-color);
+  }
+  .noUserData{
+    width: 100%; 
+    padding: 40px 20px;
+  }
   @media screen and (max-width: 767px) {
     .image {
       width: 200px;
