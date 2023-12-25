@@ -10,4 +10,3 @@ class COUNT_SAVES_ERROR extends Exception {}
 class CHECK_VISIT_ERROR extends Exception {}
 class ADD_VISIT_ERROR extends Exception {}
 class TOTAL_VISIT_ERROR extends Exception {}
-class MY_SAVES_ERROR extends Exception {}
