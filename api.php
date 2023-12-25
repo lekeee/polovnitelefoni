@@ -33,4 +33,4 @@
 </body>
 </html>
 
-<script src="api.js"></script>
+<script type="module" src="api.js?v=<?php echo time(); ?>"></script>
