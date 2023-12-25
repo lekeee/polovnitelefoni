@@ -16,7 +16,7 @@ require_once __DIR__ .'/../../vendor/autoload.php';
 
 $clientID = '33934885967-9cfe82jlrm1u3bqtciruhklre83s87d9.apps.googleusercontent.com';
 $clientSecret = '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';
-$redirectUri = 'http://localhost:81/polovnitelefoni/polovnitelefoni/app/controllers/googleLoginController.php';
+$redirectUri = 'http://localhost/polovnitelefoni/app/controllers/googleLoginController.php';
 
 // Call Google API
 $client = new Google_Client();

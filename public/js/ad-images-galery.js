@@ -109,5 +109,3 @@ document.addEventListener('DOMContentLoaded', () => {
       thumbnailsContainer.scrollLeft = (scrollLeft - walk);
     });
   });
-  
-  

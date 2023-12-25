@@ -27,4 +27,5 @@
     class VERIFY_USER_ERROR extends Exception {}
     class GET_USER_DATA_FROM_ID_ERROR extends Exception {}
     class GET_IP_ERROR extends Exception {}
+    class MY_SAVES_ERROR extends Exception {}
 ?>
