@@ -179,10 +179,7 @@ class Phone extends Ad{
         catch(Exception $e){
             throw new COUNT_SAVES_ERROR();
         }
-    }
-    
-    public function save($user_id, $ad_id){
-
+    }public function save($user_id, $ad_id){
         try{
             $sql = "INSERT INTO sacuvani_oglasi (user_id, ad_id) 
             VALUES (?,?)";
@@ -222,4 +219,5 @@ class Phone extends Ad{
             throw new SAVE_CANNOT_BE_DELETED();
         }
     }
+    
 }

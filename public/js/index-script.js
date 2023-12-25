@@ -88,9 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
     document.querySelectorAll('.filtericoncontainer')[0].addEventListener('click', function(){
         document.querySelectorAll('.darkbackground')[0].style.display = 'block';
         document.querySelectorAll('.filterleftmaincontainer')[0].classList.remove('deactive');
