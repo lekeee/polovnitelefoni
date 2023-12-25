@@ -84,7 +84,7 @@ class Phone extends Ad{
         try{
             $sql = "SELECT * FROM oglasi WHERE user_id=? LIMIT $limit OFFSET $offset";
             $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("i", $ad_id);
+            $stmt->bind_param("i", $user_id);
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -161,7 +161,6 @@ class Phone extends Ad{
             throw new TOTAL_VISIT_ERROR();
         }
     }
-    
     public function countSaves($ad_id){
         try{
             $sql = "SELECT COUNT(*) as count FROM sacuvani_oglasi WHERE ad_id = ?";
@@ -183,6 +182,7 @@ class Phone extends Ad{
     }
     
     public function save($user_id, $ad_id){
+
         try{
             $sql = "INSERT INTO sacuvani_oglasi (user_id, ad_id) 
             VALUES (?,?)";

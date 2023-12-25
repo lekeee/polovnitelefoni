@@ -313,14 +313,14 @@ termss[1].addEventListener("click", function(){
 function damageListToString(){
     let result = '';
     selectedDamages.forEach(element => {
-        result += (element + ',');
+        result += (element + ', ');
     });
     return result;
 }
 function accessoriesListToString(){
     let result = '';
     selectedAccessories.forEach(element => {
-        result += (element + ',');
+        result += (element + ', ');
     });
     return result;
 }

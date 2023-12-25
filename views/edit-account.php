@@ -1,6 +1,5 @@
 <?php
     include_once "../app/auth/checkAuthState.php";
-    $userData = json_decode($user->returnUser(), true);
 ?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
@@ -23,6 +22,8 @@
             <div class="div-block-677">
                 <div class="div-block-678"><a href="dashboard.php" class="dashboardlinks w-inline-block">
                         <div>Kontrolna tabla</div>
+                    </a><a href="add-new-ad.php" class="dashboardlinks w-inline-block">
+                        <div>Dodaj oglas</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
                         <div>Narudžbine</div>
                     </a><a href="#" class="dashboardlinks w-inline-block">
@@ -107,7 +108,7 @@
                                 </div>
                                 <input type="password" class="updateinput w-input" maxlength="256"
                                     name="UserOldPassword" data-name="UserOldPassword" placeholder=""
-                                    id="UserOldPassword" />
+                                    id="UserOldPassword" <?php if($userData['oauth_uid'] !== null) echo "disabled"?>/>
                             </div>
                             <div class="div-block-682 inputupdate pdtop">
                                 <div class="passwordLabel">
@@ -124,7 +125,8 @@
                                 </div>
                                 <input type="password" class="updateinput w-input" maxlength="256"
                                     name="UserNewPassword" data-name="UserNewPassword" placeholder=""
-                                    id="UserNewPassword" pattern=".{8,20}" title="Lozinka mora imati između 8 i 20 znakova"/>
+                                    id="UserNewPassword" pattern=".{8,20}" title="Lozinka mora imati između 8 i 20 znakova"
+                                    <?php if($userData['oauth_uid'] !== null) echo "disabled"?>/>
                             </div>
                             <div class="div-block-682 inputupdate pdtop">
                                 <div class="passwordLabel">
@@ -139,7 +141,7 @@
                                 </div>
                                 <input type="password" class="updateinput w-input" maxlength="256"
                                     name="UserConfirmedNewPassword" data-name="UserConfirmedNewPassword" placeholder=""
-                                    id="UserConfirmedNewPassword" />
+                                    id="UserConfirmedNewPassword"  <?php if($userData['oauth_uid'] !== null) echo "disabled"?>/>
                             </div><input type="submit" value="Sačuvaj promene" data-value="Sacuvaj Promene"
                                 data-wait="../public/src/loading.gif" class="submit-button-5 w-button" id="saveButton"
                                 style="width: 146px; height: 50px; color: white;" />

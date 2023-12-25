@@ -708,7 +708,7 @@ class User{
 
     public function mySaves(){
         try{
-            $user_id = $this->getIdRegister();
+            $user_id =  $this->getId();
             $sql = "SELECT * FROM sacuvani_oglasi INNER JOIN oglasi 
             ON sacuvani_oglasi.ad_id = oglasi.ad_id
             WHERE sacuvani_oglasi.user_id=?";
