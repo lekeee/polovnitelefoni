@@ -1,0 +1,190 @@
+function addToFavourite(x, user_id, ad_id) {
+    fetch('../app/controllers/adController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'addToFavourite',
+            user_id: user_id,
+            ad_id: ad_id
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            // console.log(data);
+            if (data.status === 'success') {
+                x.querySelector("svg").style.fill = "red";
+                x.querySelector("svg").style.stroke = "red";
+            }
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
+}
+
+function removeFromFavourite(x, user_id, ad_id) {
+    fetch('../app/controllers/adController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'removeFromFavourite',
+            user_id: user_id,
+            ad_id: ad_id
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            // console.log(data);
+            if (data.status === 'success') {
+                x.querySelector("svg").style.fill = "none";
+                x.querySelector("svg").style.stroke = "black";
+            }
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
+}
+
+function checkIsSaved(event, x, user_id, ad_id) {
+    event.stopPropagation();
+    fetch('../app/controllers/adController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'checkIsFavourite',
+            user_id: user_id,
+            ad_id: ad_id
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            // console.log(data);
+            if (data.status === 'exist') {
+                removeFromFavourite(x, user_id, ad_id);
+            } else if (data.status === 'not-exist') {
+                addToFavourite(x, user_id, ad_id);
+            }
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
+}
+function checkIsSaved2(event){
+    event.stopPropagation();
+}
+
+function FilterData(params) {
+    const url = '../app/controllers/adController.php?' + params;
+    fetch(url, {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === 'success'){
+            let jsonmodels = JSON.stringify(data.message);
+            updateWidgets(jsonmodels);
+            document.querySelectorAll('.productsmaincontainer')[0].scrollIntoView({behavior: 'smooth'});
+        }
+    })
+    .catch(error => console.error('Došlo je do greške:', error));
+}
+
+function updateWidgets(ads) {
+    fetch('../inc/widget.php', {
+        method: 'POST',
+        headers: {
+
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            ads: ads
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            document.querySelectorAll('.productsmaincontainer')[0].innerHTML = '';
+            document.querySelectorAll('.productsmaincontainer')[0].innerHTML = data;
+
+            const elements = document.getElementsByClassName('widgetimagescontainer');
+            for (let i = 0; i < elements.length; i++) {
+                const imageVal = elements[i].getAttribute('bg-image');
+                elements[i].style.backgroundImage = 'url("' + imageVal + '")';
+
+            }
+
+            const hoverElements = document.querySelectorAll('.hoverDetector');
+            hoverElements.forEach(function (hoverElement) {
+                hoverElement.addEventListener('mouseover', function () {
+                    const imagePath = this.getAttribute('image-data');
+                    const imageIndicator = this.getAttribute('image-indicator');
+                    const parent = this.parentElement;
+
+                    parent.style.backgroundImage = `url(${imagePath})`;
+                    const indicators = parent.querySelectorAll('.imageindicatior');
+                    indicators.forEach(function (indicator) {
+                        indicator.classList.remove('active');
+                    });
+                    indicators[imageIndicator].classList.add('active');
+
+                });
+            });
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
+}
+
+function getAds() {
+    fetch('../app/controllers/adController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'getAds',
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            // console.log(data.message);
+            updateWidgets(data.message);
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
+}

@@ -1,0 +1,364 @@
+[29-Dec-2023 22:16:21 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/polovtel/public_html/app/classes/Phone.php:157
+Stack trace:
+#0 /home/polovtel/public_html/inc/widget.php(19): Phone->totalVisits()
+#1 /home/polovtel/public_html/inc/widget.php(10): showWidget()
+#2 {main}
+  thrown in /home/polovtel/public_html/app/classes/Phone.php on line 157
+[29-Dec-2023 22:17:13 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/polovtel/public_html/app/classes/Phone.php:157
+Stack trace:
+#0 /home/polovtel/public_html/inc/widget.php(19): Phone->totalVisits()
+#1 /home/polovtel/public_html/inc/widget.php(10): showWidget()
+#2 {main}
+  thrown in /home/polovtel/public_html/app/classes/Phone.php on line 157
+[29-Dec-2023 22:17:48 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/polovtel/public_html/app/classes/Phone.php:157
+Stack trace:
+#0 /home/polovtel/public_html/inc/widget.php(19): Phone->totalVisits()
+#1 /home/polovtel/public_html/inc/widget.php(10): showWidget()
+#2 {main}
+  thrown in /home/polovtel/public_html/app/classes/Phone.php on line 157
+[29-Dec-2023 22:18:09 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/polovtel/public_html/app/classes/Phone.php:157
+Stack trace:
+#0 /home/polovtel/public_html/inc/widget.php(19): Phone->totalVisits()
+#1 /home/polovtel/public_html/inc/widget.php(10): showWidget()
+#2 {main}
+  thrown in /home/polovtel/public_html/app/classes/Phone.php on line 157
+[29-Dec-2023 22:20:28 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/polovtel/public_html/app/classes/Phone.php:157
+Stack trace:
+#0 /home/polovtel/public_html/inc/widget.php(19): Phone->totalVisits()
+#1 /home/polovtel/public_html/inc/widget.php(10): showWidget()
+#2 {main}
+  thrown in /home/polovtel/public_html/app/classes/Phone.php on line 157
+[29-Dec-2023 22:20:34 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::get_result() in /home/polovtel/public_html/app/classes/Phone.php:157
+Stack trace:
+#0 /home/polovtel/public_html/inc/widget.php(19): Phone->totalVisits()
+#1 /home/polovtel/public_html/inc/widget.php(10): showWidget()
+#2 {main}
+  thrown in /home/polovtel/public_html/app/classes/Phone.php on line 157
+[29-Dec-2023 22:32:28 Europe/Belgrade] PHP Warning:  require_once(app/config/config.php): Failed to open stream: No such file or directory in /home/polovtel/public_html/inc/header1.php on line 2
+[29-Dec-2023 22:32:28 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Failed opening required 'app/config/config.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/polovtel/public_html/inc/header1.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/polovtel/public_html/inc/header1.php on line 2
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:03:24 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:06:07 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 21
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 97
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 229
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 234
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:50 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:31:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 21
+[29-Dec-2023 23:31:59 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 97
+[29-Dec-2023 23:31:59 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:31:59 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:31:59 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:31:59 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:31:59 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 229
+[29-Dec-2023 23:31:59 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 234
+[29-Dec-2023 23:32:12 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 21
+[29-Dec-2023 23:32:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 97
+[29-Dec-2023 23:32:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:32:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:32:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:32:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:32:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 229
+[29-Dec-2023 23:32:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 234
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:02 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:32 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:58 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 21
+[29-Dec-2023 23:33:58 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:58 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 97
+[29-Dec-2023 23:33:58 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:33:58 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:33:58 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:33:58 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:33:58 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 229
+[29-Dec-2023 23:33:58 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 234
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:33:59 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:03 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 21
+[29-Dec-2023 23:34:03 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 97
+[29-Dec-2023 23:34:03 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:34:03 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 98
+[29-Dec-2023 23:34:03 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:34:03 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 99
+[29-Dec-2023 23:34:03 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 229
+[29-Dec-2023 23:34:03 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/widget.php on line 234
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:18 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:30 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:34:43 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[29-Dec-2023 23:35:37 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/widget.php on line 62
+[30-Dec-2023 18:17:21 Europe/Belgrade] PHP Parse error:  syntax error, unexpected token ":", expecting "," or ";" in /home/polovtel/public_html/inc/widget.php on line 61
+[30-Dec-2023 18:58:44 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function shell_exec() in /home/polovtel/public_html/inc/widget.php:63
+Stack trace:
+#0 /home/polovtel/public_html/inc/widget.php(10): showWidget()
+#1 {main}
+  thrown in /home/polovtel/public_html/inc/widget.php on line 63
+[30-Dec-2023 19:01:58 Europe/Belgrade] PHP Fatal error:  Uncaught Error: Call to undefined function shell_exec() in /home/polovtel/public_html/inc/widget.php:63
+Stack trace:
+#0 /home/polovtel/public_html/inc/widget.php(10): showWidget()
+#1 {main}
+  thrown in /home/polovtel/public_html/inc/widget.php on line 63
+[30-Dec-2023 19:02:44 Europe/Belgrade] PHP Parse error:  syntax error, unexpected identifier "ad_id", expecting "," or ";" in /home/polovtel/public_html/inc/widget.php on line 63
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:03:49 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:04:42 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Undefined property: User::$getId in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:05:33 Europe/Belgrade] PHP Warning:  Array to string conversion in /home/polovtel/public_html/inc/widget.php on line 64
+[30-Dec-2023 19:10:56 Europe/Belgrade] PHP Parse error:  Unclosed '{' on line 13 in /home/polovtel/public_html/inc/widget.php on line 284

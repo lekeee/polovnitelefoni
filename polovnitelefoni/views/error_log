@@ -1,0 +1,108 @@
+[29-Dec-2023 21:57:54 Europe/Belgrade] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/polovtel/public_html/polovnitelefoni/app/config/config.php:8
+Stack trace:
+#0 /home/polovtel/public_html/polovnitelefoni/app/config/config.php(8): mysqli_connect()
+#1 /home/polovtel/public_html/polovnitelefoni/app/auth/userAuthentification.php(2): require_once('/home/polovtel/...')
+#2 /home/polovtel/public_html/polovnitelefoni/inc/header.php(2): require_once('/home/polovtel/...')
+#3 /home/polovtel/public_html/polovnitelefoni/views/index.php(12): require_once('/home/polovtel/...')
+#4 {main}
+  thrown in /home/polovtel/public_html/polovnitelefoni/app/config/config.php on line 8
+[29-Dec-2023 21:58:11 Europe/Belgrade] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/polovtel/public_html/polovnitelefoni/app/config/config.php:8
+Stack trace:
+#0 /home/polovtel/public_html/polovnitelefoni/app/config/config.php(8): mysqli_connect()
+#1 /home/polovtel/public_html/polovnitelefoni/app/auth/userAuthentification.php(2): require_once('/home/polovtel/...')
+#2 /home/polovtel/public_html/polovnitelefoni/inc/header.php(2): require_once('/home/polovtel/...')
+#3 /home/polovtel/public_html/polovnitelefoni/views/index.php(12): require_once('/home/polovtel/...')
+#4 {main}
+  thrown in /home/polovtel/public_html/polovnitelefoni/app/config/config.php on line 8
+[29-Dec-2023 23:03:23 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 8
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/app/auth/checkAuthState.php on line 4
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 104
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 46
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 48
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 56
+[29-Dec-2023 23:11:12 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 58
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 104
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:32:57 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:01 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 104
+[29-Dec-2023 23:33:01 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:01 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:01 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:01 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/app/auth/checkAuthState.php on line 4
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 104
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 46
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 48
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 56
+[29-Dec-2023 23:33:08 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 58
+[29-Dec-2023 23:33:31 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 104
+[29-Dec-2023 23:33:31 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:31 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:31 Europe/Belgrade] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/polovtel/public_html/inc/header.php on line 107
+[29-Dec-2023 23:33:31 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/inc/header.php on line 107
+[30-Dec-2023 14:50:29 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:29 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:29 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:29 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:29 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:29 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:29 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:50:29 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:50:31 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:31 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:31 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:31 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:31 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:31 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:31 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:50:31 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:50:32 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:32 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:32 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:32 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:32 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:32 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:32 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:50:32 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:50:55 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:55 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:55 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:55 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:55 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:55 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:55 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:50:55 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:50:56 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:56 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:50:56 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:56 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:50:56 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:56 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:50:56 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:50:56 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:51:47 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:51:47 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 46
+[30-Dec-2023 14:51:47 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:51:47 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 48
+[30-Dec-2023 14:51:47 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:51:47 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 56
+[30-Dec-2023 14:51:47 Europe/Belgrade] PHP Warning:  Undefined variable $userData in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 14:51:47 Europe/Belgrade] PHP Warning:  Trying to access array offset on value of type null in /home/polovtel/public_html/views/dashboard.php on line 58
+[30-Dec-2023 15:12:53 Europe/Belgrade] PHP Parse error:  syntax error, unexpected single-quoted string ";", expecting "," or ";" in /home/polovtel/public_html/app/classes/User.php on line 650
+[30-Dec-2023 15:12:56 Europe/Belgrade] PHP Parse error:  syntax error, unexpected single-quoted string ";", expecting "," or ";" in /home/polovtel/public_html/app/classes/User.php on line 650
+[30-Dec-2023 15:12:57 Europe/Belgrade] PHP Parse error:  syntax error, unexpected single-quoted string ";", expecting "," or ";" in /home/polovtel/public_html/app/classes/User.php on line 650
+[30-Dec-2023 15:15:12 Europe/Belgrade] PHP Parse error:  syntax error, unexpected single-quoted string "data:" in /home/polovtel/public_html/app/classes/User.php on line 646
+[30-Dec-2023 15:15:36 Europe/Belgrade] PHP Parse error:  syntax error, unexpected single-quoted string "data:" in /home/polovtel/public_html/app/classes/User.php on line 646
+[30-Dec-2023 15:15:37 Europe/Belgrade] PHP Parse error:  syntax error, unexpected single-quoted string "data:" in /home/polovtel/public_html/app/classes/User.php on line 646
+[30-Dec-2023 15:15:48 Europe/Belgrade] PHP Parse error:  syntax error, unexpected single-quoted string "data:" in /home/polovtel/public_html/app/classes/User.php on line 646
+[30-Dec-2023 15:15:48 Europe/Belgrade] PHP Parse error:  syntax error, unexpected single-quoted string "data:" in /home/polovtel/public_html/app/classes/User.php on line 646
