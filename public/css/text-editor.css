@@ -1,0 +1,65 @@
+.main-div{
+      border: 1px solid #ddd;
+      width: 100%;
+      padding: 6px;
+    }
+
+    #editor-container {
+      margin: 5px;
+      margin-left: 0;
+    }
+
+    [contenteditable] {
+      text-decoration: none;
+      color: #000;
+    }
+
+    #editor {
+      width: 100%; /* Fiksna širina polja za unos teksta */
+      height: 200px; /* Visina polja za unos teksta */
+      padding: 0px;
+      border-bottom: none;
+      overflow-y: auto; /* Dodato kako bi se omogućilo skrolovanje po potrebi */
+
+    }
+
+    #editor:focus {
+      outline: none;
+    }
+
+    #character-count {
+      text-align: right;
+      margin: 5px; /* Dodat margin kako bi se div malo odvojio od rubova */
+      color: #818ea0;
+      pointer-events: none;
+      font-size: 10px;
+    }
+
+    .command-btn {
+      display: inline;
+      background: #ffffff;
+      border: 0;
+      border-radius: 3px;
+      cursor: pointer;
+      margin: 2px;
+      min-width: 30px;
+      padding: 5px;
+    }
+
+    .command-btn:hover {
+      background-color: #ddd; /* Boja pozadine na hover efektu */
+      border-radius: 3px;
+    }
+
+    .active-command-btn{
+      background-color: #ddd;
+    }
+
+    .separator {
+      border-left: solid 1px #e0e0e0;
+      margin-right: 7px;
+   }
+
+   .error-border {
+      border: 1px solid red;
+    }
