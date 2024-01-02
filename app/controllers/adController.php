@@ -265,7 +265,7 @@ if ($user->isLogged()) {
         $oldState = $_GET['oldState'];
         $newState = $_GET['newState'];
         $damagedState = $_GET['damagedState'];
-        $offset = $_GET['offset'] * $limit;
+        $offset = $_GET['page'] * $limit;
 
         try {
             $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit);
