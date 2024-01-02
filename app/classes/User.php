@@ -2,6 +2,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+require_once "Verification.php";
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include_once(__DIR__ . '/../exceptions/userExceptions.php');
 
 
@@ -739,29 +743,32 @@ class User
         }
     }
 
-    public function deleteUser()
+    public function deleteUser($username)
     {
         try {
             $user_id = $this->getId();
-            $ver = new Verification();
-            if ($ver->deleteUserVerification($user_id) && $this->deleteUserAds()) {
+            $validUsername = $this->checkUsername($user_id, $username);
+            if ($validUsername) {
+                $ver = new Verification();
+                if ($ver->deleteUserVerification($user_id) && $this->deleteUserAds()) {
 
-                $sql = "DELETE FROM users WHERE user_id = ?";
+                    $sql = "DELETE FROM users WHERE user_id = ?";
 
-                $stmt = $this->con->prepare($sql);
-                $stmt->bind_param("i", $user_id);
-                $stmt->execute();
-                if ($stmt->error) {
-                    throw new Exception("SQL execution error: " . $stmt->error);
+                    $stmt = $this->con->prepare($sql);
+                    $stmt->bind_param("i", $user_id);
+                    $stmt->execute();
+                    if ($stmt->error) {
+                        throw new Exception("SQL execution error: " . $stmt->error);
+                    }
+                    $results = $stmt->affected_rows;
+                    if ($results > 0) {
+                        //$this->logout();
+                        return true;
+                    } else
+                        return false;
                 }
-                $results = $stmt->affected_rows;
-
-                if ($results > 0) {
-                    $this->logout();
-                    return true;
-                } else
-                    return false;
             }
+            return false;
         } catch (Exception $e) {
             throw new USER_CANNOT_BE_DELETED();
         }
@@ -789,4 +796,19 @@ class User
         }
     }
 
+    private function checkUsername($user_id, $username)
+    {
+        try {
+            $sql = "SELECT username FROM users WHERE user_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $user = $result->fetch_assoc();
+            return $user['username'] === $username;
+        } catch (Exception $e) {
+            throw new INCORECT_USERNAME();
+        }
+    }
 }

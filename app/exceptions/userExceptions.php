@@ -92,4 +92,7 @@ class USER_CANNOT_BE_DELETED extends Exception
 class USER_ADS_CANNOT_BE_DELETED extends Exception
 {
 }
+class INCORECT_USERNAME extends Exception
+{
+}
 ?>

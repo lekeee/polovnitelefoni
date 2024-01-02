@@ -7,7 +7,7 @@ abstract class Ad
     protected $user_id, $brand, $model, $title, $state, $description, $images;
     protected $price, $new_price, $views, $availability, $damage;
 
-    public function __construct($user_id = null, $brand = null, $model = null, $title = null, $state = null, $description = null, $images = null, $price = null, $new_price = null, $views = null, $availability = null, $damage = null)
+    public function __construct($user_id = null, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $images = null, $price = null, $new_price = null, $views = null, $availability = null, $damage = null)
     {
         global $con;
         $this->con = $con;
@@ -17,6 +17,7 @@ abstract class Ad
         $this->model = $model;
         $this->title = $title;
         $this->state = $state;
+        $this->stateRage = $stateRange;
         $this->description = $description;
         $this->images = $images;
         $this->price = $price;
