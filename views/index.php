@@ -604,8 +604,8 @@ require_once "../inc/headTag.php";
     <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/filter-range-slider.js?v=<?php echo time(); ?>" type="text/javascript"></script>
-    <script src="../public/js/filters.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/filters.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>
 
 </html>

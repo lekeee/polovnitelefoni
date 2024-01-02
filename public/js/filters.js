@@ -122,6 +122,8 @@ document.querySelector("#sumbitFilters").addEventListener("click", function (e) 
     cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState);
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
     getAds(0, true);
+    closeFilters();
+    closeFiltersContainer();
 });
 
 function cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState) {

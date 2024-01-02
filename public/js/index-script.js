@@ -86,21 +86,23 @@ document.addEventListener('DOMContentLoaded', function () {
         element.classList.remove('visible');
     }
 
-
     document.querySelectorAll('.filtericoncontainer')[0].addEventListener('click', function () {
         document.querySelectorAll('.darkbackground')[0].style.display = 'block';
         document.querySelectorAll('.filterleftmaincontainer')[0].classList.remove('deactive');
         document.querySelectorAll('.filterleftmaincontainer')[0].classList.add('active');
     });
     document.querySelectorAll('.closeicon')[0].addEventListener('click', function () {
-        document.querySelectorAll('.filterleftmaincontainer')[0].classList.remove('active');
-        document.querySelectorAll('.filterleftmaincontainer')[0].classList.add('deactive');
-        setTimeout(() => {
-            document.querySelectorAll('.darkbackground')[0].style.display = 'none';
-        }, 300);
+        closeFiltersContainer();
     });
 
 });
+function closeFiltersContainer(){
+    document.querySelectorAll('.filterleftmaincontainer')[0].classList.remove('active');
+    document.querySelectorAll('.filterleftmaincontainer')[0].classList.add('deactive');
+    setTimeout(() => {
+        document.querySelectorAll('.darkbackground')[0].style.display = 'none';
+    }, 300);
+}
 
 function openQuickView(x) {
     document.querySelector('body').style.overflowY = "hidden";
