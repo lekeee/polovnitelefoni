@@ -165,6 +165,7 @@
   justify-content: space-between;
   align-items: flex-start;
   display: flex;
+  padding-right: 10px;
 }
 
 .mostvisitedright {

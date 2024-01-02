@@ -326,8 +326,8 @@ class Phone extends Ad
     public function mostViewedAd()
     {
         try {
-            $sql = "SELECT o., COUNT() AS broj_poseta 
-                    FROM posetioci p
+            $sql = "SELECT o.*, COUNT(*) AS broj_poseta 
+                    FROM visitors p
                     INNER JOIN oglasi o ON p.ad_id = o.ad_id
                     GROUP BY o.ad_id 
                     ORDER BY broj_poseta DESC LIMIT 1";
@@ -344,7 +344,7 @@ class Phone extends Ad
     public function mostSavedAd()
     {
         try {
-            $sql = "SELECT o., COUNT() AS broj_sacuvanih 
+            $sql = "SELECT o.*, COUNT(*) AS broj_sacuvanih 
                     FROM sacuvani_oglasi so
                     INNER JOIN oglasi o ON so.ad_id = o.ad_id
                     GROUP BY o.ad_id 
