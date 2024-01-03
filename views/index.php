@@ -209,16 +209,62 @@ require_once "../inc/headTag.php";
             </div>
             <div class="threeinrowcontainers">
                 <div class="mostvisitedcontainer">
+                        <?php
+                            try{
+                                $mostViewedAdData = $phone->mostViewedAd();
+                                $mostViewedAd = NULL;
+                                if($mostViewedAdData !== NULL){
+                                    $mostViewedAd = json_decode($mostViewedAdData, true);
+                                    //print_r($mostViewedAd);
+                                }
+                            }catch(Exception $e){
+                                echo "GRESKA";
+                            }
+                        ?>
                     <div class="mostvisitedleft">
                         <div class="mostviewedbrandmodelcont">
-                            <div class="mostviewedheadtitle">Najposećeniji oglas</div>
-                            <h1 class="mostviewedmodelandbrandtitle">Apple iPhone 15 Pro Max</h1>
+                            
+                            <div class="mostviewedheadtitle">
+                                Najposećeniji oglas
+                            </div>
+                            <h1 class="mostviewedmodelandbrandtitle">
+                                <?php
+                                    if($mostViewedAd !== NULL){
+                                        echo $mostViewedAd['title'];
+                                    }
+                                ?>
+                            </h1>
                         </div>
                         <div class="mostviewedpricecontainer">
-                            <div class="mostviewedpricetitle">Djordje Ivanovic</div>
+                            <div class="mostviewedpricetitle">
+                                <?php
+                                    if($mostViewedAd !== NULL){
+                                        $ownerID = $mostViewedAd['user_id'];
+                                        $userData = $user->getUserDataFromId($ownerID);
+                                        $userDataDecoded = json_decode($userData, true);
+                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
+                                    }
+                                ?>
+                            </div>
                             <div class="priceviewcontainer">
-                                <div class="priceviewmainprice"><strong class="bold-text-2">€1299</strong></div>
-                                <div class="priceviewoldprice"><strong class="bold-text-3">€1400</strong></div>
+                                <div class="priceviewmainprice">
+                                    <strong class="bold-text-2">
+                                        <?php
+                                            if($mostViewedAd !== NULL){
+                                                echo $mostViewedAd['price'] !== NULL ? '€' . $mostViewedAd['price'] : 'Dogovor';
+                                            }
+                                        ?>
+                                    </strong>
+                                </div>
+                                <div class="priceviewoldprice">
+                                    <strong class="bold-text-3">
+                                        <?php
+                                            if($mostViewedAd !== NULL && $mostViewedAd['old_price'] !== NULL){
+                                                echo '€' . $mostViewedAd['old_price'];
+                                            }
+                                        ?>
+                                    </strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -230,16 +276,61 @@ require_once "../inc/headTag.php";
                             alt="iPhone 15 Pro Max" class="mostvisitedrightimage" /></div>
                 </div>
                 <div class="mostsavedcontainer">
+                    <?php
+                        try{
+                            $mostSavedAdData = $phone->mostSavedAd();
+                            $mostSavedAd = NULL;
+                            if($mostSavedAdData !== NULL){
+                                $mostSavedAd = json_decode($mostSavedAdData, true);
+                                //print_r($mostViewedAd);
+                            }
+                        }catch(Exception $e){
+                            echo "GRESKA";
+                        }
+                    ?>
                     <div class="mostvisitedleft">
                         <div class="mostsavedheadcontainer">
-                            <div class="mostsavedheadtitle">Najsačuvaniji oglas</div>
-                            <h1 class="mostviewedmodelandbrandtitle">Samsung Galaxy S22 5G</h1>
+                            <div class="mostsavedheadtitle">
+                                Najsačuvaniji oglas
+                            </div>
+                            <h1 class="mostviewedmodelandbrandtitle">
+                                <?php
+                                    if($mostSavedAd !== NULL){
+                                        echo $mostSavedAd['title'];            
+                                    }
+                                ?>
+                            </h1>
                         </div>
                         <div class="mostsavedpricecontainer">
-                            <div class="mostviewedpricetitle">Aleksa Jovanovic</div>
+                            <div class="mostviewedpricetitle">
+                                <?php
+                                    if($mostSavedAd !== NULL){
+                                        $ownerID = $mostSavedAd['user_id'];
+                                        $userData = $user->getUserDataFromId($ownerID);
+                                        $userDataDecoded = json_decode($userData, true);
+                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
+                                    }
+                                ?>
+                            </div>
                             <div class="priceviewcontainer">
-                                <div class="priceviewmainprice"><strong class="bold-text-2">€1099</strong></div>
-                                <div class="priceviewoldprice"><strong class="bold-text-3">€1400</strong></div>
+                                <div class="priceviewmainprice">
+                                    <strong class="bold-text-2">
+                                        <?php
+                                            if($mostSavedAd !== NULL){
+                                                echo $mostSavedAd['price'] !== NULL ? '€' . $mostSavedAd['price'] : 'Dogovor';
+                                            }
+                                        ?>
+                                    </strong>
+                                </div>
+                                <div class="priceviewoldprice">
+                                    <strong class="bold-text-3">
+                                        <?php
+                                            if($mostSavedAd !== NULL && $mostSavedAd['old_price'] !== NULL){
+                                                echo '€' . $mostSavedAd['old_price'];
+                                            }
+                                        ?>
+                                    </strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -248,16 +339,59 @@ require_once "../inc/headTag.php";
                             loading="lazy" alt="Samsung Galaxy S22" class="mostvisitedrightimage" /></div>
                 </div>
                 <div class="newestcontainer">
+                    <?php
+                        try{
+                            $newestAdData = $phone->newestAd();
+                            $newestAd = NULL;
+                            if($newestAdData !== NULL){
+                                $newestAd = json_decode($newestAdData, true);
+                                //print_r($mostViewedAd);
+                            }
+                        }catch(Exception $e){
+                            echo "GRESKA";
+                        }
+                    ?>
                     <div class="mostvisitedleft">
                         <div class="newestheadcontainer">
                             <div class="newestheadtitle">Najnoviji oglas</div>
-                            <h1 class="mostviewedmodelandbrandtitle">Xiomi Redmi Note 13 Pro</h1>
+                            <h1 class="mostviewedmodelandbrandtitle">
+                                <?php
+                                    if($newestAd !== NULL){
+                                        echo $newestAd['title'];
+                                    }
+                                ?>
+                            </h1>
                         </div>
                         <div class="newestpricecontainer">
-                            <div class="mostviewedpricetitle">Dragan Ivanovic</div>
+                            <div class="mostviewedpricetitle">
+                                <?php
+                                    if($newestAd !== NULL){
+                                        $ownerID = $newestAd['user_id'];
+                                        $userData = $user->getUserDataFromId($ownerID);
+                                        $userDataDecoded = json_decode($userData, true);
+                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
+                                    }
+                                ?>
+                            </div>
                             <div class="priceviewcontainer">
-                                <div class="priceviewmainprice"><strong class="bold-text-2">€599</strong></div>
-                                <div class="priceviewoldprice"><strong class="bold-text-3">€750</strong></div>
+                                <div class="priceviewmainprice">
+                                    <strong class="bold-text-2">
+                                        <?php
+                                            if($newestAd !== NULL){
+                                                echo $newestAd['price'] !== NULL ? '€' . $newestAd['price'] : 'Dogovor';
+                                            }
+                                        ?> 
+                                    </strong>
+                                </div>
+                                <div class="priceviewoldprice">
+                                    <strong class="bold-text-3">
+                                        <?php
+                                            if($newestAd !== NULL && $newestAd['old_price'] !== NULL){
+                                                echo '€' . $newestAd['old_price'];
+                                            }
+                                        ?>
+                                    </strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -470,8 +604,8 @@ require_once "../inc/headTag.php";
     <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/filter-range-slider.js?v=<?php echo time(); ?>" type="text/javascript"></script>
-    <script src="../public/js/filters.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/filters.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>
 
 </html>
