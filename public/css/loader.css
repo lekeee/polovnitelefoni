@@ -1,0 +1,29 @@
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 40px;
+    aspect-ratio: 1;
+    display: grid;
+    grid: 50%/50%;
+    animation: l4-0 1.5s infinite steps(1);
+  }
+  .loader::before {
+    content: "";
+    transform-origin: bottom; 
+    animation: 
+      l4-1 0.375s infinite linear alternate,
+      l4-2 0.375s infinite steps(1) alternate;
+  }
+  @keyframes l4-0 {
+    0%  {transform:scale(1 , 1) rotate(0deg)}
+    25% {transform:scale(1 ,-1) rotate(90deg)}
+    50% {transform:scale(-1,-1) rotate(0deg)}
+    75% {transform:scale(-1, 1) rotate(90deg)}
+  }
+  @keyframes l4-1 {
+    0%   {transform:perspective(150px) rotateX(  0deg)}
+    100% {transform:perspective(150px) rotateX(180deg)}
+  }
+  @keyframes l4-2 {
+    0% {background:#fbbd28}
+    50%{background:#ed6969}
+  }

@@ -1,0 +1,28 @@
+@import url('../css/variables.css');
+.edit-account-error{
+    margin: 0px 10px;
+    border: 2px solid var(--main-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: none;
+    /* background-color: var(--border-color); */
+}
+@media screen and (max-width: 479px) {
+    .edit-account-error{
+        margin: 0;
+        margin-bottom: 20px;
+    }
+}
+.edit-success{
+    border-color: lightgreen;
+    display: block;
+}
+.edit-error{
+    border-color: var(--main-color);
+    display: block;
+}
+.passwordLabel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
