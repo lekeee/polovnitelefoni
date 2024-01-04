@@ -73,17 +73,20 @@ require_once "../inc/headTag.php";
                                                     sizes="(max-width: 479px) 100vw, (max-width: 767px) 23vw, 120px"
                                                     alt="Star Rating of 5" class="image-30" id="quick-view-rate" />
                                             </div>
-                                            <div class="div-block-696">
-                                                <div class="text-block-47">
-                                                    <p id="quick-view-visitors"></p>
-                                                    <img src="../public/src/eye-icon.svg" alt="Eye" srcset="">
+                                            <div style="display: inline-block">
+                                                <div class="div-block-696">
+                                                    <div class="text-block-47">
+                                                        <p id="quick-view-visitors"></p>
+                                                        <img src="../public/src/eye-icon.svg" alt="Eye" srcset="">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="div-block-696">
-                                                <div class="text-block-47">
-                                                    <p id="quick-view-saves"></p>
-                                                    <img src="../public/src/favourite_icon.png" alt="Eye" srcset=""
-                                                        style="width: 20px">
+                                                
+                                                <div class="div-block-696">
+                                                    <div class="text-block-47">
+                                                        <p id="quick-view-saves"></p>
+                                                        <img src="../public/src/favourite_icon.png" alt="Eye" srcset=""
+                                                            style="width: 20px">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -439,9 +442,8 @@ require_once "../inc/headTag.php";
                                 <option value="3">48 oglasa</option>
                                 <option value="4">64 oglasa</option>
                             </select>
-                            <div class="sortingseparator"></div><img src="../public/src/grid-icon.svg" loading="lazy"
-                                alt="GridView Icon" class="gridviewicon" /><img src="../public/src/list-icon.svg"
-                                loading="lazy" width="22" alt="List View Icon" class="listviewicon" />
+                            <div class="sortingseparator"></div><img src="../public/src/grid-icon.svg?v=<?php echo time() ?>"
+                                alt="GridView Icon" class="gridviewicon" /><img src="../public/src/list-icon.svg?v=<?php echo time(); ?>" width="22" alt="List View Icon" class="listviewicon" />
                         </form>
                         <div class="w-form-done"></div>
                         <div class="w-form-fail"></div>
@@ -573,7 +575,7 @@ require_once "../inc/headTag.php";
                     </div>
                 </div>
                 <div class="productscontainer">
-                    <div class="filterstlabela">Filteri</div>
+                    <div class="filterstlabela"></div>
                     <div class="productsmaincontainer"></div>
                     <div class="loadmorecontainer">
                         <a href="#" current-page="0" class="loadmorebutton w-button" onclick="loadMore(this)">Učitaj
@@ -601,11 +603,11 @@ require_once "../inc/headTag.php";
         </script>
 
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
-    <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/filter-range-slider.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/filters.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>
 
 </html>

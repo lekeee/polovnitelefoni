@@ -1,0 +1,34 @@
+@import url('variables.css');
+.saved-ads-main-container{
+    width: 100%;
+    height: 100%;
+}
+.no-saved-ads{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.no-saved-ads-main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.no-saved-ads-main-container img{
+    width: 150px;
+}
+.no-saved-ads-main-container p{
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.no-saved-ads-main-container button{
+    padding: 12px 20px;
+    background-color: var(--third-color);
+    color: white;
+    border-radius: 5px;
+    margin-top: 20px;
+}

@@ -152,7 +152,7 @@ function openQuickView(x) {
     document.querySelector("#quick-view-saves").innerHTML = saves;
 
     if (damage != '') {
-        document.querySelector('#quick-view-damage').style.display = "block";
+        document.querySelector('#quick-view-damage').style.display = "inline-block";
     } else {
         document.querySelector('#quick-view-damage').style.display = "none";
     }

@@ -1,5 +1,6 @@
 window.onload = function () {
     localStorage.removeItem('filterData');
+    document.querySelector('#resetFilters').disabled = true;
 };
 
 const brandsCheckboxes = document.querySelectorAll('.custom-brand-checkbox');
@@ -117,14 +118,86 @@ function getState() {
     }
 }
 
+function showFilters(){
+    const savedFilterDataJson = localStorage.getItem('filterData');
+    const filtersLabel = document.querySelectorAll('.filterstlabela')[0];
+    filtersLabel.style.display = 'block';
+    filtersLabel.innerHTML = '';
+
+    if (savedFilterDataJson) {
+        const savedInitialData = JSON.parse(savedFilterDataJson);
+        
+        const brandsSelected2 = savedInitialData.brandsSelected;
+        const modelsSelected2 = savedInitialData.modelsSelected;
+        const minPrice2 = savedInitialData.minPrice;
+        const maxPrice2 = savedInitialData.maxPrice;
+        const oldState2 = savedInitialData.oldState;
+        const newState2 = savedInitialData.newState;
+        const damagedState2 = savedInitialData.damagedState;
+
+        console.log(brandsSelected2 + " " + modelsSelected2 + " " + minPrice2 + " " + maxPrice2 + " " + oldState2 + " " + newState2 + " " + damagedState2);
+        const deleteFilters = document.createElement('a');
+        deleteFilters.setAttribute('href', '#');
+        deleteFilters.innerHTML = "X Obriši filtere";
+        deleteFilters.addEventListener('click', resetFilters);
+        deleteFilters.classList.add("removeFiltersLabel");
+        filtersLabel.appendChild(deleteFilters);
+
+        if(brandsSelected2 !== null){
+            for(let i = 0; i < brandsSelected2.length; i++){
+                const brand = document.createElement('a');
+                brand.setAttribute('href', '#');
+                brand.innerHTML = "X " + brandsSelected2[i];
+                filtersLabel.appendChild(brand);
+            }
+        }
+        if (modelsSelected2 !== null){
+            for(let i = 0; i < modelsSelected2.length; i++){
+                const models = document.createElement('a');
+                models.setAttribute('href', '#');
+                models.innerHTML = "X " + modelsSelected2[i].model;
+                filtersLabel.appendChild(models);
+            }
+        }
+        if(minPrice2 !== null && maxPrice2 !== null){
+            const price = document.createElement('a');
+            price.setAttribute('href', '#');
+            price.innerHTML = "X " + '€' + minPrice2 + ' - ' + '€' + maxPrice2;
+            filtersLabel.appendChild(price);
+        }
+        if(oldState2){
+            const state = document.createElement('a');
+            state.setAttribute('href', '#');
+            state.innerHTML = "X Novo";
+            filtersLabel.appendChild(state);
+        }
+        if(newState2){
+            const state = document.createElement('a');
+            state.setAttribute('href', '#');
+            state.innerHTML = "X Polovno";
+            filtersLabel.appendChild(state);
+        }
+        if(damagedState2){
+            const state = document.createElement('a');
+            state.setAttribute('href', '#');
+            state.innerHTML = "X Oštećenje";
+            filtersLabel.appendChild(state);
+        }
+    }
+}
+
 document.querySelector("#sumbitFilters").addEventListener("click", function (e) {
     e.preventDefault();
+    getState();
     cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState);
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
     getAds(0, true);
-    // closeFilters();
-    closeFilters();
-    closeFiltersContainer();
+    var sirinaProzora = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if(sirinaProzora <= 991){
+        closeFilters();
+        closeFiltersContainer();
+    }
+    showFilters();
 });
 
 function cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState) {
@@ -181,11 +254,54 @@ function getAds(currentPage, restart) {
     });
 
     // console.log(sort);
-
     FilterData(params, restart);
 }
 
 sortSelect.addEventListener("change", function () {
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
     getAds(0, true);
+});
+
+
+function resetFilters(){
+    localStorage.removeItem('filterData');
+    const brandsCheckboxes = document.querySelectorAll('.custom-brand-checkbox');
+    brandsCheckboxes.forEach(element => {
+        element.checked = false;
+    });
+
+    const modelsCheckboxesContainer = document.querySelectorAll('.custom-dropdown-item');
+    modelsCheckboxesContainer.forEach(container => {
+        const modelsCheckboxes = container.querySelectorAll('input');
+        modelsCheckboxes.forEach(element => {
+            element.checked = false;
+        });
+    });
+
+    document.querySelectorAll('.input-min')[0].value = 0;
+    document.querySelectorAll('.input-max')[0].value = 2500;
+    document.querySelectorAll('.range-min')[0].value = 0;
+    document.querySelectorAll('.range-max')[0].value = 2500;
+    document.querySelectorAll('.progress')[0].style.left = "0px";
+    document.querySelectorAll('.progress')[0].style.right = "0px";
+
+    document.querySelector('#oldState').checked = false;
+    document.querySelector('#newState').checked = false;
+    document.querySelector('#damagedState').checked = false;
+
+    document.querySelectorAll('.filterstlabela')[0].style.display = 'none';
+    getAds(0, true);
+}
+
+document.querySelector('#resetFilters').addEventListener('click', resetFilters);
+
+const mobileMenuTriggerOpen = document.querySelector('#mobile-menu-open');
+const mobileMenuTriggerClose = document.querySelector('#mobile-menu-close');
+mobileMenuTriggerOpen.addEventListener('click', function(){
+    document.querySelector('body').style.overflowY = "hidden";
+});
+mobileMenuTriggerClose.addEventListener('click', function(){
+    setTimeout(() => {
+        document.querySelector('body').style.overflowY = "auto";
+    }, 300);
 });

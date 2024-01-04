@@ -91,6 +91,14 @@ function showWidget($ads){
                     </svg>
                     <?php } ?>
                 </div>
+                <?php
+                            if ($ads[$i]["damage"] !== NULL) {
+                                ?>
+                            <div class="addtosavedcontainer" title="Oštećenje" style="padding: 5px; margin-top: 5px; background-color: #ed6969; border-color: #ed6969; cursor: default">
+                                <img src="../public/src/broken-phone.svg?v=<?php echo time(); ?>" alt="Broken Phone Icon" style="width: 100%" />
+                </div>
+                <?php } ?>
+                
                 <!-- <div title="Premium oglas" class="premiumindicatorcontainer">
                         <img
                             src="../public/src/star-icon.svg" loading="lazy" alt="Star Icon"
@@ -115,10 +123,10 @@ function showWidget($ads){
                 <?php
                             if ($ads[$i]["damage"] !== NULL) {
                                 ?>
-                <div class="brokenindicator" style="display: block">
+                <!-- <div class="brokenindicator" style="display: block">
                     <img src="../public/src/broken-phone-badge-ed6969.svg" loading="lazy" alt="Broken Phone Icon"
                         class="brokenimageindicator" />
-                </div>
+                </div> -->
                 <?php } ?>
                 <div class="salecontainer">
                     <div class="salelabel">9%</div>

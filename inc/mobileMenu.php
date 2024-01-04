@@ -2,7 +2,7 @@
     class="div-block-52 mobilemenu">
     <div class="div-block-54">
         <div class="div-block-58"><img src="../public/src/polovnitelefoni_white.svg" loading="lazy" width="158.5"
-                alt="Logo Icon" class="image-19" /></div><img src="../public/src/close_icon.png" loading="lazy"
+                alt="Logo Icon" class="image-19" /></div><img src="../public/src/close_icon.png" id="mobile-menu-close" loading="lazy"
             width="25" data-w-id="386d0adb-87ab-cf79-835c-b53b004ddbd0" alt="Close Icon" class="image-13" />
     </div>
     <div class="div-block-65">

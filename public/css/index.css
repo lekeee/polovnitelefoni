@@ -1060,18 +1060,29 @@
 
 .quickviewcontainer {
   z-index: 1000;
-  width: 100%;
-  /* max-height: 600px; */
-  max-width: 1100px;
+  width: 90%;
+  max-height: 80%;
+  max-width: 1150px;
   background-color: rgba(0, 0, 0, 0);
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
   display: block;
   position: relative;
+  /* padding: 20px; */
   top: auto;
   left: auto;
   right: auto;
+  overflow: auto;
+}
+
+.quickviewcontainer::-webkit-scrollbar {
+  width: 12px; /* Širina skrolbara */
+}
+
+.quickviewcontainer::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Boja palca skrolbara (nevidljiva) */
+}
+
+.quickviewcontainer::-webkit-scrollbar-track {
+  background-color: transparent; /* Boja staze skrolbara (nevidljiva) */
 }
 
 .quickviewmaincontainer {
@@ -1211,8 +1222,10 @@
   background-color: var(--main-color);
   color: #fff;
 }
+@media screen and (min-width: 991px) {
 
-@media screen and (min-width: 1280px) {
+}
+@media screen and (min-width: 991px) {
     .widgetcontainer.gold:hover .addtocomparecontainer {
   animation: slideIn 0.3s ease-in-out forwards;
 }
@@ -1352,9 +1365,6 @@
     background-color: var(--border-color);
   }
 }
-.div-block-718, .div-block-719{
-  height: 200px;
-}
 @media screen and (max-width: 1150px) {
   .widgetimagescontainer{
     width: 200px;
@@ -1367,7 +1377,7 @@
 @media screen and (max-width: 991px) {
   .quickviewcontainer{
     flex-direction: column;
-    max-height: 700px;
+    /* max-height: 700px; */
     overflow: auto;
   }
   .imagescontainerquickview {
@@ -1528,6 +1538,17 @@
   .widget-description-container{
     width: 200px;
   }
+
+  .quickviewmaindatacontainer {
+    margin: auto;
+    flex-direction: column;
+    width: 60%;
+  }
+
+  .imagescontainerquickview,
+  .datacontainerquickview {
+    width: 100%;
+  }
 }
 .quick-view-image-container{
   height: 500px;;
@@ -1541,15 +1562,8 @@
     min-height: 200px;
   }
   .quickviewcontainer{
-    max-height: 700px;
+    /* max-height: 700px; */
     overflow: auto;
-  }
-  .quickviewcontainer::-webkit-scrollbar {
-    width: 0.1em; /* Postavite širinu na 0.1em */
-  }
-
-  .quickviewcontainer::-webkit-scrollbar-thumb {
-      background-color: transparent; /* Boja klizača */
   }
   .shopandsavetext {
     font-size: 18px;
@@ -1630,6 +1644,7 @@
 
   .quickviewmaindatacontainer {
     flex-direction: column;
+    width: 100%;
   }
 
   .imagescontainerquickview,
@@ -1763,11 +1778,6 @@
     background-attachment: scroll;
   }
 
-  .addtocomparecontainer,
-  .quickviewicon {
-    right: 0;
-  }
-
   .widgettitlecontainer {
     text-align: left;
   }
@@ -1846,6 +1856,7 @@
     width: 300px;
   }
 }
+
 @media screen and (max-width: 370px) {
   .widgetimagescontainer{
     width: 240px;
@@ -1856,7 +1867,12 @@
   }
 }
 
-
+@media screen and (max-width: 991px){
+  .addtocomparecontainer,
+  .quickviewicon {
+    right: 0;
+  }
+}
 
 .custom-dropdown-menu {
   width: 100%;
@@ -2074,3 +2090,14 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
 }
 
+@media screen and (max-width: 1279px){
+  .quickviewcontainer{
+    top: -36px;
+  }
+}.quickviewcontainer::-webkit-scrollbar {
+  width: 0.1em; /* Postavite širinu na 0.1em */
+}
+
+.quickviewcontainer::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Boja klizača */
+}

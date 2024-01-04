@@ -223,7 +223,7 @@
                                         ?>
                                     </h2>
                                     <h2 class="heading-9">
-                                        <?php 
+                                        <?865432php 
                                             if(!empty($adData['old_price'])){
                                                 if(!empty($adData['price'])){
                                                     echo '€' . $adData['old_price'];
@@ -233,6 +233,7 @@
                                     </h2>
                                 </div>
                             </div>
+                        
                             <div data-w-id="0eacc543-0b81-e5be-a1e1-d7c3709a619c" class="div-block-719"><img
                                     src="../public/src/userShow.png" loading="lazy" alt="User Profile Image"
                                     class="image-39" />

@@ -20,26 +20,10 @@ require_once "../inc/headTag.php";
     <section class="dashboard">
         <div class="div-block-676">
             <div class="div-block-677">
-                <div class="div-block-678"><a href="dashboard.php" class="dashboardlinks active w-inline-block">
-                        <div>Kontrolna tabla</div>
-                    </a><a href="add-new-ad.php" class="dashboardlinks w-inline-block">
-                        <div>Dodaj oglas</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Narudžbine</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Preuzimanja</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Adrese</div>
-                    </a><a href="edit-account.php" class="dashboardlinks w-inline-block">
-                        <div>Podaci o nalogu</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Upoređivanja</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Omiljeni oglasi</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block" onclick="signOut()">
-                        <div>Odjavi se</div>
-                    </a>
-                </div>
+                <?php require_once('../inc/dashboard-navigation.php') ?>
+                <script>
+                    document.querySelectorAll('.dashboardlinks')[0].classList.add('active');
+                </script>
                 <div class="div-block-679">
                     <div class="text-block-43">Zdravo <strong>
                             <?php
@@ -63,13 +47,15 @@ require_once "../inc/headTag.php";
                             ?>
                         </strong>? <span class="text-span-3" onclick="signOut()">Odjavi se</span>)
                     </div>
-                    <div class="text-block-42">Na kontrolnoj tabli svog naloga možete pogledati svoje <span
-                            class="text-span-3">nedavne porudžbine</span>, upravljati <span class="text-span-3">adresama
-                            za isporuku i fakturisanje</span> kao i <span class="text-span-3"
-                            onclick="window.location.href = 'edit-account.php'">izmeniti lozinku i detalje
-                            naloga</span>
+                    <div class="text-block-42">
+                        Na kontrolnoj tabli svog naloga možete pogledati svoje 
+                        <span class="text-span-3">nedavne porudžbine</span>
+                        , upravljati 
+                        <span class="text-span-3">adresama za isporuku i fakturisanje</span>
+                        , <span class="text-span-3" onclick="window.location.href = 'edit-account.php'">izmeniti lozinku i detalje naloga</span>
+                        kao i <span class="text-span-3" id="delete-account">obrisati nalog</span>
                     </div>
-                    <div class="text-block-42" style="margin-top: 30px">
+                    <div class="text-block-42" id="delete-account-container" style="margin-top: 30px; display: none;">
                         <h4>Brisanje Naloga</h4>
                         <p>Brisanjem vašeg naloga biće obrisane sve informacije o vama kao i svi vaši oglasi. Nakon
                             što obrišete nalog nećete moći da ga povratite.</p>
