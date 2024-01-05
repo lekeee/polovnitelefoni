@@ -80,7 +80,7 @@ require_once "../inc/headTag.php";
                                                         <img src="../public/src/eye-icon.svg" alt="Eye" srcset="">
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="div-block-696">
                                                     <div class="text-block-47">
                                                         <p id="quick-view-saves"></p>
@@ -212,59 +212,59 @@ require_once "../inc/headTag.php";
             </div>
             <div class="threeinrowcontainers">
                 <div class="mostvisitedcontainer">
-                        <?php
-                            try{
-                                $mostViewedAdData = $phone->mostViewedAd();
-                                $mostViewedAd = NULL;
-                                if($mostViewedAdData !== NULL){
-                                    $mostViewedAd = json_decode($mostViewedAdData, true);
-                                    //print_r($mostViewedAd);
-                                }
-                            }catch(Exception $e){
-                                echo "GRESKA";
-                            }
-                        ?>
+                    <?php
+                    try {
+                        $mostViewedAdData = $phone->mostViewedAd();
+                        $mostViewedAd = NULL;
+                        if ($mostViewedAdData !== NULL) {
+                            $mostViewedAd = json_decode($mostViewedAdData, true);
+                            //print_r($mostViewedAd);
+                        }
+                    } catch (Exception $e) {
+                        echo "GRESKA";
+                    }
+                    ?>
                     <div class="mostvisitedleft">
                         <div class="mostviewedbrandmodelcont">
-                            
+
                             <div class="mostviewedheadtitle">
                                 Najposećeniji oglas
                             </div>
                             <h1 class="mostviewedmodelandbrandtitle">
                                 <?php
-                                    if($mostViewedAd !== NULL){
-                                        echo $mostViewedAd['title'];
-                                    }
+                                if ($mostViewedAd !== NULL) {
+                                    echo $mostViewedAd['title'];
+                                }
                                 ?>
                             </h1>
                         </div>
                         <div class="mostviewedpricecontainer">
                             <div class="mostviewedpricetitle">
                                 <?php
-                                    if($mostViewedAd !== NULL){
-                                        $ownerID = $mostViewedAd['user_id'];
-                                        $userData = $user->getUserDataFromId($ownerID);
-                                        $userDataDecoded = json_decode($userData, true);
-                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
-                                    }
+                                if ($mostViewedAd !== NULL) {
+                                    $ownerID = $mostViewedAd['user_id'];
+                                    $userData = $user->getUserDataFromId($ownerID);
+                                    $userDataDecoded = json_decode($userData, true);
+                                    echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
+                                }
                                 ?>
                             </div>
                             <div class="priceviewcontainer">
                                 <div class="priceviewmainprice">
                                     <strong class="bold-text-2">
                                         <?php
-                                            if($mostViewedAd !== NULL){
-                                                echo $mostViewedAd['price'] !== NULL ? '€' . $mostViewedAd['price'] : 'Dogovor';
-                                            }
+                                        if ($mostViewedAd !== NULL) {
+                                            echo $mostViewedAd['price'] !== NULL ? '€' . $mostViewedAd['price'] : 'Dogovor';
+                                        }
                                         ?>
                                     </strong>
                                 </div>
                                 <div class="priceviewoldprice">
                                     <strong class="bold-text-3">
                                         <?php
-                                            if($mostViewedAd !== NULL && $mostViewedAd['old_price'] !== NULL){
-                                                echo '€' . $mostViewedAd['old_price'];
-                                            }
+                                        if ($mostViewedAd !== NULL && $mostViewedAd['old_price'] !== NULL) {
+                                            echo '€' . $mostViewedAd['old_price'];
+                                        }
                                         ?>
                                     </strong>
                                 </div>
@@ -280,16 +280,16 @@ require_once "../inc/headTag.php";
                 </div>
                 <div class="mostsavedcontainer">
                     <?php
-                        try{
-                            $mostSavedAdData = $phone->mostSavedAd();
-                            $mostSavedAd = NULL;
-                            if($mostSavedAdData !== NULL){
-                                $mostSavedAd = json_decode($mostSavedAdData, true);
-                                //print_r($mostViewedAd);
-                            }
-                        }catch(Exception $e){
-                            echo "GRESKA";
+                    try {
+                        $mostSavedAdData = $phone->mostSavedAd();
+                        $mostSavedAd = NULL;
+                        if ($mostSavedAdData !== NULL) {
+                            $mostSavedAd = json_decode($mostSavedAdData, true);
+                            //print_r($mostViewedAd);
                         }
+                    } catch (Exception $e) {
+                        echo "GRESKA";
+                    }
                     ?>
                     <div class="mostvisitedleft">
                         <div class="mostsavedheadcontainer">
@@ -298,39 +298,39 @@ require_once "../inc/headTag.php";
                             </div>
                             <h1 class="mostviewedmodelandbrandtitle">
                                 <?php
-                                    if($mostSavedAd !== NULL){
-                                        echo $mostSavedAd['title'];            
-                                    }
+                                if ($mostSavedAd !== NULL) {
+                                    echo $mostSavedAd['title'];
+                                }
                                 ?>
                             </h1>
                         </div>
                         <div class="mostsavedpricecontainer">
                             <div class="mostviewedpricetitle">
                                 <?php
-                                    if($mostSavedAd !== NULL){
-                                        $ownerID = $mostSavedAd['user_id'];
-                                        $userData = $user->getUserDataFromId($ownerID);
-                                        $userDataDecoded = json_decode($userData, true);
-                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
-                                    }
+                                if ($mostSavedAd !== NULL) {
+                                    $ownerID = $mostSavedAd['user_id'];
+                                    $userData = $user->getUserDataFromId($ownerID);
+                                    $userDataDecoded = json_decode($userData, true);
+                                    echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
+                                }
                                 ?>
                             </div>
                             <div class="priceviewcontainer">
                                 <div class="priceviewmainprice">
                                     <strong class="bold-text-2">
                                         <?php
-                                            if($mostSavedAd !== NULL){
-                                                echo $mostSavedAd['price'] !== NULL ? '€' . $mostSavedAd['price'] : 'Dogovor';
-                                            }
+                                        if ($mostSavedAd !== NULL) {
+                                            echo $mostSavedAd['price'] !== NULL ? '€' . $mostSavedAd['price'] : 'Dogovor';
+                                        }
                                         ?>
                                     </strong>
                                 </div>
                                 <div class="priceviewoldprice">
                                     <strong class="bold-text-3">
                                         <?php
-                                            if($mostSavedAd !== NULL && $mostSavedAd['old_price'] !== NULL){
-                                                echo '€' . $mostSavedAd['old_price'];
-                                            }
+                                        if ($mostSavedAd !== NULL && $mostSavedAd['old_price'] !== NULL) {
+                                            echo '€' . $mostSavedAd['old_price'];
+                                        }
                                         ?>
                                     </strong>
                                 </div>
@@ -343,55 +343,55 @@ require_once "../inc/headTag.php";
                 </div>
                 <div class="newestcontainer">
                     <?php
-                        try{
-                            $newestAdData = $phone->newestAd();
-                            $newestAd = NULL;
-                            if($newestAdData !== NULL){
-                                $newestAd = json_decode($newestAdData, true);
-                                //print_r($mostViewedAd);
-                            }
-                        }catch(Exception $e){
-                            echo "GRESKA";
+                    try {
+                        $newestAdData = $phone->newestAd();
+                        $newestAd = NULL;
+                        if ($newestAdData !== NULL) {
+                            $newestAd = json_decode($newestAdData, true);
+                            //print_r($mostViewedAd);
                         }
+                    } catch (Exception $e) {
+                        echo "GRESKA";
+                    }
                     ?>
                     <div class="mostvisitedleft">
                         <div class="newestheadcontainer">
                             <div class="newestheadtitle">Najnoviji oglas</div>
                             <h1 class="mostviewedmodelandbrandtitle">
                                 <?php
-                                    if($newestAd !== NULL){
-                                        echo $newestAd['title'];
-                                    }
+                                if ($newestAd !== NULL) {
+                                    echo $newestAd['title'];
+                                }
                                 ?>
                             </h1>
                         </div>
                         <div class="newestpricecontainer">
                             <div class="mostviewedpricetitle">
                                 <?php
-                                    if($newestAd !== NULL){
-                                        $ownerID = $newestAd['user_id'];
-                                        $userData = $user->getUserDataFromId($ownerID);
-                                        $userDataDecoded = json_decode($userData, true);
-                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
-                                    }
+                                if ($newestAd !== NULL) {
+                                    $ownerID = $newestAd['user_id'];
+                                    $userData = $user->getUserDataFromId($ownerID);
+                                    $userDataDecoded = json_decode($userData, true);
+                                    echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
+                                }
                                 ?>
                             </div>
                             <div class="priceviewcontainer">
                                 <div class="priceviewmainprice">
                                     <strong class="bold-text-2">
                                         <?php
-                                            if($newestAd !== NULL){
-                                                echo $newestAd['price'] !== NULL ? '€' . $newestAd['price'] : 'Dogovor';
-                                            }
-                                        ?> 
+                                        if ($newestAd !== NULL) {
+                                            echo $newestAd['price'] !== NULL ? '€' . $newestAd['price'] : 'Dogovor';
+                                        }
+                                        ?>
                                     </strong>
                                 </div>
                                 <div class="priceviewoldprice">
                                     <strong class="bold-text-3">
                                         <?php
-                                            if($newestAd !== NULL && $newestAd['old_price'] !== NULL){
-                                                echo '€' . $newestAd['old_price'];
-                                            }
+                                        if ($newestAd !== NULL && $newestAd['old_price'] !== NULL) {
+                                            echo '€' . $newestAd['old_price'];
+                                        }
                                         ?>
                                     </strong>
                                 </div>
@@ -442,8 +442,10 @@ require_once "../inc/headTag.php";
                                 <option value="3">48 oglasa</option>
                                 <option value="4">64 oglasa</option>
                             </select>
-                            <div class="sortingseparator"></div><img src="../public/src/grid-icon.svg?v=<?php echo time() ?>"
-                                alt="GridView Icon" class="gridviewicon" /><img src="../public/src/list-icon.svg?v=<?php echo time(); ?>" width="22" alt="List View Icon" class="listviewicon" />
+                            <div class="sortingseparator"></div><img
+                                src="../public/src/grid-icon.svg?v=<?php echo time() ?>" alt="GridView Icon"
+                                class="gridviewicon" /><img src="../public/src/list-icon.svg?v=<?php echo time(); ?>"
+                                width="22" alt="List View Icon" class="listviewicon" />
                         </form>
                         <div class="w-form-done"></div>
                         <div class="w-form-fail"></div>
@@ -598,10 +600,7 @@ require_once "../inc/headTag.php";
     require_once "../inc/footer.php";
     ?>
 
-    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=655506e07faa7f82a5f25610"
-        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
-        </script>
-
+    <script src="../public/js-public/jquery.js"></script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/filter-range-slider.js?v=<?php echo time(); ?>" type="text/javascript"></script>
