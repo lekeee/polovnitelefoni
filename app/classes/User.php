@@ -723,7 +723,7 @@ class User
         }
     }
 
-    public function mySaves()
+    public function mySaves($offset, $limit)
     {
         try {
             $user_id = $this->getId();

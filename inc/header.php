@@ -5,11 +5,11 @@ include_once '../app/exceptions/userExceptions.php';
 
 $mySaves = 0;
 if ($user->isLogged()) {
-    $myData = $user->mySaves();
+    $myData = $user->mySaves(0, 1000);
     $mySavesData = null;
 
     if ($myData !== null) {
-        $mySavesData = json_decode($user->mySaves(), true);
+        $mySavesData = json_decode($user->mySaves(0, 1000), true);
     }
     if ($mySavesData !== NULL) {
         $counted = count($mySavesData);

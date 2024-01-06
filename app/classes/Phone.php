@@ -435,78 +435,78 @@ class Phone extends Ad
         }
     }
 
-    public function getAdFolder($ad_id){
-        try {
-            $sql = "SELECT images FROM oglasi WHERE ad_id=?";
-            $stmt = $this->con->prepare($sql);
+    // public function getAdFolder($ad_id){
+    //     try {
+    //         $sql = "SELECT images FROM oglasi WHERE ad_id=?";
+    //         $stmt = $this->con->prepare($sql);
 
-            if (!$stmt) {
-                die('Error in SQL query: ' . $this->con->error);
-            }
+    //         if (!$stmt) {
+    //             die('Error in SQL query: ' . $this->con->error);
+    //         }
 
-            $stmt->bind_param("i", $ad_id);
-            $stmt->execute();
-            $stmt->bind_result($imageFolder);
-            $stmt->fetch();
-            $stmt->close();
+    //         $stmt->bind_param("i", $ad_id);
+    //         $stmt->execute();
+    //         $stmt->bind_result($imageFolder);
+    //         $stmt->fetch();
+    //         $stmt->close();
 
-            return $imageFolder;
-        } catch (Exception $e) {
-            throw new GET_AD_FOLDER_ERROR();
-        }
-    }
+    //         return $imageFolder;
+    //     } catch (Exception $e) {
+    //         throw new GET_AD_FOLDER_ERROR();
+    //     }
+    // }
 
-    public function updateAd($ad_id, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $price = null, $images = null, $damage = null, $accessories = null){
-        try {
-            $sql = "UPDATE oglasi 
-                    SET brand=?, model=?, title=?, state=?, stateRange=?, description=?, price=?, old_price=?, damage=?, accessories=? 
-                    WHERE ad_id=?";
-            $stmt = $this->con->prepare($sql);
-            if (!$stmt) {
-                die('Error in SQL query: ' . $this->con->error);
-            }
+    // public function updateAd($ad_id, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $price = null, $images = null, $damage = null, $accessories = null){
+    //     try {
+    //         $sql = "UPDATE oglasi 
+    //                 SET brand=?, model=?, title=?, state=?, stateRange=?, description=?, price=?, old_price=?, damage=?, accessories=? 
+    //                 WHERE ad_id=?";
+    //         $stmt = $this->con->prepare($sql);
+    //         if (!$stmt) {
+    //             die('Error in SQL query: ' . $this->con->error);
+    //         }
 
-            $adData = json_decode($this->read($ad_id), true);
+    //         $adData = json_decode($this->read($ad_id), true);
 
-            $brand = empty($brand) ? $adData['brand'] : $brand;
-            $model = empty($model) ? $adData['model'] : $model;
-            $title = empty($title) ? $adData['title'] : $title;
-            $state = empty($state) ? $adData['state'] : $state;
-            $stateRange = empty($stateRange) ? $adData['stateRange'] : $stateRange;
-            $description = empty($description) ? $adData['description'] : $description;
+    //         $brand = empty($brand) ? $adData['brand'] : $brand;
+    //         $model = empty($model) ? $adData['model'] : $model;
+    //         $title = empty($title) ? $adData['title'] : $title;
+    //         $state = empty($state) ? $adData['state'] : $state;
+    //         $stateRange = empty($stateRange) ? $adData['stateRange'] : $stateRange;
+    //         $description = empty($description) ? $adData['description'] : $description;
 
-            if(empty($price)){
-                $price = $adData['price'];
-                $oldprice = $adData['old_price'];
-            }
-            else{
-                $oldprice = $adData['price'];
-            }
+    //         if(empty($price)){
+    //             $price = $adData['price'];
+    //             $oldprice = $adData['old_price'];
+    //         }
+    //         else{
+    //             $oldprice = $adData['price'];
+    //         }
 
-            $damage = empty($damage) ? $adData['damage'] : $damage;
-            $accessories = empty($accessories) ? $adData['accessories'] : $accessories;
+    //         $damage = empty($damage) ? $adData['damage'] : $damage;
+    //         $accessories = empty($accessories) ? $adData['accessories'] : $accessories;
 
-            $stmt->bind_param("ssssssssssi", $brand, $model, $title, $state, $stateRange, $description, $price, $oldprice, $damage, $accessories, $ad_id);
-            $result = $stmt->execute();
-            $affectedRows = $stmt->affected_rows;
+    //         $stmt->bind_param("ssssssssssi", $brand, $model, $title, $state, $stateRange, $description, $price, $oldprice, $damage, $accessories, $ad_id);
+    //         $result = $stmt->execute();
+    //         $affectedRows = $stmt->affected_rows;
 
-            //treba se obrise folder
-            if ($result && $affectedRows > 0) {
-                if (!empty($images)) {
-                    $adFolder = $this->getAdFolder($ad_id);
-                    $imagesUploaded = $this->saveImages('../../uploads/' . $adFolder, $images);
-                    return $imagesUploaded;
-                }
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception $e) {
-            throw new AD_CANNOT_BE_UPDATED();
-        }
-    }
+    //         //treba se obrise folder
+    //         if ($result && $affectedRows > 0) {
+    //             if (!empty($images)) {
+    //                 $adFolder = $this->getAdFolder($ad_id);
+    //                 $imagesUploaded = $this->saveImages('../../uploads/' . $adFolder, $images);
+    //                 return $imagesUploaded;
+    //             }
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     } catch (Exception $e) {
+    //         throw new AD_CANNOT_BE_UPDATED();
+    //     }
+    // }
 
-    public function getDeviceImage($ad_id){
+    // public function getDeviceImage($ad_id){
         
-    }
+    // }
 }

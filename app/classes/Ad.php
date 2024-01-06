@@ -45,7 +45,7 @@ abstract class Ad
     abstract public function deleteAd($ad_id);
     abstract public function deleteAdfromSaves($ad_id);
     abstract public function deleteAdfromVisit($ad_id);
-    abstract public function updateAd($ad_id, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $price = null, $images = null, $damage = null, $accessories = null);
-    abstract public function getAdFolder($ad_id);
-    abstract public function getDeviceImage($ad_id);
+    // abstract public function updateAd($ad_id, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $price = null, $images = null, $damage = null, $accessories = null);
+    // abstract public function getAdFolder($ad_id);
+    // abstract public function getDeviceImage($ad_id);
 }

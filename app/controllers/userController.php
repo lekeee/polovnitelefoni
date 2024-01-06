@@ -6,6 +6,7 @@ require_once "../config/config.php";
 require_once "../classes/Phone.php";
 include_once '../exceptions/userExceptions.php';
 
+$limit = 16;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     if (isset($data['action'])) {
@@ -188,6 +189,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $response = array(
                     'status' => 'error',
                     'message' => 'Došlo je do greše prilikom brisanja naloga!'
+                );
+            }
+        } else if ($data['action'] === 'getSavedAds') {
+            try {
+                $offset = intval($data['page']) * $limit;
+                $result = $user->mySaves($offset, $limit);
+                if ($result !== NULL) {
+                    $response = array(
+                        'status' => 'success',
+                        'message' => $result
+                    );
+                } else {
+                    $response = array(
+                        'status' => 'empty',
+                        'message' => 'Nema sačuvanih oglasa'
+                    );
+                }
+            } catch (Exception $e) {
+                $response = array(
+                    'status' => 'error',
+                    'message' => 'Došlo je do greške prilikom prihvatanja sacuvanih oglasa'
                 );
             }
         }
