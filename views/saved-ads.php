@@ -33,7 +33,7 @@ require_once "../inc/headTag.php";
                             <div class="no-saved-ads-main-container">
                                 <img src="../public/src/love-icon.svg?v=<?php echo time(); ?>" srcset="Love Icon">
                                 <p>NEMATE JOŠ NIJEDAN SAČUVANI OGLAS</p>
-                                <button>Vrati se u šop</button>
+                                <button onclick="window.location.href='../'">Vrati se u šop</button>
                             </div>
                         </div>
                         <div class="saved-ads" style="display: none;">
@@ -68,6 +68,7 @@ require_once "../inc/headTag.php";
     <script src="../public/js-public/jquery.js"></script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/saved-ads.js?v=<?php echo time() ?>"></script>
+    <script src="../public/js/index.js?v=<?php echo time() ?>"></script>
 </body>
 
 </html>

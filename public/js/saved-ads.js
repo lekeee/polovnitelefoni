@@ -25,9 +25,10 @@ function getSavedAds(page) {
                 document.querySelectorAll('.no-saved-ads')[0].style.display = "none";
                 document.querySelectorAll('.saved-ads')[0].style.display = "block";
                 document.querySelector("#saved-body").innerHTML = data.message;
-                console.log(data.message);
+                // console.log(data.message);
             } else if (data.status === 'empty') {
-
+                document.querySelectorAll('.saved-ads')[0].style.display = "none";
+                document.querySelectorAll('.no-saved-ads')[0].style.display = "block";
             } else {
 
             }
