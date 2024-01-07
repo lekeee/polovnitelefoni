@@ -58,13 +58,13 @@ function savedWidget($ads)
         }
         ob_start();
         ?>
-<tr>
-    <td class="table-image">
-        <img src="<?php echo $putanja; ?>" alt="Slika proizvoda 1">
-    </td>
-    <td>
-        <a href="" class="saved-title">
-            <?php
+        <tr id="row_<?php echo $ads[$i]['ad_id'] ?>">
+            <td class="table-image">
+                <img src="<?php echo $putanja; ?>" alt="Slika proizvoda 1">
+            </td>
+            <td>
+                <a href="../views/ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>" class="saved-title">
+                    <?php
                     if (strlen($ads[$i]['title']) > 40) {
                         $padded_string = substr($ads[$i]['title'], 0, 37);
                         echo $padded_string . '...';
@@ -72,29 +72,54 @@ function savedWidget($ads)
                         echo $ads[$i]['title'];
                     }
                     ?>
-        </a>
-    </td>
-    <td>
-        <p class="saved-price">
-            <?php
+                </a>
+            </td>
+            <td>
+                <p class="saved-price">
+                    <?php
                     if ($ads[$i]['price'] !== NULL) {
                         echo '€' . $ads[$i]['price'];
                     } else {
                         echo "Dogovor";
                     }
                     ?>
-        </p>
-    </td>
-    <td class="saved-date">
-        <?php echo $ads[$i]['creation_date'] ?>
-    </td>
-    <td>Novo</td>
-    <td class="saved-damage damage">OŠTEĆENJE</td>
-    <td>
-        <div class="saved-price-close-container"></div>
-    </td>
-</tr>
-<?php
+                </p>
+            </td>
+            <td class="saved-date">
+                <?php
+                $creationDateTime = $ads[$i]['creation_date'];
+                $timestamp = strtotime($creationDateTime);
+                $formattedDate = date("Y-m-d", $timestamp);
+                echo $formattedDate;
+                ?>
+            </td>
+            <td>
+                <?php
+                if ($ads[$i]['state'] === 1) {
+                    echo 'Novo';
+                } else {
+                    echo 'Polovno';
+                }
+                ?>
+            </td>
+            <td class="saved-damage damage">
+                <?php
+                if ($ads[$i]['damage'] !== NULL) {
+                    echo 'OŠTEĆENJE';
+                }
+                ?>
+            </td>
+            <td>
+                <?php
+                $user = new User();
+                $userID = $user->getId();
+                $adID = $ads[$i]['ad_id'];
+                ?>
+                <div class="saved-price-close-container" onclick="removeFromFavourite(null, <?php echo $userID ?>, <?php echo $ads[$i]['ad_id'] ?>);
+                             document.getElementById('row_<?php echo $adID ?>').style.display='none';"></div>
+            </td>
+        </tr>
+        <?php
         $result .= ob_get_clean();
     }
     return $result;

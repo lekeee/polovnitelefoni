@@ -130,17 +130,12 @@ if ($user->isLogged()) {
                 <div class="div-block-10" onclick="window.location.href='../views/saved-ads.php'">
                     <img src="../public/src/love-icon.svg?v=<?php echo time(); ?>" style="width: 30px"
                         alt="Favourite Ads Icon" class="image-3" />
-                    <?php
-                    if ($mySaves > 0) {
-                        ?>
-                        <div class="div-block-11">
-                            <div class="text-block-10">
-                                <?php echo $mySaves ?>
-                            </div>
+                    <div class="div-block-11" id="mySavesContainer"
+                        style="display: <?php echo $mySaves > 0 ? 'flex' : 'none' ?>">
+                        <div class="text-block-10" id="mySavesCount">
+                            <?php echo $mySaves ?>
                         </div>
-                        <?php
-                    }
-                    ?>
+                    </div>
                 </div>
             </div>
         </div>

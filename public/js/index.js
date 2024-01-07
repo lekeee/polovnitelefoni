@@ -20,8 +20,16 @@ function addToFavourite(x, user_id, ad_id) {
         .then(data => {
             // console.log(data);
             if (data.status === 'success') {
-                x.querySelector("svg").style.fill = "red";
-                x.querySelector("svg").style.stroke = "red";
+                if (x !== null) {
+                    x.querySelector("svg").style.fill = "red";
+                    x.querySelector("svg").style.stroke = "red";
+                }
+                const savesContainer = document.querySelector("#mySavesContainer");
+                const savesCounter = document.querySelector('#mySavesCount');
+                let counter = parseInt(savesCounter.innerHTML, 10);
+                counter++;
+                savesContainer.style.display = 'flex';
+                savesCounter.innerHTML = counter;
             }
         })
         .catch(error => {
@@ -51,8 +59,18 @@ function removeFromFavourite(x, user_id, ad_id) {
         .then(data => {
             // console.log(data);
             if (data.status === 'success') {
-                x.querySelector("svg").style.fill = "none";
-                x.querySelector("svg").style.stroke = "black";
+                if (x !== null) {
+                    x.querySelector("svg").style.fill = "none";
+                    x.querySelector("svg").style.stroke = "black";
+                }
+                const savesContainer = document.querySelector("#mySavesContainer");
+                const savesCounter = document.querySelector('#mySavesCount');
+                let counter = parseInt(savesCounter.innerHTML, 10);
+                counter--;
+                if (counter === 0) {
+                    savesContainer.style.display = 'none';
+                }
+                savesCounter.innerHTML = counter;
             }
         })
         .catch(error => {
