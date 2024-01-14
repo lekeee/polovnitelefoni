@@ -1,5 +1,6 @@
 <?php
 require_once "../classes/User.php";
+require_once "../classes/Phone.php";
 require_once "../config/config.php";
 include_once '../exceptions/userExceptions.php';
 
@@ -10,11 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     if (isset($data['action'])) {
         $user = new User();
-        if ($data['action'] == 'getSavedAds') {
+        $phone = new Phone();
+        if ($data['action'] == 'getMyAds') {
             try {
                 $limit = 16;
                 $offset = intval($data['page']) * $limit;
-                $result = $user->mySaves($offset, $limit);
+                $result = $user->myAds($offset, $limit);
                 if ($result !== NULL) {
                     $shows = savedWidget(json_decode($result, true));
                     $response = array(
@@ -25,6 +27,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $response = array(
                         'status' => 'empty',
                         'message' => 'Nema sačuvanih oglasa'
+                    );
+                }
+            } catch (Exception $e) {
+                $response = array(
+                    'status' => 'error',
+                    'message' => 'Došlo je do greške prilikom prihvatanja sacuvanih oglasa'
+                );
+            }
+        } else if ($data['action'] == 'deleteAd') {
+            $ad_id = $data['ad_id'];
+            try {
+                $result = $phone->deleteAd($ad_id);
+                if ($result) {
+                    $response = array(
+                        'status' => 'success',
+                        'message' => 'Oglas je uspešno obrisan.'
+                    );
+                } else {
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Došlo je do greške prilikom brisanja oglasa.'
                     );
                 }
             } catch (Exception $e) {
@@ -74,7 +97,16 @@ function savedWidget($ads)
                     ?>
                 </a>
             </td>
-
+            <td>
+                <?php
+                echo $ads[$i]['brand'];
+                ?>
+            </td>
+            <td>
+                <?php
+                echo $ads[$i]['model'];
+                ?>
+            </td>
             <td>
                 <p class="saved-price">
                     <?php
@@ -96,28 +128,20 @@ function savedWidget($ads)
             </td>
             <td>
                 <?php
-                if ($ads[$i]['state'] === 1) {
-                    echo 'Novo';
-                } else {
-                    echo 'Polovno';
-                }
-                ?>
-            </td>
-            <td class="saved-damage damage">
-                <?php
-                if ($ads[$i]['damage'] !== NULL) {
-                    echo 'OŠTEĆENJE';
-                }
-                ?>
-            </td>
-            <td>
-                <?php
                 $user = new User();
                 $userID = $user->getId();
                 $adID = $ads[$i]['ad_id'];
                 ?>
-                <div class="saved-price-close-container"
-                    onclick="removeFromMySave(<?php echo $userID ?>, <?php echo $ads[$i]['ad_id'] ?>)"></div>
+                <div style="display: flex; flex-direction: column;">
+                    <div title="Obriši oglas" class="delete-edit-buttons" style="background: #ed6969;"
+                        onclick="showDeleteConfirm(<?php echo $adID ?>)">
+                        <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obriši">
+                    </div>
+                    <div title="Uredi oglas" class="delete-edit-buttons" style="background: #041e42;">
+                        <img src="../public/src/edit-icon.svg?v=<?php echo time(); ?>" alt="Obriši">
+                    </div>
+                </div>
+
             </td>
         </tr>
         <?php

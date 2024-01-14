@@ -600,7 +600,7 @@ require_once "../inc/headTag.php";
     require_once "../inc/footer.php";
     ?>
 
-    <script src="../public/js-public/jquery.js"></script>
+    <script src="../public/js-public/jquery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/filter-range-slider.js?v=<?php echo time(); ?>" type="text/javascript"></script>

@@ -729,7 +729,7 @@ class User
             $user_id = $this->getId();
             $sql = "SELECT * FROM sacuvani_oglasi INNER JOIN oglasi 
             ON sacuvani_oglasi.ad_id = oglasi.ad_id
-            WHERE sacuvani_oglasi.user_id=?";
+            WHERE sacuvani_oglasi.user_id=? LIMIT $limit OFFSET $offset ";
             $stmt = $this->con->prepare($sql);
             $stmt->bind_param("i", $user_id);
             $stmt->execute();
@@ -809,6 +809,24 @@ class User
             return $user['username'] === $username;
         } catch (Exception $e) {
             throw new INCORECT_USERNAME();
+        }
+    }
+
+    public function myAds($offset = 0, $limit = 24)
+    {
+        try {
+            $user_id = $this->getId();
+            $sql = "SELECT * FROM oglasi WHERE user_id=? LIMIT $limit OFFSET $offset";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                return json_encode($result->fetch_all(MYSQLI_ASSOC));
+            }
+            return NULL;
+        } catch (Exception $e) {
+            throw new ADS_NOT_SELECTED();
         }
     }
 }

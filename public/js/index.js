@@ -1,5 +1,5 @@
-function addToFavourite(x, user_id, ad_id) {
-    fetch('../app/controllers/adController.php', {
+async function addToFavourite(x, user_id, ad_id) {
+    await fetch('../app/controllers/adController.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -37,8 +37,8 @@ function addToFavourite(x, user_id, ad_id) {
         });
 }
 
-function removeFromFavourite(x, user_id, ad_id) {
-    fetch('../app/controllers/adController.php', {
+async function removeFromFavourite(x, user_id, ad_id) {
+    await fetch('../app/controllers/adController.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -57,8 +57,12 @@ function removeFromFavourite(x, user_id, ad_id) {
             }
         })
         .then(data => {
-            // console.log(data);
-            if (data.status === 'success') {
+            if (x == null && data.status === 'success') {
+                return true;
+            } else if (x == null && data.status === 'error') {
+                return false;
+            }
+            if (x != null && data.status === 'success') {
                 if (x !== null) {
                     x.querySelector("svg").style.fill = "none";
                     x.querySelector("svg").style.stroke = "black";
@@ -78,9 +82,9 @@ function removeFromFavourite(x, user_id, ad_id) {
         });
 }
 
-function checkIsSaved(event, x, user_id, ad_id) {
+async function checkIsSaved(event, x, user_id, ad_id) {
     event.stopPropagation();
-    fetch('../app/controllers/adController.php', {
+    await fetch('../app/controllers/adController.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -114,9 +118,9 @@ function checkIsSaved2(event) {
     event.stopPropagation();
 }
 
-function FilterData(params, restart) {
+async function FilterData(params, restart) {
     const url = '../app/controllers/adController.php?' + params;
-    fetch(url, {
+    await fetch(url, {
         method: 'GET'
     })
         .then(response => response.json())
@@ -131,9 +135,9 @@ function FilterData(params, restart) {
         .catch(error => console.error('Došlo je do greške:', error));
 }
 
-function updateWidgets(ads) {
+async function updateWidgets(ads) {
     document.querySelectorAll('.loadmorebutton')[0].style.display = 'block';
-    fetch('../inc/widget.php', {
+    await fetch('../inc/widget.php', {
         method: 'POST',
         headers: {
 
@@ -181,33 +185,6 @@ function updateWidgets(ads) {
             console.log('Greska:', error);
         });
 }
-
-// function getAds(page) {
-//     fetch('../app/controllers/adController.php', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             action: 'getAds',
-//             page: page,
-//         })
-//     })
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json();
-//             } else {
-//                 throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
-//             }
-//         })
-//         .then(data => {
-//             // console.log(data.message);
-//             updateWidgets(data.message);
-//         })
-//         .catch(error => {
-//             console.log('Greska:', error);
-//         });
-// }
 
 function loadMore(x) {
     let currentPage = x.getAttribute('current-page');

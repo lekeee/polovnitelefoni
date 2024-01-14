@@ -20,9 +20,9 @@
     <section class="dashboard">
         <div class="div-block-676">
             <div class="div-block-677">
-            <?php require_once('../inc/dashboard-navigation.php') ?>
+                <?php require_once('../inc/dashboard-navigation.php') ?>
                 <script>
-                    document.querySelectorAll('.dashboardlinks')[5].classList.add('active');
+                document.querySelectorAll('.dashboardlinks')[6].classList.add('active');
                 </script>
                 <div class="div-block-679">
                     <div class="div-block-680"></div>
@@ -86,14 +86,14 @@
                                     </label>
                                     <img width="20" loading="lazy" alt="Show Password Icon"
                                         src="../public/src/show_password_icon.png" class="image-8"
-                                        onclick="showPassword(1)" input-id="UserOldPassword" id="show1"/>
+                                        onclick="showPassword(1)" input-id="UserOldPassword" id="show1" />
                                     <img width="20" loading="lazy" alt="Hide Password Icon"
                                         src="../public/src/hide_password_icon.png" class="image-7"
-                                        onclick="hidePassword(1)" input-id="UserOldPassword" id="hide1"/>
+                                        onclick="hidePassword(1)" input-id="UserOldPassword" id="hide1" />
                                 </div>
                                 <input type="password" class="updateinput w-input" maxlength="256"
                                     name="UserOldPassword" data-name="UserOldPassword" placeholder=""
-                                    id="UserOldPassword" <?php if($userData['oauth_uid'] !== null) echo "disabled"?>/>
+                                    id="UserOldPassword" <?php if($userData['oauth_uid'] !== null) echo "disabled"?> />
                             </div>
                             <div class="div-block-682 inputupdate pdtop">
                                 <div class="passwordLabel">
@@ -103,30 +103,32 @@
                                         lozinku)</label>
                                     <img width="20" loading="lazy" alt="Show Password Icon"
                                         src="../public/src/show_password_icon.png" class="image-8"
-                                        onclick="showPassword(2)" input-id="UserNewPassword" id="show2"/>
+                                        onclick="showPassword(2)" input-id="UserNewPassword" id="show2" />
                                     <img width="20" loading="lazy" alt="Hide Password Icon"
                                         src="../public/src/hide_password_icon.png" class="image-7"
-                                        onclick="hidePassword(2)" input-id="UserNewPassword" id="hide2"/>
+                                        onclick="hidePassword(2)" input-id="UserNewPassword" id="hide2" />
                                 </div>
                                 <input type="password" class="updateinput w-input" maxlength="256"
                                     name="UserNewPassword" data-name="UserNewPassword" placeholder=""
-                                    id="UserNewPassword" pattern=".{8,20}" title="Lozinka mora imati između 8 i 20 znakova"
-                                    <?php if($userData['oauth_uid'] !== null) echo "disabled"?>/>
+                                    id="UserNewPassword" pattern=".{8,20}"
+                                    title="Lozinka mora imati između 8 i 20 znakova"
+                                    <?php if($userData['oauth_uid'] !== null) echo "disabled"?> />
                             </div>
                             <div class="div-block-682 inputupdate pdtop">
                                 <div class="passwordLabel">
-                                    <label for="UserConfirmedNewPassword" class="field-label-3" >Potvrdite novu
+                                    <label for="UserConfirmedNewPassword" class="field-label-3">Potvrdite novu
                                         lozinku</label>
                                     <img width="20" loading="lazy" alt="Show Password Icon"
                                         src="../public/src/show_password_icon.png" class="image-8"
-                                        onclick="showPassword(3)" input-id="UserConfirmedNewPassword" id="show3"/>
+                                        onclick="showPassword(3)" input-id="UserConfirmedNewPassword" id="show3" />
                                     <img width="20" loading="lazy" alt="Hide Password Icon"
                                         src="../public/src/hide_password_icon.png" class="image-7"
-                                        onclick="hidePassword(3)" input-id="UserConfirmedNewPassword" id="hide3"/>
+                                        onclick="hidePassword(3)" input-id="UserConfirmedNewPassword" id="hide3" />
                                 </div>
                                 <input type="password" class="updateinput w-input" maxlength="256"
                                     name="UserConfirmedNewPassword" data-name="UserConfirmedNewPassword" placeholder=""
-                                    id="UserConfirmedNewPassword"  <?php if($userData['oauth_uid'] !== null) echo "disabled"?>/>
+                                    id="UserConfirmedNewPassword"
+                                    <?php if($userData['oauth_uid'] !== null) echo "disabled"?> />
                             </div><input type="submit" value="Sačuvaj promene" data-value="Sacuvaj Promene"
                                 data-wait="../public/src/loading.gif" class="submit-button-5 w-button" id="saveButton"
                                 style="width: 146px; height: 50px; color: white;" />
