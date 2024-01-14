@@ -117,6 +117,104 @@
     background-repeat: no-repeat;
 }
 
+.delete-edit-buttons {
+    padding: 7px 7px;
+    margin: 2px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.delete-edit-buttons img {
+    width: 20px;
+    height: 20px;
+}
+
+.delete-backgound-container {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 2000;
+    padding: 20px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-main-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    background-color: white;
+    transform: scale(0);
+    opacity: 0;
+}
+
+.delete-main-container.active {
+    animation: showDeleteConfirm 0.3s ease-in-out forwards;
+}
+
+.delete-main-container.close {
+    animation: deleteDeleteConfirm 0.3s ease-in-out forwards;
+}
+
+@keyframes showDeleteConfirm {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes deleteDeleteConfirm {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.delete-main-container p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.delete-confirm {
+    width: 100%;
+    background-color: #041e42;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.delete-confirm img {
+    width: 20px;
+    margin-top: -2px;
+    margin-right: 5px;
+}
+
 @media screen and (max-width: 767px) {
     .saved-date {
         display: none;

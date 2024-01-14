@@ -87,20 +87,7 @@ class Phone extends Ad
         }
     }
 
-    public function select24UserAds($user_id, $offset = 0, $limit = 24)
-    {
-        try {
-            $sql = "SELECT * FROM oglasi WHERE user_id=? LIMIT $limit OFFSET $offset";
-            $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("i", $user_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
 
-            return $result->fetch_all(MYSQLI_ASSOC);
-        } catch (Exception $e) {
-            throw new ADS_NOT_SELECTED();
-        }
-    }
 
     public function read($ad_id)
     {
@@ -507,6 +494,6 @@ class Phone extends Ad
     // }
 
     // public function getDeviceImage($ad_id){
-        
+
     // }
 }
