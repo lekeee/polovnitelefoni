@@ -72,20 +72,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                {
-                                                    "items": [{
-                                                        "_id": "656ed08ea98a280693a4f870",
-                                                        "origFileName": "<?php echo $file; ?>",
-                                                        "fileName": "<?php echo $file; ?>",
-                                                        "fileSize": <?php echo filesize($putanja); ?>,
-                                                        "height": <?php echo $height; ?>,
-                                                        "url": "<?php echo $putanja; ?>",
-                                                        "width": <?php echo $width; ?>,
-                                                        "type": "image"
-                                                    }],
-                                                    "group": "phoneImage"
-                                                }
-                                                </script>
+                                                            {
+                                                                "items": [{
+                                                                    "_id": "656ed08ea98a280693a4f870",
+                                                                    "origFileName": "<?php echo $file; ?>",
+                                                                    "fileName": "<?php echo $file; ?>",
+                                                                    "fileSize": <?php echo filesize($putanja); ?>,
+                                                                    "height": <?php echo $height; ?>,
+                                                                    "url": "<?php echo $putanja; ?>",
+                                                                    "width": <?php echo $width; ?>,
+                                                                    "type": "image"
+                                                                }],
+                                                                "group": "phoneImage"
+                                                            }
+                                                            </script>
                                             </a>
                                         </div>
 
@@ -389,7 +389,9 @@ require_once "../inc/headTag.php";
     require_once "../inc/footer.php";
     ?>
 
-    <script src="../public/js-public/jquery.js"></script>
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=655506e07faa7f82a5f25610"
+        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+        </script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/ad-images-galery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
