@@ -6042,7 +6042,7 @@ textarea.w-select {
   .div-block-696 {
     /* margin-left: 10px; */
     margin-right: 10px;
-    display: block;
+    /* display: block; */
   }
 
   .text-block-48,
@@ -6484,11 +6484,13 @@ textarea.w-select {
   margin-left: 10px;
   cursor: pointer;
 }
-.filterstlabela a{
+
+.filterstlabela a {
   text-decoration: none;
   margin-right: 10px;
   color: black;
 }
+
 .removeFiltersLabel:hover {
   font-weight: bold;
 }

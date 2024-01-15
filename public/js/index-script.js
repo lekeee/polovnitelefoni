@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
-function closeFiltersContainer(){
+function closeFiltersContainer() {
     document.querySelectorAll('.filterleftmaincontainer')[0].classList.remove('active');
     document.querySelectorAll('.filterleftmaincontainer')[0].classList.add('deactive');
     setTimeout(() => {
@@ -110,6 +110,7 @@ function openQuickView(x) {
     // console.log(x);
     const darkBackground = document.querySelector('.darkbackground2');
     const quickViewContainer = document.querySelector('.quickviewcontainer');
+    const ad_id = x.getAttribute('ad-id');
     const mainimage = x.getAttribute('main-image');
     const title = x.getAttribute('ad-title');
     const brand = x.getAttribute('brand');
@@ -128,12 +129,15 @@ function openQuickView(x) {
     const address = x.getAttribute('address');
     const phone = x.getAttribute('phone');
 
-    darkBackground.style.display = 'flex';
+    darkBackground.style.display = 'block';
     quickViewContainer.classList.remove('deactive');
     quickViewContainer.classList.add('active');
 
     document.querySelector('#quick-view-image').src = mainimage;
     document.querySelector('#quick-view-title').innerHTML = title;
+    document.querySelector('#quick-view-title').addEventListener('click', function () {
+        window.location.href = `../views/ad.php?ad_id=${ad_id}`;
+    });
     document.querySelector('#quick-view-brand').innerHTML = brand;
     document.querySelector('#quick-view-model').innerHTML = model;
 

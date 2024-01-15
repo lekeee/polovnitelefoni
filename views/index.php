@@ -54,7 +54,8 @@ require_once "../inc/headTag.php";
                                 </div>
                             </div>
                             <div class="datacontainerquickview" style="padding: 20px; padding-right: 10px;">
-                                <h1 class="heading-6" id="quick-view-title" style="font-size: 30px"></h1>
+                                <h1 class="heading-6" id="quick-view-title">
+                                </h1>
                                 <div class="div-block-718" style="margin-top: 20px;">
                                     <div class="div-block-717" style="justify-content: space-around;">
                                         <div class="div-block-693">
@@ -147,7 +148,7 @@ require_once "../inc/headTag.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="div-block-721">
+                                            <!-- <div class="div-block-721">
                                                 <div class="div-block-705"><img src="../public/src/heart-grey.png"
                                                         loading="lazy" width="20" alt="Favourite" />
                                                     <div class="text-block-51">Sačuvaj oglas</div>
@@ -158,7 +159,7 @@ require_once "../inc/headTag.php";
                                                         loading="lazy" alt="Compare" class="image-33" />
                                                     <div class="text-block-51">Uporedi</div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="div-block-706"><img src="../public/src/delivery.png" loading="lazy"
@@ -174,16 +175,6 @@ require_once "../inc/headTag.php";
                                         <div class="text-block-54" id="quick-view-saves-count">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="div-block-708">
-                                    <div class="text-block-55">Kategorije: </div><a href="#" class="link-4">Mobilni
-                                        Telefoni,
-                                    </a>
-                                    <a href="#" class="link-5" id="quick-view-second-brand">
-                                        <?php
-                                        //echo $adData['brand'] 
-                                        ?>
-                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -98,7 +98,7 @@ function showWidget($ads)
                             <div class="addtosavedcontainer" title="Oštećenje"
                                 style="padding: 5px; margin-top: 5px; background-color: #ed6969; border-color: #ed6969; cursor: default">
                                 <img src="../public/src/broken-phone.svg?v=<?php echo time(); ?>" alt="Broken Phone Icon"
-                                    style="width: 100%" />
+                                    style="height: 100%" />
                             </div>
                         <?php } ?>
 
@@ -110,7 +110,7 @@ function showWidget($ads)
                                 src="../public/src/compare-icon.svg" loading="lazy" alt="Compare Icon" style="width: 20px;" />
                         </div>
                         <div data-w-id="3e330f58-2da6-4705-f661-2e6804eb87a4" class="quickviewicon"
-                            onclick="openQuickView(this)" main-image="<?php echo $putanja ?>"
+                            onclick="openQuickView(this)" main-image="<?php echo $putanja ?>" ad-id="<?php echo $ads[$i]['ad_id'] ?>"
                             ad-title="<?php echo $ads[$i]['title'] ?>" brand="<?php echo $ads[$i]['brand'] ?>"
                             model="<?php echo $ads[$i]['model'] ?>" state="<?php echo $ads[$i]['state'] ?>"
                             rate="<?php echo $ads[$i]['stateRange'] ?>" visitors="<?php echo $views ?>"
