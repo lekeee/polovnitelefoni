@@ -137,7 +137,8 @@ function savedWidget($ads)
                         onclick="showDeleteConfirm(<?php echo $adID ?>)">
                         <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obriši">
                     </div>
-                    <div title="Uredi oglas" class="delete-edit-buttons" style="background: #041e42;">
+                    <div title="Uredi oglas" class="delete-edit-buttons" style="background: #041e42;"
+                        onclick="window.location.href='../views/edit-ad.php?ad_id=<?php echo $adID ?>'">
                         <img src="../public/src/edit-icon.svg?v=<?php echo time(); ?>" alt="Obriši">
                     </div>
                 </div>

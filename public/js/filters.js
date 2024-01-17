@@ -1,10 +1,14 @@
 window.onload = function () {
     localStorage.removeItem('filterData');
+    localStorage.removeItem('limitData');
+    // localStorage.removeItem('loadedAdsCounter');
     document.querySelector('#resetFilters').disabled = true;
+    //showAllAdsCounter();
 };
 
 const brandsCheckboxes = document.querySelectorAll('.custom-brand-checkbox');
 const sortSelect = document.querySelector('#sorting');
+const limitChange = document.querySelector('#showCount');
 
 
 let brandsSelected = [];
@@ -87,12 +91,9 @@ function createModelCheckerhandler(element) {
     }
 }
 
-
-
 modelsCheckboxes.forEach(element => {
     element.addEventListener('change', createModelCheckerhandler(element));
 });
-
 
 function getPrice() {
     const rangeMin = document.querySelectorAll('.input-min')[0];
@@ -118,7 +119,7 @@ function getState() {
     }
 }
 
-function showFilters(){
+function showFilters() {
     const savedFilterDataJson = localStorage.getItem('filterData');
     const filtersLabel = document.querySelectorAll('.filterstlabela')[0];
     filtersLabel.style.display = 'block';
@@ -126,7 +127,7 @@ function showFilters(){
 
     if (savedFilterDataJson) {
         const savedInitialData = JSON.parse(savedFilterDataJson);
-        
+
         const brandsSelected2 = savedInitialData.brandsSelected;
         const modelsSelected2 = savedInitialData.modelsSelected;
         const minPrice2 = savedInitialData.minPrice;
@@ -143,41 +144,41 @@ function showFilters(){
         deleteFilters.classList.add("removeFiltersLabel");
         filtersLabel.appendChild(deleteFilters);
 
-        if(brandsSelected2 !== null){
-            for(let i = 0; i < brandsSelected2.length; i++){
+        if (brandsSelected2 !== null) {
+            for (let i = 0; i < brandsSelected2.length; i++) {
                 const brand = document.createElement('a');
                 brand.setAttribute('href', '#');
                 brand.innerHTML = "X " + brandsSelected2[i];
                 filtersLabel.appendChild(brand);
             }
         }
-        if (modelsSelected2 !== null){
-            for(let i = 0; i < modelsSelected2.length; i++){
+        if (modelsSelected2 !== null) {
+            for (let i = 0; i < modelsSelected2.length; i++) {
                 const models = document.createElement('a');
                 models.setAttribute('href', '#');
                 models.innerHTML = "X " + modelsSelected2[i].model;
                 filtersLabel.appendChild(models);
             }
         }
-        if(minPrice2 !== null && maxPrice2 !== null){
+        if (minPrice2 !== null && maxPrice2 !== null) {
             const price = document.createElement('a');
             price.setAttribute('href', '#');
             price.innerHTML = "X " + '€' + minPrice2 + ' - ' + '€' + maxPrice2;
             filtersLabel.appendChild(price);
         }
-        if(oldState2){
+        if (oldState2) {
             const state = document.createElement('a');
             state.setAttribute('href', '#');
             state.innerHTML = "X Novo";
             filtersLabel.appendChild(state);
         }
-        if(newState2){
+        if (newState2) {
             const state = document.createElement('a');
             state.setAttribute('href', '#');
             state.innerHTML = "X Polovno";
             filtersLabel.appendChild(state);
         }
-        if(damagedState2){
+        if (damagedState2) {
             const state = document.createElement('a');
             state.setAttribute('href', '#');
             state.innerHTML = "X Oštećenje";
@@ -188,12 +189,13 @@ function showFilters(){
 
 document.querySelector("#sumbitFilters").addEventListener("click", function (e) {
     e.preventDefault();
+    localStorage.removeItem('loadedAdsCounter');
     getState();
     cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState);
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
     getAds(0, true);
     var sirinaProzora = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    if(sirinaProzora <= 991){
+    if (sirinaProzora <= 991) {
         closeFilters();
         closeFiltersContainer();
     }
@@ -213,6 +215,17 @@ function cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState) {
 
     const initialDataJson = JSON.stringify(initialDataToSave);
     localStorage.setItem('filterData', initialDataJson);
+}
+
+function getLimit() {
+    const savedLimitDataJSON = localStorage.getItem('limitData');
+    // let limit = 16;
+    let limit = 2;
+    if (savedLimitDataJSON) {
+        const savedInitialData = JSON.parse(savedLimitDataJSON);
+        limit = savedInitialData.limit;
+    }
+    return limit;
 }
 
 function getAds(currentPage, restart) {
@@ -240,8 +253,10 @@ function getAds(currentPage, restart) {
 
     let jsonmodels = JSON.stringify(modelsSelected2);
     let encodedModels = encodeURIComponent(jsonmodels);
+    const limit = getLimit();
 
     const params = new URLSearchParams({
+        action: 'getAds',
         sort: sort,
         brandsSelected: brandsSelected2.join(','),
         modelsSelected: encodedModels,
@@ -251,6 +266,7 @@ function getAds(currentPage, restart) {
         newState: newState2,
         damagedState: damagedState2,
         page: currentPage,
+        limit: limit,
     });
 
     // console.log(sort);
@@ -258,13 +274,60 @@ function getAds(currentPage, restart) {
 }
 
 sortSelect.addEventListener("change", function () {
+    localStorage.removeItem('loadedAdsCounter');
+    firstTry = false;
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
     getAds(0, true);
 });
 
+function cahceLimitData(value) {
+    const initialDataToSave = {
+        limit: value,
+    };
 
-function resetFilters(){
+    const initialDataJson = JSON.stringify(initialDataToSave);
+    localStorage.setItem('limitData', initialDataJson);
+}
+
+limitChange.addEventListener("change", function () {
+    localStorage.removeItem('loadedAdsCounter');
+    firstTry = false;
+    document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
+    cahceLimitData(this.value);
+    getAds(0, true);
+});
+
+let firstTry = true;
+function cacheAdsCounter(value) {
+    let initialDataToSave;
+    if (firstTry) {
+        initialDataToSave = {
+            counter: 2,
+        }
+        firstTry = false;
+    } else {
+        const loadedAdsCounter = localStorage.getItem('loadedAdsCounter');
+
+        let currentCounter = 0;
+        if (loadedAdsCounter) {
+            const savedInitialData = JSON.parse(loadedAdsCounter);
+            currentCounter += Number(savedInitialData.counter);
+        }
+
+        initialDataToSave = {
+            counter: currentCounter + value,
+        };
+    }
+    const initialDataJson = JSON.stringify(initialDataToSave);
+    localStorage.setItem('loadedAdsCounter', initialDataJson);
+}
+
+function resetFilters() {
+    localStorage.removeItem('loadedAdsCounter');
     localStorage.removeItem('filterData');
+    localStorage.removeItem('loadedAdsCounter');
+    firstTry = false;
+
     const brandsCheckboxes = document.querySelectorAll('.custom-brand-checkbox');
     brandsCheckboxes.forEach(element => {
         element.checked = false;
@@ -297,11 +360,20 @@ document.querySelector('#resetFilters').addEventListener('click', resetFilters);
 
 const mobileMenuTriggerOpen = document.querySelector('#mobile-menu-open');
 const mobileMenuTriggerClose = document.querySelector('#mobile-menu-close');
-mobileMenuTriggerOpen.addEventListener('click', function(){
+mobileMenuTriggerOpen.addEventListener('click', function () {
     document.querySelector('body').style.overflowY = "hidden";
 });
-mobileMenuTriggerClose.addEventListener('click', function(){
+mobileMenuTriggerClose.addEventListener('click', function () {
     setTimeout(() => {
         document.querySelector('body').style.overflowY = "auto";
     }, 300);
 });
+
+function cacheAllAdsCounter(value) {
+    const initialDataToSave = {
+        counter: Number(value),
+    };
+
+    const initialDataJson = JSON.stringify(initialDataToSave);
+    localStorage.setItem('allAdsCounter', initialDataJson);
+}
