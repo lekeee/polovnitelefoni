@@ -126,10 +126,14 @@ async function FilterData(params, restart) {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
+                cacheAdsCounter(data.message.length);
                 if (restart) document.querySelectorAll('.productsmaincontainer')[0].innerHTML = '';
                 let jsonmodels = JSON.stringify(data.message);
                 updateWidgets(jsonmodels);
                 if (restart) document.querySelectorAll('.productsmaincontainer')[0].scrollIntoView({ behavior: 'smooth' });
+                // params.action = 'countFilteredData';
+                params.set('action', 'countFilteredData');
+                showAllAdsCounter(params);
             }
         })
         .catch(error => console.error('Došlo je do greške:', error));
@@ -156,7 +160,9 @@ async function updateWidgets(ads) {
         })
         .then(data => {
             document.querySelectorAll('.productsmaincontainer')[0].innerHTML += data;
-            if (data.length === 0 || data.length < 4) document.querySelectorAll('.loadmorebutton')[0].style.display = 'none';
+
+            checkLoadMoreButton();
+
             const elements = document.getElementsByClassName('widgetimagescontainer');
             for (let i = 0; i < elements.length; i++) {
                 const imageVal = elements[i].getAttribute('bg-image');
@@ -186,6 +192,20 @@ async function updateWidgets(ads) {
         });
 }
 
+function checkLoadMoreButton() {
+    const loadedAdsCounter = localStorage.getItem('loadedAdsCounter');
+    const allAdsCounter = localStorage.getItem('allAdsCounter');
+    console.log(allAdsCounter);
+    if (loadedAdsCounter && allAdsCounter) {
+        const loadedAdsCounterInitialData = JSON.parse(loadedAdsCounter);
+        const allAdsCounterInitialData = JSON.parse(allAdsCounter);
+        console.log(Number(loadedAdsCounterInitialData.counter) + ' ' + Number(allAdsCounterInitialData.counter))
+        if (Number(loadedAdsCounterInitialData.counter) === Number(allAdsCounterInitialData.counter)) {
+            document.querySelectorAll('.loadmorebutton')[0].style.display = 'none';
+        }
+    }
+}
+
 function loadMore(x) {
     let currentPage = x.getAttribute('current-page');
     currentPage = parseInt(currentPage, 10);
@@ -193,4 +213,20 @@ function loadMore(x) {
     x.setAttribute('current-page', currentPage);
 
     getAds(currentPage);
+}
+
+async function showAllAdsCounter(params) {
+    const url = '../app/controllers/adController.php?' + params;
+    await fetch(url, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const element = document.querySelector('.showingtitle');
+                element.innerHTML = "Prikazuje se svih " + data.message[0]["ukupno_oglasa"] + " rezultata";
+                cacheAllAdsCounter(data.message[0]["ukupno_oglasa"]);
+            }
+        })
+        .catch(error => console.error('Došlo je do greške:', error));
 }

@@ -16,7 +16,7 @@ require_once "../inc/headTag.php";
 
     <?php
     $phone = new Phone();
-    $ads = json_decode($phone->select24(), true);
+    // $adsCount = json_decode($phone->countAllAds(), true);
     ?>
 
     <link href="../public/css/index.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
@@ -410,8 +410,7 @@ require_once "../inc/headTag.php";
                     <div class="filtertitle">Filtriraj proizvode</div>
                 </div>
                 <div class="showingcountercontainer">
-                    <div class="showingtitle">Prikazuje se svih
-                        <?php echo count($ads) ?> rezultata
+                    <div class="showingtitle">
                     </div>
                 </div>
                 <div class="sortingcontainer">
@@ -428,10 +427,14 @@ require_once "../inc/headTag.php";
                             <div class="sortingseparator"></div>
                             <div class="sortingshowtitle">Prikazuj: </div><select id="showCount" name="showCount"
                                 data-name="showCount" class="adsshowing w-select">
-                                <option value="1">16 oglasa</option>
-                                <option value="2">32 oglasa</option>
-                                <option value="3">48 oglasa</option>
-                                <option value="4">64 oglasa</option>
+                                <!-- <option value="16">16 oglasa</option>
+                                <option value="32">32 oglasa</option>
+                                <option value="48">48 oglasa</option>
+                                <option value="64">64 oglasa</option> -->
+                                <option value="2">16 oglasa</option>
+                                <option value="4">32 oglasa</option>
+                                <option value="6">48 oglasa</option>
+                                <option value="8">64 oglasa</option>
                             </select>
                             <div class="sortingseparator"></div><img
                                 src="../public/src/grid-icon.svg?v=<?php echo time() ?>" alt="GridView Icon"

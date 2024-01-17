@@ -415,85 +415,106 @@ class Phone extends Ad
                 throw new Exception("SQL execution error: " . $stmt->error);
             }
             $results = $stmt->affected_rows;
-
-            return true;
+            if ($results > 0)
+                return true;
+            return false;
         } catch (Exception $e) {
             throw new DELETE_AD_FROM_VISITS_ERROR();
         }
     }
+    public function countAllAds()
+    {
+        try {
+            $sql = "SELECT COUNT(*) as count FROM oglasi";
 
-    // public function getAdFolder($ad_id){
-    //     try {
-    //         $sql = "SELECT images FROM oglasi WHERE ad_id=?";
-    //         $stmt = $this->con->prepare($sql);
+            $stmt = $this->con->prepare($sql);
 
-    //         if (!$stmt) {
-    //             die('Error in SQL query: ' . $this->con->error);
-    //         }
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-    //         $stmt->bind_param("i", $ad_id);
-    //         $stmt->execute();
-    //         $stmt->bind_result($imageFolder);
-    //         $stmt->fetch();
-    //         $stmt->close();
+            if ($row = $result->fetch_assoc()) {
+                return $row['count'];
+            }
+            return 0;
+        } catch (Exception $e) {
+            throw new NEWEST_AD_ERROR();
+        }
+    }
 
-    //         return $imageFolder;
-    //     } catch (Exception $e) {
-    //         throw new GET_AD_FOLDER_ERROR();
-    //     }
-    // }
 
-    // public function updateAd($ad_id, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $price = null, $images = null, $damage = null, $accessories = null){
-    //     try {
-    //         $sql = "UPDATE oglasi 
-    //                 SET brand=?, model=?, title=?, state=?, stateRange=?, description=?, price=?, old_price=?, damage=?, accessories=? 
-    //                 WHERE ad_id=?";
-    //         $stmt = $this->con->prepare($sql);
-    //         if (!$stmt) {
-    //             die('Error in SQL query: ' . $this->con->error);
-    //         }
+    public function countAllFilteredAds($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24)
+    {
+        try {
+            $sql = "SELECT COUNT(*) as ukupno_oglasa FROM oglasi WHERE 1";
 
-    //         $adData = json_decode($this->read($ad_id), true);
 
-    //         $brand = empty($brand) ? $adData['brand'] : $brand;
-    //         $model = empty($model) ? $adData['model'] : $model;
-    //         $title = empty($title) ? $adData['title'] : $title;
-    //         $state = empty($state) ? $adData['state'] : $state;
-    //         $stateRange = empty($stateRange) ? $adData['stateRange'] : $stateRange;
-    //         $description = empty($description) ? $adData['description'] : $description;
+            $models = json_decode(urldecode($models), true);
+            if ($brands !== null && !empty($brands)) {
+                $brandConditions = [];
+                $brandsArray = explode(",", $brands);
 
-    //         if(empty($price)){
-    //             $price = $adData['price'];
-    //             $oldprice = $adData['old_price'];
-    //         }
-    //         else{
-    //             $oldprice = $adData['price'];
-    //         }
+                $insertedBrands = [];
+                $br = 0;
+                $brandWithModels = [];
+                foreach ($brandsArray as $brand) {
+                    $exist = 0;
+                    if ($models !== null && !empty($models)) {
+                        for ($i = 0; $i < count($models); $i++) {
+                            if (in_array($brand, $models[$i])) {
+                                $model = $models[$i]['model'];
+                                $brandConditions[] = "(brand = '$brand' AND model = '$model')";
+                                $exist = 1;
+                            }
+                        }
+                    }
+                    $brandWithModels[$br] = $exist;
+                    if ($brandWithModels[$br] == 0) {
+                        $insertedBrands[] = "'" . $brand . "'";
+                    }
+                    $br++;
+                }
+                $insertedBrands = array_unique($insertedBrands);
+                if (!empty($models) && !empty($insertedBrands)) {
+                    $sql .= " AND (" . implode(" OR ", $brandConditions) . ")" . " OR brand IN (" . implode(", ", $insertedBrands) . ')';
+                } else if (empty($models) && !empty($insertedBrands)) {
+                    $sql .= " AND brand IN (" . implode(", ", $insertedBrands) . ')';
+                } else if (!empty($models) && empty($insertedBrands)) {
+                    $sql .= " AND (" . implode(" OR ", $brandConditions) . ")";
+                }
+            }
 
-    //         $damage = empty($damage) ? $adData['damage'] : $damage;
-    //         $accessories = empty($accessories) ? $adData['accessories'] : $accessories;
+            if ($minPrice !== null) {
+                $sql .= " AND (price >= $minPrice OR price IS NULL)";
+            }
 
-    //         $stmt->bind_param("ssssssssssi", $brand, $model, $title, $state, $stateRange, $description, $price, $oldprice, $damage, $accessories, $ad_id);
-    //         $result = $stmt->execute();
-    //         $affectedRows = $stmt->affected_rows;
+            if ($maxPrice !== null) {
+                $sql .= " AND (price <= $maxPrice OR price IS NULL)";
+            }
 
-    //         //treba se obrise folder
-    //         if ($result && $affectedRows > 0) {
-    //             if (!empty($images)) {
-    //                 $adFolder = $this->getAdFolder($ad_id);
-    //                 $imagesUploaded = $this->saveImages('../../uploads/' . $adFolder, $images);
-    //                 return $imagesUploaded;
-    //             }
-    //             return true;
-    //         } else {
-    //             return false;
-    //         }
-    //     } catch (Exception $e) {
-    //         throw new AD_CANNOT_BE_UPDATED();
-    //     }
-    // }
+            if ($new && !$used && !$damaged) {
+                $sql .= " AND state = 1"; // novi
+            } elseif (!$new && $used && !$damaged) {
+                $sql .= " AND state = 0"; // polovni
+            } elseif (!$new && !$used && $damaged) {
+                $sql .= " AND damage IS NOT NULL"; // osteceni
+            } elseif ($new && $used && !$damaged) {
+                $sql .= " AND (state = 1 OR state = 0)"; // novi i korisceni
+            } elseif ($new && !$used && $damaged) {
+                $sql .= " AND (state = 1 OR damage IS NOT NULL)"; // novi i osteceni
+            } elseif (!$new && $used && $damaged) {
+                $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
+            } elseif ($new && $used && $damaged) {
+                $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
+            }
+            //echo $sql;
+            $result = $this->con->query($sql);
+            if (!$result) {
+                throw new Exception("Database error: " . $this->con->error);
+            }
 
-    // public function getDeviceImage($ad_id){
-
-    // }
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } catch (Exception $e) {
+            throw new FILTERS_ERROR();
+        }
+    }
 }
