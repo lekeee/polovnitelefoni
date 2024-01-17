@@ -30,7 +30,6 @@ abstract class Ad
     abstract public function create($user_id, $brand, $model, $title, $state, $stateRange, $description, $price, $images, $availability, $damage, $accessories);
     abstract public function saveImages($uploadDirectory, $imageSrcArray);
     abstract public function select24();
-    abstract public function select24UserAds($user_id, $offset = 0, $limit = 24);
     abstract public function read($user_id);
     abstract public function checkVisit($ip, $ad_id);
     abstract public function addVisit($ip, $ad_id);
@@ -47,5 +46,6 @@ abstract class Ad
     abstract public function deleteAdfromVisit($ad_id);
     abstract public function updateAd($ad_id, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $price = null, $images = null, $damage = null, $accessories = null);
     abstract public function getAdFolder($ad_id);
-    abstract public function getDeviceImage($ad_id);
+    abstract public function getDeviceImage($brandName, $modelName);
+    abstract public function deleteImagesFromFolder($folder);
 }

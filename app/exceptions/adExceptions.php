@@ -62,3 +62,10 @@ class GET_AD_FOLDER_ERROR extends Exception
 class AD_CANNOT_BE_UPDATED extends Exception 
 {
 }
+class GET_DEVICE_IMAGE_ERROR extends Exception 
+{
+}
+class DELETE_IMAGES_FROM_FOLDER_ERROR extends Exception 
+{
+}
+

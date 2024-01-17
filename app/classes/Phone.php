@@ -87,21 +87,6 @@ class Phone extends Ad
         }
     }
 
-    public function select24UserAds($user_id, $offset = 0, $limit = 24)
-    {
-        try {
-            $sql = "SELECT * FROM oglasi WHERE user_id=? LIMIT $limit OFFSET $offset";
-            $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("i", $user_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            return $result->fetch_all(MYSQLI_ASSOC);
-        } catch (Exception $e) {
-            throw new ADS_NOT_SELECTED();
-        }
-    }
-
     public function read($ad_id)
     {
         try {
@@ -281,25 +266,25 @@ class Phone extends Ad
                 $sql .= " AND (price <= $maxPrice OR price IS NULL)";
             }
 
-            if ($new && !$used && !$damaged) {
+            if ($new === 'true' && $used === 'false' && $damaged === 'false') {
                 $sql .= " AND state = 1"; // novi
-            } elseif (!$new && $used && !$damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND state = 0"; // polovni
-            } elseif (!$new && !$used && $damaged) {
+            } elseif ($new === 'false' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND damage IS NOT NULL"; // osteceni
-            } elseif ($new && $used && !$damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND (state = 1 OR state = 0)"; // novi i korisceni
-            } elseif ($new && !$used && $damaged) {
+            } elseif ($new === 'true' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR damage IS NOT NULL)"; // novi i osteceni
-            } elseif (!$new && $used && $damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
-            } elseif ($new && $used && $damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
-            }
+            }            
 
             if ($sort !== null) {
                 if ($sort == 0) {
-                    $sql .= 'GROUP BY o.ad_id 
+                    $sql .= ' GROUP BY o.ad_id 
                     ORDER BY broj_sacuvanih DESC';
                 } else if ($sort == 1) {
                     $sql .= " ORDER BY creation_date DESC";
@@ -312,7 +297,7 @@ class Phone extends Ad
 
             $sql .= " LIMIT $limit OFFSET $offset";
             $result = $this->con->query($sql);
-            // echo $sql;
+            //echo $sql;
             if (!$result) {
                 throw new Exception("Database error: " . $this->con->error);
             }
@@ -490,10 +475,10 @@ class Phone extends Ad
             $result = $stmt->execute();
             $affectedRows = $stmt->affected_rows;
 
-            //treba se obrise folder
             if ($result && $affectedRows > 0) {
                 if (!empty($images)) {
                     $adFolder = $this->getAdFolder($ad_id);
+                    $this->deleteImagesFromFolder($adFolder);
                     $imagesUploaded = $this->saveImages('../../uploads/' . $adFolder, $images);
                     return $imagesUploaded;
                 }
@@ -506,7 +491,50 @@ class Phone extends Ad
         }
     }
 
-    public function getDeviceImage($ad_id){
-        
+    public function getDeviceImage($brandName, $modelName){
+        try{
+            $jsonFilePath = 'public/JSON/sortedData.json';
+            $jsonData = file_get_contents($jsonFilePath);
+            $data = json_decode($jsonData, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                die('Greška prilikom dekodiranja JSON fajla.');
+            }
+
+            foreach ($data as $brand) {
+                if ($brand['brand_name'] == $brandName) {
+                    foreach ($brand['device_list'] as $device) {
+                        if ($device['device_name'] == $modelName) {
+                            return $device['device_image'];
+                        }
+                    }
+                }
+            }
+        }
+        catch(Exception $e){
+            throw new GET_DEVICE_IMAGE_ERROR();
+        }
+    }
+
+    public function deleteImagesFromFolder($folder){
+        try{
+            $folderPath = 'uploads/' . $folder . '/';
+
+            if (file_exists($folderPath)) {
+                $files = glob($folderPath . '*');
+
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                        unlink($file);
+                        echo 'Slika uspešno obrisana: ' . $file . '<br>';
+                    }
+                }
+                echo 'Sve slike su uspešno obrisane.';
+            } else {
+                echo 'Folder ne postoji.';
+            }
+        }
+        catch(Exception $e){
+            throw new DELETE_IMAGES_FROM_FOLDER_ERROR();
+        }
     }
 }
