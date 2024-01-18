@@ -82,6 +82,38 @@ async function removeFromFavourite(x, user_id, ad_id) {
         });
 }
 
+async function isSaved(user_id, ad_id) {
+    await fetch('../app/controllers/adController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'checkIsFavourite',
+            user_id: user_id,
+            ad_id: ad_id
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            // console.log(data);
+            if (data.status === 'exist') {
+                return 1;
+            } else if (data.status === 'not-exist') {
+                return 0;
+            }
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
+}
+
 async function checkIsSaved(event, x, user_id, ad_id) {
     event.stopPropagation();
     await fetch('../app/controllers/adController.php', {
