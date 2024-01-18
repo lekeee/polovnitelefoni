@@ -69,8 +69,8 @@ require_once "../inc/headTag.php";
                 <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obriši" id="delete-btn">
                 Obriši oglas
             </div>
-            <div class="delete-confirm">
-                <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Obriši">
+            <div class="delete-confirm" onclick="hideDeleteConfirm()">
+                <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Obriši" ">
                 Otkaži
             </div>
         </div>
@@ -81,10 +81,10 @@ require_once "../inc/headTag.php";
     require_once "../inc/footer.php";
     ?>
 
-    <script src="../public/js-public/jquery.js"></script>
-    <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
-    <script src="../public/js/my-ads.js?v=<?php echo time() ?>"></script>
-    <script type="module" src="../public/js/index.js?v=<?php echo time() ?>"></script>
+    <script src=" ../public/js-public/jquery.js"></script>
+                <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+                <script src="../public/js/my-ads.js?v=<?php echo time() ?>"></script>
+                <script type="module" src="../public/js/index.js?v=<?php echo time() ?>"></script>
 </body>
 
 </html>

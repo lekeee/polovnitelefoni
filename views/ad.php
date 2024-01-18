@@ -15,6 +15,18 @@ if (isset($adId)) {
         $visitorsData = $phone->totalVisits($adId);
         $userData = json_decode($user->getUserDataFromId($adData['user_id']), true);
         $savesCount = $phone->countSaves($adId);
+
+        $myData = $user->mySaves();
+        $mySaves = null;
+        if ($myData !== null) {
+            $mySaves = json_decode($user->mySaves(), true);
+        }
+        $savedAdsIds = [];
+        if ($mySaves !== null) {
+            $savedAdsIds = array_column($mySaves, 'ad_id');
+        }
+        $saved = in_array($adData['ad_id'], $savedAdsIds);
+
     } catch (Exception $e) {
         header('Location: index.php');
     }
@@ -72,20 +84,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [{
-                                                                    "_id": "656ed08ea98a280693a4f870",
-                                                                    "origFileName": "<?php echo $file; ?>",
-                                                                    "fileName": "<?php echo $file; ?>",
-                                                                    "fileSize": <?php echo filesize($putanja); ?>,
-                                                                    "height": <?php echo $height; ?>,
-                                                                    "url": "<?php echo $putanja; ?>",
-                                                                    "width": <?php echo $width; ?>,
-                                                                    "type": "image"
-                                                                }],
-                                                                "group": "phoneImage"
-                                                            }
-                                                            </script>
+                                                    {
+                                                        "items": [{
+                                                            "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                            "origFileName": "<?php echo $file; ?>",
+                                                            "fileName": "<?php echo $file; ?>",
+                                                            "fileSize": <?php echo filesize($putanja); ?>,
+                                                            "height": <?php echo $height; ?>,
+                                                            "url": "<?php echo $putanja; ?>",
+                                                            "width": <?php echo $width; ?>,
+                                                            "type": "image"
+                                                        }],
+                                                        "group": "phoneImage"
+                                                    }
+                                                    </script>
                                             </a>
                                         </div>
 
@@ -100,40 +112,7 @@ require_once "../inc/headTag.php";
                                         srcset="../public/src/arrow_right_icon.svg">
                                 </div>
                             </div>
-                            <div class="deviceState">
-                                <?php
-                                if ($adData['state'] === 0) {
-                                    echo "<p>Polovan uređaj <b>" . $adData['stateRange'] . " / 10</b></p>";
-                                    if ($adData['stateRange'] <= 3) {
-                                        echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "red";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#fff4f4";
-                                            </script>';
-                                    } else if ($adData['stateRange'] <= 5) {
-                                        echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "orange";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#fff8ec";
-                                            </script>';
-                                    } else if ($adData['stateRange'] <= 7) {
-                                        echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "blue";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#f2f2ff";
-                                            </script>';
-                                    } else if ($adData['stateRange'] <= 9) {
-                                        echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "#90eeea";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#edfffe";
-                                            </script>';
-                                    } else {
-                                        echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "lightgreen";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#f4faf6";
-                                            </script>';
-                                    }
-                                }
-                                ?>
 
-                            </div>
                         </div>
                     </div>
                     <div class="thumbnails-container">
@@ -220,6 +199,42 @@ require_once "../inc/headTag.php";
                                             <div class="text-block-49">OŠTEĆENJE</div>
                                         </div>
                                     <?php } ?>
+                                    <div class="deviceState">
+                                        <?php
+                                        if ($adData['state'] === 0) {
+                                            echo "<p><b>" . $adData['stateRange'] . " / 10</b></p>";
+                                            if ($adData['stateRange'] <= 3) {
+                                                echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "red";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#fff4f4";
+                                            </script>';
+                                            } else if ($adData['stateRange'] <= 5) {
+                                                echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "orange";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#fff8ec";
+                                            </script>';
+                                            } else if ($adData['stateRange'] <= 7) {
+                                                echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "blue";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#f2f2ff";
+                                            </script>';
+                                            } else if ($adData['stateRange'] <= 9) {
+                                                echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "#90eeea";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#edfffe";
+                                            </script>';
+                                            } else {
+                                                echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "lightgreen";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#f4faf6";
+                                            </script>';
+                                            }
+                                        } else if ($adData['state'] === 1) {
+                                            echo "<p><b>Novo</b></p>";
+                                        }
+                                        ?>
+
+                                    </div>
                                 </div>
                                 <div class="div-block-701">
                                     <h2 class="heading-8">
@@ -284,9 +299,23 @@ require_once "../inc/headTag.php";
                                         </div>
                                     </div>
                                     <div class="div-block-721">
-                                        <div class="div-block-705"><img src="../public/src/heart-grey.png"
-                                                loading="lazy" width="20" alt="Favourite" />
-                                            <div class="text-block-51">Sačuvaj oglas</div>
+                                        <div class="div-block-705">
+                                            <svg fill="<?php echo $saved == 1 ? "red" : "#818ea0" ?>"
+                                                stroke="<?php echo $saved == 1 ? "red" : "#818ea0" ?>" width="20"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                            </svg>
+                                            <div class="text-block-51">
+                                                <?php
+                                                if ($saved == 1) {
+                                                    echo "Ukloni iz sačuvanih oglasa";
+                                                } else {
+                                                    "Sačuvaj oglas";
+                                                }
+                                                ?>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="div-block-722">
@@ -389,13 +418,13 @@ require_once "../inc/headTag.php";
     require_once "../inc/footer.php";
     ?>
 
-    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=655506e07faa7f82a5f25610"
-        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
-        </script>
+    <script src="../public/js-public/jquery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/ad-images-galery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/specifications.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/ad.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>
 
 </html>

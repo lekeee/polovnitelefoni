@@ -4496,6 +4496,7 @@ textarea.w-select {
   flex-direction: column;
   justify-content: space-between;
   display: flex;
+  gap: 10px;
 }
 
 .div-block-718 {
@@ -6439,12 +6440,10 @@ textarea.w-select {
 
 .deviceState {
   padding: 7px 15px;
-  position: absolute;
-  right: 10px;
-  top: 10px;
   background: #f4faf6;
   border-radius: 5px;
   border: 1px solid lightgreen;
+  display: inline-block;
 }
 
 .deviceState p {
