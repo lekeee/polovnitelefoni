@@ -21,8 +21,12 @@ async function addToFavourite(x, user_id, ad_id) {
             // console.log(data);
             if (data.status === 'success') {
                 if (x !== null) {
+                    x.querySelector("svg").classList.add('redLoveAnimation');
                     x.querySelector("svg").style.fill = "red";
                     x.querySelector("svg").style.stroke = "red";
+                    setTimeout(function () {
+                        x.querySelector("svg").classList.remove('redLoveAnimation')
+                    }, 300);
                 }
                 const savesContainer = document.querySelector("#mySavesContainer");
                 const savesCounter = document.querySelector('#mySavesCount');
@@ -64,8 +68,12 @@ async function removeFromFavourite(x, user_id, ad_id) {
             }
             if (x != null && data.status === 'success') {
                 if (x !== null) {
+                    x.querySelector("svg").classList.add('redLoveAnimation');
                     x.querySelector("svg").style.fill = "none";
                     x.querySelector("svg").style.stroke = "black";
+                    setTimeout(function () {
+                        x.querySelector("svg").classList.remove('redLoveAnimation')
+                    }, 300);
                 }
                 const savesContainer = document.querySelector("#mySavesContainer");
                 const savesCounter = document.querySelector('#mySavesCount');

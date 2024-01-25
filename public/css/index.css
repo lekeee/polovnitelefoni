@@ -471,6 +471,26 @@
   background-color: #ffe3e3;
 }
 
+.redLoveAnimation,
+.redLoveAnimationReverse {
+  animation: heartBeat 0.3s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.4);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
 .image-8 {
   width: 20px;
 }
@@ -1569,6 +1589,11 @@
 }
 
 @media screen and (max-width: 767px) {
+  .openmysavesicon {
+    width: 28px;
+    height: 28px;
+  }
+
   .quick-view-image-container {
     height: 300px;
   }
@@ -1695,6 +1720,19 @@
 }
 
 @media screen and (max-width: 479px) {
+
+  .addtocontainer {
+    width: 45px;
+  }
+
+  .addtocomparecontainer,
+  .quickviewicon,
+  .addtosavedcontainer {
+
+    height: 45px;
+  }
+
+
   .absolutedescriptionconteiner {
     display: none;
   }
