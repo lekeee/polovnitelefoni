@@ -4882,6 +4882,12 @@ textarea.w-select {
   display: block;
 }
 
+.image-3 {
+  width: 30px;
+  height: 30px;
+  margin-left: 30px;
+}
+
 @media screen and (min-width: 1280px) {
   .container.firstnavbar {
     border-bottom-style: none;
@@ -4954,11 +4960,7 @@ textarea.w-select {
     display: flex;
   }
 
-  .image-3 {
-    width: 30px;
-    height: 30px;
-    margin-left: 30px;
-  }
+
 
   .div-block-12 {
     display: flex;
