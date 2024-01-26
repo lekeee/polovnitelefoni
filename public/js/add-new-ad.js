@@ -1,10 +1,10 @@
 const title = document.querySelector("#Title");
 const titleCounter = document.querySelector("#titleCounter");
 
-title.addEventListener("input", function(){
-    if(this.value.length > 60){
+title.addEventListener("input", function () {
+    if (this.value.length > 60) {
         this.value = this.value.substring(0, 60);
-    }else{
+    } else {
         titleCounter.innerHTML = this.value.length;
     }
 });
@@ -32,7 +32,16 @@ var allAccessories = [
     "SIM free"
 ];
 
-function addToSelectedAccessories(x){
+if (typeof selectedAccessoriesTemp !== 'undefined') {
+    selectedAccessoriesTemp.forEach(element => {
+        selectedAccessories.push(element);
+        const ind = allAccessories.indexOf(element);
+        allAccessories.splice(ind, 1);
+    })
+}
+
+
+function addToSelectedAccessories(x) {
     selectedAccessories.push(x);
     const indexToRemove = allAccessories.indexOf(x);
     if (indexToRemove !== -1) {
@@ -42,7 +51,7 @@ function addToSelectedAccessories(x){
     displaySelectedAccessoried();
 }
 
-function removeFromSelectedAccessories(x){
+function removeFromSelectedAccessories(x) {
     allAccessories.push(x);
     const indexToRemove = selectedAccessories.indexOf(x);
     if (indexToRemove !== -1) {
@@ -58,12 +67,12 @@ function displayAccessories() {
     for (var i = 0; i < allAccessories.length; i++) {
         const divItem1 = document.createElement("div");
         divItem1.classList.add("div-block-754");
-            const divItem2 = document.createElement("div");
-            divItem2.classList.add("text-block-67");
-            divItem2.innerHTML = allAccessories[i];
+        const divItem2 = document.createElement("div");
+        divItem2.classList.add("text-block-67");
+        divItem2.innerHTML = allAccessories[i];
         divItem1.setAttribute("value", allAccessories[i]);
         divItem1.appendChild(divItem2);
-        divItem1.onclick = function() {
+        divItem1.onclick = function () {
             addToSelectedAccessories(this.getAttribute("value"));
         };
         accessoriesList.appendChild(divItem1);
@@ -71,24 +80,24 @@ function displayAccessories() {
 }
 displayAccessories();
 
-function displaySelectedAccessoried(){
+function displaySelectedAccessoried() {
     const accessoriesList = document.getElementById("selectedAccessories");
     accessoriesList.innerHTML = '';
-    if(selectedAccessories.length === 0){
+    if (selectedAccessories.length === 0) {
         accessoriesList.style.display = 'none';
-    }else{
+    } else {
         accessoriesList.style.display = 'block';
     }
     for (var i = 0; i < selectedAccessories.length; i++) {
         const divItem1 = document.createElement("div");
         divItem1.classList.add("div-block-752");
-            const divItem2 = document.createElement("div");
-            divItem2.classList.add("text-block-66");
-            divItem2.innerHTML = selectedAccessories[i];
+        const divItem2 = document.createElement("div");
+        divItem2.classList.add("text-block-66");
+        divItem2.innerHTML = selectedAccessories[i];
         divItem1.appendChild(divItem2);
         divItem1.setAttribute("value", selectedAccessories[i]);
         divItem1.appendChild(divItem2);
-        divItem1.onclick = function() {
+        divItem1.onclick = function () {
             removeFromSelectedAccessories(this.getAttribute("value"));
         };
         accessoriesList.appendChild(divItem1);
@@ -112,7 +121,15 @@ var allDamages = [
     "Problem s portom za punjenje"
 ];
 
-function addToSelectedDamage(x){
+if (typeof selectedDamagesTemp !== 'undefined') {
+    selectedDamagesTemp.forEach(element => {
+        selectedDamages.push(element);
+        const ind = allDamages.indexOf(element);
+        allDamages.splice(ind, 1);
+    })
+}
+
+function addToSelectedDamage(x) {
     selectedDamages.push(x);
     const indexToRemove = allDamages.indexOf(x);
     if (indexToRemove !== -1) {
@@ -122,7 +139,7 @@ function addToSelectedDamage(x){
     displaySelectedDamages();
 }
 
-function removeFromSelectedDamages(x){
+function removeFromSelectedDamages(x) {
     allDamages.push(x);
     const indexToRemove = selectedDamages.indexOf(x);
     if (indexToRemove !== -1) {
@@ -138,12 +155,12 @@ function displayDamages() {
     for (var i = 0; i < allDamages.length; i++) {
         const divItem1 = document.createElement("div");
         divItem1.classList.add("div-block-754");
-            const divItem2 = document.createElement("div");
-            divItem2.classList.add("text-block-67");
-            divItem2.innerHTML = allDamages[i];
+        const divItem2 = document.createElement("div");
+        divItem2.classList.add("text-block-67");
+        divItem2.innerHTML = allDamages[i];
         divItem1.setAttribute("value", allDamages[i]);
         divItem1.appendChild(divItem2);
-        divItem1.onclick = function() {
+        divItem1.onclick = function () {
             addToSelectedDamage(this.getAttribute("value"));
         };
         damagesList.appendChild(divItem1);
@@ -151,25 +168,25 @@ function displayDamages() {
 }
 displayDamages();
 
-function displaySelectedDamages(){
+function displaySelectedDamages() {
     const damagesList = document.getElementById("selectedDamages");
     damagesList.innerHTML = '';
-    if(selectedDamages.length === 0){
+    if (selectedDamages.length === 0) {
         damagesList.style.display = 'none';
-    }else{
+    } else {
         damagesList.style.display = 'block';
     }
     for (var i = 0; i < selectedDamages.length; i++) {
         const divItem1 = document.createElement("div");
         divItem1.classList.add("div-block-752");
         divItem1.classList.add("ostecenja");
-            const divItem2 = document.createElement("div");
-            divItem2.classList.add("text-block-66");
-            divItem2.innerHTML = selectedDamages[i];
+        const divItem2 = document.createElement("div");
+        divItem2.classList.add("text-block-66");
+        divItem2.innerHTML = selectedDamages[i];
         divItem1.appendChild(divItem2);
         divItem1.setAttribute("value", selectedDamages[i]);
         divItem1.appendChild(divItem2);
-        divItem1.onclick = function() {
+        divItem1.onclick = function () {
             removeFromSelectedDamages(this.getAttribute("value"));
         };
         damagesList.appendChild(divItem1);
@@ -179,22 +196,22 @@ displaySelectedDamages();
 //#endregion Ostecenja
 
 //#region proveraStanjaUredjaja
-function checkUserState(){
+function checkUserState() {
     const deviceStateRadio = document.querySelector('input[name="deviceState"]:checked');
-    if(deviceStateRadio){
+    if (deviceStateRadio) {
         const radioValue = deviceStateRadio.value;
         const newStateLabel = document.querySelector('#newState');
         const oldStateLabel = document.querySelector('#oldState');
         const deviceStateRate = document.querySelector('#deviceStateRate');
         const deviceState = document.querySelector("#deviceState");
-        if(radioValue === "newState"){
+        if (radioValue === "newState") {
             oldStateLabel.style.color = "black";
             oldStateLabel.style.backgroundColor = "white";
             newStateLabel.style.color = "white";
             newStateLabel.style.backgroundColor = "#ed6969";
             deviceStateRate.style.display = 'none';
             deviceState.style.borderBottom = "1px solid #ddd";
-        }else{
+        } else {
             newStateLabel.style.color = "black";
             newStateLabel.style.backgroundColor = "white";
             oldStateLabel.style.color = "white";
@@ -208,30 +225,31 @@ checkUserState();
 //#endregion proveraStanjaUredjaja
 
 //#region cena ili dogovor
-function dealOrPrice(){
+function dealOrPrice() {
     const deal = document.querySelector('input[name="deal"]');
     const dealBackground = document.querySelector('#dealBackground');
     const priceContainer = document.querySelector('#price');
 
-    if(deal.checked){
+    if (deal.checked) {
         priceContainer.value = '';
         dealBackground.style.color = "white";
         dealBackground.style.backgroundColor = "#ed6969";
         priceContainer.disabled = true;
-    }else{
+    } else {
         dealBackground.style.color = "black";
         dealBackground.style.backgroundColor = "white";
         priceContainer.disabled = false;
     }
 }
+dealOrPrice();
 //#endregion cena ili dogovor
 
-function showErrorNotification(status, value){
+function showErrorNotification(status, value) {
     stopLoadingAnimation("saveData");
     const errorContainer = document.querySelector('#error');
 
     const errorInsideContainre = errorContainer.querySelector("div");
-    if(status === 0)
+    if (status === 0)
         errorInsideContainre.style.borderColor = "red";
     else
         errorInsideContainre.style.borderColor = "lightgreen";
@@ -241,83 +259,84 @@ function showErrorNotification(status, value){
     window.location.href = "#error";
 }
 
-function titleValidation(title){
-    if(title.trim() === ''){
+function titleValidation(title) {
+    console.log('tu sam');
+    if (title.trim() === '') {
         showErrorNotification(0, "GRESKA: Naslov oglasa je obavezan!");
         return false;
-    }else if(title.length <= 10){
+    } else if (title.length <= 10) {
         showErrorNotification(0, "GRESKA: Naslov oglasa mora biti duži od 10 karaktera!");
         return false;
-    }else if(title.length > 60){
+    } else if (title.length > 60) {
         showErrorNotification(0, "GRESKA: Naslov oglasa mora biti kraci od 60 karaktera!");
         return false;
     }
     return true;
 }
-function brandValidation(brand){
-    if(brand.trim() === ''){
+function brandValidation(brand) {
+    if (brand.trim() === '') {
         showErrorNotification(0, "Morate izabrati brend mobilnog telefona!");
         return false;
     }
     return true;
 }
-function modelValidation(model){
-    if(model.trim() === ''){
+function modelValidation(model) {
+    if (model.trim() === '') {
         showErrorNotification(0, "Morate izabrati model mobilnog telefona!");
         return false;
     }
     return true;
 }
-function imageValidations(images){
-    if(images.length < 2){
+function imageValidations(images) {
+    if (images.length < 2) {
         showErrorNotification(0, "Morate izabrati najmanje dve fotografije!");
         return false;
-    }else if(images.length > 10){
+    } else if (images.length > 10) {
         showErrorNotification(0, "Morate izabrati najviše deset fotografije!");
         return false;
     }
     return true;
 }
-function descriptionValidation(description){
-    if(description.length <= 20){
+function descriptionValidation(description) {
+    if (description.length <= 20) {
         showErrorNotification(0, "Opis mora biti duzi od 20 karaktera!");
         return false;
-    }else if(description.length > 2000){
+    } else if (description.length > 2000) {
         showErrorNotification(0, "Opis mora biti kraci od 2000 karaktera!");
         return false;
     }
     return true;
 }
 
-function priceValidation(){
+function priceValidation() {
     const dealInput = document.querySelector("#deal");
     const priceInput = document.querySelector("#price");
 
-    if(!dealInput.checked){
-        if(priceInput.trim() !== ''){
+    if (!dealInput.checked) {
+        if (priceInput.trim() !== '') {
             return true;
-        }else{
+        } else {
             showErrorNotification(0, "Morate uneti cenu oglasa! (Ukoliko ne želite da navedete cenu telefona, možete selektovati KONTAKT)");
             return false;
         }
     }
 }
 const termss = document.querySelectorAll('input[name="term"]');
-termss[0].addEventListener("click", function(){
+termss[0].addEventListener("click", function () {
     this.style.borderColor = "#041e42";
 });
-termss[1].addEventListener("click", function(){
+termss[1].addEventListener("click", function () {
     this.style.borderColor = "#041e42";
 });
 
-function damageListToString(){
+function damageListToString() {
     let result = '';
     selectedDamages.forEach(element => {
         result += (element + ', ');
     });
     return result;
 }
-function accessoriesListToString(){
+function accessoriesListToString() {
     let result = '';
     selectedAccessories.forEach(element => {
         result += (element + ', ');
@@ -336,11 +355,11 @@ function sendDataToController(
     deal,
     price,
     terms
-){
+) {
     const damagesString = damageListToString();
     const accessoriesString = accessoriesListToString();
-    
-    fetch('../app/controllers/adController.php',{
+
+    fetch('../app/controllers/adController.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -361,29 +380,30 @@ function sendDataToController(
             damages: damagesString
         })
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
-        }
-    })
-    .then(data => { 
-        stopLoadingAnimation("saveData");
-        if(data.status === 'error'){
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            stopLoadingAnimation("saveData");
+            if (data.status === 'error') {
+                showErrorNotification(0, "Došlo je do greške. Molimo pokušajte kasnije!");
+            } else {
+                showErrorNotification(1, "Oglas je uspešno kreiran i poslat na proveru. Administratori će pogledati Vaš oglas i ukoliko on podržava sva ograničenja, biće odobren. Kada administratori odobre (ili ne) vaš oglas, bićete obavešteni putem email adrese.");
+            }
+        })
+        .catch(error => {
             showErrorNotification(0, "Došlo je do greške. Molimo pokušajte kasnije!");
-        }else{
-            showErrorNotification(1, "Oglas je uspešno kreiran i poslat na proveru. Administratori će pogledati Vaš oglas i ukoliko on podržava sva ograničenja, biće odobren. Kada administratori odobre (ili ne) vaš oglas, bićete obavešteni putem email adrese.");
-        }
-    })
-    .catch(error => {
-        showErrorNotification(0, "Došlo je do greške. Molimo pokušajte kasnije!");
-    });
+        });
 }
 
 //#region slanje podataka
 const saveDataBtn = document.querySelector("#saveData");
-saveDataBtn.addEventListener("click", function(){
+saveDataBtn.addEventListener("click", function () {
+    console.log("Kliknuto");
     const titleInput = document.querySelector("#Title").value;
     const brandInput = document.querySelector("#brandSelect").value;
     const modelInput = document.querySelector("#modelSelect").value;
@@ -398,11 +418,11 @@ saveDataBtn.addEventListener("click", function(){
     startLoadingAnimation("saveData");
     this.style.backgroundSize = '3%';
 
-    if(!terms[0].checked){
+    if (!terms[0].checked) {
         document.querySelector('#term1').style.borderColor = "red";
         stopLoadingAnimation("saveData");
         return;
-    }if(!terms[1].checked){
+    } if (!terms[1].checked) {
         document.querySelector('#term2').style.borderColor = "red";
         stopLoadingAnimation("saveData");
         return;
@@ -411,9 +431,14 @@ saveDataBtn.addEventListener("click", function(){
     images.forEach(element => {
         imagesSrc.push(element.src);
     });
-    if(titleValidation(titleInput) && brandValidation(brandInput) && modelValidation(modelInput)
-        && imageValidations(images) && descriptionValidation(description)){
-            sendDataToController(titleInput, brandInput, modelInput, deviceStateRadio, stateRangeValue, imagesSrc, description, deal.checked, price, terms[0].checked && terms[1].checked);
+    if (titleValidation(titleInput) && brandValidation(brandInput) && modelValidation(modelInput)
+        && imageValidations(images) && descriptionValidation(description)) {
+        sendDataToController(titleInput, brandInput, modelInput, deviceStateRadio, stateRangeValue, imagesSrc, description, deal.checked, price, terms[0].checked && terms[1].checked);
+    }
+
+    const updateIdentificato = this.getAttribute('update');
+    if (updateIdentificato != '') {
+        deleteAdUpdate(updateIdentificato);
     }
 });
 //#endregion slanje podataka
@@ -427,3 +452,32 @@ document.getElementById('price').addEventListener('focus', function () {
 document.getElementById('price').addEventListener('blur', function () {
     this.classList.remove('focused');
 });
+
+
+async function deleteAdUpdate(adID) {
+    await fetch('../app/controllers/myAdsController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'deleteAd',
+            ad_id: adID,
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            if (data.status === 'success') {
+
+            }
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
+}

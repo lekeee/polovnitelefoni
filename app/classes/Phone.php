@@ -364,8 +364,8 @@ class Phone extends Ad
     {
         try {
             if ($this->deleteAdfromSaves($ad_id) && $this->deleteAdfromVisit($ad_id)) {
-                $sql = "DELETE FROM oglasi WHERE ad_id = ?";
 
+                $sql = "DELETE FROM oglasi WHERE ad_id = ?";
                 $stmt = $this->con->prepare($sql);
                 $stmt->bind_param("i", $ad_id);
 
@@ -395,7 +395,6 @@ class Phone extends Ad
                 throw new Exception("SQL execution error: " . $stmt->error);
             }
             $results = $stmt->affected_rows;
-
             return true;
         } catch (Exception $e) {
             throw new DELETE_AD_FROM_SAVES_ERROR();
@@ -410,14 +409,13 @@ class Phone extends Ad
             $stmt = $this->con->prepare($sql);
             $stmt->bind_param("i", $ad_id);
 
+
             $stmt->execute();
             if ($stmt->error) {
                 throw new Exception("SQL execution error: " . $stmt->error);
             }
             $results = $stmt->affected_rows;
-            if ($results > 0)
-                return true;
-            return false;
+            return true;
         } catch (Exception $e) {
             throw new DELETE_AD_FROM_VISITS_ERROR();
         }
@@ -515,6 +513,124 @@ class Phone extends Ad
             return $result->fetch_all(MYSQLI_ASSOC);
         } catch (Exception $e) {
             throw new FILTERS_ERROR();
+        }
+    }
+    public function getAdFolder($ad_id)
+    {
+        try {
+            $sql = "SELECT images FROM oglasi WHERE ad_id=?";
+            $stmt = $this->con->prepare($sql);
+
+            if (!$stmt) {
+                die('Error in SQL query: ' . $this->con->error);
+            }
+            $imageFolder = null;
+            $stmt->bind_param("i", $ad_id);
+            $stmt->execute();
+            $stmt->bind_result($imageFolder);
+            $stmt->fetch();
+            $stmt->close();
+
+            return $imageFolder;
+        } catch (Exception $e) {
+            throw new GET_AD_FOLDER_ERROR();
+        }
+    }
+
+    public function updateAd($ad_id, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $price = null, $images = null, $damage = null, $accessories = null)
+    {
+        try {
+            $sql = "UPDATE oglasi 
+                    SET brand=?, model=?, title=?, state=?, stateRange=?, description=?, price=?, old_price=?, damage=?, accessories=? 
+                    WHERE ad_id=?";
+            $stmt = $this->con->prepare($sql);
+            if (!$stmt) {
+                die('Error in SQL query: ' . $this->con->error);
+            }
+
+            $adData = json_decode($this->read($ad_id), true);
+
+            $brand = empty($brand) ? $adData['brand'] : $brand;
+            $model = empty($model) ? $adData['model'] : $model;
+            $title = empty($title) ? $adData['title'] : $title;
+            $state = empty($state) ? $adData['state'] : $state;
+            $stateRange = empty($stateRange) ? $adData['stateRange'] : $stateRange;
+            $description = empty($description) ? $adData['description'] : $description;
+
+            if (empty($price)) {
+                $price = $adData['price'];
+                $oldprice = $adData['old_price'];
+            } else {
+                $oldprice = $adData['price'];
+            }
+
+            $damage = empty($damage) ? $adData['damage'] : $damage;
+            $accessories = empty($accessories) ? $adData['accessories'] : $accessories;
+
+            $stmt->bind_param("ssssssssssi", $brand, $model, $title, $state, $stateRange, $description, $price, $oldprice, $damage, $accessories, $ad_id);
+            $result = $stmt->execute();
+            $affectedRows = $stmt->affected_rows;
+
+            if ($result && $affectedRows > 0) {
+                if (!empty($images)) {
+                    $adFolder = $this->getAdFolder($ad_id);
+                    $this->deleteImagesFromFolder($adFolder);
+                    $imagesUploaded = $this->saveImages('../../uploads/' . $adFolder, $images);
+                    return $imagesUploaded;
+                }
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            throw new AD_CANNOT_BE_UPDATED();
+        }
+    }
+
+    public function getDeviceImage($brandName, $modelName)
+    {
+        try {
+            $jsonFilePath = 'public/JSON/sortedData.json';
+            $jsonData = file_get_contents($jsonFilePath);
+            $data = json_decode($jsonData, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                die('Greška prilikom dekodiranja JSON fajla.');
+            }
+
+            foreach ($data as $brand) {
+                if ($brand['brand_name'] == $brandName) {
+                    foreach ($brand['device_list'] as $device) {
+                        if ($device['device_name'] == $modelName) {
+                            return $device['device_image'];
+                        }
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            throw new GET_DEVICE_IMAGE_ERROR();
+        }
+    }
+
+    public function deleteImagesFromFolder($folder)
+    {
+        try {
+            $folderPath = 'uploads/' . $folder . '/';
+
+            if (file_exists($folderPath)) {
+                $files = glob($folderPath . '*');
+
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                        unlink($file);
+                        echo 'Slika uspešno obrisana: ' . $file . '<br>';
+                    }
+                }
+                echo 'Sve slike su uspešno obrisane.';
+            } else {
+                echo 'Folder ne postoji.';
+            }
+        } catch (Exception $e) {
+            throw new DELETE_IMAGES_FROM_FOLDER_ERROR();
         }
     }
 }

@@ -13,7 +13,7 @@ if (isset($adId)) {
         $phoneAd = $phone->read($adId);
         $adData = json_decode($phoneAd, true);
         $visitorsData = $phone->totalVisits($adId);
-        $userData = json_decode($user->getUserDataFromId($adData['user_id']), true);
+        $adOwner = json_decode($user->getUserDataFromId($adData['user_id']), true);
         $savesCount = $phone->countSaves($adId);
 
         $myData = $user->mySaves();
@@ -262,13 +262,13 @@ require_once "../inc/headTag.php";
                                     src="../public/src/userShow.png" loading="lazy" alt="User Profile Image"
                                     class="image-39" />
                                 <h1 class="heading-10">
-                                    <?php echo $userData['name'] . ' ' . $userData['lastname'] ?>
+                                    <?php echo $adOwner['name'] . ' ' . $adOwner['lastname'] ?>
                                 </h1>
                                 <div class="text-block-57">
-                                    <?php echo $userData['city'] ?>
+                                    <?php echo $adOwner['city'] ?>
                                 </div>
                                 <div class="text-block-60">
-                                    <?php echo $userData['address'] ?>
+                                    <?php echo $adOwner['address'] ?>
                                 </div>
                             </div>
                         </div>
@@ -279,7 +279,7 @@ require_once "../inc/headTag.php";
                                         <div class="div-block-712">
                                             <div class="div-block-714">
                                                 <div class="text-block-56">
-                                                    <?php echo $userData['phone'] ?>
+                                                    <?php echo $adOwner['phone'] ?>
                                                 </div>
                                                 <div class="div-block-704">
                                                     <div class="div-block-716"><img src="../public/src/message-icon.png"
