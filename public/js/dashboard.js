@@ -1,5 +1,6 @@
 const deleteBtn = document.querySelector("#delete-button");
 const deleteInput = document.querySelector("#delete-password");
+const deleteLink = document.querySelector("#delete-account");
 
 deleteBtn.addEventListener('click', function () {
     const deleteText = deleteInput.value;
@@ -24,9 +25,17 @@ deleteBtn.addEventListener('click', function () {
             console.log(data);
             if (data['status'] === 'success') {
                 window.location.href = "../views/index.php";
+            }else if(data['status'] === 'error'){
+
             }
         })
         .catch(error => {
             console.log('Greska:', error);
         });
+});
+
+deleteLink.addEventListener('click', function(){
+    this.style.color = "#ed6969";
+    const deleteContainer = document.querySelector('#delete-account-container');
+    deleteContainer.style.display = "block";
 });

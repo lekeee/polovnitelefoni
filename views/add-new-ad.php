@@ -21,27 +21,10 @@
     <section class="dashboard">
         <div class="div-block-676">
             <div class="div-block-677">
-                <div class="div-block-678" style="">
-                    <a href="dashboard.php" class="dashboardlinks w-inline-block">
-                        <div>Kontrolna tabla</div>
-                    </a><a href="add-new-ad.php" class="dashboardlinks w-inline-block active">
-                        <div>Dodaj oglas</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Narudžbine</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Preuzimanja</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Adrese</div>
-                    </a><a href="edit-account.php" class="dashboardlinks w-inline-block">
-                        <div>Podaci o nalogu</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Upoređivanja</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block">
-                        <div>Omiljeni oglasi</div>
-                    </a><a href="#" class="dashboardlinks w-inline-block" onclick="signOut()">
-                        <div>Odjavi se</div>
-                    </a>
-                </div>
+            <?php require_once('../inc/dashboard-navigation.php') ?>
+                <script>
+                    document.querySelectorAll('.dashboardlinks')[1].classList.add('active');
+                </script>
                 <?php
                     
                     if($userData['name'] !== null && $userData['lastname'] !== null

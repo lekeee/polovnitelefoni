@@ -16,7 +16,7 @@ require_once "../inc/headTag.php";
 
     <?php
     $phone = new Phone();
-    $ads = json_decode($phone->select24(), true);
+    // $adsCount = json_decode($phone->countAllAds(), true);
     ?>
 
     <link href="../public/css/index.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
@@ -54,7 +54,8 @@ require_once "../inc/headTag.php";
                                 </div>
                             </div>
                             <div class="datacontainerquickview" style="padding: 20px; padding-right: 10px;">
-                                <h1 class="heading-6" id="quick-view-title" style="font-size: 30px"></h1>
+                                <h1 class="heading-6" id="quick-view-title">
+                                </h1>
                                 <div class="div-block-718" style="margin-top: 20px;">
                                     <div class="div-block-717" style="justify-content: space-around;">
                                         <div class="div-block-693">
@@ -73,17 +74,20 @@ require_once "../inc/headTag.php";
                                                     sizes="(max-width: 479px) 100vw, (max-width: 767px) 23vw, 120px"
                                                     alt="Star Rating of 5" class="image-30" id="quick-view-rate" />
                                             </div>
-                                            <div class="div-block-696">
-                                                <div class="text-block-47">
-                                                    <p id="quick-view-visitors"></p>
-                                                    <img src="../public/src/eye-icon.svg" alt="Eye" srcset="">
+                                            <div style="display: inline-block">
+                                                <div class="div-block-696">
+                                                    <div class="text-block-47">
+                                                        <p id="quick-view-visitors"></p>
+                                                        <img src="../public/src/eye-icon.svg" alt="Eye" srcset="">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="div-block-696">
-                                                <div class="text-block-47">
-                                                    <p id="quick-view-saves"></p>
-                                                    <img src="../public/src/favourite_icon.png" alt="Eye" srcset=""
-                                                        style="width: 20px">
+
+                                                <div class="div-block-696">
+                                                    <div class="text-block-47">
+                                                        <p id="quick-view-saves"></p>
+                                                        <img src="../public/src/favourite_icon.png" alt="Eye" srcset=""
+                                                            style="width: 20px">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,7 +148,7 @@ require_once "../inc/headTag.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="div-block-721">
+                                            <!-- <div class="div-block-721">
                                                 <div class="div-block-705"><img src="../public/src/heart-grey.png"
                                                         loading="lazy" width="20" alt="Favourite" />
                                                     <div class="text-block-51">Sačuvaj oglas</div>
@@ -155,7 +159,7 @@ require_once "../inc/headTag.php";
                                                         loading="lazy" alt="Compare" class="image-33" />
                                                     <div class="text-block-51">Uporedi</div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="div-block-706"><img src="../public/src/delivery.png" loading="lazy"
@@ -171,16 +175,6 @@ require_once "../inc/headTag.php";
                                         <div class="text-block-54" id="quick-view-saves-count">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="div-block-708">
-                                    <div class="text-block-55">Kategorije: </div><a href="#" class="link-4">Mobilni
-                                        Telefoni,
-                                    </a>
-                                    <a href="#" class="link-5" id="quick-view-second-brand">
-                                        <?php
-                                        //echo $adData['brand'] 
-                                        ?>
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -209,59 +203,59 @@ require_once "../inc/headTag.php";
             </div>
             <div class="threeinrowcontainers">
                 <div class="mostvisitedcontainer">
-                        <?php
-                            try{
-                                $mostViewedAdData = $phone->mostViewedAd();
-                                $mostViewedAd = NULL;
-                                if($mostViewedAdData !== NULL){
-                                    $mostViewedAd = json_decode($mostViewedAdData, true);
-                                    //print_r($mostViewedAd);
-                                }
-                            }catch(Exception $e){
-                                echo "GRESKA";
-                            }
-                        ?>
+                    <?php
+                    try {
+                        $mostViewedAdData = $phone->mostViewedAd();
+                        $mostViewedAd = NULL;
+                        if ($mostViewedAdData !== NULL) {
+                            $mostViewedAd = json_decode($mostViewedAdData, true);
+                            //print_r($mostViewedAd);
+                        }
+                    } catch (Exception $e) {
+                        echo "GRESKA";
+                    }
+                    ?>
                     <div class="mostvisitedleft">
                         <div class="mostviewedbrandmodelcont">
-                            
+
                             <div class="mostviewedheadtitle">
                                 Najposećeniji oglas
                             </div>
                             <h1 class="mostviewedmodelandbrandtitle">
                                 <?php
-                                    if($mostViewedAd !== NULL){
-                                        echo $mostViewedAd['title'];
-                                    }
+                                if ($mostViewedAd !== NULL) {
+                                    echo $mostViewedAd['title'];
+                                }
                                 ?>
                             </h1>
                         </div>
                         <div class="mostviewedpricecontainer">
                             <div class="mostviewedpricetitle">
                                 <?php
-                                    if($mostViewedAd !== NULL){
-                                        $ownerID = $mostViewedAd['user_id'];
-                                        $userData = $user->getUserDataFromId($ownerID);
-                                        $userDataDecoded = json_decode($userData, true);
-                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
-                                    }
+                                if ($mostViewedAd !== NULL) {
+                                    $ownerID = $mostViewedAd['user_id'];
+                                    $userData = $user->getUserDataFromId($ownerID);
+                                    $userDataDecoded = json_decode($userData, true);
+                                    echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
+                                }
                                 ?>
                             </div>
                             <div class="priceviewcontainer">
                                 <div class="priceviewmainprice">
                                     <strong class="bold-text-2">
                                         <?php
-                                            if($mostViewedAd !== NULL){
-                                                echo $mostViewedAd['price'] !== NULL ? '€' . $mostViewedAd['price'] : 'Dogovor';
-                                            }
+                                        if ($mostViewedAd !== NULL) {
+                                            echo $mostViewedAd['price'] !== NULL ? '€' . $mostViewedAd['price'] : 'Dogovor';
+                                        }
                                         ?>
                                     </strong>
                                 </div>
                                 <div class="priceviewoldprice">
                                     <strong class="bold-text-3">
                                         <?php
-                                            if($mostViewedAd !== NULL && $mostViewedAd['old_price'] !== NULL){
-                                                echo '€' . $mostViewedAd['old_price'];
-                                            }
+                                        if ($mostViewedAd !== NULL && $mostViewedAd['old_price'] !== NULL) {
+                                            echo '€' . $mostViewedAd['old_price'];
+                                        }
                                         ?>
                                     </strong>
                                 </div>
@@ -277,16 +271,16 @@ require_once "../inc/headTag.php";
                 </div>
                 <div class="mostsavedcontainer">
                     <?php
-                        try{
-                            $mostSavedAdData = $phone->mostSavedAd();
-                            $mostSavedAd = NULL;
-                            if($mostSavedAdData !== NULL){
-                                $mostSavedAd = json_decode($mostSavedAdData, true);
-                                //print_r($mostViewedAd);
-                            }
-                        }catch(Exception $e){
-                            echo "GRESKA";
+                    try {
+                        $mostSavedAdData = $phone->mostSavedAd();
+                        $mostSavedAd = NULL;
+                        if ($mostSavedAdData !== NULL) {
+                            $mostSavedAd = json_decode($mostSavedAdData, true);
+                            //print_r($mostViewedAd);
                         }
+                    } catch (Exception $e) {
+                        echo "GRESKA";
+                    }
                     ?>
                     <div class="mostvisitedleft">
                         <div class="mostsavedheadcontainer">
@@ -295,39 +289,39 @@ require_once "../inc/headTag.php";
                             </div>
                             <h1 class="mostviewedmodelandbrandtitle">
                                 <?php
-                                    if($mostSavedAd !== NULL){
-                                        echo $mostSavedAd['title'];            
-                                    }
+                                if ($mostSavedAd !== NULL) {
+                                    echo $mostSavedAd['title'];
+                                }
                                 ?>
                             </h1>
                         </div>
                         <div class="mostsavedpricecontainer">
                             <div class="mostviewedpricetitle">
                                 <?php
-                                    if($mostSavedAd !== NULL){
-                                        $ownerID = $mostSavedAd['user_id'];
-                                        $userData = $user->getUserDataFromId($ownerID);
-                                        $userDataDecoded = json_decode($userData, true);
-                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
-                                    }
+                                if ($mostSavedAd !== NULL) {
+                                    $ownerID = $mostSavedAd['user_id'];
+                                    $userData = $user->getUserDataFromId($ownerID);
+                                    $userDataDecoded = json_decode($userData, true);
+                                    echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
+                                }
                                 ?>
                             </div>
                             <div class="priceviewcontainer">
                                 <div class="priceviewmainprice">
                                     <strong class="bold-text-2">
                                         <?php
-                                            if($mostSavedAd !== NULL){
-                                                echo $mostSavedAd['price'] !== NULL ? '€' . $mostSavedAd['price'] : 'Dogovor';
-                                            }
+                                        if ($mostSavedAd !== NULL) {
+                                            echo $mostSavedAd['price'] !== NULL ? '€' . $mostSavedAd['price'] : 'Dogovor';
+                                        }
                                         ?>
                                     </strong>
                                 </div>
                                 <div class="priceviewoldprice">
                                     <strong class="bold-text-3">
                                         <?php
-                                            if($mostSavedAd !== NULL && $mostSavedAd['old_price'] !== NULL){
-                                                echo '€' . $mostSavedAd['old_price'];
-                                            }
+                                        if ($mostSavedAd !== NULL && $mostSavedAd['old_price'] !== NULL) {
+                                            echo '€' . $mostSavedAd['old_price'];
+                                        }
                                         ?>
                                     </strong>
                                 </div>
@@ -340,55 +334,55 @@ require_once "../inc/headTag.php";
                 </div>
                 <div class="newestcontainer">
                     <?php
-                        try{
-                            $newestAdData = $phone->newestAd();
-                            $newestAd = NULL;
-                            if($newestAdData !== NULL){
-                                $newestAd = json_decode($newestAdData, true);
-                                //print_r($mostViewedAd);
-                            }
-                        }catch(Exception $e){
-                            echo "GRESKA";
+                    try {
+                        $newestAdData = $phone->newestAd();
+                        $newestAd = NULL;
+                        if ($newestAdData !== NULL) {
+                            $newestAd = json_decode($newestAdData, true);
+                            //print_r($mostViewedAd);
                         }
+                    } catch (Exception $e) {
+                        echo "GRESKA";
+                    }
                     ?>
                     <div class="mostvisitedleft">
                         <div class="newestheadcontainer">
                             <div class="newestheadtitle">Najnoviji oglas</div>
                             <h1 class="mostviewedmodelandbrandtitle">
                                 <?php
-                                    if($newestAd !== NULL){
-                                        echo $newestAd['title'];
-                                    }
+                                if ($newestAd !== NULL) {
+                                    echo $newestAd['title'];
+                                }
                                 ?>
                             </h1>
                         </div>
                         <div class="newestpricecontainer">
                             <div class="mostviewedpricetitle">
                                 <?php
-                                    if($newestAd !== NULL){
-                                        $ownerID = $newestAd['user_id'];
-                                        $userData = $user->getUserDataFromId($ownerID);
-                                        $userDataDecoded = json_decode($userData, true);
-                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
-                                    }
+                                if ($newestAd !== NULL) {
+                                    $ownerID = $newestAd['user_id'];
+                                    $userData = $user->getUserDataFromId($ownerID);
+                                    $userDataDecoded = json_decode($userData, true);
+                                    echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
+                                }
                                 ?>
                             </div>
                             <div class="priceviewcontainer">
                                 <div class="priceviewmainprice">
                                     <strong class="bold-text-2">
                                         <?php
-                                            if($newestAd !== NULL){
-                                                echo $newestAd['price'] !== NULL ? '€' . $newestAd['price'] : 'Dogovor';
-                                            }
-                                        ?> 
+                                        if ($newestAd !== NULL) {
+                                            echo $newestAd['price'] !== NULL ? '€' . $newestAd['price'] : 'Dogovor';
+                                        }
+                                        ?>
                                     </strong>
                                 </div>
                                 <div class="priceviewoldprice">
                                     <strong class="bold-text-3">
                                         <?php
-                                            if($newestAd !== NULL && $newestAd['old_price'] !== NULL){
-                                                echo '€' . $newestAd['old_price'];
-                                            }
+                                        if ($newestAd !== NULL && $newestAd['old_price'] !== NULL) {
+                                            echo '€' . $newestAd['old_price'];
+                                        }
                                         ?>
                                     </strong>
                                 </div>
@@ -416,8 +410,7 @@ require_once "../inc/headTag.php";
                     <div class="filtertitle">Filtriraj proizvode</div>
                 </div>
                 <div class="showingcountercontainer">
-                    <div class="showingtitle">Prikazuje se svih
-                        <?php echo count($ads) ?> rezultata
+                    <div class="showingtitle">
                     </div>
                 </div>
                 <div class="sortingcontainer">
@@ -434,14 +427,19 @@ require_once "../inc/headTag.php";
                             <div class="sortingseparator"></div>
                             <div class="sortingshowtitle">Prikazuj: </div><select id="showCount" name="showCount"
                                 data-name="showCount" class="adsshowing w-select">
-                                <option value="1">16 oglasa</option>
-                                <option value="2">32 oglasa</option>
-                                <option value="3">48 oglasa</option>
-                                <option value="4">64 oglasa</option>
+                                <!-- <option value="16">16 oglasa</option>
+                                <option value="32">32 oglasa</option>
+                                <option value="48">48 oglasa</option>
+                                <option value="64">64 oglasa</option> -->
+                                <option value="2">16 oglasa</option>
+                                <option value="4">32 oglasa</option>
+                                <option value="6">48 oglasa</option>
+                                <option value="8">64 oglasa</option>
                             </select>
-                            <div class="sortingseparator"></div><img src="../public/src/grid-icon.svg" loading="lazy"
-                                alt="GridView Icon" class="gridviewicon" /><img src="../public/src/list-icon.svg"
-                                loading="lazy" width="22" alt="List View Icon" class="listviewicon" />
+                            <div class="sortingseparator"></div><img
+                                src="../public/src/grid-icon.svg?v=<?php echo time() ?>" alt="GridView Icon"
+                                class="gridviewicon" /><img src="../public/src/list-icon.svg?v=<?php echo time(); ?>"
+                                width="22" alt="List View Icon" class="listviewicon" />
                         </form>
                         <div class="w-form-done"></div>
                         <div class="w-form-fail"></div>
@@ -573,7 +571,7 @@ require_once "../inc/headTag.php";
                     </div>
                 </div>
                 <div class="productscontainer">
-                    <div class="filterstlabela">Filteri</div>
+                    <div class="filterstlabela"></div>
                     <div class="productsmaincontainer"></div>
                     <div class="loadmorecontainer">
                         <a href="#" current-page="0" class="loadmorebutton w-button" onclick="loadMore(this)">Učitaj
@@ -596,16 +594,13 @@ require_once "../inc/headTag.php";
     require_once "../inc/footer.php";
     ?>
 
-    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=655506e07faa7f82a5f25610"
-        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
-        </script>
-
+    <script src="../public/js-public/jquery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
-    <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/filter-range-slider.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/filters.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>
 
 </html>

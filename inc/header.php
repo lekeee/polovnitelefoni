@@ -1,25 +1,25 @@
 <?php
-    require_once "../app/auth/userAuthentification.php";
-    include_once "../app/classes/User.php";
-    include_once '../app/exceptions/userExceptions.php';
+require_once "../app/auth/userAuthentification.php";
+include_once "../app/classes/User.php";
+include_once '../app/exceptions/userExceptions.php';
 
-    $mySaves = 0;
-    if($user->isLogged()){
-        $myData = $user->mySaves();
-        $mySavesData = null;
-        
-        if($myData !== null){
-            $mySavesData = json_decode($user->mySaves(), true);
-        }
-        if($mySavesData !== NULL){
-            $counted = count($mySavesData);
-            if($counted > 9)
-                $mySaves = $counted + '+';
-            else
-                $mySaves = $counted;
-        }else
-            $mySaves = 0;
+$mySaves = 0;
+if ($user->isLogged()) {
+    $myData = $user->mySaves(0, 1000);
+    $mySavesData = null;
+
+    if ($myData !== null) {
+        $mySavesData = json_decode($user->mySaves(0, 1000), true);
     }
+    if ($mySavesData !== NULL) {
+        $counted = count($mySavesData);
+        if ($counted > 9)
+            $mySaves = $counted + '+';
+        else
+            $mySaves = $counted;
+    } else
+        $mySaves = 0;
+}
 ?>
 <section class="header">
     <div class="w-layout-blockcontainer container firstnavbar w-container">
@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="div-block"><a data-w-id="dececed3-f170-003e-2db2-631e28dd94b9" href="#" class="w-inline-block"><img
-                src="../public/src/hamburger_menu.png" loading="lazy" width="30" height="30" alt="Hamburger Menu"
+                src="../public/src/hamburger_menu.png" id='mobile-menu-open' width="30" height="30" alt="Hamburger Menu"
                 class="image-6" /></a>
         <div class="div-block-57" style="cursor: pointer;" onclick="window.location.href='/polovnitelefoni'"><img
                 src="../public/src/polovnitelefoni.svg" loading="lazy" height="60" alt="Logo" class="image" /></div>
@@ -97,47 +97,45 @@
                         class="image-27" />
                     <div>
                         <div class="text-block-7" style="color: grey">
-                            <?php echo $user !== NULL && $user->isLogged() ? "Dobrodošli" : "Prijavi se na"?></div>
+                            <?php echo $user !== NULL && $user->isLogged() ? "Dobrodošli" : "Prijavi se na" ?>
+                        </div>
                         <div class="text-block-8">
                             <?php
-                                if($user !== NULL && $user->isLogged()){
-                                    $userData = $user->returnUser();
-                                    $userData = json_decode($userData, true);
-                                    if($userData !== null){
-                                        $userDataDecoded = json_decode($user->returnUser(), true);
-                                        if(!empty($userDataDecoded['username'])){
-                                            echo $userDataDecoded['username'];
-                                        }else{
-                                            echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
-                                        }
-                                    }else{
-                                        echo "Profil";
+                            if ($user !== NULL && $user->isLogged()) {
+                                $userData = $user->returnUser();
+                                $userData = json_decode($userData, true);
+                                if ($userData !== null) {
+                                    $userDataDecoded = json_decode($user->returnUser(), true);
+                                    if (!empty($userDataDecoded['username'])) {
+                                        echo $userDataDecoded['username'];
+                                    } else {
+                                        echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
                                     }
-                                    
-                                }else{
+                                } else {
                                     echo "Profil";
                                 }
-                                ?>
+
+                            } else {
+                                echo "Profil";
+                            }
+                            ?>
                         </div>
 
                     </div>
                 </div>
                 <div class="div-block-9"><a href="../views/add-new-ad.php" class="link-block-3 w-inline-block"><img
-                            src="../public/src/add_new_ad_icon.png" loading="lazy" width="20" alt="Add New Ad"
-                            class="image-2" />
+                            src="../public/src/add_new_ad_icon.png" width="20" alt="Add New Ad" class="image-2" />
                         <div class="text-block-9">Dodaj Oglas</div>
                     </a></div>
-                <div class="div-block-10"><img src="../public/src/favourite_icon.png" loading="lazy" width="35"
+                <div class="div-block-10" onclick="window.location.href='../views/saved-ads.php'">
+                    <img src="../public/src/love-icon.svg?v=<?php echo time(); ?>" style="width: 30px"
                         alt="Favourite Ads Icon" class="image-3" />
-                    <?php
-                            if($mySaves > 0){
-                        ?>
-                    <div class="div-block-11">
-                        <div class="text-block-10"><?php echo $mySaves ?></div>
+                    <div class="div-block-11" id="mySavesContainer"
+                        style="display: <?php echo $mySaves > 0 ? 'flex' : 'none' ?>">
+                        <div class="text-block-10" id="mySavesCount">
+                            <?php echo $mySaves ?>
+                        </div>
                     </div>
-                    <?php
-                            }
-                        ?>
                 </div>
             </div>
         </div>
