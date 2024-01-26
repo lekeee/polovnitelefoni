@@ -31,7 +31,7 @@ require_once "../inc/headTag.php";
                     <div class="saved-ads-main-container">
                         <div class="no-saved-ads" style="display: none;">
                             <div class="no-saved-ads-main-container">
-                                <img src="../public/src/love-icon.svg?v=<?php echo time(); ?>" srcset="Love Icon">
+                                <img src="../public/src/love-icon.svg?v=<?php echo time(); ?>">
                                 <p>NEMATE JOŠ NIJEDAN SAČUVANI OGLAS</p>
                                 <button onclick="window.location.href='../'">Vrati se u šop</button>
                             </div>

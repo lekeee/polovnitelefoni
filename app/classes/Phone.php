@@ -364,8 +364,8 @@ class Phone extends Ad
     {
         try {
             if ($this->deleteAdfromSaves($ad_id) && $this->deleteAdfromVisit($ad_id)) {
-                $sql = "DELETE FROM oglasi WHERE ad_id = ?";
 
+                $sql = "DELETE FROM oglasi WHERE ad_id = ?";
                 $stmt = $this->con->prepare($sql);
                 $stmt->bind_param("i", $ad_id);
 
@@ -395,7 +395,6 @@ class Phone extends Ad
                 throw new Exception("SQL execution error: " . $stmt->error);
             }
             $results = $stmt->affected_rows;
-
             return true;
         } catch (Exception $e) {
             throw new DELETE_AD_FROM_SAVES_ERROR();
@@ -410,14 +409,13 @@ class Phone extends Ad
             $stmt = $this->con->prepare($sql);
             $stmt->bind_param("i", $ad_id);
 
+
             $stmt->execute();
             if ($stmt->error) {
                 throw new Exception("SQL execution error: " . $stmt->error);
             }
             $results = $stmt->affected_rows;
-            if ($results > 0)
-                return true;
-            return false;
+            return true;
         } catch (Exception $e) {
             throw new DELETE_AD_FROM_VISITS_ERROR();
         }

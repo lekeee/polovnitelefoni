@@ -31,7 +31,7 @@ require_once "../inc/headTag.php";
                     <div class="saved-ads-main-container">
                         <div class="no-saved-ads" style="display: none;">
                             <div class="no-saved-ads-main-container">
-                                <img src="../public/src/not-found.svg?v=<?php echo time(); ?>" srcset="Love Icon">
+                                <img src="../public/src/not-found.svg?v=<?php echo time(); ?>">
                                 <p>NEMATE JOŠ NIJEDAN OGLAS</p>
                                 <button onclick="window.location.href='add-new-ad.php'">Dodaj novi oglas</button>
                             </div>
