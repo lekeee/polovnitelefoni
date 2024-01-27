@@ -68,3 +68,6 @@ class GET_DEVICE_IMAGE_ERROR extends Exception
 class DELETE_IMAGES_FROM_FOLDER_ERROR extends Exception
 {
 }
+class DELETE_IMAGES_FOLDER_ERROR extends Exception
+{
+}

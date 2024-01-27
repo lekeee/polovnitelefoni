@@ -2686,8 +2686,7 @@ textarea.w-select {
 
 .div-block-14 {
   width: 100%;
-  /* height: 100%; */
-  height: 50px;
+  height: 100%;
   max-width: none;
   opacity: 1;
   cursor: pointer;
@@ -6298,7 +6297,6 @@ textarea.w-select {
 
   .div-block-717 {
     width: 100%;
-    height: 180px;
   }
 
   .div-block-718 {

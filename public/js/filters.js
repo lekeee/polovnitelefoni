@@ -1,6 +1,5 @@
 window.onload = function () {
     localStorage.removeItem('filterData');
-    localStorage.removeItem('limitData');
     // localStorage.removeItem('loadedAdsCounter');
     document.querySelector('#resetFilters').disabled = true;
     //showAllAdsCounter();
@@ -136,7 +135,6 @@ function showFilters() {
         const newState2 = savedInitialData.newState;
         const damagedState2 = savedInitialData.damagedState;
 
-        console.log(brandsSelected2 + " " + modelsSelected2 + " " + minPrice2 + " " + maxPrice2 + " " + oldState2 + " " + newState2 + " " + damagedState2);
         const deleteFilters = document.createElement('a');
         deleteFilters.setAttribute('href', '#');
         deleteFilters.innerHTML = "X Obriši filtere";
@@ -270,7 +268,6 @@ function getAds(currentPage, restart) {
         limit: limit,
     });
 
-    // console.log(sort);
     FilterData(params, restart);
 }
 

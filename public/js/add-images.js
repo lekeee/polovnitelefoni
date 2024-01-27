@@ -11,42 +11,42 @@ function handleFileSelect(event) {
         return;
     }
 
-    if(numberOfUploadedImages + files.length > MAX_IMAGES){
+    if (numberOfUploadedImages + files.length > MAX_IMAGES) {
         alert("Maksimalan broj slika koje možete otpremiti po oglasu je 10");
         return;
     }
 
     const previewContainer = document.getElementById('imagePreviewContainer');
-        for (const file of files) {
-            const reader = new FileReader();
+    for (const file of files) {
+        const reader = new FileReader();
 
-            reader.onloadend = function() {
-                const image = document.createElement('li');
-                image.classList.add('image-preview');
-                image.classList.add('uploadedImage');
+        reader.onloadend = function () {
+            const image = document.createElement('li');
+            image.classList.add('image-preview');
+            image.classList.add('uploadedImage');
 
-                const imgElement = document.createElement('img');
-                imgElement.src = reader.result;
-                
+            const imgElement = document.createElement('img');
+            imgElement.src = reader.result;
 
-                const deleteIcon = document.createElement('div');
-                deleteIcon.classList.add('delete-icon');
-                deleteIcon.innerHTML = 'X';
 
-                deleteIcon.addEventListener('click', function() {
-                    previewContainer.removeChild(image);
-                });
+            const deleteIcon = document.createElement('div');
+            deleteIcon.classList.add('delete-icon');
+            deleteIcon.innerHTML = 'X';
 
-                image.appendChild(imgElement);
-                image.appendChild(deleteIcon);
+            deleteIcon.addEventListener('click', function () {
+                previewContainer.removeChild(image);
+            });
 
-                previewContainer.appendChild(image);
-            };
+            image.appendChild(imgElement);
+            image.appendChild(deleteIcon);
 
-            reader.readAsDataURL(file);
-        }
+            previewContainer.appendChild(image);
+        };
+
+        reader.readAsDataURL(file);
+    }
 }
-$(function() {
+$(function () {
     $("#imagePreviewContainer").sortable({
         revert: false,
         containment: 'parent',
@@ -57,20 +57,20 @@ $(function() {
 
     const dropArea = document.getElementById('dropArea');
 
-    dropArea.addEventListener('dragover', function(event) {
+    dropArea.addEventListener('dragover', function (event) {
         event.preventDefault();
         dropArea.classList.add('dragover');
         this.style.borderRadius = "5px";
         this.style.backgroundColor = "#ddd";
     });
 
-    dropArea.addEventListener('dragleave', function(event) {
+    dropArea.addEventListener('dragleave', function (event) {
         event.preventDefault();
         dropArea.classList.remove('dragover');
         this.style.backgroundColor = "white";
     });
 
-    dropArea.addEventListener('drop', function(event) {
+    dropArea.addEventListener('drop', function (event) {
         event.preventDefault();
         dropArea.classList.remove('dragover');
         this.style.backgroundColor = "white";

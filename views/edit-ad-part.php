@@ -144,31 +144,17 @@ if (isset($adId)) {
                             }
                             ?>
                             <script src="../public/js/image-base64.js?v=<?php echo time() ?>"></script>
-                            <?php
-                            echo "
-                                <li class='image-preview uploadedImage'>
-                                    <img src='' id='main-image'>
-                                    <div class='delete-icon'>X</div>
-                                </li>
-                            ";
-                            ?>
                             <script>
-                                getBase64('<?php echo $mainImage ?>', 'main-image');
+                                getBase64('<?php echo $mainImage ?>');
                             </script>
                             <?php
                             foreach ($files as $file) {
                                 $fileNameWithoutExtension = pathinfo($file, PATHINFO_FILENAME);
                                 if (strtolower($fileNameWithoutExtension) !== 'mainimage') {
                                     $putanja = "../uploads/" . $adData['images'] . '/' . $file;
-                                    echo "
-                                        <li class='image-preview uploadedImage'>
-                                            <img src='' id='$fileNameWithoutExtension'>
-                                            <div class='delete-icon'>X</div>
-                                        </li>
-                                    ";
                                     ?>
                                     <script>
-                                        getBase64('<?php echo $putanja ?>', '<?php echo $fileNameWithoutExtension ?>');
+                                        getBase64('<?php echo $putanja ?>');
                                     </script>
                                     <?php
                                 }
