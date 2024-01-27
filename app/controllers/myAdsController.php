@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else if ($data['action'] == 'deleteAd') {
             $ad_id = $data['ad_id'];
             try {
+                $result = $phone->deleteImagesFolder($ad_id);
                 $result = $phone->deleteAd($ad_id);
                 if ($result) {
                     $response = array(

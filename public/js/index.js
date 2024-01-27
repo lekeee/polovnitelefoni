@@ -18,7 +18,6 @@ async function addToFavourite(x, user_id, ad_id) {
             }
         })
         .then(data => {
-            // console.log(data);
             if (data.status === 'success') {
                 if (x !== null) {
                     x.querySelector("svg").classList.add('redLoveAnimation');
@@ -110,7 +109,6 @@ async function isSaved(user_id, ad_id) {
             }
         })
         .then(data => {
-            // console.log(data);
             if (data.status === 'exist') {
                 return 1;
             } else if (data.status === 'not-exist') {
@@ -143,7 +141,6 @@ async function checkIsSaved(event, x, user_id, ad_id) {
             }
         })
         .then(data => {
-            // console.log(data);
             if (data.status === 'exist') {
                 removeFromFavourite(x, user_id, ad_id);
             } else if (data.status === 'not-exist') {
@@ -235,11 +232,9 @@ async function updateWidgets(ads) {
 function checkLoadMoreButton() {
     const loadedAdsCounter = localStorage.getItem('loadedAdsCounter');
     const allAdsCounter = localStorage.getItem('allAdsCounter');
-    console.log(allAdsCounter);
     if (loadedAdsCounter && allAdsCounter) {
         const loadedAdsCounterInitialData = JSON.parse(loadedAdsCounter);
         const allAdsCounterInitialData = JSON.parse(allAdsCounter);
-        console.log(Number(loadedAdsCounterInitialData.counter) + ' ' + Number(allAdsCounterInitialData.counter))
         if (Number(loadedAdsCounterInitialData.counter) === Number(allAdsCounterInitialData.counter)) {
             document.querySelectorAll('.loadmorebutton')[0].style.display = 'none';
         }
