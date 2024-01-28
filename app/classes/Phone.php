@@ -648,12 +648,4 @@ class Phone extends Ad
             throw new DELETE_IMAGES_FOLDER_ERROR;
         }
     }
-
-    public function deleteFolderContents($dir)
-    {
-        $files = array_diff(scandir($dir), array('.', '..'));
-        foreach ($files as $file) {
-            unlink("$dir/$file");
-        }
-    }
 }

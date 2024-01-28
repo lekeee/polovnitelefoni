@@ -21,6 +21,8 @@ require_once "../inc/headTag.php";
     ?>
 
     <link href="../public/css/index.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    <link href="../public/css/loading-animation.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+
     <section class="mainpageselection">
         <div class="mainpagediv">
             <div class="darkbackground"></div>
@@ -573,7 +575,14 @@ require_once "../inc/headTag.php";
                 </div>
                 <div class="productscontainer">
                     <div class="filterstlabela"></div>
-                    <div class="productsmaincontainer"></div>
+
+                    <div class="productsmainconatinerhead">
+                        <div class="productsmaincontainer">
+                            <?php
+                            include_once("../inc/loadingWidget.php");
+                            ?>
+                        </div>
+                    </div>
                     <div class="loadmorecontainer">
                         <a href="#" current-page="0" class="loadmorebutton w-button" onclick="loadMore(this)">Učitaj
                             još</a>

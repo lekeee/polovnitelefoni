@@ -1,5 +1,5 @@
 const specsDiv = document.querySelectorAll('.specsdiv')[0];
-const loaderContainer = document.querySelector('#loader-container');
+const loaderContainer = document.querySelector('.loadingSpecifications');
 
 function getKeyByBrandAndModel(data, brandName, modelName) {
     for (const brand of data) {
@@ -14,26 +14,26 @@ function getKeyByBrandAndModel(data, brandName, modelName) {
     return null;
 }
 
-function getSpecifications(brandName, modelName){
-    loaderContainer.style.display = "flex";
+function getSpecifications(brandName, modelName) {
+    loaderContainer.style.display = "block";
     const jsonDataPath = '../public/JSON/sortedData.json';
 
     fetch(jsonDataPath)
-    .then(response => response.json())
-    .then(jsonData => {
-        const key = getKeyByBrandAndModel(jsonData, brandName, modelName);
-        if (key !== null) {
-            getSpecificationsData(key);
-        } else {
-            console.log("Nije pronađen odgovarajući key.");
-        }
-    })
-    .catch(error => console.error('Greška prilikom učitavanja JSON fajla:', error));
+        .then(response => response.json())
+        .then(jsonData => {
+            const key = getKeyByBrandAndModel(jsonData, brandName, modelName);
+            if (key !== null) {
+                getSpecificationsData(key);
+            } else {
+                console.log("Nije pronađen odgovarajući key.");
+            }
+        })
+        .catch(error => console.error('Greška prilikom učitavanja JSON fajla:', error));
 
 }
 
 
-function getSpecificationsData(key){
+function getSpecificationsData(key) {
     var cachedData = localStorage.getItem(key);
 
     if (cachedData) {
@@ -66,7 +66,7 @@ function getSpecificationsData(key){
     }
 }
 
-function appendSpecsRow( firstColumnContent, secondColumnContent) {
+function appendSpecsRow(firstColumnContent, secondColumnContent) {
 
     var specsRow = document.createElement("div");
     specsRow.className = "specrow";
@@ -87,7 +87,7 @@ function appendSpecsRow( firstColumnContent, secondColumnContent) {
     specsDiv.appendChild(specsRow);
 }
 
-function showSpecs(jsonObj){
+function showSpecs(jsonObj) {
     appendSpecsRow("Baterija", jsonObj.data.battery);
     appendSpecsRow("Tip baterije", jsonObj.data.batteryType);
     appendSpecsRow("Telo telefona", jsonObj.data.body);
@@ -96,19 +96,19 @@ function showSpecs(jsonObj){
     appendSpecsRow("Verzije", jsonObj.data.comment);
     appendSpecsRow("Rezolucija ekrana", jsonObj.data.display_res);
     appendSpecsRow("Veličina ekrana", jsonObj.data.display_size);
-    
+
     jsonObj.data.more_specification.forEach(function (section) {
         var sectionTitle = document.createElement("h2");
         sectionTitle.style.fontSize = "28px";
         sectionTitle.style.paddingLeft = "20px";
         sectionTitle.textContent = translateToSerbian(section.title);
         specsDiv.appendChild(sectionTitle);
-    
+
         section.data.forEach(function (item) {
             appendSpecsRow(translateToSerbian(item.title), item.data[0]);
         });
     });
-    
+
     appendSpecsRow("Operativni sistem", jsonObj.data.os_type);
     appendSpecsRow("RAM", jsonObj.data.ram);
     appendSpecsRow("Datum objavljivanja", jsonObj.data.release_date);

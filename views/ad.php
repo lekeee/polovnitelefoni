@@ -51,6 +51,7 @@ require_once "../inc/headTag.php";
     ?>
     <link href="../public/css/ad-images.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <link href="../public/css/loader.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    <link href="../public/css/loading-animation.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <section class="phoneview">
         <div class="div-block-687">
             <div class="div-block-688"><a href="#" class="lightlink">Pocetna</a>
@@ -84,20 +85,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                    {
-                                                        "items": [{
-                                                            "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                            "origFileName": "<?php echo $file; ?>",
-                                                            "fileName": "<?php echo $file; ?>",
-                                                            "fileSize": <?php echo filesize($putanja); ?>,
-                                                            "height": <?php echo $height; ?>,
-                                                            "url": "<?php echo $putanja; ?>",
-                                                            "width": <?php echo $width; ?>,
-                                                            "type": "image"
-                                                        }],
-                                                        "group": "phoneImage"
-                                                    }
-                                                    </script>
+                                                                                        {
+                                                                                            "items": [{
+                                                                                                "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                                "origFileName": "<?php echo $file; ?>",
+                                                                                                "fileName": "<?php echo $file; ?>",
+                                                                                                "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                                "height": <?php echo $height; ?>,
+                                                                                                "url": "<?php echo $putanja; ?>",
+                                                                                                "width": <?php echo $width; ?>,
+                                                                                                "type": "image"
+                                                                                            }],
+                                                                                            "group": "phoneImage"
+                                                                                        }
+                                                                                        </script>
                                             </a>
                                         </div>
 
@@ -399,10 +400,15 @@ require_once "../inc/headTag.php";
                         <div class="div-block-728">
                             <div class="div-block-737"></div>
                             <div class="div-block-738 specsdiv">
-                                <div id="loader-container"
+                                <div class="loadingSpecifications">
+                                    <?php
+                                    include_once('../inc/loadingSpecifications.php');
+                                    ?>
+                                </div>
+                                <!-- <div id="loader-container"
                                     style="width: 100%; display: flex; justify-content: center; padding: 20px">
                                     <div class="loader"></div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="div-block-736 _3dmodelshow">
