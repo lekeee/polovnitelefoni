@@ -1,0 +1,62 @@
+.imageAnimate,
+.animateDiv1,
+.animateDiv2,
+.animateDiv3,
+.animateDiv4,
+.animateDiv5,
+.animated-first-column,
+.animated-second-column,
+.sectionTitleContainer {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.animateDiv1 {
+    margin-top: 20px;
+    width: 100%;
+    height: 20px;
+}
+
+.animateDiv2 {
+    margin-top: 10px;
+    width: 50%;
+    height: 30px;
+}
+
+.animateDiv3 {
+    margin-top: 10px;
+    width: 40%;
+    height: 50px;
+}
+
+.animateDiv4 {
+    margin-top: 10px;
+    width: 50px;
+    hanging-punctuation: 50px;
+}
+
+.animateDiv5 {
+    margin-top: 10px;
+    width: 100%;
+    height: 20px;
+}
+
+.animated-first-column,
+.animated-second-column {
+    height: 20px;
+}
+
+.sectionTitleContainer {
+    width: 200px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 10%, 88%);
+    }
+
+    100% {
+        background-color: hsl(200, 15%, 95%);
+    }
+}

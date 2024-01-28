@@ -156,6 +156,11 @@ function checkIsSaved2(event) {
 }
 
 async function FilterData(params, restart) {
+    const loadingAnimationContainer = document.querySelectorAll('.loading-animation');
+    loadingAnimationContainer.forEach(element => {
+        document.querySelectorAll('.productsmaincontainer')[0].appendChild(element);
+        element.style.display = 'inline-block';
+    });
     const url = '../app/controllers/adController.php?' + params;
     await fetch(url, {
         method: 'GET'
@@ -164,7 +169,13 @@ async function FilterData(params, restart) {
         .then(data => {
             if (data.status === 'success') {
                 cacheAdsCounter(data.message.length);
-                if (restart) document.querySelectorAll('.productsmaincontainer')[0].innerHTML = '';
+                loadingAnimationContainer.forEach(element => {
+                    document.querySelectorAll('.productsmaincontainer')[0].removeChild(element);
+                    element.style.display = 'none';
+                });
+                if (typeof restart !== 'undefined' && restart === true) {
+                    document.querySelectorAll('.productsmaincontainer')[0].innerHTML = '';
+                }
                 let jsonmodels = JSON.stringify(data.message);
                 updateWidgets(jsonmodels);
                 if (restart) document.querySelectorAll('.productsmaincontainer')[0].scrollIntoView({ behavior: 'smooth' });
@@ -181,7 +192,6 @@ async function updateWidgets(ads) {
     await fetch('../inc/widget.php', {
         method: 'POST',
         headers: {
-
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({

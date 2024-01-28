@@ -53,5 +53,4 @@ abstract class Ad
     abstract public function getDeviceImage($brandName, $modelName);
     abstract public function deleteImagesFromFolder($folder);
     abstract public function deleteImagesFolder($ad_id);
-    abstract public function deleteFolderContents($dir);
 }
