@@ -54,7 +54,7 @@ if ($user->isLogged()) {
         </div>
     </div>
     <div class="div-block"><a data-w-id="dececed3-f170-003e-2db2-631e28dd94b9" href="#" class="w-inline-block"><img
-                src="../public/src/hamburger_menu.png" id='mobile-menu-open' width="30" height="30" alt="Hamburger Menu"
+                src="../public/src/hamburger_menu.svg" id='mobile-menu-open' width="30" height="30" alt="Hamburger Menu"
                 class="image-6" /></a>
         <div class="div-block-57" style="cursor: pointer;" onclick="window.location.href='/polovnitelefoni'"><img
                 src="../public/src/polovnitelefoni.svg" loading="lazy" height="60" alt="Logo" class="image" /></div>
@@ -145,7 +145,7 @@ if ($user->isLogged()) {
             <div data-hover="false" data-delay="0" data-w-id="d9013978-067d-ce1a-92bf-79873730cf28"
                 class="dropdown-5 w-dropdown">
                 <div class="dropdown-toggle-5 w-dropdown-toggle"><img width="30" height="30" alt="Hamburger Menu"
-                        src="../public/src/hamburger_menu.png" loading="lazy" />
+                        src="../public/src/hamburger_menu.svg" loading="lazy" />
                     <div class="text-block-12">Sve kategorije</div>
                     <div class="div-block-74">
                         <div class="div-block-73"><img width="14" loading="lazy" alt="Arrow Down Icon"

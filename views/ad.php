@@ -85,20 +85,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                                        {
-                                                                                            "items": [{
-                                                                                                "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                                                "origFileName": "<?php echo $file; ?>",
-                                                                                                "fileName": "<?php echo $file; ?>",
-                                                                                                "fileSize": <?php echo filesize($putanja); ?>,
-                                                                                                "height": <?php echo $height; ?>,
-                                                                                                "url": "<?php echo $putanja; ?>",
-                                                                                                "width": <?php echo $width; ?>,
-                                                                                                "type": "image"
-                                                                                            }],
-                                                                                            "group": "phoneImage"
-                                                                                        }
-                                                                                        </script>
+                                                                                                            {
+                                                                                                                "items": [{
+                                                                                                                    "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                                                    "origFileName": "<?php echo $file; ?>",
+                                                                                                                    "fileName": "<?php echo $file; ?>",
+                                                                                                                    "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                                                    "height": <?php echo $height; ?>,
+                                                                                                                    "url": "<?php echo $putanja; ?>",
+                                                                                                                    "width": <?php echo $width; ?>,
+                                                                                                                    "type": "image"
+                                                                                                                }],
+                                                                                                                "group": "phoneImage"
+                                                                                                            }
+                                                                                                            </script>
                                             </a>
                                         </div>
 
@@ -260,8 +260,8 @@ require_once "../inc/headTag.php";
                             </div>
 
                             <div data-w-id="0eacc543-0b81-e5be-a1e1-d7c3709a619c" class="div-block-719"><img
-                                    src="../public/src/userShow.png" loading="lazy" alt="User Profile Image"
-                                    class="image-39" />
+                                    src="../public/src/userShow2.svg" loading="lazy" alt="User Profile Image"
+                                    class="image-39" style="width: 64px; height: 64px" />
                                 <h1 class="heading-10">
                                     <?php echo $adOwner['name'] . ' ' . $adOwner['lastname'] ?>
                                 </h1>
@@ -301,10 +301,10 @@ require_once "../inc/headTag.php";
                                     </div>
                                     <div class="div-block-721">
                                         <div class="div-block-705">
-                                            <svg fill="<?php echo $saved == 1 ? "red" : "#818ea0" ?>"
+                                            <svg fill="<?php echo $saved == 1 ? "red" : "none" ?>"
                                                 stroke="<?php echo $saved == 1 ? "red" : "#818ea0" ?>" width="20"
-                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                height="20" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                                             </svg>
@@ -313,7 +313,7 @@ require_once "../inc/headTag.php";
                                                 if ($saved == 1) {
                                                     echo "Ukloni iz sačuvanih oglasa";
                                                 } else {
-                                                    "Sačuvaj oglas";
+                                                    echo "Sačuvaj oglas";
                                                 }
                                                 ?>
                                             </div>
