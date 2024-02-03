@@ -1,80 +1,167 @@
 @import url('variables.css');
 
-.background-user-image {
+.user-image-short-container {
     width: 100%;
-    height: 300px;
-    /* background-image: url('../src/polovnitelefoni.svg');
-    background-position: center;
-    background-size: 50%;
-    background-repeat: no-repeat; */
-    background-color: var(--main-color);
-    position: relative;
-    padding-left: 30px;
-    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
 }
 
 .user-image-container {
-    max-width: 230px;
-    position: relative;
-    bottom: -185px;
-}
-
-.user-profile-image {
-    width: 100%;
-    max-width: 230px;
-    background-color: white;
-    border-radius: 50%;
-}
-
-.user-info-container {
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-.user-info-container h2 {
-    margin: 0;
-    font-size: 36px;
-}
-
-.info-container {
-    padding: 20px;
-    margin-left: 260px;
-}
-
-.inf-cont {
-    padding-top: 20px;
-}
-
-.mail-container {
+    width: 28%;
+    background-color: var(--background-light);
     display: flex;
-    padding-top: 15px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px;
+    border-radius: 5px;
+}
+
+.user-image-container img {
+    max-width: 200px;
+}
+
+.user-short-container {
+    padding: 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    width: 82%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    background-color: var(--background-light);
+}
+
+.name-location h3,
+.name-location img,
+.name-location p {
+    display: inline-block;
+}
+
+.name-location h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    color: black;
+}
+
+.name-location img {
+    margin-left: 10px;
+    width: 16px;
+}
+
+.name-location p {
+    margin: 0;
+    color: black;
+}
+
+.user-rates {
+    margin-top: 30px;
+}
+
+.user-rates p {
+    color: black;
+    margin: 0;
+}
+
+.rate-label {
+    margin-top: 10px;
+    display: flex;
     align-items: center;
 }
 
-.mail-container img {
-    width: 24px;
-}
-
-.mail-container p {
+.user-rates img {
+    width: 120px;
     margin: 0;
-    padding: 0;
     margin-left: 10px;
-    font-size: 20px;
-    color: var(--blue-color);
 }
 
-@media screen and (max-width: 700px) {
+.user-rates h5 {
+    margin: 0;
+    font-size: 22px;
+    color: black;
+}
+
+.user-btn {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.user-send-message {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.user-send-message img {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.user-send-message a {
+    color: black;
+}
+
+.navigation {
+    width: 100%;
+    display: flex;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.user-ads-info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.user-ads-info img {
+    width: 20px;
+}
+
+.user-ads-info a {
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
+}
+
+.click-identificator {
+    border: 1px solid var(--main-color);
+}
+
+.click-identificator {
+    transition: width 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+    .user-image-short-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-image-container,
+    .user-short-container {
+        width: 100%;
+        margin: 0;
+    }
+
     .user-image-container {
-        display: block;
-        margin: auto;
+        display: flex;
+        justify-content: start;
     }
 
-    .info-container {
-        margin-left: 0;
-        padding-top: 150px;
+    .user-image-container img {
+        max-width: 200px;
     }
+}
 
-    .user-info-container {
-        padding: 0;
+@media screen and (max-width: 479px) {
+    .user-image-container {
+        display: flex;
+        justify-content: center;
     }
 }
