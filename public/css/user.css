@@ -30,6 +30,7 @@
     flex-direction: column;
     /* justify-content: space-between; */
     background-color: var(--background-light);
+    overflow: hidden;
 }
 
 .name-location h3,
@@ -137,7 +138,43 @@ a {
     transition: width 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
+.user-preview-container {
+    position: relative;
+    width: 200%;
+    display: flex;
+    left: -100%;
+}
+
+.user-preview-container.ads {
+    animation: showUserAds 0.3s ease-in-out forwards;
+}
+
+@keyframes showUserAds {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 0%;
+    }
+}
+
+.user-preview-container.info {
+    animation: showUserInfo 0.3s ease-in-out forwards;
+}
+
+@keyframes showUserInfo {
+    0% {
+        left: 0%;
+    }
+
+    100% {
+        left: -100%;
+    }
+}
+
 .user-about-container {
+    width: 50%;
     padding: 20px 0px;
 }
 
@@ -195,4 +232,87 @@ a {
         display: flex;
         justify-content: center;
     }
+}
+
+.ads-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-widget {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.widget-image {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+}
+
+.widget-info-container {
+    padding-left: 20px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.widget-info-container a {
+    font-size: 24px;
+    margin: 0;
+    color: black;
+    font-weight: 500;
+}
+
+.widget-info-container a:hover {
+    text-decoration: underline;
+    color: var(--blue-color);
+}
+
+.stars-and-rate {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.stars-and-rate img {
+    width: 120px;
+}
+
+.stars-and-rate p {
+    margin: 0;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.old-and-new-price p {
+    margin: 0;
+}
+
+.old-price {
+    font-size: 20px;
+    color: var(--greytext);
+    text-decoration: line-through;
+    margin-bottom: 10px;
+}
+
+.new-price {
+    font-size: 28px;
+    padding-top: 10px;
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+.description p {
+    color: var(--greytext);
+}
+
+.action-container {
+    width: 200px;
+    height: 100%;
 }

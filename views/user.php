@@ -67,32 +67,60 @@ require_once "../inc/headTag.php";
                         </div>
                     </div>
                     <div class="click-identificator" style="margin-top: -1px;"></div>
-                    <div class="user-about-container">
-                        <h3>Informacije o korisniku</h3>
-                        <div class="about-info-row">
-                            <p class="about-main">Korisničko ime: </p>
-                            <a class="user-info">djordje.ivanovic</a>
+
+                    <div class="user-preview-container">
+                        <div class="user-about-container">
+                            <h3>Informacije o korisniku</h3>
+                            <div class="about-info-row">
+                                <p class="about-main">Korisničko ime: </p>
+                                <a class="user-info">djordje.ivanovic</a>
+                            </div>
+                            <div class="about-info-row">
+                                <p class="about-main">Broj telefona: </p><a href="tel:0637303883"
+                                    class="user-phone">0637303883</a>
+                            </div>
+                            <div class="about-info-row">
+                                <p class="about-main">Grad: </p><a href="https://www.google.com/maps/place/Leskovac"
+                                    target="_blank" class="user-phone">Leskovac</a>
+                            </div>
+                            <div class="about-info-row">
+                                <p class="about-main">Adresa: </p><a
+                                    href="https://www.google.com/maps/place/Stara Zeleznicka Kolonija 5a"
+                                    target="_blank" class="user-phone">Stara Zeleznicka Kolonija 5a</a>
+                            </div>
+                            <div class="about-info-row">
+                                <p class="about-main">Email adresa: </p><a href="mailto:idjordje63@gmail.com"
+                                    class="user-phone">idjordje63@gmail.com</a>
+                            </div>
+                            <div class="about-info-row">
+                                <p class="about-main">Član od: </p>
+                                <a class="user-info">25.11.2023</a>
+                            </div>
                         </div>
-                        <div class="about-info-row">
-                            <p class="about-main">Broj telefona: </p><a href="tel:0637303883"
-                                class="user-phone">0637303883</a>
-                        </div>
-                        <div class="about-info-row">
-                            <p class="about-main">Grad: </p><a href="https://www.google.com/maps/place/Leskovac"
-                                target="_blank" class="user-phone">Leskovac</a>
-                        </div>
-                        <div class="about-info-row">
-                            <p class="about-main">Adresa: </p><a
-                                href="https://www.google.com/maps/place/Stara Zeleznicka Kolonija 5a" target="_blank"
-                                class="user-phone">Stara Zeleznicka Kolonija 5a</a>
-                        </div>
-                        <div class="about-info-row">
-                            <p class="about-main">Email adresa: </p><a href="mailto:idjordje63@gmail.com"
-                                class="user-phone">idjordje63@gmail.com</a>
-                        </div>
-                        <div class="about-info-row">
-                            <p class="about-main">Član od: </p>
-                            <a class="user-info">25.11.2023</a>
+                        <div class="user-about-container ads-main-container">
+                            <div class="ads-container">
+                                <div class="user-widget">
+                                    <img src="../public/src/appleiphone11_4.jpg" alt="" class="widget-image">
+                                    <div class="widget-info-container">
+                                        <a href="">Na prodaju iphone 11 pro max</a>
+                                        <div class="stars-and-rate">
+                                            <img src="../public/src/start-rating3.png" style="width: 100px">
+                                            <p>7/10</p>
+                                        </div>
+                                        <div class="old-and-new-price">
+                                            <p class="old-price">€879</p>
+                                            <p class="new-price">€567</p>
+                                        </div>
+                                        <div class="description">
+                                            <p>Na prodaju Apple iPhone 11 Pro Max. Uredjaj je kao nov, koriscen je svega
+                                                dva me... </p>
+                                        </div>
+                                    </div>
+                                    <div class="action-container">
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
