@@ -99,27 +99,9 @@ require_once "../inc/headTag.php";
                         </div>
                         <div class="user-about-container ads-main-container">
                             <div class="ads-container">
-                                <div class="user-widget">
-                                    <img src="../public/src/appleiphone11_4.jpg" alt="" class="widget-image">
-                                    <div class="widget-info-container">
-                                        <a href="">Na prodaju iphone 11 pro max</a>
-                                        <div class="stars-and-rate">
-                                            <img src="../public/src/start-rating3.png" style="width: 100px">
-                                            <p>7/10</p>
-                                        </div>
-                                        <div class="old-and-new-price">
-                                            <p class="old-price">€879</p>
-                                            <p class="new-price">€567</p>
-                                        </div>
-                                        <div class="description">
-                                            <p>Na prodaju Apple iPhone 11 Pro Max. Uredjaj je kao nov, koriscen je svega
-                                                dva me... </p>
-                                        </div>
-                                    </div>
-                                    <div class="action-container">
-
-                                    </div>
-                                </div>
+                                <?php
+                                require_once('../inc/widget-list.php');
+                                ?>
                             </div>
                         </div>
                     </div>
