@@ -52,10 +52,24 @@ require_once "../inc/headTag.php";
             </div>
 
             <div class="user-image-short-container" style="margin-top: 10px">
-                <div class="user-image-container">
-
+                <div class="user-image-container stat-main-container">
+                    <div class="stat-header">
+                        <p>statistika</p>
+                        <div class="text-separator-horizontal"></div>
+                    </div>
+                    <div class="stat-main">
+                        <p>Ukupno dodatih oglasa: <span>10</span></p>
+                        <p>Trenutno aktivnih oglasa: <span>3</span></p>
+                        <p>Ukupno cuvanja oglasa: <span>234</span></p>
+                        <div class="donut-chart-brands">
+                            <h4>Učestalost brendova</h4>
+                            <div class="donut-container">
+                                <canvas id="myCanvas" width="160" height="160"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="user-short-container">
+                <div class="user-short-container" style="padding-top: 0px">
                     <div class="navigation">
                         <div class="user-ads-info user-ads-ident">
                             <img src="../public/src/ads.svg?v=<?php echo time(); ?>">
@@ -66,8 +80,8 @@ require_once "../inc/headTag.php";
                             <a href="#">Osnovni podaci</a>
                         </div>
                     </div>
-                    <div class="click-identificator" style="margin-top: -1px;"></div>
-
+                    <div class="click-identificator" style="margin-top: -1px;">
+                    </div>
                     <div class="user-preview-container">
                         <div class="user-about-container">
                             <h3>Informacije o korisniku</h3>
@@ -116,5 +130,7 @@ require_once "../inc/headTag.php";
 
     <body>
         <script src="../public/js/user-profile.js?v=<?php echo time(); ?>"></script>
+        <script src="../public/js-public/rpie.js?v=<?php echo time(); ?>"></script>
+        <script src="../public/js/donut.js?v=<?php echo time(); ?>"></script>
 
 </html>
