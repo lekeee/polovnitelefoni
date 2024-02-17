@@ -1,0 +1,49 @@
+.donut-chart-brands {
+    margin-top: 20px;
+}
+
+.donut-chart-brands h4 {
+    font-size: 14px;
+}
+
+.donut-container {
+    width: 100%;
+}
+
+.donut-chart {
+    position: relative;
+    width: 120px;
+    /* Možete prilagoditi širinu i visinu prema potrebama */
+    height: 120px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.portion-block {
+    border-radius: 50%;
+    clip: rect(0px, 120px, 120px, 60px);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.center-donut {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    background-color: white;
+    transform: translate(-50%, -50%);
+}
+
+.circle {
+    border-radius: 50%;
+    /* clip: rect(0px, 100px, 200px, 0px); */
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    font-family: monospace;
+    font-size: 1.5rem;
+}
