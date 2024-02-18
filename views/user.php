@@ -58,15 +58,38 @@ require_once "../inc/headTag.php";
                         <div class="text-separator-horizontal"></div>
                     </div>
                     <div class="stat-main">
-                        <p>Ukupno dodatih oglasa: <span>10</span></p>
-                        <p>Trenutno aktivnih oglasa: <span>3</span></p>
-                        <p>Ukupno cuvanja oglasa: <span>234</span></p>
+                        <p>Dodati oglasi: <span>10</span></p>
+                        <p>Aktivni oglasi: <span>3</span></p>
+                        <p>Ukupno čuvanja oglasa: <span>234</span></p>
                         <div class="donut-chart-brands">
                             <h4>Učestalost brendova</h4>
                             <div class="donut-container">
-                                <canvas id="myCanvas" width="160" height="160"></canvas>
+                                <canvas id="donutCanvas" width="120" height="120"></canvas>
+                                <div class="donut-info">
+                                    <div class="donut-info-row">
+                                        <div class="color-identificator" style="background-color: #4CAF50"></div>
+                                        <p>Apple</p>
+                                    </div>
+                                    <div class="donut-info-row">
+                                        <div class="color-identificator" style="background-color: #FFC107"></div>
+                                        <p>Samsung</p>
+                                    </div>
+                                    <div class="donut-info-row">
+                                        <div class="color-identificator" style="background-color: #00BCD4"></div>
+                                        <p>Huawei</p>
+                                    </div>
+                                    <div class="donut-info-row">
+                                        <div class="color-identificator" style="background-color: #E91E63"></div>
+                                        <p>Xiaomi</p>
+                                    </div>
+                                    <div class="donut-info-row">
+                                        <div class="color-identificator" style="background-color: #9E9E9E"></div>
+                                        <p>LG</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <hr style="margin-top: 20px; color: #ddd">
                     </div>
                 </div>
                 <div class="user-short-container" style="padding-top: 0px">
