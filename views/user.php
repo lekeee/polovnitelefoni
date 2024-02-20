@@ -1,3 +1,16 @@
+<?php
+if (isset($_GET['id'])) {
+    $userID = $_GET['id'];
+} else {
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
+        // header('Location: index.php');
+    }
+    // exit;
+}
+?>
+
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
     data-wf-site="655506e07faa7f82a5f25610">
@@ -16,6 +29,11 @@ require_once "../inc/headTag.php";
     require_once "../inc/mobileMenu.php";
     ?>
 
+    <?php
+    $userID = 36; //! OBRISATI OVO KADA SE SALJE ID
+    $profileData = json_decode($user->getUserDataFromId($userID), true);
+    ?>
+
     <section class="mainpageselection">
         <div class="mainpagediv">
             <div class="user-image-short-container">
@@ -24,9 +42,25 @@ require_once "../inc/headTag.php";
                 </div>
                 <div class="user-short-container">
                     <div class="name-location">
-                        <h3>Djordje Ivanovic</h3>
+                        <h3>
+                            <?php
+                            if ($profileData['name'] != null && $profileData['lastname'] != null) {
+                                echo $profileData['name'] . ' ' . $profileData['lastname'];
+                            } else {
+                                echo $profileData['username'];
+                            }
+                            ?>
+                        </h3>
                         <img src="../public/src/location.svg?v=<?php echo time() ?>" alt="">
-                        <p>Leskovac</p>
+                        <p>
+                            <?php
+                            if ($profileData['city'] != null) {
+                                echo $profileData['city'];
+                            } else {
+                                echo 'Nepoznata lokacija';
+                            }
+                            ?>
+                        </p>
                     </div>
                     <div class="user-rates">
                         <p>Prosečna ocena</p>
@@ -110,28 +144,102 @@ require_once "../inc/headTag.php";
                             <h3>Informacije o korisniku</h3>
                             <div class="about-info-row">
                                 <p class="about-main">Korisničko ime: </p>
-                                <a class="user-info">djordje.ivanovic</a>
+                                <a class="user-info">
+                                    <?php
+                                    if ($profileData['username'] != null) {
+                                        echo $profileData['username'];
+                                    } else {
+                                        echo 'Nepoznato korisničko ime';
+                                    }
+                                    ?>
+                                </a>
                             </div>
                             <div class="about-info-row">
-                                <p class="about-main">Broj telefona: </p><a href="tel:0637303883"
-                                    class="user-phone">0637303883</a>
+                                <p class="about-main">Broj telefona: </p>
+                                <a <?php
+                                if ($profileData['phone'] != null) {
+                                    echo 'href="tel:' . $profileData['phone'] . '"';
+                                    echo 'class="user-phone"';
+                                } else {
+                                    echo 'href="#"';
+                                    echo 'class="user-info"';
+                                }
+                                ?> class="user-phone">
+                                    <?php
+                                    if ($profileData['phone'] != null) {
+                                        echo $profileData['phone'];
+                                    } else {
+                                        echo 'Nepoznat broj telefona';
+                                    }
+                                    ?>
+                                </a>
                             </div>
                             <div class="about-info-row">
-                                <p class="about-main">Grad: </p><a href="https://www.google.com/maps/place/Leskovac"
-                                    target="_blank" class="user-phone">Leskovac</a>
+                                <p class="about-main">
+                                    Grad:
+                                </p>
+                                <a <?php
+                                if ($profileData['city'] != null) {
+                                    echo 'href="https://www.google.com/maps/place/' . $profileData['city'] . '"';
+                                    echo 'class="user-phone"';
+                                } else {
+                                    echo 'href="#"';
+                                    echo 'class="user-info"';
+                                }
+                                ?>target="_blank" class="user-phone">
+                                    <?php
+                                    if ($profileData['city'] != null) {
+                                        echo $profileData['city'];
+                                    } else {
+                                        echo 'Nepoznat grad';
+                                    }
+                                    ?>
+                                </a>
                             </div>
                             <div class="about-info-row">
-                                <p class="about-main">Adresa: </p><a
-                                    href="https://www.google.com/maps/place/Stara Zeleznicka Kolonija 5a"
-                                    target="_blank" class="user-phone">Stara Zeleznicka Kolonija 5a</a>
+                                <p class="about-main">Adresa: </p><a <?php
+                                if ($profileData['address'] != null) {
+                                    echo 'href="https://www.google.com/maps/place/' . $profileData['address'] . '"';
+                                    echo 'class="user-phone"';
+                                } else {
+                                    echo 'href="#"';
+                                    echo 'class="user-info"';
+                                }
+                                ?>target="_blank" class="user-phone">
+                                    <?php
+                                    if ($profileData['address'] != null) {
+                                        echo $profileData['address'];
+                                    } else {
+                                        echo 'Nepoznata adresa';
+                                    }
+                                    ?>
+                                </a>
                             </div>
                             <div class="about-info-row">
-                                <p class="about-main">Email adresa: </p><a href="mailto:idjordje63@gmail.com"
-                                    class="user-phone">idjordje63@gmail.com</a>
+                                <p class="about-main">Email adresa: </p>
+                                <a href="" class="user-info">
+                                    <?php
+                                    if ($profileData['email'] != null) {
+                                        echo $profileData['email'];
+                                    } else {
+                                        echo 'Nepoznata email adresa';
+                                    }
+                                    ?>
+                                </a>
                             </div>
                             <div class="about-info-row">
                                 <p class="about-main">Član od: </p>
-                                <a class="user-info">25.11.2023</a>
+                                <a class="user-info">
+                                    <?php
+                                    if ($profileData['member_since'] != null) {
+                                        $date = new DateTime($profileData['member_since']);
+                                        $formattedDate = $date->format('d.m.Y');
+                                        echo $formattedDate;
+                                    } else {
+                                        echo 'Nepoznat datum učlanjivanja';
+                                    }
+                                    ?>
+                                </a>
                             </div>
                         </div>
                         <div class="user-about-container ads-main-container">
