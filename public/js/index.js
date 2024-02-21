@@ -18,7 +18,6 @@ async function addToFavourite(x, user_id, ad_id) {
             }
         })
         .then(data => {
-            // console.log(data);
             if (data.status === 'success') {
                 if (x !== null) {
                     x.querySelector("svg").classList.add('redLoveAnimation');
@@ -110,7 +109,6 @@ async function isSaved(user_id, ad_id) {
             }
         })
         .then(data => {
-            // console.log(data);
             if (data.status === 'exist') {
                 return 1;
             } else if (data.status === 'not-exist') {
@@ -143,7 +141,6 @@ async function checkIsSaved(event, x, user_id, ad_id) {
             }
         })
         .then(data => {
-            // console.log(data);
             if (data.status === 'exist') {
                 removeFromFavourite(x, user_id, ad_id);
             } else if (data.status === 'not-exist') {
@@ -159,6 +156,11 @@ function checkIsSaved2(event) {
 }
 
 async function FilterData(params, restart) {
+    const loadingAnimationContainer = document.querySelectorAll('.loading-animation');
+    loadingAnimationContainer.forEach(element => {
+        document.querySelectorAll('.productsmaincontainer')[0].appendChild(element);
+        element.style.display = 'inline-block';
+    });
     const url = '../app/controllers/adController.php?' + params;
     await fetch(url, {
         method: 'GET'
@@ -167,7 +169,13 @@ async function FilterData(params, restart) {
         .then(data => {
             if (data.status === 'success') {
                 cacheAdsCounter(data.message.length);
-                if (restart) document.querySelectorAll('.productsmaincontainer')[0].innerHTML = '';
+                loadingAnimationContainer.forEach(element => {
+                    document.querySelectorAll('.productsmaincontainer')[0].removeChild(element);
+                    element.style.display = 'none';
+                });
+                if (typeof restart !== 'undefined' && restart === true) {
+                    document.querySelectorAll('.productsmaincontainer')[0].innerHTML = '';
+                }
                 let jsonmodels = JSON.stringify(data.message);
                 updateWidgets(jsonmodels);
                 if (restart) document.querySelectorAll('.productsmaincontainer')[0].scrollIntoView({ behavior: 'smooth' });
@@ -184,7 +192,6 @@ async function updateWidgets(ads) {
     await fetch('../inc/widget.php', {
         method: 'POST',
         headers: {
-
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -235,11 +242,9 @@ async function updateWidgets(ads) {
 function checkLoadMoreButton() {
     const loadedAdsCounter = localStorage.getItem('loadedAdsCounter');
     const allAdsCounter = localStorage.getItem('allAdsCounter');
-    console.log(allAdsCounter);
     if (loadedAdsCounter && allAdsCounter) {
         const loadedAdsCounterInitialData = JSON.parse(loadedAdsCounter);
         const allAdsCounterInitialData = JSON.parse(allAdsCounter);
-        console.log(Number(loadedAdsCounterInitialData.counter) + ' ' + Number(allAdsCounterInitialData.counter))
         if (Number(loadedAdsCounterInitialData.counter) === Number(allAdsCounterInitialData.counter)) {
             document.querySelectorAll('.loadmorebutton')[0].style.display = 'none';
         }

@@ -5,6 +5,7 @@
 <?php
 require_once "../inc/headTag.php";
 ?>
+<script>localStorage.removeItem('limitData');</script>
 
 <body class="body">
 
@@ -20,6 +21,8 @@ require_once "../inc/headTag.php";
     ?>
 
     <link href="../public/css/index.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    <link href="../public/css/loading-animation.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+
     <section class="mainpageselection">
         <div class="mainpagediv">
             <div class="darkbackground"></div>
@@ -262,12 +265,11 @@ require_once "../inc/headTag.php";
                             </div>
                         </div>
                     </div>
-                    <div class="mostvisitedright"><img
-                            src="https://assets-global.website-files.com/65830899613e5c9e21ea6f21/65835b32664720bce6668a45_iPhone15ProMax-modified.png"
-                            loading="lazy"
-                            sizes="(max-width: 479px) 42vw, (max-width: 767px) 187.06597900390625px, (max-width: 991px) 24vw, (max-width: 1279px) 13vw, 178.3854217529297px"
-                            srcset="https://assets-global.website-files.com/65830899613e5c9e21ea6f21/65835b32664720bce6668a45_iPhone15ProMax-modified-p-500.png 500w, https://assets-global.website-files.com/65830899613e5c9e21ea6f21/65835b32664720bce6668a45_iPhone15ProMax-modified.png 608w"
-                            alt="iPhone 15 Pro Max" class="mostvisitedrightimage" /></div>
+                    <div class="mostvisitedright">
+                        <img src="<?php echo $phone->getDeviceImage($mostViewedAd['brand'], $mostViewedAd['model']); ?>"
+                            alt="<?php echo $mostViewedAd['brand'] . ' ' . $mostViewedAd['model'] ?>"
+                            class="mostvisitedrightimage" />
+                    </div>
                 </div>
                 <div class="mostsavedcontainer">
                     <?php
@@ -328,9 +330,11 @@ require_once "../inc/headTag.php";
                             </div>
                         </div>
                     </div>
-                    <div class="mostvisitedright"><img
-                            src="https://assets-global.website-files.com/65830899613e5c9e21ea6f21/65835bea3d2703d29296b84a_samsung-galaxy-s22-5g-bora-purple-modified.png"
-                            loading="lazy" alt="Samsung Galaxy S22" class="mostvisitedrightimage" /></div>
+                    <div class="mostvisitedright">
+                        <img src="<?php echo $phone->getDeviceImage($mostSavedAd['brand'], $mostSavedAd['model']); ?>"
+                            alt="<?php echo $mostSavedAd['brand'] . ' ' . $mostSavedAd['model'] ?>"
+                            class="mostvisitedrightimage" class="mostvisitedrightimage" />
+                    </div>
                 </div>
                 <div class="newestcontainer">
                     <?php
@@ -389,12 +393,11 @@ require_once "../inc/headTag.php";
                             </div>
                         </div>
                     </div>
-                    <div class="mostvisitedright"><img
-                            src="https://assets-global.website-files.com/65830899613e5c9e21ea6f21/65835d1a2168277e395a7e95_RedmiNote13Pro.png"
-                            loading="lazy"
-                            sizes="(max-width: 479px) 42vw, (max-width: 767px) 158.36805725097656px, (max-width: 991px) 21vw, (max-width: 1279px) 118.78472900390625px, 158.36805725097656px"
-                            srcset="https://assets-global.website-files.com/65830899613e5c9e21ea6f21/65835d1a2168277e395a7e95_RedmiNote13Pro-p-500.png 500w, https://assets-global.website-files.com/65830899613e5c9e21ea6f21/65835d1a2168277e395a7e95_RedmiNote13Pro.png 510w"
-                            alt="Redmi Note 13 Pro" class="mostvisitedrightimage" /></div>
+                    <div class="mostvisitedright">
+                        <img src="<?php echo $phone->getDeviceImage($newestAd['brand'], $newestAd['model']); ?>"
+                            alt="<?php echo $newestAd['brand'] . ' ' . $newestAd['model'] ?>" alt="Redmi Note 13 Pro"
+                            class="mostvisitedrightimage" />
+                    </div>
                 </div>
             </div>
             <div class="currentpageindicator">
@@ -572,7 +575,14 @@ require_once "../inc/headTag.php";
                 </div>
                 <div class="productscontainer">
                     <div class="filterstlabela"></div>
-                    <div class="productsmaincontainer"></div>
+
+                    <div class="productsmainconatinerhead">
+                        <div class="productsmaincontainer">
+                            <?php
+                            include_once("../inc/loadingWidget.php");
+                            ?>
+                        </div>
+                    </div>
                     <div class="loadmorecontainer">
                         <a href="#" current-page="0" class="loadmorebutton w-button" onclick="loadMore(this)">Učitaj
                             još</a>
@@ -597,9 +607,9 @@ require_once "../inc/headTag.php";
     <script src="../public/js-public/jquery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/filters.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/filter-range-slider.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
-    <script src="../public/js/filters.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>
 
