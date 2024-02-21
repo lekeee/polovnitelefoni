@@ -85,20 +85,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                                                                {
-                                                                                                                    "items": [{
-                                                                                                                        "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                                                                        "origFileName": "<?php echo $file; ?>",
-                                                                                                                        "fileName": "<?php echo $file; ?>",
-                                                                                                                        "fileSize": <?php echo filesize($putanja); ?>,
-                                                                                                                        "height": <?php echo $height; ?>,
-                                                                                                                        "url": "<?php echo $putanja; ?>",
-                                                                                                                        "width": <?php echo $width; ?>,
-                                                                                                                        "type": "image"
-                                                                                                                    }],
-                                                                                                                    "group": "phoneImage"
-                                                                                                                }
-                                                                                                                </script>
+                                                                                                                                    {
+                                                                                                                                        "items": [{
+                                                                                                                                            "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                                                                            "origFileName": "<?php echo $file; ?>",
+                                                                                                                                            "fileName": "<?php echo $file; ?>",
+                                                                                                                                            "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                                                                            "height": <?php echo $height; ?>,
+                                                                                                                                            "url": "<?php echo $putanja; ?>",
+                                                                                                                                            "width": <?php echo $width; ?>,
+                                                                                                                                            "type": "image"
+                                                                                                                                        }],
+                                                                                                                                        "group": "phoneImage"
+                                                                                                                                    }
+                                                                                                                                    </script>
                                             </a>
                                         </div>
 
@@ -259,8 +259,9 @@ require_once "../inc/headTag.php";
                                 </div>
                             </div>
 
-                            <div data-w-id="0eacc543-0b81-e5be-a1e1-d7c3709a619c" class="div-block-719"><img
-                                    src="../public/src/userShow2.svg" loading="lazy" alt="User Profile Image"
+                            <div data-w-id="0eacc543-0b81-e5be-a1e1-d7c3709a619c" class="div-block-719"
+                                onclick="window.location.href='user.php?id=<?php echo $adData['user_id'] ?>'">
+                                <img src="../public/src/userShow2.svg" loading="lazy" alt="User Profile Image"
                                     class="image-39" style="width: 64px; height: 64px" />
                                 <h1 class="heading-10">
                                     <?php echo $adOwner['name'] . ' ' . $adOwner['lastname'] ?>
