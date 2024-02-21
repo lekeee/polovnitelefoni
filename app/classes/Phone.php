@@ -364,8 +364,8 @@ class Phone extends Ad
     {
         try {
             if ($this->deleteAdfromSaves($ad_id) && $this->deleteAdfromVisit($ad_id)) {
-                $sql = "DELETE FROM oglasi WHERE ad_id = ?";
 
+                $sql = "DELETE FROM oglasi WHERE ad_id = ?";
                 $stmt = $this->con->prepare($sql);
                 $stmt->bind_param("i", $ad_id);
 
@@ -395,7 +395,6 @@ class Phone extends Ad
                 throw new Exception("SQL execution error: " . $stmt->error);
             }
             $results = $stmt->affected_rows;
-
             return true;
         } catch (Exception $e) {
             throw new DELETE_AD_FROM_SAVES_ERROR();
@@ -410,14 +409,13 @@ class Phone extends Ad
             $stmt = $this->con->prepare($sql);
             $stmt->bind_param("i", $ad_id);
 
+
             $stmt->execute();
             if ($stmt->error) {
                 throw new Exception("SQL execution error: " . $stmt->error);
             }
             $results = $stmt->affected_rows;
-            if ($results > 0)
-                return true;
-            return false;
+            return true;
         } catch (Exception $e) {
             throw new DELETE_AD_FROM_VISITS_ERROR();
         }
@@ -539,7 +537,7 @@ class Phone extends Ad
         }
     }
 
-    public function updateAd($ad_id, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $price = null, $images = null, $damage = null, $accessories = null)
+    public function updateAd($ad_id, $brand, $model, $title, $state, $stateRange, $description, $price, $images, $availability, $damage, $accessories)
     {
         try {
             $sql = "UPDATE oglasi 
@@ -592,7 +590,7 @@ class Phone extends Ad
     public function getDeviceImage($brandName, $modelName)
     {
         try {
-            $jsonFilePath = 'public/JSON/sortedData.json';
+            $jsonFilePath = '../public/JSON/sortedData.json';
             $jsonData = file_get_contents($jsonFilePath);
             $data = json_decode($jsonData, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
@@ -616,7 +614,7 @@ class Phone extends Ad
     public function deleteImagesFromFolder($folder)
     {
         try {
-            $folderPath = 'uploads/' . $folder . '/';
+            $folderPath = '../../uploads/' . $folder . '/';
 
             if (file_exists($folderPath)) {
                 $files = glob($folderPath . '*');
@@ -624,15 +622,30 @@ class Phone extends Ad
                 foreach ($files as $file) {
                     if (is_file($file)) {
                         unlink($file);
-                        echo 'Slika uspešno obrisana: ' . $file . '<br>';
                     }
                 }
-                echo 'Sve slike su uspešno obrisane.';
             } else {
                 echo 'Folder ne postoji.';
             }
         } catch (Exception $e) {
             throw new DELETE_IMAGES_FROM_FOLDER_ERROR();
+        }
+    }
+
+    public function deleteImagesFolder($ad_id)
+    {
+        try {
+            $folder = $this->getAdFolder($ad_id);
+            $folderPath = '../../uploads/' . $folder;
+
+            if (file_exists($folderPath) && is_dir($folderPath)) {
+                $this->deleteImagesFromFolder($folder);
+                rmdir($folderPath);
+                return true;
+            }
+            return false;
+        } catch (Exception $e) {
+            throw new DELETE_IMAGES_FOLDER_ERROR;
         }
     }
 }

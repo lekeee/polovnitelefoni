@@ -48,8 +48,9 @@ abstract class Ad
 
     abstract public function countAllAds();
     abstract public function countAllFilteredAds($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24);
-    abstract public function updateAd($ad_id, $brand = null, $model = null, $title = null, $state = null, $stateRange = null, $description = null, $price = null, $images = null, $damage = null, $accessories = null);
+    abstract public function updateAd($ad_id, $brand, $model, $title, $state, $stateRange, $description, $price, $images, $availability, $damage, $accessories);
     abstract public function getAdFolder($ad_id);
     abstract public function getDeviceImage($brandName, $modelName);
     abstract public function deleteImagesFromFolder($folder);
+    abstract public function deleteImagesFolder($ad_id);
 }
