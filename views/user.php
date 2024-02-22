@@ -5,9 +5,9 @@ if (isset($_GET['id'])) {
     if (isset($_SERVER['HTTP_REFERER'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else {
-        // header('Location: index.php');
+        header('Location: index.php');
     }
-    // exit;
+    exit;
 }
 ?>
 
@@ -27,10 +27,7 @@ require_once "../inc/headTag.php";
     require_once "../inc/header.php";
     require_once "../inc/bottomNavigator.php";
     require_once "../inc/mobileMenu.php";
-    ?>
 
-    <?php
-    $userID = 36; //! OBRISATI OVO KADA SE SALJE ID
     $profileData = json_decode($user->getUserDataFromId($userID), true);
     ?>
 

@@ -169,6 +169,9 @@ class User
                 }
                 if (password_verify($password, $user['password'])) {
                     $_SESSION['user_id'] = $user['user_id'];
+                    $user_token = md5(uniqid());
+                    $this->updateToken($user['user_id'], $user_token);
+                    $this->updateLoginStatus($user['user_id'], 1);
                     return true;
                 }
             }
@@ -392,10 +395,12 @@ class User
     public function logout()
     {
         if (isset($_SESSION['user_id']) && isset($_SESSION['token'])) {
+            $this->updateLoginStatus($this->getId(), 0);
             unset($_SESSION['user_id']);
             unset($_SESSION['token']);
             //$client->revokeToken(); 
         } else if (isset($_SESSION['user_id'])) {
+            $this->updateLoginStatus($this->getId(), 0);
             unset($_SESSION['user_id']);
         }
 
@@ -828,5 +833,116 @@ class User
         } catch (Exception $e) {
             throw new ADS_NOT_SELECTED();
         }
+    }
+
+
+    //! DODATO ZA PORUKE
+
+    public function updateLoginStatus($id, $status)
+    {
+        // 0 logout 1 login
+        $sql = "UPDATE users
+                SET login_status = ?
+                WHERE user_id = ?";
+        $statement = $this->con->prepare($sql);
+        $statement->bind_param("ii", $status, $id);
+        $statement->execute();
+        $result = $statement->affected_rows;
+        if ($result == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updateToken($id, $token)
+    {
+        $sql = "UPDATE users SET
+                user_token = '$token'
+                WHERE user_id = '$id'";
+        $result = $this->con->query($sql);
+        if ($result == true) {
+            return true;
+        }
+        return false;
+    }
+
+    public function getToken($id)
+    {
+        $sql = "SELECT user_token FROM users WHERE user_id = '$id'";
+        $result = $this->con->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $token = $row['user_token'];
+            return $token;
+        } else {
+            // Korisnik nije pronađen
+            return null;
+        }
+    }
+
+    public function getUserIdFromToken($token)
+    {
+        $sql = "SELECT user_id FROM users WHERE user_token = '$token'";
+        $result = $this->con->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $id = $row['user_id'];
+            return $id;
+        } else {
+            // Korisnik nije pronađen
+            return null;
+        }
+    }
+    public function updateUserConnectionId($token, $userConnectionId)
+    {
+        $sql = "UPDATE users SET
+                user_connection_id = '$userConnectionId'
+                WHERE user_token = '$token'";
+        $result = $this->con->query($sql);
+        if ($result === TRUE) {
+            return true;
+        }
+        return false;
+    }
+
+    public function loginStatus($name)
+    {
+        $sql = "SELECT user_id FROM users WHERE name = '$name'";
+        $result = $this->con->query($sql);
+
+        if ($result == true) {
+            // Korisnik pronađen, vraćamo ID
+            $row = $result->fetch_assoc();
+            $idKorisnika = $row['user_id'];
+            return $idKorisnika;
+        } else {
+            // Korisnik nije pronađen
+            return null;
+        }
+    }
+
+    public function selectAll()
+    {
+        $sql = "SELECT * FROM users";
+        $result = $this->con->query($sql);
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_all();
+        }
+    }
+    public function returnOtherUser($id)
+    {
+        $sql = "SELECT * FROM users WHERE user_id=?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $user = $result->fetch_assoc();
+
+        //ako kojim slucajem nema user vraca null
+        return $user ? json_encode($user) : null;
     }
 }

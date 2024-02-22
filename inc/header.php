@@ -76,7 +76,7 @@ if ($user->isLogged()) {
                             class="dropdown-link-4 w-dropdown-link">Pametni Satovi</a></nav>
                 </div>
             </div>
-            <div class="div-block-4"><img src="../public/src/search_icon.png" loading="lazy" width="33" height="33"
+            <div class="div-block-4"><img src="../public/src/search-icon.svg" loading="lazy" width="24"
                     alt="Search Icon" /></div>
             <div class="form-block w-form">
                 <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form"
