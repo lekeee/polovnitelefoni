@@ -1,6 +1,11 @@
 {
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "chat-src"
+        }
+    },
     "require": {
         "google/apiclient": "^2.0",
-        "symfony/cache": "^7.0"
+        "cboden/ratchet": "^0.4.4"
     }
 }
