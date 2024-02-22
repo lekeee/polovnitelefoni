@@ -85,7 +85,16 @@ $(document).ready(function () {
 
 })
 
+function removeAllActiveSender() {
+    const senders = document.querySelectorAll('.sender-container');
+    senders.forEach(element => {
+        element.classList.remove('active');
+    });
+}
+
 async function showMessages(div) {
+    removeAllActiveSender();
+    div.classList.add('active');
     let user_id = $('#login-user-id').val();
     receiverId = div.querySelector("#user-id").value;
     let receiverName = div.querySelector(".user-name").innerHTML;
@@ -155,17 +164,26 @@ function makeChatArea(receiverName) {
     var html =
         `
     <div class="chat-form-div">
-                Cet sa ${receiverName}
-                <div class="chat-div">
-                    
-                </div> 
-                <form action="" method="post" id="chat-form">
-                        <div class="send-div">
-                            <input type="text" class="send-input" name="" id="send-input">
-                            <button type="submit" class="send-btn"><i class="material-icons">send</i></button>
-                        </div>
-                </form>
+        <div class="chat-header-container">
+            <div class="chat-main-profile-image">
+                <img src="../public/src/userShow2.svg">
             </div>
+            <h3>${receiverName}<h3>
+        </div>
+        <div class="chat-main-div">
+            <div class="chat-second-div">
+                <form action="" method="post" id="chat-form">
+                    <div class="send-div">
+                        <input type="text" class="send-input" name="" id="send-input">
+                        <button type="submit" class="send-btn"><i class="material-icons">send</i></button>
+                    </div>
+                </form>
+                <div class="chat-div">
+                
+                </div>
+            </div> 
+        </div> 
+    </div>
     `;
     $('.main-chat-div').html(html);
 }
