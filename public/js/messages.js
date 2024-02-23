@@ -143,15 +143,13 @@ async function showMessages(div) {
 
                     let htmlData = `
                 <div class=${klasa}> 
-                    ${response[i].msg}
-                    <br/>
+                    <p class="message-data">${response[i].msg}</p>
                     <small class="small-data">
-                        <b>${from}</b> 
                         <i>${response[i].sent_at}</i>
-                        <img src="icons/${seen}" style="display:${displaySeen}; width:16px; height:16px;"></img>
                     </small> 
-                </div>
-                `;
+                        </div>
+                        `;
+                    // <img src="icons/${seen}" style="display:${displaySeen}; width:16px; height:16px;"></img>
 
                     $('.chat-div').append(htmlData);
                     $('.chat-div').scrollTop($('.chat-div')[0].scrollHeight);
