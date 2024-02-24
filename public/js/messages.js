@@ -37,10 +37,8 @@ $(document).ready(function () {
         if (receiverId == data.userId || data.from == "Me") {
             let htmlData = `
                 <div class=${klasa}> 
-                    ${data.message}
-                    <br/>
+                    <p class="message-data">${data.message}<p>
                     <small class="small-data">
-                        <b>${data.from}</b> 
                         <i>${data.dt}</i>
                     </small> 
                 </div>
