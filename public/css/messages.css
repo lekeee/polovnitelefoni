@@ -191,11 +191,12 @@
     display: flex;
     flex-direction: column-reverse;
     justify-content: stretch;
+    align-items: center;
 }
 
 .chat-div {
     overflow-y: auto;
-    width: 100%;
+    width: 80%;
     padding-bottom: 30px;
 }
 
@@ -211,6 +212,7 @@
 .receiver-div {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .sender-div {
@@ -223,19 +225,74 @@
 
 .sender-div .message-data,
 .receiver-div .message-data {
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 10px;
     max-width: 70%;
+    margin: 0;
 }
 
 .sender-div .message-data {
+    border-bottom-right-radius: 0px;
     background-color: var(--main-color);
     color: white;
 }
 
 .receiver-div .message-data {
+    border-bottom-left-radius: 0px;
     background-color: white;
     color: black;
+}
+
+
+.chat-second-div {
+    background-color: var(--background-light);
+    border-radius: 10px;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: stretch;
+    align-items: center;
+    padding: 40px 0px;
+}
+
+.send-div {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 20px 0px;
+}
+
+#chat-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.send-div textarea {
+    width: 100%;
+    height: auto;
+    max-height: 100px;
+    resize: none;
+    padding: 10px 20px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid var(--border-color)
+}
+
+.send-div textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.send-div button {
+    height: 40px;
+    margin-left: 5px;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* 

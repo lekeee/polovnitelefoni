@@ -36,13 +36,16 @@ $(document).ready(function () {
 
         if (receiverId == data.userId || data.from == "Me") {
             let htmlData = `
-                <div class=${klasa}> 
-                    <p class="message-data">${data.message}<p>
-                    <small class="small-data">
-                        <i>${data.dt}</i>
+                <div class=${klasa} style="margin-bottom: 5px;" onclick="showHideTime(this)" title="${data.dt.slice(0, 10)}"> 
+                    <p class="message-data">${data.message}</p>
+                    <small class="small-data" style="display: none">
+                        ${data.dt.slice(-8).slice(0, 5)}
                     </small> 
                 </div>
-                `;
+                    `;
+            // <small class="small-data">
+            // <i>${data.dt}</i>
+            // </small> 
 
             $('.chat-div').append(htmlData);
             $('.chat-form-div .chat-div').scrollTop($('.chat-form-div .chat-div')[0].scrollHeight);
@@ -114,7 +117,6 @@ async function showMessages(div) {
     })
         .then((response) => response.json())
         .then(function (response) {
-            console.log(response);
             if (response.length > 0) {
                 let klasa = "";
                 let from = "";
@@ -140,13 +142,13 @@ async function showMessages(div) {
 
 
                     let htmlData = `
-                <div class=${klasa}> 
-                    <p class="message-data">${response[i].msg}</p>
-                    <small class="small-data">
-                        <i>${response[i].sent_at}</i>
-                    </small> 
+                        <div class=${klasa} style="margin-bottom: 5px;" onclick="showHideTime(this)" title="${getMounthAndYear(response[i].sent_at)}"> 
+                            <p class="message-data">${response[i].msg}</p>
+                            <small class="small-data" style="display: none">
+                                ${getHoursAndMinutes(response[i].sent_at)}
+                            </small> 
                         </div>
-                        `;
+                            `;
                     // <img src="icons/${seen}" style="display:${displaySeen}; width:16px; height:16px;"></img>
 
                     $('.chat-div').append(htmlData);
@@ -154,6 +156,33 @@ async function showMessages(div) {
                 }
             }
         });
+}
+
+function showHideTime(div) {
+    const element = div.querySelector('small');
+    const dValue = element.style.display;
+    if (dValue === 'none') {
+        element.style.display = 'block';
+    } else {
+        element.style.display = 'none';
+    }
+}
+
+function getHoursAndMinutes(dateTimeString) {
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours();
+    const minutes = dateTime.getMinutes();
+    const formattedTime = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+    return formattedTime;
+}
+
+function getMounthAndYear(dateTimeString) {
+    const dateTime = new Date(dateTimeString);
+    const month = dateTime.getMonth() + 1;
+    const day = dateTime.getDate();
+    const year = dateTime.getFullYear();
+    const formattedTime = (day < 10 ? '0' : '') + day + '-' + (month < 10 ? '0' : '') + month + '-' + year.toString();
+    return formattedTime;
 }
 
 function makeChatArea(receiverName) {
@@ -170,8 +199,10 @@ function makeChatArea(receiverName) {
             <div class="chat-second-div">
                 <form action="" method="post" id="chat-form">
                     <div class="send-div">
-                        <input type="text" class="send-input" name="" id="send-input">
-                        <button type="submit" class="send-btn"><i class="material-icons">send</i></button>
+                        <textarea class="send-input" rows="1" id="send-input" placeholder="Poruka..."></textarea>
+                        <button type="submit" class="send-btn">
+                            <img src="../public/src/arrow-up.svg" width="30"/>
+                        </button>
                     </div>
                 </form>
                 <div class="chat-div">
