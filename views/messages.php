@@ -56,13 +56,7 @@ require_once "../inc/headTag.php";
                                 <img src="../public/src/userShow2.svg">
                                 <div id="status-div-<?php echo $userData[0] ?>"
                                     class="<?php echo $userData[4] == 0 ? "offline" : "online" ?>-status-div"></div>
-                                <div class="count-unread-div unread-msg-div-<?php echo $userData[0]; ?>"
-                                    style="display:<?php echo $br != 0 ? 'flex' : 'none' ?>">
-                                    <?php
-                                    echo $br != 0 ? $br : "";
-                                    $br = 0;
-                                    ?>
-                                </div>
+
                             </div>
                             <div class="sender-info-container">
                                 <h4 class="user-name">
@@ -74,7 +68,15 @@ require_once "../inc/headTag.php";
                                     }
                                     ?>
                                 </h4>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                                <p class="user-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+                            </div>
+                            <div class="count-unread-div unread-msg-div-<?php echo $userData[0]; ?>"
+                                style="display:<?php echo $br != 0 ? 'flex' : 'none' ?>">
+                                <?php
+                                echo $br != 0 ? $br : "";
+                                $br = 0;
+                                ?>
                             </div>
                         </div>
                     <?php } ?>
@@ -82,6 +84,10 @@ require_once "../inc/headTag.php";
             </div>
             <div class="messages-right-container">
                 <div class="main-chat-div">
+                    <div class="no-user-selected">
+                        <img src="../public/src/no-message-selected.svg">
+                        <h4>Izaberite korisnika sa kojim želite da razmenjujete poruke</h4>
+                    </div>
                 </div>
             </div>
         </div>

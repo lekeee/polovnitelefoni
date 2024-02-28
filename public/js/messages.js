@@ -3,6 +3,7 @@ const usersDiv = document.querySelector(".users-div");
 const mainChatDiv = document.querySelector('.main-chat-div');
 
 let receiverId = '';
+
 $(document).ready(function () {
     let token = $('#user-token').val();
     let con = new WebSocket(`ws://localhost:8080?token=${token}`);
@@ -35,24 +36,24 @@ $(document).ready(function () {
         }
 
         if (receiverId == data.userId || data.from == "Me") {
+            showDeliveredOrSeenIcon('none');
             let htmlData = `
                 <div class=${klasa} style="margin-bottom: 5px;" onclick="showHideTime(this)" title="${data.dt.slice(0, 10)}"> 
                     <p class="message-data">${data.message}</p>
                     <small class="small-data" style="display: none">
                         ${data.dt.slice(-8).slice(0, 5)}
-                    </small> 
+                    </small>
+                    <img src="../public/src/delivered-icon.svg" style="display:none; width:16px; height:16px;"></img>
                 </div>
                     `;
-            // <small class="small-data">
-            // <i>${data.dt}</i>
-            // </small> 
-
             $('.chat-div').append(htmlData);
             $('.chat-form-div .chat-div').scrollTop($('.chat-form-div .chat-div')[0].scrollHeight);
+            showDeliveredOrSeenIcon();
         }
         else {
+            console.log("Primio si poruku");
             let count = $(`.count-unread-div.unread-msg-div-${data.userId}`).text();
-
+            showDeliveredOrSeenIcon('none');
             if (count == '') {
                 count = 0;
             }
@@ -127,7 +128,7 @@ async function showMessages(div) {
                         klasa = "sender-div";
                         from = "Me";
                         if (response[i].status == 0) {
-                            seen = "not-seen-icon.svg";
+                            seen = "delivered-icon.svg";
                         }
                         else {
                             seen = "seen-icon.svg"
@@ -146,7 +147,8 @@ async function showMessages(div) {
                             <p class="message-data">${response[i].msg}</p>
                             <small class="small-data" style="display: none">
                                 ${getHoursAndMinutes(response[i].sent_at)}
-                            </small> 
+                            </small>
+                            <img src="../public/src/${seen}" style="display:none; width:16px; height:16px;"></img>
                         </div>
                             `;
                     // <img src="icons/${seen}" style="display:${displaySeen}; width:16px; height:16px;"></img>
@@ -154,9 +156,20 @@ async function showMessages(div) {
                     $('.chat-div').append(htmlData);
                     $('.chat-div').scrollTop($('.chat-div')[0].scrollHeight);
                 }
+                showDeliveredOrSeenIcon();
             }
         });
 }
+
+function showDeliveredOrSeenIcon(show = 'block') {
+    const senderDivs = document.querySelectorAll(".sender-div");
+    const lastSenderDiv = senderDivs[senderDivs.length - 1];
+    if (lastSenderDiv !== undefined) {
+        const imgElement = lastSenderDiv.querySelector('img');
+        imgElement.style.display = show;
+    }
+}
+
 
 function showHideTime(div) {
     const element = div.querySelector('small');
@@ -213,4 +226,16 @@ function makeChatArea(receiverName) {
     </div>
     `;
     $('.main-chat-div').html(html);
+
+    const textarea = document.querySelector('#send-input');
+    textarea.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    })
+
+    const textareabutton = document.querySelector('.send-btn');
+    textareabutton.addEventListener('click', function () {
+        textarea.style.height = 'auto';
+    });
 }
+
