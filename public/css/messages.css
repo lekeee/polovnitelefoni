@@ -4,6 +4,11 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 40px;
+}
+
+.back-message {
+    display: none;
 }
 
 .messages-main-div {
@@ -336,8 +341,6 @@
     text-align: center;
 }
 
-@media screen and (min-width: 1280px) {}
-
 @media screen and (max-width: 1050px) {
     .sender-info-container p {
         display: none;
@@ -366,9 +369,7 @@
         height: 15px;
         font-size: 12px;
     }
-}
 
-@media screen and (max-width: 1050px) {
     .sender-info-container {
         display: none;
     }
@@ -388,6 +389,149 @@
 
     .messages-search-container {
         display: none;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .messages-section {
+        width: 100%;
+        display: block;
+        overflow: hidden;
+        padding: 0;
+        position: relative;
+        height: 700px;
+    }
+
+    .messages-main-div {
+        width: 200%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .messages-main-div.active {
+        animation: showMessages 0.3s ease-in-out forwards;
+    }
+
+    .messages-main-div.deactive {
+        animation: hiddeMessages 0.3s ease-in-out forwards;
+    }
+
+    @keyframes showMessages {
+        0% {
+            left: 0%;
+        }
+
+        100% {
+            left: -100%;
+        }
+    }
+
+    @keyframes hiddeMessages {
+        0% {
+            left: -100%;
+        }
+
+        100% {
+            left: 0%;
+        }
+    }
+
+    .chat-main-profile-image {
+        margin-left: 20px;
+        margin-right: 10px;
+    }
+
+    .back-message {
+        display: block;
+    }
+
+    .chat-div,
+    .send-div {
+        width: 90%;
+    }
+
+    .messages-left-container,
+    .messages-right-container {
+        width: 50%;
+        display: inline-block;
+    }
+
+    .messages-search-container {
+        display: flex;
+    }
+
+    .sender-info-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .sender-container {
+        width: 100%;
+        height: 100px;
+        background-color: var(--background-light);
+        margin: 20px 0px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition-duration: .3s;
+        display: flex;
+    }
+
+    .sender-container {
+        padding: 0;
+    }
+
+    .profile-image-status {
+        width: 60px;
+        padding-top: 0px;
+    }
+
+    .sender-container img {
+        width: 60px;
+        margin-top: 20px;
+    }
+
+    .sender-info-container p {
+        display: block;
+    }
+
+
+}
+
+@media screen and (max-width: 530px) {
+    .sender-container {
+        height: 80px;
+    }
+
+    .sender-container img {
+        width: 40px;
+    }
+
+    .profile-image-status {
+        width: 40px;
+    }
+
+    .sender-info-container {
+        justify-content: center;
+    }
+
+    .sender-info-container p {
+        display: none;
+    }
+
+    .offline-status-div,
+    .online-status-div {
+        position: absolute;
+        bottom: 20px;
+        right: 0px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 2px solid white;
+        transition-duration: .3s;
     }
 }
 

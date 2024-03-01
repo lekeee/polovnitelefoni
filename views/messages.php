@@ -24,7 +24,7 @@ require_once "../inc/headTag.php";
                     <div class="search-icon-container">
                         <img src="../public/src/search-icon.svg" width="24">
                     </div>
-                    <input type="text">
+                    <input type="text" placeholder="Pretraži">
                 </div>
                 <div class="messages-sender-container">
                     <?php

@@ -95,6 +95,11 @@ function removeAllActiveSender() {
 }
 
 async function showMessages(div) {
+
+    const mainElement = document.querySelector(".messages-main-div");
+    mainElement.classList.remove('deactive');
+    mainElement.classList.add('active');
+
     removeAllActiveSender();
     div.classList.add('active');
     let user_id = $('#login-user-id').val();
@@ -203,6 +208,7 @@ function makeChatArea(receiverName) {
         `
     <div class="chat-form-div">
         <div class="chat-header-container">
+            <img class="back-message" src="../public/src/arrow-back.svg" style="width: 20px"/>
             <div class="chat-main-profile-image">
                 <img src="../public/src/userShow2.svg">
             </div>
@@ -237,5 +243,12 @@ function makeChatArea(receiverName) {
     textareabutton.addEventListener('click', function () {
         textarea.style.height = 'auto';
     });
+
+    const backmessage = document.querySelector('.back-message');
+    backmessage.addEventListener('click', function () {
+        const mainElement = document.querySelector(".messages-main-div");
+        mainElement.classList.remove('active');
+        mainElement.classList.add('deactive');
+    })
 }
 
