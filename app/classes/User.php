@@ -11,7 +11,6 @@ include_once(__DIR__ . '/../exceptions/userExceptions.php');
 
 class User
 {
-
     protected $con;
 
     public function __construct()
