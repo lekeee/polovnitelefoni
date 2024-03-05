@@ -593,7 +593,7 @@ class User
 
                 <div style='text-align: left; padding: 0px 20px 20px 20px;'>
                     <h1><b>Verifikacija emaila</b></h1>
-                    <p>Hvala što koristite sajt polovnitelefoni.shop!</p>
+                    <p>Hvala što koristite sajt polovni-telefoni.rs!</p>
                     <p>Potrebno nam je još malo informacija da bismo završili vašu registraciju, uključujući i potvrdu vaše e-mail adrese.</p>
                     <p>Kliknite na dugme ispod koje će vas odvesti na stranicu za verifikaciju.</p>
 

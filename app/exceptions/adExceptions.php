@@ -71,3 +71,6 @@ class DELETE_IMAGES_FROM_FOLDER_ERROR extends Exception
 class DELETE_IMAGES_FOLDER_ERROR extends Exception
 {
 }
+class SAVE_DELETED_AD_DATA_ERROR extends Exception
+{
+}
