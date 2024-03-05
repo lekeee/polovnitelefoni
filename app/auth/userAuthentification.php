@@ -1,7 +1,6 @@
 <?php
-    require_once "../app/config/config.php";
-    require_once "../app/classes/User.php";
-    require_once "../app/classes/Phone.php";
+require dirname(__DIR__) . "/config/config.php";
+require dirname(__DIR__) . "/classes/User.php";
+require dirname(__DIR__) . "/classes/Phone.php";
 
-    $user = new User();
-?>
+$user = new User();

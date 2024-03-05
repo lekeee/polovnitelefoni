@@ -1,5 +1,11 @@
 {
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "chat-src"
+        }
+    },
     "require": {
-        "google/apiclient": "^2.0"
+        "google/apiclient": "^2.0",
+        "cboden/ratchet": "^0.4.4"
     }
 }
