@@ -27,4 +27,3 @@ $client->setRedirectUri($redirectUri);
 $client->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");
 
 $loginUrl = $client->createAuthUrl();
-
