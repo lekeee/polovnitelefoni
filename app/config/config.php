@@ -1,5 +1,4 @@
 <?php
-session_abort();
 session_start();
 $servername = "localhost";
 $db_username = "root";
@@ -27,4 +26,3 @@ $client->setRedirectUri($redirectUri);
 $client->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");
 
 $loginUrl = $client->createAuthUrl();
-

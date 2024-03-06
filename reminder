@@ -6,7 +6,7 @@ ozdvajanje header tag-a --------------------------------------------------------
 
 DIZAJNIRANJE EMAILA -------------------------------------------------------------------------------------------(URADJENO)
 
-OGLASI
+OGLASI --------------------------------------------------------------------------------------------------------(URADJENO)
     -stara/nova cena
     -ocena
     -br pregleda
@@ -14,36 +14,29 @@ OGLASI
     -ostecenja biranje
     -dodatna oprema biranje
 
-PROFIL KORISNIKA
+PROFIL KORISNIKA ----------------------------------------------------------------------------------------------(URADJENO)
     -da se vide svi njegovi oglasi
     -da se oceni korisnik
     -da se vidi njegova statistika(ocene, broj oglasa, licni podaci)
 
-BRISANJE NALOGA
+BRISANJE NALOGA -----------------------------------------------------------------------------------------------(URADJENO)
     -da se obrisu svi oglasi na nalogu
 
-BRISANJE OGLASA
+BRISANJE OGLASA -----------------------------------------------------------------------------------------------(URADJENO)
     -da se obrisu sve veze sa oglasom iz baze
 
-UREDJIVANJE OGLASA
-
-REGISTRACIJA
-    -Prilikom registracije, slazem se sa uslovima korsicenja 
-    na sajtu polovni telefoni
-    
-    TERMS OF SERVICES 
-        -na formi za registraciju
+UREDJIVANJE OGLASA --------------------------------------------------------------------------------------------(URADJENO)
 
 GOOGLE REGISTRACIJA -------------------------------------------------------------------------------------------(URADJENO)
 
 ONEMOGUCITI PROMENU LOZINKE ZA GOOGLE KORISNIKE (OAUTH_UID) ---------------------------------------------------(URADJENO)
 
 PRIKAZ OGLASA -------------------------------------------------------------------------------------------------(URADJENO)
-    -stanje 9.8/10
-    -na strelice da se menjaju slike
-    -da se doda animacija za slide slike
+-stanje 9.8/10
+-na strelice da se menjaju slike
+-da se doda animacija za slide slike
 
-INDIKATOR OSTENCENJA TELEFONA (IKONICA)
+INDIKATOR OSTENCENJA TELEFONA (IKONICA) -----------------------------------------------------------------------(URADJENO)
 
 OGRANICENJE DA KORISNIK NE MOZE DA DODA OGLAS UKOLIKO NIJE UNEO SVOJE PODATKE ---------------------------------(URADJENO)
 
@@ -51,24 +44,47 @@ POVEZIVANJE DUGMETA DODAVANJE OGLASA -------------------------------------------
 
 PROMENITI DASHBOARD PODATKE -----------------------------------------------------------------------------------(URADJENO)
 
-GLAVNA STRANICA (FILTERI, SORTIRANJE ITD)
+GLAVNA STRANICA (FILTERI, SORTIRANJE ITD) ---------------------------------------------------------------------(URADJENO)
 
-SPRECIFIKACIJE TELEFONA
-
-BAG ZA IPHONE (BROJ TELEFONA)
+SPRECIFIKACIJE TELEFONA ---------------------------------------------------------------------------------------(URADJENO)
 
 DODATI DOGOVOR PRI PRIKAZIVANJU OGLASA ------------------------------------------------------------------------(URADJENO)
 
-DODAJ U SACUVANO
-
-DODAJ U COMPARE
+DODAJ U SACUVANO ----------------------------------------------------------------------------------------------(URADJENO)
 
 DODATNA OPREMA (ZAREZI DA SE UKLONE) --------------------------------------------------------------------------(URADJENO)
 
-PRIKAZ OGLASA ZA OSTECENE UREDJAJE
+PRIKAZ OGLASA ZA OSTECENE UREDJAJE ----------------------------------------------------------------------------(URADJENO)
 
-SLIKA
+PORUKE --------------------------------------------------------------------------------------------------------(URADJENO)
 
---------------------------------------------------------------
 
-PORUKE
+
+
+DODAJ U COMPARE
+
+REGISTRACIJA
+-Prilikom registracije, slazem se sa uslovima korsicenja 
+na sajtu polovni telefoni
+
+TERMS OF SERVICES 
+-na formi za registraciju
+
+BAG ZA IPHONE (BROJ TELEFONA)
+
+DODATI SLANJE EMAILA ZA POTVRDU PRI PRIJAVLJUVANJU --------------------------------------------------------------(URADJENO)
+
+PRIJAVA PROFILA -------------------------------------------------------------------------------------------------(URADJENO)
+
+RESITI BAG ZA SLIKE NA OGLASU
+
+OCENI KORISNIKA
+
+DODATNE STRANICE
+    -O NAMA...
+
+PRETRAZIVANJE
+
+KORISNIKOV PROFIL (POVEZATI SA FUNKCIJAMA)
+
+PREGLEDI OGLASA

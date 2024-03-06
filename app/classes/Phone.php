@@ -268,25 +268,25 @@ class Phone extends Ad
                 $sql .= " AND (price <= $maxPrice OR price IS NULL)";
             }
 
-            if ($new && !$used && !$damaged) {
+            if ($new === 'true' && $used === 'false' && $damaged === 'false') {
                 $sql .= " AND state = 1"; // novi
-            } elseif (!$new && $used && !$damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND state = 0"; // polovni
-            } elseif (!$new && !$used && $damaged) {
+            } elseif ($new === 'false' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND damage IS NOT NULL"; // osteceni
-            } elseif ($new && $used && !$damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND (state = 1 OR state = 0)"; // novi i korisceni
-            } elseif ($new && !$used && $damaged) {
+            } elseif ($new === 'true' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR damage IS NOT NULL)"; // novi i osteceni
-            } elseif (!$new && $used && $damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
-            } elseif ($new && $used && $damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
             }
 
             if ($sort !== null) {
                 if ($sort == 0) {
-                    $sql .= 'GROUP BY o.ad_id 
+                    $sql .= ' GROUP BY o.ad_id 
                     ORDER BY broj_sacuvanih DESC';
                 } else if ($sort == 1) {
                     $sql .= " ORDER BY creation_date DESC";
@@ -363,8 +363,10 @@ class Phone extends Ad
     public function deleteAd($ad_id)
     {
         try {
-            if ($this->deleteAdfromSaves($ad_id) && $this->deleteAdfromVisit($ad_id)) {
+            $this->deleteAdfromSaves($ad_id);
+            $this->deleteAdfromVisit($ad_id);
 
+            if ($this->saveDeletedAdData($ad_id)) {
                 $sql = "DELETE FROM oglasi WHERE ad_id = ?";
                 $stmt = $this->con->prepare($sql);
                 $stmt->bind_param("i", $ad_id);
@@ -377,6 +379,7 @@ class Phone extends Ad
 
                 return $results > 0 ? true : false;
             }
+
         } catch (Exception $e) {
             throw new AD_CANNOT_BE_DELETED();
         }
@@ -394,7 +397,6 @@ class Phone extends Ad
             if ($stmt->error) {
                 throw new Exception("SQL execution error: " . $stmt->error);
             }
-            $results = $stmt->affected_rows;
             return true;
         } catch (Exception $e) {
             throw new DELETE_AD_FROM_SAVES_ERROR();
@@ -414,12 +416,39 @@ class Phone extends Ad
             if ($stmt->error) {
                 throw new Exception("SQL execution error: " . $stmt->error);
             }
-            $results = $stmt->affected_rows;
             return true;
         } catch (Exception $e) {
             throw new DELETE_AD_FROM_VISITS_ERROR();
         }
     }
+
+    public function saveDeletedAdData($ad_id)
+    {
+        try {
+            $sql = "SELECT user_id, brand, model, creation_date FROM oglasi WHERE ad_id = ?";
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $ad_id);
+
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($row = $result->fetch_assoc()) {
+                $sql = "INSERT INTO obrisani_oglasi (ad_id, user_id, brand, model, creation_date) 
+                    VALUES (?,?,?,?,?)";
+                $stmt = $this->con->prepare($sql);
+                $stmt->bind_param("iisss", $ad_id, $row['user_id'], $row['brand'], $row['model'], $row['creation_date']);
+                $stmt->execute();
+
+                $results = $stmt->affected_rows;
+                return $results > 0 ? true : false;
+            }
+            return false;
+        } catch (Exception $e) {
+            throw new SAVE_DELETED_AD_DATA_ERROR();
+        }
+    }
+
     public function countAllAds()
     {
         try {
@@ -489,19 +518,19 @@ class Phone extends Ad
                 $sql .= " AND (price <= $maxPrice OR price IS NULL)";
             }
 
-            if ($new && !$used && !$damaged) {
+            if ($new === 'true' && $used === 'false' && $damaged === 'false') {
                 $sql .= " AND state = 1"; // novi
-            } elseif (!$new && $used && !$damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND state = 0"; // polovni
-            } elseif (!$new && !$used && $damaged) {
+            } elseif ($new === 'false' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND damage IS NOT NULL"; // osteceni
-            } elseif ($new && $used && !$damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND (state = 1 OR state = 0)"; // novi i korisceni
-            } elseif ($new && !$used && $damaged) {
+            } elseif ($new === 'true' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR damage IS NOT NULL)"; // novi i osteceni
-            } elseif (!$new && $used && $damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
-            } elseif ($new && $used && $damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
             }
             //echo $sql;

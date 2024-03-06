@@ -65,7 +65,7 @@ require_once "../inc/headTag.php";
             <p>Da li ste sigurni da želite da obrišete oglas
                 <strong>Na prodaju novi iPhone 15 Pro Max</strong>
             </p>
-            <div class="delete-confirm" onclick="deleteAd()">
+            <div class="delete-confirm" onclick="deleteAd()" style="background-color: #ed6969">
                 <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obriši" id="delete-btn">
                 Obriši oglas
             </div>
