@@ -38,7 +38,12 @@ function login(email, password) {
             console.log(data);
             stopLoadingAnimation("login-submit");
             if (data.status === 'error') {
-                showNotification2(4, data.message, true);
+                if (data.message === 'Pogrešna email adresa ili lozinka' ||
+                    data.message === 'Došlo je do greške. Molimo pokušajte kasnije') {
+                    showNotification2(4, data.message, false);
+                } else {
+                    showNotification2(4, data.message, true);
+                }
             } else {
                 console.log('Uspesno ste se prijavili.');
                 window.location.href = "../views/index.php";
