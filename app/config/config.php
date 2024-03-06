@@ -1,5 +1,4 @@
 <?php
-session_abort();
 session_start();
 $servername = "localhost";
 $db_username = "root";

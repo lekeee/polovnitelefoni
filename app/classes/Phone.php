@@ -268,25 +268,25 @@ class Phone extends Ad
                 $sql .= " AND (price <= $maxPrice OR price IS NULL)";
             }
 
-            if ($new && !$used && !$damaged) {
+            if ($new === 'true' && $used === 'false' && $damaged === 'false') {
                 $sql .= " AND state = 1"; // novi
-            } elseif (!$new && $used && !$damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND state = 0"; // polovni
-            } elseif (!$new && !$used && $damaged) {
+            } elseif ($new === 'false' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND damage IS NOT NULL"; // osteceni
-            } elseif ($new && $used && !$damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND (state = 1 OR state = 0)"; // novi i korisceni
-            } elseif ($new && !$used && $damaged) {
+            } elseif ($new === 'true' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR damage IS NOT NULL)"; // novi i osteceni
-            } elseif (!$new && $used && $damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
-            } elseif ($new && $used && $damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
             }
 
             if ($sort !== null) {
                 if ($sort == 0) {
-                    $sql .= 'GROUP BY o.ad_id 
+                    $sql .= ' GROUP BY o.ad_id 
                     ORDER BY broj_sacuvanih DESC';
                 } else if ($sort == 1) {
                     $sql .= " ORDER BY creation_date DESC";
@@ -366,7 +366,7 @@ class Phone extends Ad
             $this->deleteAdfromSaves($ad_id);
             $this->deleteAdfromVisit($ad_id);
 
-            if($this->saveDeletedAdData($ad_id)){
+            if ($this->saveDeletedAdData($ad_id)) {
                 $sql = "DELETE FROM oglasi WHERE ad_id = ?";
                 $stmt = $this->con->prepare($sql);
                 $stmt->bind_param("i", $ad_id);
@@ -379,7 +379,7 @@ class Phone extends Ad
 
                 return $results > 0 ? true : false;
             }
-            
+
         } catch (Exception $e) {
             throw new AD_CANNOT_BE_DELETED();
         }
@@ -422,7 +422,8 @@ class Phone extends Ad
         }
     }
 
-    public function saveDeletedAdData($ad_id){
+    public function saveDeletedAdData($ad_id)
+    {
         try {
             $sql = "SELECT user_id, brand, model, creation_date FROM oglasi WHERE ad_id = ?";
 
@@ -517,19 +518,19 @@ class Phone extends Ad
                 $sql .= " AND (price <= $maxPrice OR price IS NULL)";
             }
 
-            if ($new && !$used && !$damaged) {
+            if ($new === 'true' && $used === 'false' && $damaged === 'false') {
                 $sql .= " AND state = 1"; // novi
-            } elseif (!$new && $used && !$damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND state = 0"; // polovni
-            } elseif (!$new && !$used && $damaged) {
+            } elseif ($new === 'false' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND damage IS NOT NULL"; // osteceni
-            } elseif ($new && $used && !$damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'false') {
                 $sql .= " AND (state = 1 OR state = 0)"; // novi i korisceni
-            } elseif ($new && !$used && $damaged) {
+            } elseif ($new === 'true' && $used === 'false' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR damage IS NOT NULL)"; // novi i osteceni
-            } elseif (!$new && $used && $damaged) {
+            } elseif ($new === 'false' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
-            } elseif ($new && $used && $damaged) {
+            } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
             }
             //echo $sql;
