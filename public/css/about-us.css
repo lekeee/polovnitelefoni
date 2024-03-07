@@ -1,0 +1,89 @@
+@import url('./variables.css');
+
+.mainpagediv {
+    padding-top: 40px;
+    color: black;
+}
+
+.mainpagediv h1 {
+    font-size: 34px;
+    color: black;
+    font-weight: 700;
+}
+
+.aboutuscontent {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.leftaboutuscontainer,
+.rightaboutuscontainer {
+    width: 50%;
+}
+
+.leftaboutuscontainer p {
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--greytext);
+}
+
+.leftaboutuscontainer h3 {
+    font-weight: 550;
+}
+
+.leftaboutuscontainer ul li {
+    color: var(--greytext);
+}
+
+.rightaboutuscontainer {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 1100px) {
+    .aboutuscontent {
+        flex-direction: column;
+    }
+
+    .leftaboutuscontainer,
+    .rightaboutuscontainer {
+        width: 100%;
+    }
+
+    .rightaboutuscontainer {
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .mainpagediv {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .mainpagediv {
+        width: 100%;
+    }
+
+    .rightaboutuscontainer {
+        justify-content: center;
+    }
+
+    .rightaboutuscontainer img {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .mainpagediv h1 {
+        font-size: 26px;
+    }
+
+    .mainpagediv h3 {
+        font-size: 18px;
+    }
+
+    .mainpagediv p {
+        font-size: 14px;
+    }
+}

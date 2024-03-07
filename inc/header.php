@@ -23,7 +23,8 @@ if ($user->isLogged()) {
 ?>
 <section class="header">
     <div class="w-layout-blockcontainer container firstnavbar w-container">
-        <div class="w-layout-blockcontainer container-2 w-container"><a href="#" class="link-block w-inline-block">
+        <div class="w-layout-blockcontainer container-2 w-container"><a href="../views/about-us.php"
+                class="link-block w-inline-block">
                 <div class="firstnavbartext">O nama</div>
             </a><a href="#" class="link-block w-inline-block">
                 <div class="text-block firstnavbartext">Mon nalog</div>

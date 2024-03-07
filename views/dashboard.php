@@ -48,11 +48,12 @@ require_once "../inc/headTag.php";
                         </strong>? <span class="text-span-3" onclick="signOut()">Odjavi se</span>)
                     </div>
                     <div class="text-block-42">
-                        Na kontrolnoj tabli svog naloga možete pogledati svoje 
+                        Na kontrolnoj tabli svog naloga možete pogledati svoje
                         <span class="text-span-3">nedavne porudžbine</span>
-                        , upravljati 
+                        , upravljati
                         <span class="text-span-3">adresama za isporuku i fakturisanje</span>
-                        , <span class="text-span-3" onclick="window.location.href = 'edit-account.php'">izmeniti lozinku i detalje naloga</span>
+                        , <span class="text-span-3" onclick="window.location.href = 'edit-account.php'">izmeniti lozinku
+                            i detalje naloga</span>
                         kao i <span class="text-span-3" id="delete-account">obrisati nalog</span>
                     </div>
                     <div class="text-block-42" id="delete-account-container" style="margin-top: 30px; display: none;">
@@ -77,9 +78,7 @@ require_once "../inc/headTag.php";
     require_once "../inc/footer.php";
     ?>
 
-    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=655506e07faa7f82a5f25610"
-        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
-    </script>
+    <script src="../public/js-public/jquery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/dashboard.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>

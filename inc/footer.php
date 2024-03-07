@@ -50,7 +50,7 @@
         </div>
         <div class="div-block-39">
             <h4 class="heading-2">Upoznajte Nas</h4>
-            <div class="div-block-40"><a href="#" class="link-block-7 w-inline-block">
+            <div class="div-block-40"><a href="../views/about-us.php" class="link-block-7 w-inline-block">
                     <div class="text-block-31">O Nama</div>
                 </a><a href="#" class="link-block-7 w-inline-block">
                     <div class="text-block-31">O Sajtu Polovni Telefoni</div>

@@ -1,5 +1,5 @@
 <?php
-require_once "../app/auth/checkAuthState.php";
+require_once "../app/auth/userAuthentification.php";
 if (isset($_GET['id'])) {
     $userID = $_GET['id'];
     $myId = $user->getId();
@@ -320,5 +320,7 @@ require_once "../inc/headTag.php";
         <script src="../public/js-public/rpie.js?v=<?php echo time(); ?>"></script>
         <script src="../public/js/donut.js?v=<?php echo time(); ?>"></script>
         <script src="../public/js/user.js?v=<?php echo time(); ?>"></script>
+        <script src="../public/js-public/jquery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+        <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 
 </html>
