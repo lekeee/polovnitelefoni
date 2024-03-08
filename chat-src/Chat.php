@@ -35,6 +35,7 @@ class Chat implements MessageComponentInterface
         foreach ($this->clients as $client) {
             $client->send(json_encode($data));
         }
+        $this->user->updateOnlineStatus($user_id, 1);
 
         echo "New connection! ({$conn->resourceId})\n";
     }
@@ -104,6 +105,7 @@ class Chat implements MessageComponentInterface
         foreach ($this->clients as $client) {
             $client->send(json_encode($data));
         }
+        $this->user->updateOnlineStatus($user_id, 0);
 
         $this->clients->detach($conn);
         echo "Connection {$conn->resourceId} has disconnected\n";

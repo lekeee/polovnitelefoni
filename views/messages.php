@@ -29,16 +29,12 @@ require_once "../inc/headTag.php";
                 <div class="messages-sender-container">
                     <?php
                     $token = $user->getToken($_SESSION['user_id']);
-                    $name = $userData["name"];
-                    $users = $user->selectAll();
+                    $users = $user->selectUsersWithMessages($_SESSION['user_id']);
                     $msg = new Messages();
                     $unreadData = $msg->getUnreadMessages($_SESSION['user_id']);
                     $br = 0;
 
                     foreach ($users as $userData) {
-                        if ($userData[1] == $name) {
-                            continue;
-                        }
                         foreach ($unreadData as $countUnread) {
                             if ($countUnread['sender_id'] == $userData[0]) {
                                 $br = $countUnread['count_unread'];
@@ -55,8 +51,19 @@ require_once "../inc/headTag.php";
                             <div class="profile-image-status">
                                 <img src="../public/src/userShow2.svg">
                                 <div id="status-div-<?php echo $userData[0] ?>"
-                                    class="<?php echo $userData[4] == 0 ? "offline" : "online" ?>-status-div"></div>
-
+                                    class=
+                                    "
+                                        <?php 
+                                        if($userData[16] == 1){
+                                            if($userData[17] == 1){
+                                                echo 'online';
+                                            }
+                                            else echo 'offline';
+                                        }
+                                        else echo 'offline';
+                                        ?>-status-div
+                                    ">
+                                </div>
                             </div>
                             <div class="sender-info-container">
                                 <h4 class="user-name">

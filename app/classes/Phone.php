@@ -282,7 +282,7 @@ class Phone extends Ad
                 $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
             } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
-            }
+            }  
 
             if ($sort !== null) {
                 if ($sort == 0) {
@@ -464,7 +464,7 @@ class Phone extends Ad
             }
             return 0;
         } catch (Exception $e) {
-            throw new NEWEST_AD_ERROR();
+            throw new COUNT_ALL_ADS_ERROR();
         }
     }
 
@@ -532,7 +532,7 @@ class Phone extends Ad
                 $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
             } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
-            }
+            }  
             //echo $sql;
             $result = $this->con->query($sql);
             if (!$result) {
@@ -675,6 +675,63 @@ class Phone extends Ad
             return false;
         } catch (Exception $e) {
             throw new DELETE_IMAGES_FOLDER_ERROR;
+        }
+    }
+
+    public function returnUserAds($table, $id){
+        try {
+            $sql = "SELECT * FROM $table WHERE user_id = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $ads = $result->fetch_all(MYSQLI_ASSOC);
+            if ($ads) {
+                return json_encode($ads);
+            } else {
+                return json_encode([]);
+            }
+        } catch (Exception $e) {
+            throw new RETURN_USER_ADS_ERROR();
+        }
+    }
+
+    public function brandsPrecentage($id){
+        try{
+            $activeAds = json_decode($this->returnUserAds("oglasi", $id), true);
+            $deletedAds = json_decode($this->returnUserAds("obrisani_oglasi", $id), true);
+
+            foreach ($activeAds as $ad) {
+                $brand = $ad['brand'];
+                if (!isset($brandCounts[$brand])) {
+                    $brandCounts[$brand] = 1;
+                } else {
+                    $brandCounts[$brand]++;
+                }
+            }
+
+            foreach ($deletedAds as $ad) {
+                $brand = $ad['brand'];
+                if (!isset($brandCounts[$brand])) {
+                    $brandCounts[$brand] = 1;
+                } else {
+                    $brandCounts[$brand]++;
+                }
+            }
+
+            $totalAds = count($activeAds) + count($deletedAds);
+            $brandPercentages = [];
+
+            foreach ($brandCounts as $brand => $count) {
+                $percentage = ($count / $totalAds) * 100;
+                $brandPercentages[$brand] = $percentage;
+            }
+
+            return $brandPercentages;
+        }
+        catch(Exception $e){
+            throw new BRANDS_PRECENTAGE_ERROR();
         }
     }
 }
