@@ -849,6 +849,22 @@ class User
         return false;
     }
 
+    public function updateOnlineStatus($id, $status)
+    {
+        // 0 logout 1 login
+        $sql = "UPDATE users
+                SET online_status = ?
+                WHERE user_id = ?";
+        $statement = $this->con->prepare($sql);
+        $statement->bind_param("ii", $status, $id);
+        $statement->execute();
+        $result = $statement->affected_rows;
+        if ($result == 1) {
+            return true;
+        }
+        return false;
+    }
+
     public function updateToken($id, $token)
     {
         $sql = "UPDATE users SET
@@ -918,12 +934,17 @@ class User
         }
     }
 
-    public function selectAll()
+    public function selectUsersWithMessages($id)
     {
-        $sql = "SELECT * FROM users";
-        $result = $this->con->query($sql);
-
-        if ($result->num_rows > 0) {
+        $sql = "SELECT DISTINCT u.* FROM users u 
+                INNER JOIN messages m 
+                ON u.user_id = m.sender_id OR u.user_id = m.receiver_id 
+                WHERE u.user_id <> ? AND (m.sender_id = ? OR m.receiver_id = ?)";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("iii", $id, $id, $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if($result->num_rows > 0){
             return $result->fetch_all();
         }
     }

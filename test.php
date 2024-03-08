@@ -8,3 +8,9 @@ require "app/classes/User.php";
 
 $phone = new Phone();
 $user = new User();
+
+$users = $user->selectAll();
+//var_dump($users);
+foreach( $users as $u ){
+    echo $u[17];
+}
