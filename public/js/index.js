@@ -224,13 +224,17 @@ async function updateWidgets(ads) {
                     const imageIndicator = this.getAttribute('image-indicator');
                     const parent = this.parentElement;
 
-                    parent.style.backgroundImage = `url(${imagePath})`;
+                    // Dodajte tranziciju za glatki prelaz
+                    parent.style.transition = 'background-image 0.5s ease';
+
+                    // Postavite novu sliku sa transparentnim prelazom
+                    parent.style.backgroundImage = `linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0)), url(${imagePath})`;
+
                     const indicators = parent.querySelectorAll('.imageindicatior');
                     indicators.forEach(function (indicator) {
                         indicator.classList.remove('active');
                     });
                     indicators[imageIndicator].classList.add('active');
-
                 });
             });
         })
