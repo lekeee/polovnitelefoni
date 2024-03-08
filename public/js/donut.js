@@ -6,7 +6,7 @@ function generateDonut(values, colors) {
         animationSpeed: 2,
         doughnutHoleSize: null,
         doughnutHoleColor: '#fff',
-        offset: 1,
+        offset: 0,
         pie: 'normal',
         isStrokePie: {
             stroke: 20,

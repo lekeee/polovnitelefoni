@@ -41,12 +41,15 @@
     /* background-color: var(--background-light); */
     display: flex;
     /* align-items: center; */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    padding: 20px 20px;
+    padding: 0px 20px;
+    padding-bottom: 10px;
 }
 
 .user-image-container img {
-    max-width: 200px;
+    max-width: 170px;
 }
 
 .user-short-container {
@@ -70,23 +73,26 @@
 .name-location h3 {
     margin: 0;
     padding: 0;
-    font-size: 30px;
+    font-size: 32px;
     color: black;
 }
 
+.loc-img-p {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
 .name-location img {
-    margin-left: 10px;
-    width: 16px;
+    width: 24px;
 }
 
 .name-location p {
     margin: 0;
     color: black;
+    font-size: 24px;
 }
 
-.user-rates {
-    margin-top: 30px;
-}
 
 .user-rates p {
     color: black;
@@ -99,27 +105,88 @@
     align-items: center;
 }
 
-.user-rates img {
-    width: 120px;
-    margin: 0;
-    margin-left: 10px;
+.positive-negative-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.user-rates h5 {
-    margin: 0;
-    font-size: 22px;
-    color: black;
+.positive-negative-container p {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 0px;
 }
+
+.positive-emoji {
+    cursor: pointer;
+    stroke: #29a046;
+    fill: none;
+    /* fill: white; */
+    transition-duration: .3s;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.positive-emoji line {
+    stroke: #29a046;
+}
+
+.positive-emoji path {
+    stroke: #29a046;
+}
+
+.positive-emoji:hover {
+    background-color: #29a046;
+    stroke: white;
+    border-radius: 50%;
+}
+
+.positive-emoji:hover line {
+    stroke: white;
+}
+
+.positive-emoji:hover path {
+    stroke: white;
+}
+
+.negative-emoji {
+    cursor: pointer;
+    stroke: white;
+    fill: none;
+    /* fill: white; */
+    transition-duration: .3s;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.negative-emoji:hover {
+    background-color: red;
+}
+
+.negative-emoji:hover circle {
+    stroke: white;
+}
+
+.negative-emoji:hover path {
+    stroke: white;
+}
+
 
 .user-btn {
     display: inline-block;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .user-send-message {
-    margin-top: 30px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    background-color: var(--main-color);
+    padding: 10px 17px;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 a {
@@ -132,7 +199,18 @@ a {
 }
 
 .user-send-message a {
-    color: black;
+    color: white;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+}
+
+.user-send-message.report {
+    background-color: #ffe6e6;
+}
+
+.user-send-message.report a {
+    color: #ed6969;
 }
 
 .navigation {
@@ -223,6 +301,10 @@ a {
     width: 150px;
     margin: 0;
     color: black;
+}
+
+.user-interactions {
+    margin-top: 30px;
 }
 
 .user-phone {
@@ -344,6 +426,8 @@ a {
 
 .stat-main {
     margin-top: 10px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .stat-main p {
@@ -361,6 +445,7 @@ a {
 
 .donut-container {
     display: flex;
+    align-items: start;
     flex-direction: row;
 }
 
@@ -504,7 +589,26 @@ hr {
     }
 }
 
+.not-found-container {
+    width: 100%;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    display: none;
+}
 
+.not-found-container img {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.not-found-container p {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
 
 .report-confirm {
     width: 100%;
@@ -622,5 +726,12 @@ hr {
 
     .action-container {
         display: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .about-info-row {
+        flex-direction: column;
+        margin-bottom: 5px;
     }
 }

@@ -6,7 +6,13 @@ const reportContent = document.querySelector('.report-content');
 const reportSuccess = document.querySelector('.report-success');
 const secondButton = document.querySelector('.exit');
 
-const brandColors = ['#4CAF50', '#00BCD4', '#E91E63', '#FFC107', '#9E9E9E'];
+const brandColors = [
+    '#4CAF50', '#00BCD4', '#E91E63', '#FFC107', '#9E9E9E',
+    '#FF5722', '#3F51B5', '#673AB7', '#FF9800', '#2196F3',
+    '#FFEB3B', '#9C27B0', '#03A9F4', '#F44336', '#795548',
+    '#607D8B', '#009688', '#FF5722', '#8BC34A', '#03A9F4',
+    '#FFC107', '#CDDC39', '#607D8B', '#9E9E9E', '#9C27B0'
+];
 
 getUserAds();
 
@@ -106,8 +112,23 @@ function getUserAds() {
         })
         .then(data => {
             if (data.status === 'success') {
+                if (data.numbers === 0) {
+                    document.querySelector('.not-found-container').style.display = 'flex';
+                }
                 const adsMainContainer = document.querySelector('.ads-container');
-                adsMainContainer.innerHTML = data.message;
+                if (data.numbers !== 0)
+                    adsMainContainer.innerHTML = data.message;
+
+                if (data.numbers === 0 && data.deletedAds === 0) {
+                    document.querySelector('.donut-container').innerHTML = "<i style='color: #818ea0'>Nema informacija</i>";
+                }
+
+                const deletedAdsCount = parseInt(data.deletedAds);
+                // localStorage.setItem("userAdsCount", deletedAdsCount + parseInt(data.numbers));
+                document.querySelector("#addedAds").innerHTML = deletedAdsCount + parseInt(data.numbers);
+                document.querySelector("#activeAds").innerHTML = parseInt(data.numbers);
+
+                getBrandsData();
             }
             else if (data.status === 'empty') {
                 console.log("Korisnik nema oglase");
@@ -147,12 +168,9 @@ function getBrandsData() {
         })
         .then(data => {
             if (data.status === 'success') {
-                const brands = Object.keys(data.message);
-                let values = [];
-                brands.forEach(brand => {
-                    values.push(data.message[brand]);
-                });
+                const values = createBrandsArray(data.message);
                 generateDonut(values, brandColors);
+                createDonutLegend(data.message);
             }
             else if (data.status === 'empty') {
                 console.log("Korisnik nema oglase");
@@ -165,5 +183,28 @@ function getBrandsData() {
         });
 }
 
+function createBrandsArray(data) {
+    const brands = Object.keys(data);
+    let values = [];
+    brands.forEach(brand => {
+        values.push(data[brand]);
+    });
+    return values;
+}
 
-getBrandsData();
+function createDonutLegend(data) {
+    const brands = Object.keys(data);
+    const mainBrandContainer = document.querySelector('.donut-info');
+    for (let i = 0; i < brands.length; i++) {
+        const div1 = document.createElement('div');
+        div1.classList.add('donut-info-row');
+        const div2 = document.createElement('div');
+        div2.classList.add("color-identificator");
+        div2.style.backgroundColor = brandColors[i];
+        const p1 = document.createElement('p');
+        p1.innerText = brands[i];
+        div1.appendChild(div2);
+        div1.appendChild(p1);
+        mainBrandContainer.appendChild(div1);
+    }
+}

@@ -703,7 +703,7 @@ class Phone extends Ad
         try {
             $activeAds = json_decode($this->returnUserAds("oglasi", $id), true);
             $deletedAds = json_decode($this->returnUserAds("obrisani_oglasi", $id), true);
-
+            $brandCounts = [];
             foreach ($activeAds as $ad) {
                 $brand = $ad['brand'];
                 if (!isset($brandCounts[$brand])) {

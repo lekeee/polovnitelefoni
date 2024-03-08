@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userID = $data['userID'];
             try {
                 $ads = $phone->returnUserAds("oglasi", $userID);
+                $deletedAds = $phone->returnUserAds("obrisani_oglasi", $userID);
                 if ($ads !== NULL) {
                     $res = array();
                     foreach (json_decode($ads, true) as $ad) {
@@ -23,7 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     $response = array(
                         'status' => 'success',
-                        'message' => $res
+                        'message' => $res,
+                        'numbers' => count(json_decode($ads, true)),
+                        'deletedAds' => count(json_decode($deletedAds, true))
                     );
                 } else {
                     $response = array(
