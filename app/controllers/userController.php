@@ -212,6 +212,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'message' => 'Došlo je do greške prilikom prihvatanja sacuvanih oglasa'
                 );
             }
+        } else if ($data['action'] === 'getEmailAddress') {
+            try {
+                $username = $data['username'];
+                $result = $user->getEmail($username);
+                if ($result !== NULL) {
+                    $response = array(
+                        'status' => 'success',
+                        'message' => $result
+                    );
+                } else {
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Ne postoji email'
+                    );
+                }
+            } catch (Exception $ex) {
+                $response = array(
+                    'status' => 'error',
+                    'message' => 'Došlo je do greške'
+                );
+            }
+        } else if ($data['action'] === 'reportUser') {
+            try {
+                $userId = $data['userId'];
+                $reportedId = $data['reportedId'];
+                $msg = $data['msg'];
+                $result = $user->reportUser($userId, $reportedId, $msg);
+                if ($result) {
+                    $response = array(
+                        'status' => 'success',
+                        'message' => 'Uspešno prijavljen korisnik'
+                    );
+                } else {
+                    $response = array(
+                        'status' => 'error',
+                        'message' => 'Došlo je do greške prilikom prijave korisnika'
+                    );
+                }
+            } catch (Exception $ex) {
+                $response = array(
+                    'status' => 'error',
+                    'message' => 'Došlo je do greške'
+                );
+            }
         }
     }
 } else {
@@ -222,4 +266,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 echo json_encode($response);
-?>

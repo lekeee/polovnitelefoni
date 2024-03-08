@@ -2,13 +2,15 @@
     class="div-block-52 mobilemenu">
     <div class="div-block-54">
         <div class="div-block-58"><img src="../public/src/polovnitelefoni_white.svg" loading="lazy" width="158.5"
-                alt="Logo Icon" class="image-19" /></div><img src="../public/src/close_icon.png" id="mobile-menu-close" loading="lazy"
-            width="25" data-w-id="386d0adb-87ab-cf79-835c-b53b004ddbd0" alt="Close Icon" class="image-13" />
+                alt="Logo Icon" class="image-19" /></div><img src="../public/src/close_icon.png" id="mobile-menu-close"
+            loading="lazy" width="25" data-w-id="386d0adb-87ab-cf79-835c-b53b004ddbd0" alt="Close Icon"
+            class="image-13" />
     </div>
     <div class="div-block-65">
         <div class="div-block-53">
             <div class="div-block-56 mobilemenucategories">
-                <div data-w-id="0625a947-9d0a-d78f-a5b8-ec080b610134" class="div-block-14">
+                <div data-w-id="0625a947-9d0a-d78f-a5b8-ec080b610134" class="div-block-14"
+                    style="padding-top: 20px; padding-bottom: 20px">
                     <div class="div-block-78"><img src="../public/src/hamburger_menu.png" loading="lazy" width="30"
                             alt="Hamburger Menu" />
                         <div class="text-block-41">Sve Kategorije</div>
@@ -17,6 +19,8 @@
             </div>
             <div class="div-block-62"></div><a href="#" class="link-block-10 w-inline-block">
                 <div class="text-block-36">Početna</div>
+            </a><a href="../views/about-us.php" class="link-block-10 w-inline-block">
+                <div class="text-block-36">O nama</div>
             </a><a href="#" class="link-block-10 w-inline-block">
                 <div class="text-block-36">Šop</div>
             </a><a href="#" class="link-block-10 w-inline-block">

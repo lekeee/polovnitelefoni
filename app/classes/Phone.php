@@ -366,7 +366,7 @@ class Phone extends Ad
             $this->deleteAdfromSaves($ad_id);
             $this->deleteAdfromVisit($ad_id);
 
-            if($this->saveDeletedAdData($ad_id)){
+            if ($this->saveDeletedAdData($ad_id)) {
                 $sql = "DELETE FROM oglasi WHERE ad_id = ?";
                 $stmt = $this->con->prepare($sql);
                 $stmt->bind_param("i", $ad_id);
@@ -379,7 +379,7 @@ class Phone extends Ad
 
                 return $results > 0 ? true : false;
             }
-            
+
         } catch (Exception $e) {
             throw new AD_CANNOT_BE_DELETED();
         }
@@ -422,7 +422,8 @@ class Phone extends Ad
         }
     }
 
-    public function saveDeletedAdData($ad_id){
+    public function saveDeletedAdData($ad_id)
+    {
         try {
             $sql = "SELECT user_id, brand, model, creation_date FROM oglasi WHERE ad_id = ?";
 

@@ -962,6 +962,7 @@ class User
         return $user ? json_encode($user) : null;
     }
 
+
     public function reportUser($userId, $reportedId, $msg){
         $sql = "INSERT INTO prijave (user_id, reported_id, report_msg)
                 VALUES(?,?,?)";

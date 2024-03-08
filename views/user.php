@@ -1,6 +1,12 @@
 <?php
+require_once "../app/auth/userAuthentification.php";
 if (isset($_GET['id'])) {
     $userID = $_GET['id'];
+    $myId = $user->getId();
+    if ($userID == $myId) {
+        header('Location: dashboard.php');
+        exit;
+    }
 } else {
     if (isset($_SERVER['HTTP_REFERER'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -75,7 +81,8 @@ require_once "../inc/headTag.php";
                         <div class="user-btn">
                             <div class="user-send-message">
                                 <img src="../public/src/report.svg" alt="">
-                                <a href="#">Prijavi korisnika</a>
+                                <a href="#" onclick="showReportUser(<?php echo $user->isLogged() ?>)">Prijavi
+                                    korisnika</a>
                             </div>
                         </div>
                     </div>
@@ -251,14 +258,69 @@ require_once "../inc/headTag.php";
             </div>
         </div>
     </section>
+
+    <div class="report-backgound-container">
+        <div class="report-main-container">
+            <div class="image-report-container">
+                <img src="../public/src/polovnitelefoni-only-logo.svg">
+                <p><b>Prijava korisnika</b></p>
+            </div>
+            <div class="report-content">
+                <p class="report-info">Iskazali ste želju za prijavu korisnika <b>
+                        <?php
+                        if ($profileData['name'] != null && $profileData['lastname'] != null) {
+                            echo $profileData['name'] . ' ' . $profileData['lastname'] . '.';
+                        } else {
+                            echo $profileData['username'] . '.';
+                        }
+                        ?>
+                    </b>
+                    Ukoliko smatrate da korisnik narušava pravila naše zajednice, navedite
+                    raglog vaše prijave.</p>
+
+                <div class="report-message-container">
+                    <p style="margin-bottom: 0; font-weight: 600;">RAZLOG PRIJAVE PROFILA<span
+                            style="color: red; font-weight: bold">*</span> :
+                    </p>
+                    <textarea name="report-message" class="report-message">
+                </textarea>
+                    <p class="admin-text">Nakon što prijavite profil, administratori će pogledati vašu prijavu i
+                        proveriti
+                        prijavljeni profil.
+                        Bićete blagovremeno obavešteni o ishodu.</p>
+                </div>
+                <div class="report-confirm report"
+                    onclick="reportUser(<?php echo $myId ?>, <?php echo $userID ?>, this)"
+                    style="background-color: #ed6969">
+                    <img src="../public/src/report-icon.svg?v=<?php echo time(); ?>" alt="Obriši" id="delete-btn">
+                    Prijavi korisnika
+                </div>
+            </div>
+
+            <div class="report-success">
+                <p><b>Uspešno ste prijavili korisnika. Administratori će pogledati vaš zahtev i u najkraće mogućem
+                        vremeću će vas obavestiti o ishodu.</b></p>
+            </div>
+            <div class="report-confirm exit" onclick="hiddeReportUser()">
+                <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Obriši">
+                <label>Otkaži</label>
+            </div>
+        </div>
+    </div>
+
+
+
     <?php
     require_once "../inc/subscribeForm.php";
     require_once "../inc/footer.php";
     ?>
 
     <body>
-        <script src="../public/js/user-profile.js?v=<?php echo time(); ?>"></script>
+        <script src=" ../public/js/user-profile.js?v=<?php echo time(); ?>"></script>
         <script src="../public/js-public/rpie.js?v=<?php echo time(); ?>"></script>
         <script src="../public/js/donut.js?v=<?php echo time(); ?>"></script>
+        <script src="../public/js/user.js?v=<?php echo time(); ?>"></script>
+        <script src="../public/js-public/jquery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+        <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 
 </html>
