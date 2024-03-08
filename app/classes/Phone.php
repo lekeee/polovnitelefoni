@@ -282,7 +282,7 @@ class Phone extends Ad
                 $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
             } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
-            }  
+            }
 
             if ($sort !== null) {
                 if ($sort == 0) {
@@ -532,7 +532,7 @@ class Phone extends Ad
                 $sql .= " AND (state = 0 OR damage IS NOT NULL)"; // polovni i osteceni
             } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
-            }  
+            }
             //echo $sql;
             $result = $this->con->query($sql);
             if (!$result) {
@@ -678,7 +678,8 @@ class Phone extends Ad
         }
     }
 
-    public function returnUserAds($table, $id){
+    public function returnUserAds($table, $id)
+    {
         try {
             $sql = "SELECT * FROM $table WHERE user_id = ?";
             $stmt = $this->con->prepare($sql);
@@ -697,8 +698,9 @@ class Phone extends Ad
         }
     }
 
-    public function brandsPrecentage($id){
-        try{
+    public function brandsPrecentage($id)
+    {
+        try {
             $activeAds = json_decode($this->returnUserAds("oglasi", $id), true);
             $deletedAds = json_decode($this->returnUserAds("obrisani_oglasi", $id), true);
 
@@ -729,8 +731,7 @@ class Phone extends Ad
             }
 
             return $brandPercentages;
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             throw new BRANDS_PRECENTAGE_ERROR();
         }
     }

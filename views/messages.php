@@ -1,3 +1,6 @@
+<?php
+require_once "../app/auth/checkAuthState.php";
+?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
     data-wf-site="655506e07faa7f82a5f25610">
@@ -50,17 +53,15 @@ require_once "../inc/headTag.php";
                             <input type="hidden" name="" id="user-id" value="<?php echo $userData[0] ?>">
                             <div class="profile-image-status">
                                 <img src="../public/src/userShow2.svg">
-                                <div id="status-div-<?php echo $userData[0] ?>"
-                                    class=
-                                    "
-                                        <?php 
-                                        if($userData[16] == 1){
-                                            if($userData[17] == 1){
+                                <div id="status-div-<?php echo $userData[0] ?>" class="
+                                        <?php
+                                        if ($userData[16] == 1) {
+                                            if ($userData[17] == 1) {
                                                 echo 'online';
-                                            }
-                                            else echo 'offline';
-                                        }
-                                        else echo 'offline';
+                                            } else
+                                                echo 'offline';
+                                        } else
+                                            echo 'offline';
                                         ?>-status-div
                                     ">
                                 </div>

@@ -248,9 +248,7 @@ require_once "../inc/headTag.php";
                         </div>
                         <div class="user-about-container ads-main-container">
                             <div class="ads-container">
-                                <?php
-                                require_once('../inc/widget-list.php');
-                                ?>
+
                             </div>
                         </div>
                     </div>

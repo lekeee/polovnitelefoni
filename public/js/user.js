@@ -6,6 +6,10 @@ const reportContent = document.querySelector('.report-content');
 const reportSuccess = document.querySelector('.report-success');
 const secondButton = document.querySelector('.exit');
 
+const brandColors = ['#4CAF50', '#00BCD4', '#E91E63', '#FFC107', '#9E9E9E'];
+
+getUserAds();
+
 
 userReportMainContainer.addEventListener('click', function (e) {
     e.stopPropagation();
@@ -80,3 +84,86 @@ async function sendReportRequest(userId, reportedId, msg) {
             console.log('Greska:', error);
         });
 }
+
+function getUserAds() {
+    const userID = getUserID();
+    fetch('../app/controllers/userAdsController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'getUserAds',
+            userID: userID
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                const adsMainContainer = document.querySelector('.ads-container');
+                adsMainContainer.innerHTML = data.message;
+            }
+            else if (data.status === 'empty') {
+                console.log("Korisnik nema oglase");
+            } else {
+                console.log("Doslo je do greske: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
+}
+
+function getUserID() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    return id;
+}
+
+function getBrandsData() {
+    const userID = getUserID();
+    fetch('../app/controllers/userAdsController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'getBrandsData',
+            userID: userID
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                const brands = Object.keys(data.message);
+                let values = [];
+                brands.forEach(brand => {
+                    values.push(data.message[brand]);
+                });
+                generateDonut(values, brandColors);
+            }
+            else if (data.status === 'empty') {
+                console.log("Korisnik nema oglase");
+            } else {
+                console.log("Doslo je do greske: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
+}
+
+
+getBrandsData();
