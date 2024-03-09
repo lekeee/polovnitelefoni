@@ -30,7 +30,6 @@ abstract class Ad
     abstract public function create($user_id, $brand, $model, $title, $state, $stateRange, $description, $price, $images, $availability, $damage, $accessories);
     abstract public function saveImages($uploadDirectory, $imageSrcArray);
     abstract public function select24();
-
     abstract public function read($user_id);
     abstract public function checkVisit($ip, $ad_id);
     abstract public function addVisit($ip, $ad_id);
@@ -45,9 +44,7 @@ abstract class Ad
     abstract public function deleteAd($ad_id);
     abstract public function deleteAdfromSaves($ad_id);
     abstract public function deleteAdfromVisit($ad_id);
-
     abstract public function saveDeletedAdData($ad_id);
-
     abstract public function countAllAds();
     abstract public function countAllFilteredAds($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24);
     abstract public function updateAd($ad_id, $brand, $model, $title, $state, $stateRange, $description, $price, $images, $availability, $damage, $accessories);
@@ -55,4 +52,6 @@ abstract class Ad
     abstract public function getDeviceImage($brandName, $modelName);
     abstract public function deleteImagesFromFolder($folder);
     abstract public function deleteImagesFolder($ad_id);
+    abstract public function returnUserAds($table, $id);
+    abstract public function brandsPrecentage($id);
 }

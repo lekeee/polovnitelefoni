@@ -74,3 +74,12 @@ class DELETE_IMAGES_FOLDER_ERROR extends Exception
 class SAVE_DELETED_AD_DATA_ERROR extends Exception
 {
 }
+class RETURN_USER_ADS_ERROR extends Exception
+{
+}
+class COUNT_ALL_ADS_ERROR extends Exception
+{
+}
+class BRANDS_PRECENTAGE_ERROR extends Exception
+{
+}

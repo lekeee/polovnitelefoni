@@ -6,4 +6,3 @@
 // require "app/classes/Phone.php";
 
 // $phone = new Phone();
-phpinfo();
