@@ -26,14 +26,16 @@ if ($user->isLogged()) {
         <div class="w-layout-blockcontainer container-2 w-container"><a href="../views/about-us.php"
                 class="link-block w-inline-block">
                 <div class="firstnavbartext">O nama</div>
-            </a><a href="#" class="link-block w-inline-block">
-                <div class="text-block firstnavbartext">Mon nalog</div>
+            </a><a href="<?php echo $user->isLogged() ? '../views/dashboard.php' : '../views/login.php' ?>"
+                class="link-block w-inline-block">
+                <div class="text-block firstnavbartext">Moj nalog</div>
             </a><a href="#" class="link-block w-inline-block">
                 <div class="text-block-2 firstnavbartext">Izdvojeni proizvodi</div>
-            </a><a href="#" class="link-block w-inline-block">
-                <div class="text-block-3 firstnavbartext">Lista želja</div>
+            </a><a href="../views/saved-ads.php" class="link-block w-inline-block">
+                <div class="text-block-3 firstnavbartext">Sačuvani oglasi</div>
             </a></div>
-        <div class="w-layout-blockcontainer container-3 w-container"><a href="#" class="link-block w-inline-block">
+        <div class="w-layout-blockcontainer container-3 w-container">
+            <a href="#" class="link-block w-inline-block" title="U izradi...">
                 <div class="text-block-4">Prati pošiljku</div>
             </a>
             <div data-hover="false" data-delay="0" class="dropdown w-dropdown">

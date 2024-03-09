@@ -6,7 +6,10 @@
 .animateDiv5,
 .animated-first-column,
 .animated-second-column,
-.sectionTitleContainer {
+.sectionTitleContainer,
+.user-animations-image,
+.user-animations-title,
+.user-animations-thumb {
     animation: skeleton-loading 1s linear infinite alternate;
 }
 
@@ -58,5 +61,81 @@
 
     100% {
         background-color: hsl(200, 15%, 95%);
+    }
+}
+
+
+
+/* User Profile Animations */
+
+.user-animation-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 10px;
+}
+
+.user-animations-image {
+    width: 35%;
+    height: 200px;
+}
+
+.user-animations-details {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-animations-title {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.user-animations-action {
+    width: 15%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-animations-thumb {
+    width: 45%;
+    height: 50px;
+}
+
+@media screen and (max-width: 1000px) {
+    .user-animations-action {
+        display: none;
+    }
+
+    .user-animations-details {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .user-animations-image {
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .user-animations-image {
+        height: 80px;
+        width: 30%;
+    }
+
+    .user-animations-details {
+        width: 65%;
+    }
+
+    .user-animations-title.first {
+        height: 30px;
+    }
+
+    .user-animations-title.third,
+    .user-animations-title.fourth {
+        display: none;
     }
 }
