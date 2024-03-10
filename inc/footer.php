@@ -54,8 +54,8 @@
                     <div class="text-block-31">O Nama</div>
                 </a><a href="#" class="link-block-7 w-inline-block">
                     <div class="text-block-31">O Sajtu Polovni Telefoni</div>
-                </a><a href="#" class="link-block-7 w-inline-block">
-                    <div class="text-block-31">Odnosi Ulagača</div>
+                </a><a href="../views/support.php" class="link-block-7 w-inline-block">
+                    <div class="text-block-31">Podrška</div>
                 </a><a href="#" class="link-block-7 w-inline-block">
                     <div class="text-block-31">Ocene Korisnika</div>
                 </a><a href="#" class="link-block-7 w-inline-block">

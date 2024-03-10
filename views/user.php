@@ -36,7 +36,7 @@ require_once "../inc/headTag.php";
 
     $profileData = json_decode($user->getUserDataFromId($userID), true);
     ?>
-
+    <link href="../public/css/loading-animation.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <section class="mainpageselection">
         <div class="mainpagediv">
             <div class="user-image-short-container">
@@ -162,7 +162,7 @@ require_once "../inc/headTag.php";
 
             <div class="user-image-short-container" style="margin-top: 10px">
                 <div class="user-image-container stat-main-container">
-                    <div class="stat-header">
+                    <div class="stat-header" style="margin-top: 20px">
                         <p>statistika</p>
                         <div class="text-separator-horizontal"></div>
                     </div>
@@ -304,6 +304,9 @@ require_once "../inc/headTag.php";
                         <div class="user-about-container ads-main-container">
                             <div class="ads-container-temp" style="width: 100%; height: 1px"></div>
                             <div class="ads-container">
+                                <?php
+                                include_once("../inc/loadingWidgetList.php");
+                                ?>
                                 <div class="not-found-container">
                                     <img src="../public/src/not-found.svg" alt="Nema rezultata">
                                     <p>Korisnik nema ni jedan aktivani oglas</p>
