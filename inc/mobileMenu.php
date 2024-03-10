@@ -19,28 +19,42 @@
             </div>
             <div class="div-block-62"></div><a href="#" class="link-block-10 w-inline-block">
                 <div class="text-block-36">Početna</div>
-            </a><a href="../views/about-us.php" class="link-block-10 w-inline-block">
-                <div class="text-block-36">O nama</div>
-            </a><a href="#" class="link-block-10 w-inline-block">
-                <div class="text-block-36">Šop</div>
+            </a>
             </a><a href="#" class="link-block-10 w-inline-block">
                 <div class="div-block-63">
-                    <div class="div-block-81"><img src="../public/src/mobile_phone_icon.png" loading="lazy"
+                    <div class="div-block-81"><img src="../public/src/shop-icon.svg" loading="lazy"
                             alt="Mobile Phone Icon" class="image-20" />
-                        <div class="text-block-36">Mobilni Telefoni</div>
+                        <div class="text-block-36">Šop</div>
                     </div>
                 </div>
             </a><a href="#" class="link-block-10 w-inline-block">
                 <div class="div-block-63">
-                    <div class="div-block-82"><img src="../public/src/headphones_icon.png" loading="lazy"
-                            alt="Headphones Icon" class="image-20" />
-                        <div class="text-block-36">Slušalice</div>
+                    <div class="div-block-81">
+                        <img src="../public/src/subscribe-icon.svg" loading="lazy" alt="Mobile Phone Icon"
+                            class="image-20" style="width: 18px" />
+                        <div class="text-block-36">Pretplati se</div>
                     </div>
                 </div>
-            </a><a href="#" class="link-block-10 notpad w-inline-block">
-                <div class="text-block-36">Blog</div>
             </a><a href="#" class="link-block-10 w-inline-block">
+                <div class="div-block-63">
+                    <div class="div-block-82">
+                        <div class="text-block-36">Kontakt</div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="link-block-10 w-inline-block">
+                <div class="div-block-63">
+                    <div class="div-block-82"><img src="../public/src/blog-icon.svg" loading="lazy"
+                            alt="Headphones Icon" class="image-20" style="width: 18px" />
+                        <div class="text-block-36">Blog</div>
+                    </div>
+                </div>
+            </a>
+            <a href="../views/support.php" class="link-block-10 w-inline-block">
                 <div class="text-block-36">Podrška</div>
+            </a>
+            <a href="../views/about-us.php" class="link-block-10 w-inline-block">
+                <div class="text-block-36">O nama</div>
             </a>
             <div class="div-block-62"></div><a href="#" class="link-block-10 w-inline-block">
                 <div class="text-block-36">Prati Pošiljku</div>
