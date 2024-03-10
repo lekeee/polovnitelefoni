@@ -14,20 +14,23 @@
                     <div class="div-block-78"><img src="../public/src/hamburger_menu.png" loading="lazy" width="30"
                             alt="Hamburger Menu" />
                         <div class="text-block-41">Sve Kategorije</div>
-                    </div><img src="../public/src/arrow_right.png" loading="lazy" width="14" alt="Arrow Forward Icon" />
+                    </div>
+                    <img src="../public/src/arrow_right.png" loading="lazy" width="14" alt="Arrow Forward Icon" />
                 </div>
             </div>
-            <div class="div-block-62"></div><a href="#" class="link-block-10 w-inline-block">
+            <div class="div-block-62"></div>
+            <a href="../views/index.php" class="link-block-10 w-inline-block">
                 <div class="text-block-36">Početna</div>
             </a>
-            </a><a href="#" class="link-block-10 w-inline-block">
+            <a href="" class="shopTrigger link-block-10 w-inline-block">
                 <div class="div-block-63">
                     <div class="div-block-81"><img src="../public/src/shop-icon.svg" loading="lazy"
                             alt="Mobile Phone Icon" class="image-20" />
                         <div class="text-block-36">Šop</div>
                     </div>
                 </div>
-            </a><a href="#" class="link-block-10 w-inline-block">
+            </a>
+            <a href="#" class="subscribeTrigger link-block-10 w-inline-block" style="backgroundColor: red;">
                 <div class="div-block-63">
                     <div class="div-block-81">
                         <img src="../public/src/subscribe-icon.svg" loading="lazy" alt="Mobile Phone Icon"
@@ -45,7 +48,7 @@
             <a href="#" class="link-block-10 w-inline-block">
                 <div class="div-block-63">
                     <div class="div-block-82"><img src="../public/src/blog-icon.svg" loading="lazy"
-                            alt="Headphones Icon" class="image-20" style="width: 18px" />
+                            alt="Headphones Icon" class="image-20" />
                         <div class="text-block-36">Blog</div>
                     </div>
                 </div>
@@ -185,3 +188,4 @@
         </div>
     </div>
 </div>
+<script src="../public/js/index-scroll.js?v=<?php echo time(); ?>" type="text/javascript"></script>

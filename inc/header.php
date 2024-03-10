@@ -282,4 +282,3 @@ if ($user->isLogged()) {
 </section>
 <div class="div-block-13 lineseparator"></div>
 <div data-w-id="2312cd45-42d1-6acc-59ef-08dd05adea72" class="div-block-55"></div>
-<script src="../public/js/index-scroll.js?v=<?php echo time(); ?>" type="text/javascript"></script>
