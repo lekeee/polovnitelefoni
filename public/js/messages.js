@@ -26,11 +26,6 @@ $(document).ready(function () {
             $(`#status-div-${data.user_id_status}`).addClass("offline-status-div");
         }
 
-        if(data.action == "update_seen"){
-            console.log();
-            showDeliveredOrSeenIcon();
-        }
-
         let klasa = "";
         if (data.from == "Me") {
             klasa = "sender-div";
@@ -38,7 +33,6 @@ $(document).ready(function () {
         else {
             klasa = "receiver-div";
         }
-
         if (receiverId == data.userId || data.from == "Me") {
             showDeliveredOrSeenIcon('none');
             let htmlData = `
@@ -47,17 +41,17 @@ $(document).ready(function () {
                     <small class="small-data" style="display: none">
                         ${data.dt.slice(-8).slice(0, 5)}
                     </small>
-                    <img src="../public/src/delivered-icon.svg" style="display:none; width:16px; height:16px;"></img>
+                    <img src="../public/src/delivered-icon.svg" style="display:none; width:16px; height:16px; margin-top: 2px"></img>
                 </div>
                     `;
             $('.chat-div').append(htmlData);
             $('.chat-form-div .chat-div').scrollTop($('.chat-form-div .chat-div')[0].scrollHeight);
-            if(klasa == "receiver-div"){
+            if (klasa == "receiver-div") {
                 let obj = {
                     action: "update_seen",
-                    receiverId : data.userId,
-                    senderId : data.receiverId,
-                    msgId : data.msg_id
+                    receiverId: data.userId,
+                    senderId: data.receiverId,
+                    msgId: data.msg_id
                 }
                 con.send(JSON.stringify(obj));
             }
@@ -65,14 +59,19 @@ $(document).ready(function () {
         }
         else {
             console.log("Primio si poruku");
+            if (data.action == "update_seen") {
+                console.log("azuriraj seen");
+                showDeliveredOrSeenIcon('block', true);
+            }
+            // showDeliveredOrSeenIcon("none");
             let count = $(`.count-unread-div.unread-msg-div-${data.userId}`).text();
-            showDeliveredOrSeenIcon('none');
             if (count == '') {
                 count = 0;
             }
             count++;
             $(`.count-unread-div.unread-msg-div-${data.userId}`).text(count);
             $(`.count-unread-div.unread-msg-div-${data.userId}`).css('display', 'flex');
+
         }
     }
 
@@ -166,7 +165,7 @@ async function showMessages(div) {
                             <small class="small-data" style="display: none">
                                 ${getHoursAndMinutes(response[i].sent_at)}
                             </small>
-                            <img src="../public/src/${seen}" style="display:none; width:16px; height:16px;"></img>
+                            <img src="../public/src/${seen}" style="display:none; width:16px; height:16px; margin-top: 2px"></img>
                         </div>
                             `;
                     // <img src="icons/${seen}" style="display:${displaySeen}; width:16px; height:16px;"></img>
@@ -176,7 +175,7 @@ async function showMessages(div) {
                 }
                 let obj = {
                     action: "update_seen",
-                    receiverId : receiverId
+                    receiverId: receiverId
                 }
                 con.send(JSON.stringify(obj));
                 showDeliveredOrSeenIcon();
@@ -184,11 +183,14 @@ async function showMessages(div) {
         });
 }
 
-function showDeliveredOrSeenIcon(show = 'block') {
+function showDeliveredOrSeenIcon(show = 'block', seen = false) {
     const senderDivs = document.querySelectorAll(".sender-div");
     const lastSenderDiv = senderDivs[senderDivs.length - 1];
     if (lastSenderDiv !== undefined) {
         const imgElement = lastSenderDiv.querySelector('img');
+        if (seen) {
+            imgElement.src = "../public/src/seen-icon.svg";
+        }
         imgElement.style.display = show;
     }
 }
