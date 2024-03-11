@@ -1,7 +1,7 @@
 const mainDiv = document.querySelector(".main-div");
-  const editor = document.querySelector("#editor");
-  const characterCount = document.querySelector('#character-count');
-  var currentCountvar = 0;
+const editor = document.querySelector("#editor");
+const characterCount = document.querySelector('#character-count');
+var currentCount = 0;
 
   function execCommand(command) {
     document.execCommand(command, false, null);
@@ -41,7 +41,7 @@ const mainDiv = document.querySelector(".main-div");
   function updateCharacterCount(tmp) {
     
     if (editor && characterCount) {
-      const currentCount = editor.textContent.length;
+      currentCount = editor.textContent.length;
       
       if(tmp != 0){
         currentCount += tmp;
@@ -110,13 +110,10 @@ var ce = document.querySelector('[contenteditable]')
 
 var backspaceBtn = document.querySelector('#backspace-btn');
 backspaceBtn.addEventListener('click', function () {
-    backspaceFunction();
-});
-
-function backspaceFunction() {
+    console.log(currentCount);
     if (currentCount > 0) {
-
-        editor.textContent = editor.textContent.slice(0, -1);
-        updateCharacterCount(0);
-    }
-}
+      console.log("kliknuo")
+      editor.textContent = editor.textContent.slice(0, -1);
+      updateCharacterCount(0);
+  }
+});

@@ -962,7 +962,6 @@ class User
         return $user ? json_encode($user) : null;
     }
 
-
     public function reportUser($userId, $reportedId, $msg){
         $sql = "INSERT INTO prijave (user_id, reported_id, report_msg)
                 VALUES(?,?,?)";
@@ -973,5 +972,16 @@ class User
         $results = $stmt->affected_rows;
 
         return $results > 0 ? true : false;
+    }
+
+    public function addMark($positive_or_negative, $id){
+        $sql = "UPDATE users 
+                SET $positive_or_negative = $positive_or_negative + 1
+                WHERE user_id = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+        return $results == 1 ? true : false;
     }
 }
