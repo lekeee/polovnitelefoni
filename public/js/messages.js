@@ -3,10 +3,10 @@ const usersDiv = document.querySelector(".users-div");
 const mainChatDiv = document.querySelector('.main-chat-div');
 
 let receiverId = '';
-
+let con;
 $(document).ready(function () {
     let token = $('#user-token').val();
-    let con = new WebSocket(`ws://localhost:8080?token=${token}`);
+    con = new WebSocket(`ws://localhost:8080?token=${token}`);
     let user_id = $('#login-user-id').val();
 
 
@@ -24,7 +24,11 @@ $(document).ready(function () {
         else if (data.status_type == "Offline") {
             $(`#status-div-${data.user_id_status}`).removeClass("online-status-div");
             $(`#status-div-${data.user_id_status}`).addClass("offline-status-div");
-            //! DODATI FETCH
+        }
+
+        if(data.action == "update_seen"){
+            console.log();
+            showDeliveredOrSeenIcon();
         }
 
         let klasa = "";
@@ -48,6 +52,15 @@ $(document).ready(function () {
                     `;
             $('.chat-div').append(htmlData);
             $('.chat-form-div .chat-div').scrollTop($('.chat-form-div .chat-div')[0].scrollHeight);
+            if(klasa == "receiver-div"){
+                let obj = {
+                    action: "update_seen",
+                    receiverId : data.userId,
+                    senderId : data.receiverId,
+                    msgId : data.msg_id
+                }
+                con.send(JSON.stringify(obj));
+            }
             showDeliveredOrSeenIcon();
         }
         else {
@@ -161,6 +174,11 @@ async function showMessages(div) {
                     $('.chat-div').append(htmlData);
                     $('.chat-div').scrollTop($('.chat-div')[0].scrollHeight);
                 }
+                let obj = {
+                    action: "update_seen",
+                    receiverId : receiverId
+                }
+                con.send(JSON.stringify(obj));
                 showDeliveredOrSeenIcon();
             }
         });
