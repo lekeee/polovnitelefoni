@@ -26,14 +26,16 @@ if ($user->isLogged()) {
         <div class="w-layout-blockcontainer container-2 w-container"><a href="../views/about-us.php"
                 class="link-block w-inline-block">
                 <div class="firstnavbartext">O nama</div>
-            </a><a href="#" class="link-block w-inline-block">
-                <div class="text-block firstnavbartext">Mon nalog</div>
+            </a><a href="<?php echo $user->isLogged() ? '../views/dashboard.php' : '../views/login.php' ?>"
+                class="link-block w-inline-block">
+                <div class="text-block firstnavbartext">Moj nalog</div>
             </a><a href="#" class="link-block w-inline-block">
                 <div class="text-block-2 firstnavbartext">Izdvojeni proizvodi</div>
-            </a><a href="#" class="link-block w-inline-block">
-                <div class="text-block-3 firstnavbartext">Lista želja</div>
+            </a><a href="../views/saved-ads.php" class="link-block w-inline-block">
+                <div class="text-block-3 firstnavbartext">Sačuvani oglasi</div>
             </a></div>
-        <div class="w-layout-blockcontainer container-3 w-container"><a href="#" class="link-block w-inline-block">
+        <div class="w-layout-blockcontainer container-3 w-container">
+            <a href="#" class="link-block w-inline-block" title="U izradi...">
                 <div class="text-block-4">Prati pošiljku</div>
             </a>
             <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
@@ -59,7 +61,7 @@ if ($user->isLogged()) {
                 class="image-6" /></a>
         <div class="div-block-57" style="cursor: pointer;" onclick="window.location.href='/polovnitelefoni'"><img
                 src="../public/src/polovnitelefoni.svg" loading="lazy" height="60" alt="Logo" class="image" /></div>
-        <div class="div-block-2">
+        <!-- <div class="div-block-2">
             <div class="div-block-3">
                 <div data-hover="false" data-delay="0" data-w-id="665941f7-2c5c-e618-c253-3b3a958220df"
                     class="dropdown-4 w-dropdown">
@@ -89,6 +91,12 @@ if ($user->isLogged()) {
                 <div class="w-form-done"></div>
                 <div class="w-form-fail"></div>
             </div>
+        </div> -->
+        <div class="div-block-2">
+            <input type="text" placeholder="Pretraži...">
+            <button class="searchbutton">
+                <img src="../public/src/search-icon.svg" loading="lazy" width="22" alt="Search Icon" />
+            </button>
         </div>
         <div class="div-block-5">
             <div class="div-block-6 div-block-7">
@@ -124,10 +132,12 @@ if ($user->isLogged()) {
 
                     </div>
                 </div>
-                <div class="div-block-9"><a href="../views/add-new-ad.php" class="link-block-3 w-inline-block"><img
-                            src="../public/src/add_new_ad_icon.png" width="20" alt="Add New Ad" class="image-2" />
+                <div class="div-block-9">
+                    <a href="../views/add-new-ad.php" class="link-block-3 w-inline-block">
+                        <img src="../public/src/add_new_ad_icon.png" width="20" alt="Add New Ad" class="image-2" />
                         <div class="text-block-9">Dodaj Oglas</div>
-                    </a></div>
+                    </a>
+                </div>
                 <div class="div-block-10" onclick="window.location.href='../views/saved-ads.php'">
                     <img src="../public/src/love-icon.svg?v=<?php echo time(); ?>" style="width: 30px"
                         alt="Favourite Ads Icon" class="image-3" />
@@ -228,21 +238,32 @@ if ($user->isLogged()) {
                 </nav>
             </div>
         </div>
-        <div class="div-block-15"><a href="#" class="link-block-4 w-inline-block">
+        <div class="div-block-15">
+            <a href="../views/index.php" class="link-block-4 w-inline-block">
                 <div class="text-block-13">Početna</div>
-            </a><a href="#" class="link-block-4 w-inline-block">
+            </a>
+            <a href="#" class="shopTrigger link-block-4 w-inline-block">
+                <img src="../public/src/shop-icon.svg" loading="lazy" width="20" height="20" alt="Headphones Icon"
+                    class="image-4" />
                 <div class="text-block-13">Šop</div>
-            </a><a href="#" class="link-block-4 w-inline-block"><img src="../public/src/mobile_phone_icon.png"
-                    loading="lazy" width="25" alt="Mobile Phone Icon" />
-                <div class="text-block-13">Mobilni Telefoni</div>
-            </a><a href="#" class="link-block-4 w-inline-block"><img src="../public/src/headphones_icon.png"
-                    loading="lazy" width="22" height="22" alt="Headphones Icon" class="image-4" />
-                <div class="text-block-13">Mobilni Telefoni</div>
-            </a><a href="#" class="link-block-4 w-inline-block">
-                <div class="text-block-13">Blog</div>
-            </a><a href="#" class="link-block-4 w-inline-block">
+            </a>
+            <a href="#" class="subscribeTrigger link-block-4 w-inline-block">
+                <img src="../public/src/subscribe-icon.svg" loading="lazy" width="16" height="16" alt="Headphones Icon"
+                    class="image-4" />
+                <div class="text-block-13">Pretplati se</div>
+            </a>
+            <a href="#" class="link-block-4 w-inline-block">
+                <div class="text-block-13">Kontakt</div>
+            </a>
+            <a href="#" class="link-block-4 w-inline-block" title="Uskoro!">
+                <img src="../public/src/blog-icon.svg" loading="lazy" width="22" height="22" alt="Headphones Icon"
+                    class="image-4" />
+                <div class="text-block-13" title="Uskoro!">Blog</div>
+            </a>
+            <a href="../views/support.php" class="link-block-4 w-inline-block">
                 <div class="text-block-13">Podrška</div>
-            </a></div>
+            </a>
+        </div>
         <div class="div-block-16">
             <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
                 <div class="dropdown-toggle-4 w-dropdown-toggle"><img src="../public/src/onsale_icon.jpg" loading="lazy"
@@ -252,8 +273,9 @@ if ($user->isLogged()) {
                         <div class="text-block-15">Super sniženja</div>
                     </div><img width="14" loading="lazy" alt="Arrow Down Icon" src="../public/src/arrow_down.png" />
                 </div>
-                <nav class="w-dropdown-list"><a href="#" class="w-dropdown-link">Link 1</a><a href="#"
-                        class="w-dropdown-link">Link 2</a><a href="#" class="w-dropdown-link">Link 3</a></nav>
+                <nav class="w-dropdown-list">
+                    <a href="#" class="w-dropdown-link">Uskoro!</a>
+                </nav>
             </div>
         </div>
     </div>

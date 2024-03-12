@@ -184,7 +184,7 @@ require_once "../inc/headTag.php";
                     </div>
                 </div>
             </div>
-            <div class="shopandsavecontainer">
+            <!-- <div class="shopandsavecontainer">
                 <div class="shopandsaveleftcontainertext">
                     <h1 class="shopandsavetext">Kupujte i</h1>
                     <div class="shopandsaveleftcontainerspandiv">
@@ -203,7 +203,7 @@ require_once "../inc/headTag.php";
                         </div>
                     </div><a href="#" class="button shopnowbutton w-button">Kupi odmah</a>
                 </div>
-            </div>
+            </div> -->
             <div class="threeinrowcontainers">
                 <div class="mostvisitedcontainer">
                     <?php

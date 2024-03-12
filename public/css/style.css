@@ -2445,11 +2445,36 @@ textarea.w-select {
   max-width: 500px;
   min-width: 300px;
   border: 1px solid var(--border-color);
-  border-radius: 5px;
+  border-radius: 25px;
   justify-content: space-between;
   align-items: center;
   margin: auto;
   display: none;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.div-block-2 input {
+  width: 80%;
+  height: 100%;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border: none;
+  outline: none;
+  padding-left: 30px;
+  font-weight: bold;
+}
+
+.div-block-2 input::placeholder {
+  color: var(--greytext);
+  font-weight: normal;
+}
+
+.searchbutton {
+  width: 20%;
+  height: 40px;
+  background-color: var(--third-color);
+  border-radius: 25px;
 }
 
 .image {

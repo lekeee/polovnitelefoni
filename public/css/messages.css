@@ -4,7 +4,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .back-message {
@@ -60,6 +60,21 @@
 .messages-sender-container {
     width: 100%;
     height: 600px;
+}
+
+.no-user-found {
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-light);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-user-found img {
+    width: 70%;
 }
 
 .sender-container {
