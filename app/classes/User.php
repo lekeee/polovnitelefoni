@@ -955,21 +955,50 @@ class User
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("iis", $userId, $reportedId, $msg);
         $stmt->execute();
+        $results = $stmt->affected_rows;
+
+        return $results > 0 ? true : false;
+    }
+
+    public function addRate($user_id, $rated_id, $type){
+        // type => 1 positive 0 negative
+        $sql = "INSERT INTO ocene_user (user_id, rated_id, tip)
+                VALUES (?, ?, ?)";  
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("iii", $user_id, $rated_id, $type);
+        $stmt->execute();
 
         $results = $stmt->affected_rows;
 
         return $results > 0 ? true : false;
     }
 
-    public function addMark($positive_or_negative, $id)
-    {
-        $sql = "UPDATE users 
-                SET $positive_or_negative = $positive_or_negative + 1
-                WHERE user_id = ?";
+    public function isRated($user_id, $rated_id){
+        $sql = "SELECT * FROM ocene_user 
+                WHERE user_id = ? AND rated_id = ?";
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("i", $id);
+        $stmt->bind_param("ii", $user_id, $rated_id);
         $stmt->execute();
-        $results = $stmt->affected_rows;
-        return $results == 1 ? true : false;
+        $result = $stmt->get_result();
+
+        if($result->num_rows > 0){
+            return $result->fetch_assoc();
+        }
+        else 
+            return null;
+    }
+
+    public function returnRates($rated_id){
+        $sql = "SELECT
+                 (SELECT count(*) FROM `ocene_user` WHERE rated_id = ? AND tip = 1) AS broj_pozitivnih, 
+                 (SELECT count(*) FROM `ocene_user` WHERE rated_id = ? AND tip = 0) AS broj_negativnih; ";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("ii", $rated_id, $rated_id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        if($result->num_rows > 0){
+            return $result->fetch_assoc();
+        }
     }
 }
