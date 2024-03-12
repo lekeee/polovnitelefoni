@@ -1,6 +1,7 @@
 const chatDiv = document.querySelector(".chat-form-div");
 const usersDiv = document.querySelector(".users-div");
 const mainChatDiv = document.querySelector('.main-chat-div');
+const needClickContainer = document.querySelector('.needClick');
 
 let receiverId = '';
 let con;
@@ -120,7 +121,7 @@ async function showMessages(div) {
 
     $(`.unread-msg-div-${receiverId}`).text("");
     $(`.unread-msg-div-${receiverId}`).css('display', 'none');
-    makeChatArea(receiverName);
+    makeChatArea(receiverName, receiverId);
 
     await fetch("../app/controllers/messagesController.php", {
         method: "POST",
@@ -223,16 +224,16 @@ function getMounthAndYear(dateTimeString) {
     return formattedTime;
 }
 
-function makeChatArea(receiverName) {
+function makeChatArea(receiverName, receiverId) {
     var html =
         `
     <div class="chat-form-div">
         <div class="chat-header-container">
             <img class="back-message" src="../public/src/arrow-back.svg" style="width: 20px"/>
-            <div class="chat-main-profile-image">
+            <div class="chat-main-profile-image" style="cursor: pointer;" onclick="window.location.href='../views/user.php?id=${receiverId}'">
                 <img src="../public/src/userShow2.svg">
             </div>
-            <h3>${receiverName}<h3>
+            <h3 onclick="window.location.href='../views/user.php?id=${receiverId}'">${receiverName}<h3>
         </div>
         <div class="chat-main-div">
             <div class="chat-second-div">
@@ -272,3 +273,6 @@ function makeChatArea(receiverName) {
     })
 }
 
+if (needClickContainer !== null && needClickContainer !== undefined) {
+    needClickContainer.click();
+}

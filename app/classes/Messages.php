@@ -143,4 +143,31 @@ class Messages
         return $ids;
     }
 
+    public function selectUsersWithMessages($id)
+    {
+        $sql = "SELECT DISTINCT u.* FROM users u 
+                INNER JOIN messages m 
+                ON u.user_id = m.sender_id OR u.user_id = m.receiver_id 
+                WHERE u.user_id <> ? AND (m.sender_id = ? OR m.receiver_id = ?)";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("iii", $id, $id, $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return $result->fetch_all();
+        }
+    }
+
+    public function returnLastMessage()
+    {
+        $query = "SELECT * FROM `messages` WHERE receiver_id = ? OR sender_id = ? ORDER BY sent_at DESC LIMIT 1";
+        $statement = $this->con->prepare($query);
+        $statement->bind_param("ii", $this->sender_id, $this->sender_id);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        $message = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $message;
+    }
 }

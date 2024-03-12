@@ -35,24 +35,27 @@ if ($user->isLogged()) {
                 <div class="text-block-3 firstnavbartext">Sačuvani oglasi</div>
             </a></div>
         <div class="w-layout-blockcontainer container-3 w-container">
-            <a href="#" class="link-block w-inline-block" title="U izradi...">
+            <!-- <a href="#" class="link-block w-inline-block" title="U izradi...">
                 <div class="text-block-4">Prati pošiljku</div>
-            </a>
+            </a> -->
             <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
                 <div class="dropdown-toggle seconddropdown w-dropdown-toggle">
-                    <div class="text-block-5">Srpski</div><img src="../public/src/arrow_down.png" loading="lazy"
-                        width="14" height="14" alt="Arrow Down Icon" />
+                    <div class="text-block-5">
+                        Srpski
+                    </div>
+                    <img src="../public/src/arrow_down.png" loading="lazy" width="14" height="14"
+                        alt="Arrow Down Icon" />
                 </div>
-                <nav class="dropdown-list w-dropdown-list"><a href="#" class="dropdown-link w-dropdown-link">English</a>
-                </nav>
+                <!-- <nav class="dropdown-list w-dropdown-list"><a href="#" class="dropdown-link w-dropdown-link">English</a>
+                </nav> -->
             </div>
             <div data-hover="false" data-delay="0" class="dropdown seconddropdown w-dropdown">
                 <div class="dropdown-toggle seconddropdown w-dropdown-toggle">
                     <div class="text-block-5">EUR</div><img src="../public/src/arrow_down.png" loading="lazy" width="14"
                         height="14" alt="Arrow Down Icon" />
                 </div>
-                <nav class="dropdown-list w-dropdown-list"><a href="#" class="dropdown-link w-dropdown-link">RSD</a>
-                </nav>
+                <!-- <nav class="dropdown-list w-dropdown-list"><a href="#" class="dropdown-link w-dropdown-link">RSD</a>
+                </nav> -->
             </div>
         </div>
     </div>

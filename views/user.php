@@ -125,7 +125,8 @@ require_once "../inc/headTag.php";
                                         <rect class="cls-1" height="32" width="32" />
                                     </g>
                                 </svg>
-                                <a href="#">Pošalji poruku</a>
+                                <a href="../views/messages.php?id=<?php echo $userID ?>">Pošalji
+                                    poruku</a>
                             </div>
                         </div>
                         <div class="user-btn">
@@ -304,12 +305,14 @@ require_once "../inc/headTag.php";
                         <div class="user-about-container ads-main-container">
                             <div class="ads-container-temp" style="width: 100%; height: 1px"></div>
                             <div class="ads-container">
-                                <?php
-                                include_once("../inc/loadingWidgetList.php");
-                                ?>
+                                <div class="loading-container">
+                                    <?php
+                                    include_once("../inc/loadingWidgetList.php");
+                                    ?>
+                                </div>
                                 <div class="not-found-container">
                                     <img src="../public/src/not-found.svg" alt="Nema rezultata">
-                                    <p>Korisnik nema ni jedan aktivani oglas</p>
+                                    <p>Korisnik nema ni jedan aktivni oglas</p>
                                 </div>
                             </div>
                         </div>
