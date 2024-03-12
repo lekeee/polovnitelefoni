@@ -16,6 +16,14 @@ require_once "../inc/headTag.php";
     require_once "../inc/mobileMenu.php";
     ?>
 
+    <?php
+    if ($isLogged = $user->isLogged()) {
+        $userData = json_decode($user->returnUser(), true);
+    }
+    ?>
+
+    <link href="../public/css/user.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+
     <section class="mainpageselection">
         <div class="mainpagediv">
             <!-- <img src="../public/src/polovnitelefoni.svg" alt="Polovni Telefoni logo"> -->
@@ -31,16 +39,28 @@ require_once "../inc/headTag.php";
                 <div class="support-name-lastname">
                     <div class="suport-column">
                         <p>Ime</p>
-                        <input type="text" id="name" placeholder="Unesite Vaše ime" />
+                        <input type="text" id="name" placeholder="Unesite Vaše ime" <?php
+                        if ($isLogged && $userData['name'] != null) {
+                            echo "value=" . $userData['name'];
+                        }
+                        ?> />
                     </div>
                     <div class="suport-column second">
                         <p>Prezime</p>
-                        <input type="text" id="lastname" placeholder="Unesite Vaše prezime" />
+                        <input type="text" id="lastname" placeholder="Unesite Vaše prezime" <?php
+                        if ($isLogged && $userData['lastname'] != null) {
+                            echo "value=" . $userData['lastname'];
+                        }
+                        ?> />
                     </div>
                 </div>
                 <div class="support-email-container">
                     <p>Email adresa</p>
-                    <input type="text" id="email" placeholder="Unesite Vašu email adresu" />
+                    <input type="text" id="email" placeholder="Unesite Vašu email adresu" <?php
+                    if ($isLogged && $userData['email'] != null) {
+                        echo "value=" . $userData['email'];
+                    }
+                    ?> />
                 </div>
                 <div class="support-email-container">
                     <p>Navedite problem koji imate</p>
@@ -55,12 +75,26 @@ require_once "../inc/headTag.php";
                     <!-- <input type="text" id="email" placeholder="Unesite Vašu email adresu" style="margin-top: 5px;" /> -->
                     <textarea name="description" id="description"></textarea>
                 </div>
-                <button>Kontaktiraj Podršku</button>
+                <button onclick="sendMessageToSupport()">Kontaktiraj Podršku</button>
             </div>
         </div>
     </section>
 
-
+    <div class="report-backgound-container">
+        <div class="report-main-container" style="max-width: 400px">
+            <div class="image-report-container">
+                <img src="../public/src/polovnitelefoni-only-logo.svg">
+                <p><b>Obaveštenje</b></p>
+            </div>
+            <div class="report-content">
+                <p>Vaša prijava je poslata administratorima. Bićete obavešteni o ishodu prijave putem email adrese koju
+                    ste uneli prilikom podnošenja prijave. </p>
+                <div class="report-confirm exit" style="margin-top: 20px;" onclick="hiddeReportUser()">
+                    <label>U redu</label>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php
     require_once "../inc/subscribeForm.php";
@@ -68,7 +102,10 @@ require_once "../inc/headTag.php";
     ?>
 
     <body>
+        <script src="../public/js/user.js?v=<?php echo time(); ?>"></script>
+
         <script src="../public/js-public/jquery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
         <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+        <script src="../public/js/support.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 
 </html>

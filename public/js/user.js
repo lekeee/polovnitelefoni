@@ -55,7 +55,7 @@ function reportUser(userId, reportedId, x) {
 }
 
 async function sendReportRequest(userId, reportedId, msg) {
-    fetch('../app/controllers/userController.php', {
+    await fetch('../app/controllers/userController.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
