@@ -338,6 +338,7 @@ a {
 .widget-info-container {
     padding-left: 20px;
     height: 180px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

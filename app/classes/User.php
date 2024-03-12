@@ -934,20 +934,6 @@ class User
         }
     }
 
-    public function selectUsersWithMessages($id)
-    {
-        $sql = "SELECT DISTINCT u.* FROM users u 
-                INNER JOIN messages m 
-                ON u.user_id = m.sender_id OR u.user_id = m.receiver_id 
-                WHERE u.user_id <> ? AND (m.sender_id = ? OR m.receiver_id = ?)";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("iii", $id, $id, $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if($result->num_rows > 0){
-            return $result->fetch_all();
-        }
-    }
     public function returnOtherUser($id)
     {
         $sql = "SELECT * FROM users WHERE user_id=?";
@@ -962,8 +948,8 @@ class User
         return $user ? json_encode($user) : null;
     }
 
-
-    public function reportUser($userId, $reportedId, $msg){
+    public function reportUser($userId, $reportedId, $msg)
+    {
         $sql = "INSERT INTO prijave (user_id, reported_id, report_msg)
                 VALUES(?,?,?)";
         $stmt = $this->con->prepare($sql);
@@ -973,5 +959,17 @@ class User
         $results = $stmt->affected_rows;
 
         return $results > 0 ? true : false;
+    }
+
+    public function addMark($positive_or_negative, $id)
+    {
+        $sql = "UPDATE users 
+                SET $positive_or_negative = $positive_or_negative + 1
+                WHERE user_id = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $results = $stmt->affected_rows;
+        return $results == 1 ? true : false;
     }
 }
