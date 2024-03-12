@@ -32,10 +32,76 @@ require_once "../inc/headTag.php";
                 <div class="messages-sender-container">
                     <?php
                     $token = $user->getToken($_SESSION['user_id']);
-                    $users = $user->selectUsersWithMessages($_SESSION['user_id']);
                     $msg = new Messages();
+                    $users = $msg->selectUsersWithMessages($_SESSION['user_id']);
                     $unreadData = $msg->getUnreadMessages($_SESSION['user_id']);
                     $br = 0;
+                    $notEmptyUsersDiv = false;
+
+                    if (isset($_GET['id'])) {
+                        $messagesExist = false;
+                        $receiver_id = $_GET['id'];
+                        if ($users !== NULL) {
+                            foreach ($users as $userData) {
+                                if ($userData[0] == $receiver_id) {
+                                    $messagesExist = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!$messagesExist) {
+                            $notExistUserEncoded = $user->returnOtherUser($receiver_id);
+                            if ($notExistUserEncoded !== NULL) {
+                                $notExistUser = json_decode($notExistUserEncoded, true);
+                                $notEmptyUsersDiv = true;
+                                ?>
+                                <div class="header-div">
+                                    <!-- Prepraviti da se ovo cuva u local storage -->
+                                    <input type="hidden" name="" id="login-user-id" value="<?php echo $_SESSION['user_id']; ?>">
+                                    <input type="hidden" name="" id="user-token" value="<?php echo $token; ?>">
+                                </div>
+                                <div class="sender-container needClick" onclick="showMessages(this)">
+                                    <input type="hidden" name="" id="user-id" value="<?php echo $receiver_id ?>">
+                                    <div class="profile-image-status">
+                                        <img src="../public/src/userShow2.svg">
+                                        <div id="status-div-<?php echo $receiver_id ?>" class="
+                                        <?php
+                                        if ($notExistUser['login_status'] == 1) {
+                                            if ($notExistUser['online_status'] == 1) {
+                                                echo 'online';
+                                            } else
+                                                echo 'offline';
+                                        } else
+                                            echo 'offline';
+                                        ?>-status-div
+                                    ">
+                                        </div>
+                                    </div>
+                                    <div class="sender-info-container">
+                                        <h4 class="user-name">
+                                            <?php
+                                            if ($notExistUser['name'] !== null && $notExistUser['lastname'] !== null) {
+                                                echo $notExistUser['name'] . ' ' . $notExistUser['lastname'];
+                                            } else {
+                                                echo $notExistUser['username'];
+                                            }
+                                            ?>
+                                        </h4>
+                                        <!-- <p class="user-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p> -->
+
+                                    </div>
+                                    <div class="count-unread-div unread-msg-div-<?php echo $receiver_id; ?>"
+                                        style="display:<?php echo $br != 0 ? 'flex' : 'none' ?>">
+                                        <?php
+                                        echo $br != 0 ? $br : "";
+                                        $br = 0;
+                                        ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        }
+                    }
                     if ($users !== NULL) {
                         foreach ($users as $userData) {
                             foreach ($unreadData as $countUnread) {
@@ -43,13 +109,18 @@ require_once "../inc/headTag.php";
                                     $br = $countUnread['count_unread'];
                                 }
                             }
+                            $notEmptyUsersDiv = true;
+                            $klasa = '';
+                            if (isset($_GET['id']) && $userData[0] == $receiver_id) {
+                                $klasa = 'needClick';
+                            }
                             ?>
                             <div class="header-div">
                                 <!-- Prepraviti da se ovo cuva u local storage -->
                                 <input type="hidden" name="" id="login-user-id" value="<?php echo $_SESSION['user_id']; ?>">
                                 <input type="hidden" name="" id="user-token" value="<?php echo $token; ?>">
                             </div>
-                            <div class="sender-container" onclick="showMessages(this)">
+                            <div class="sender-container <?php echo $klasa ?>" onclick="showMessages(this)">
                                 <input type="hidden" name="" id="user-id" value="<?php echo $userData[0] ?>">
                                 <div class="profile-image-status">
                                     <img src="../public/src/userShow2.svg">
@@ -76,7 +147,25 @@ require_once "../inc/headTag.php";
                                         }
                                         ?>
                                     </h4>
-                                    <p class="user-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                                    <!-- <p class="user-description"> -->
+                                    <?php
+                                    // $msg->setReceiverId($_SESSION['user_id']);
+                                    // $msg->setSenderId($userData[0]);
+                                    // $messagesEncoded = $msg->returnLastMessage();
+                                    // if ($messagesEncoded != NULL) {
+                                    //     $lastMessage = $messagesEncoded[0]['msg'];
+                                    //     if (strlen($lastMessage) > 55) {
+                                    //         $lastMessage = substr($lastMessage, 0, 55);
+                                    //         $lastMessage .= '...';
+                                    //     }
+                                    //     if ($messagesEncoded[0]['status'] == 0) {
+                                    //         echo "<b>" . $lastMessage . "</b>";
+                                    //     } else {
+                                    //         echo $lastMessage;
+                                    //     }
+                                    // }
+                                    ?>
+                                    <!-- </p> -->
 
                                 </div>
                                 <div class="count-unread-div unread-msg-div-<?php echo $userData[0]; ?>"
@@ -88,12 +177,12 @@ require_once "../inc/headTag.php";
                                 </div>
                             </div>
                         <?php }
-                    } else { ?>
-                        <div class="no-user-selected">
-                            <img src="../public/src/begin-chat.svg" style="width: 60%">
-                            <h4>Nemate poruke nisakim</h4>
-                        </div>
 
+                    } else if (!$notEmptyUsersDiv) { ?>
+                            <div class="no-user-selected">
+                                <img src="../public/src/begin-chat.svg" style="width: 60%">
+                                <h4>Nemate poruke nisakim</h4>
+                            </div>
                     <?php } ?>
                 </div>
             </div>

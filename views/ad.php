@@ -83,20 +83,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                {
-                                                                    "items": [{
-                                                                        "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                        "origFileName": "<?php echo $file; ?>",
-                                                                        "fileName": "<?php echo $file; ?>",
-                                                                        "fileSize": <?php echo filesize($putanja); ?>,
-                                                                        "height": <?php echo $height; ?>,
-                                                                        "url": "<?php echo $putanja; ?>",
-                                                                        "width": <?php echo $width; ?>,
-                                                                        "type": "image"
-                                                                    }],
-                                                                    "group": "phoneImage"
-                                                                }
-                                                            </script>
+                                                                                                    {
+                                                                                                        "items": [{
+                                                                                                            "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                                            "origFileName": "<?php echo $file; ?>",
+                                                                                                            "fileName": "<?php echo $file; ?>",
+                                                                                                            "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                                            "height": <?php echo $height; ?>,
+                                                                                                            "url": "<?php echo $putanja; ?>",
+                                                                                                            "width": <?php echo $width; ?>,
+                                                                                                            "type": "image"
+                                                                                                        }],
+                                                                                                        "group": "phoneImage"
+                                                                                                    }
+                                                                                                </script>
                                             </a>
                                         </div>
 
@@ -282,8 +282,12 @@ require_once "../inc/headTag.php";
                                                     <?php echo $adOwner['phone'] ?>
                                                 </div>
                                                 <div class="div-block-704">
-                                                    <div class="div-block-716"><img src="../public/src/message-icon.png"
-                                                            loading="lazy" alt="Message" class="image-32 messagebtn" />
+                                                    <div class="div-block-716"
+                                                        ownerid="<?php echo $adData['user_id'] ?>"
+                                                        myid="<?php echo $user->getId(); ?>"
+                                                        onclick="openMessages(this)">
+                                                        <img src="../public/src/message-icon.png" loading="lazy"
+                                                            alt="Message" class="image-32 messagebtn" />
                                                         <div class="text-block-50">Kontaktiraj vlasnika</div>
                                                     </div>
                                                 </div>

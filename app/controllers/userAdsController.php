@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $ads = $phone->returnUserAds("oglasi", $userID);
                 $deletedAds = $phone->returnUserAds("obrisani_oglasi", $userID);
-                if ($ads !== NULL) {
+                if ($ads !== NULL && $ads !== []) {
                     $res = array();
                     foreach (json_decode($ads, true) as $ad) {
                         $putanja = getMainImagePath($ad);

@@ -153,9 +153,21 @@ class Messages
         $stmt->bind_param("iii", $id, $id, $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        if($result->num_rows > 0){
+        if ($result->num_rows > 0) {
             return $result->fetch_all();
         }
     }
 
+    public function returnLastMessage()
+    {
+        $query = "SELECT * FROM `messages` WHERE receiver_id = ? OR sender_id = ? ORDER BY sent_at DESC LIMIT 1";
+        $statement = $this->con->prepare($query);
+        $statement->bind_param("ii", $this->sender_id, $this->sender_id);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        $message = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $message;
+    }
 }

@@ -948,13 +948,13 @@ class User
         return $user ? json_encode($user) : null;
     }
 
-    public function reportUser($userId, $reportedId, $msg){
+    public function reportUser($userId, $reportedId, $msg)
+    {
         $sql = "INSERT INTO prijave (user_id, reported_id, report_msg)
                 VALUES(?,?,?)";
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("iis", $userId, $reportedId, $msg);
         $stmt->execute();
-
         $results = $stmt->affected_rows;
 
         return $results > 0 ? true : false;

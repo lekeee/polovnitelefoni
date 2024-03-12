@@ -112,10 +112,11 @@ function getUserAds() {
         })
         .then(data => {
             if (data.status === 'success') {
+                const adsMainContainer = document.querySelector('.ads-container');
                 if (data.numbers === 0) {
+                    document.querySelector('.loading-container').style.display = 'none';
                     document.querySelector('.not-found-container').style.display = 'flex';
                 }
-                const adsMainContainer = document.querySelector('.ads-container');
                 if (data.numbers !== 0)
                     adsMainContainer.innerHTML = data.message;
 
