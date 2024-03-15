@@ -57,7 +57,7 @@ require_once "../inc/headTag.php";
                                     <circle cx="12" cy="12" r="10" />
                                 </svg>
 
-                                <p>10</p>
+                                <p id="positive-rates">0</p>
                             </div>
                             <div class="positive-negative-container" style="margin-left: 10px">
                                 <svg class="negative-emoji" width="37" height="37" viewBox="0 0 24 24" fill="none">
@@ -73,7 +73,7 @@ require_once "../inc/headTag.php";
                                     </g>
                                 </svg>
 
-                                <p>0</p>
+                                <p id="negative-rates">0</p>
                             </div>
                         </div>
                     </div>
