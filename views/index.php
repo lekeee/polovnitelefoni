@@ -470,11 +470,11 @@ require_once "../inc/headTag.php";
 
 
                                     if (json_last_error() !== JSON_ERROR_NONE) {
-                                        die('Greška pri čitanju JSON datoteke.');
+                                        die ('Greška pri čitanju JSON datoteke.');
                                     }
 
                                     foreach ($dataJSON as $brand) {
-                                        if (!empty($brand["device_list"])) {
+                                        if (!empty ($brand["device_list"])) {
                                             echo "
                                                     <div class='custom-dropdown-menu'>
                                                         <div class='dropdown-click-toggler'>
@@ -579,7 +579,7 @@ require_once "../inc/headTag.php";
                     <div class="productsmainconatinerhead">
                         <div class="productsmaincontainer">
                             <?php
-                            include_once("../inc/loadingWidget.php");
+                            include_once ("../inc/loadingWidget.php");
                             ?>
                         </div>
                     </div>
@@ -598,7 +598,9 @@ require_once "../inc/headTag.php";
             </div>
         </div>
     </section>
-
+    <?php
+    require_once "../inc/message-button.php";
+    ?>
     <?php
     require_once "../inc/subscribeForm.php";
     require_once "../inc/footer.php";
