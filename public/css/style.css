@@ -6531,3 +6531,22 @@ textarea.w-select {
 .removeFiltersLabel:hover {
   font-weight: bold;
 }
+
+.no-result-main-container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-result-main-container img {
+  width: 100px;
+}
+
+.no-result-main-container p {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
+}

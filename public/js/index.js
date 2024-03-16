@@ -168,6 +168,25 @@ async function FilterData(params, restart) {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
+                if (data.message.length == 0) {
+                    console.log("nema rezultata");
+                    // ! Dodati identifikator da nema rezultata
+                    const div1 = document.createElement('div');
+                    div1.classList.add('no-result-main-container');
+                    const img1 = document.createElement('img');
+                    img1.src = '../public/src/not-found.svg';
+                    const p1 = document.createElement('p');
+                    p1.innerHTML = "Nije pronađen nijedan rezultat!";
+                    div1.appendChild(img1);
+                    div1.appendChild(p1);
+                    const mainElement = document.querySelector('.productsmaincontainer');
+                    mainElement.innerHTML = '';
+                    mainElement.appendChild(div1);
+                    document.querySelector('.loadmorecontainer').style.display = 'none';
+                    scrollIntoAds();
+                    return;
+                }
+                document.querySelector('.loadmorecontainer').style.display = 'flex';
                 cacheAdsCounter(data.message.length);
                 loadingAnimationContainer.forEach(element => {
                     document.querySelectorAll('.productsmaincontainer')[0].removeChild(element);
@@ -178,7 +197,7 @@ async function FilterData(params, restart) {
                 }
                 let jsonmodels = JSON.stringify(data.message);
                 updateWidgets(jsonmodels);
-                if (restart) document.querySelectorAll('.productsmaincontainer')[0].scrollIntoView({ behavior: 'smooth' });
+                if (restart) scrollIntoAds();
                 // params.action = 'countFilteredData';
                 params.set('action', 'countFilteredData');
                 showAllAdsCounter(params);
@@ -186,7 +205,15 @@ async function FilterData(params, restart) {
         })
         .catch(error => console.error('Došlo je do greške:', error));
 }
+function scrollIntoAds() {
+    var mainContainer = document.querySelector('.productsmaincontainer');
 
+    var mainContainerTop = mainContainer.getBoundingClientRect().top;
+    window.scrollTo({
+        top: window.scrollY + mainContainerTop - 100,
+        behavior: 'smooth'
+    });
+}
 async function updateWidgets(ads) {
     document.querySelectorAll('.loadmorebutton')[0].style.display = 'block';
     await fetch('../inc/widget.php', {
