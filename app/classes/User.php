@@ -166,7 +166,7 @@ class User
                 if ($user["verified"] == 0) {
                     throw new ACCOUNT_NOT_VERIFIED();
                 }
-                if (password_verify($password, $user['password'])) {
+                if ($user['password'] != null && password_verify($password, $user['password'])) {
                     $_SESSION['user_id'] = $user['user_id'];
                     $user_token = md5(uniqid());
                     $this->updateToken($user['user_id'], $user_token);

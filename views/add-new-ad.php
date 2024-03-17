@@ -21,9 +21,9 @@ require_once "../inc/headTag.php";
     <section class="dashboard">
         <div class="div-block-676">
             <div class="div-block-677">
-                <?php require_once('../inc/dashboard-navigation.php') ?>
+                <?php require_once ('../inc/dashboard-navigation.php') ?>
                 <script>
-                    document.querySelectorAll('.dashboardlinks')[1].classList.add('active');
+                    document.querySelectorAll('.dashboardlinks')[2].classList.add('active');
                 </script>
                 <?php
 
@@ -33,7 +33,7 @@ require_once "../inc/headTag.php";
                     && $userData['phone'] !== null && $userData['city'] !== null
                     && $userData['address'] !== null
                 )
-                    include_once("add-new-ad-part.php");
+                    include_once ("add-new-ad-part.php");
                 else
                     echo '
                             <div class="noUserData">

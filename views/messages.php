@@ -27,7 +27,7 @@ require_once "../inc/headTag.php";
                     <div class="search-icon-container">
                         <img src="../public/src/search-icon.svg" width="24">
                     </div>
-                    <input type="text" placeholder="Pretraži">
+                    <input id="search-bar" type="text" placeholder="Pretraži">
                 </div>
                 <div class="messages-sender-container">
                     <?php
@@ -38,7 +38,7 @@ require_once "../inc/headTag.php";
                     $br = 0;
                     $notEmptyUsersDiv = false;
 
-                    if (isset($_GET['id'])) {
+                    if (isset ($_GET['id'])) {
                         $messagesExist = false;
                         $receiver_id = $_GET['id'];
                         if ($users !== NULL) {
@@ -60,7 +60,7 @@ require_once "../inc/headTag.php";
                                     <input type="hidden" name="" id="login-user-id" value="<?php echo $_SESSION['user_id']; ?>">
                                     <input type="hidden" name="" id="user-token" value="<?php echo $token; ?>">
                                 </div>
-                                <div class="sender-container needClick" onclick="showMessages(this)">
+                                <div class="sender-container needClick">
                                     <input type="hidden" name="" id="user-id" value="<?php echo $receiver_id ?>">
                                     <div class="profile-image-status">
                                         <img src="../public/src/userShow2.svg">
@@ -111,7 +111,7 @@ require_once "../inc/headTag.php";
                             }
                             $notEmptyUsersDiv = true;
                             $klasa = '';
-                            if (isset($_GET['id']) && $userData[0] == $receiver_id) {
+                            if (isset ($_GET['id']) && $userData[0] == $receiver_id) {
                                 $klasa = 'needClick';
                             }
                             ?>
@@ -120,7 +120,7 @@ require_once "../inc/headTag.php";
                                 <input type="hidden" name="" id="login-user-id" value="<?php echo $_SESSION['user_id']; ?>">
                                 <input type="hidden" name="" id="user-token" value="<?php echo $token; ?>">
                             </div>
-                            <div class="sender-container <?php echo $klasa ?>" onclick="showMessages(this)">
+                            <div class="sender-container <?php echo $klasa ?>">
                                 <input type="hidden" name="" id="user-id" value="<?php echo $userData[0] ?>">
                                 <div class="profile-image-status">
                                     <img src="../public/src/userShow2.svg">
@@ -202,7 +202,7 @@ require_once "../inc/headTag.php";
     require_once "../inc/footer.php";
     ?>
     <script src="../public/js-public/jquery.js"></script>
-    <script src="../public/js/messages.js?=<?php echo time(); ?>"></script>
+    <script src="../public/js/messages.js?=<?php echo time(); ?>" type="module"></script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>
 
