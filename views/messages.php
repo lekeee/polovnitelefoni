@@ -38,7 +38,7 @@ require_once "../inc/headTag.php";
                     $br = 0;
                     $notEmptyUsersDiv = false;
 
-                    if (isset($_GET['id'])) {
+                    if (isset ($_GET['id'])) {
                         $messagesExist = false;
                         $receiver_id = $_GET['id'];
                         if ($users !== NULL) {
@@ -60,7 +60,7 @@ require_once "../inc/headTag.php";
                                     <input type="hidden" name="" id="login-user-id" value="<?php echo $_SESSION['user_id']; ?>">
                                     <input type="hidden" name="" id="user-token" value="<?php echo $token; ?>">
                                 </div>
-                                <div class="sender-container needClick"">
+                                <div class="sender-container needClick">
                                     <input type="hidden" name="" id="user-id" value="<?php echo $receiver_id ?>">
                                     <div class="profile-image-status">
                                         <img src="../public/src/userShow2.svg">
@@ -111,7 +111,7 @@ require_once "../inc/headTag.php";
                             }
                             $notEmptyUsersDiv = true;
                             $klasa = '';
-                            if (isset($_GET['id']) && $userData[0] == $receiver_id) {
+                            if (isset ($_GET['id']) && $userData[0] == $receiver_id) {
                                 $klasa = 'needClick';
                             }
                             ?>
