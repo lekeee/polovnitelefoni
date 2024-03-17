@@ -256,6 +256,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'message' => 'Došlo je do greške'
                 );
             }
+        } else if ($data['action'] === 'returnRates') {
+            $response = returnRates($user, $data);
+        } else if ($data['action'] === 'rateUser') {
+            $response = rateUser($user, $data);
         }
     }
 } else {
@@ -266,3 +270,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 echo json_encode($response);
+
+function returnRates($user, $data)
+{
+    try {
+        $userId = $data['userID'];
+        $result = $user->returnRates($userId);
+        $result2 = false;
+        if ($user->isLogged()) {
+            $result2 = $user->isRated($user->getId(), $userId);
+        }
+        if ($result !== null) {
+            $response = [
+                'status' => 'success',
+                'message' => $result,
+                'isRated' => $result2,
+            ];
+        } else {
+            $response = [
+                'status' => 'empty',
+                'message' => 'Još uvek nema ocenass'
+            ];
+        }
+    } catch (Exception $e) {
+        $response = [
+            'status' => 'error',
+            'message' => 'Doslo je do greske prilikom pribavljanja ocena'
+        ];
+    }
+    return $response;
+}
+
+function rateUser($user, $data)
+{
+    try {
+        $userId = $data['userID'];
+        $type = $data['tip'];
+        $result = $user->addRate($user->getId(), $userId, $type);
+        if ($result !== false) {
+            $response = [
+                'status' => 'success',
+                'message' => $result,
+            ];
+        } else {
+            $response = [
+                'status' => 'error',
+                'message' => 'Došlo je do greške prilikom ocenjivanja korisnika'
+            ];
+        }
+    } catch (Exception $e) {
+        $response = [
+            'status' => 'error',
+            'message' => 'Doslo je do greske prilikom ocenjivanja korisnika'
+        ];
+    }
+    return $response;
+}

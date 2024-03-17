@@ -150,6 +150,20 @@
     stroke: white;
 }
 
+.positive-emoji.active {
+    background-color: #29a046;
+    stroke: white;
+    border-radius: 50%;
+}
+
+.positive-emoji.active line {
+    stroke: white;
+}
+
+.positive-emoji.active path {
+    stroke: white;
+}
+
 .negative-emoji {
     cursor: pointer;
     stroke: white;
@@ -169,6 +183,18 @@
 }
 
 .negative-emoji:hover path {
+    stroke: white;
+}
+
+.negative-emoji.active {
+    background-color: red;
+}
+
+.negative-emoji.active circle {
+    stroke: white;
+}
+
+.negative-emoji.active path {
     stroke: white;
 }
 

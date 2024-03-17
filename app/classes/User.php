@@ -960,20 +960,42 @@ class User
         return $results > 0 ? true : false;
     }
 
-    public function addRate($user_id, $rated_id, $type){
-        // type => 1 positive 0 negative
-        $sql = "INSERT INTO ocene_user (user_id, rated_id, tip)
-                VALUES (?, ?, ?)";  
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("iii", $user_id, $rated_id, $type);
-        $stmt->execute();
+    public function addRate($user_id, $rated_id, $type)
+    {
+        $check_sql = "SELECT COUNT(*) as count FROM ocene_user WHERE user_id = ? AND rated_id = ?";
+        $check_stmt = $this->con->prepare($check_sql);
+        $check_stmt->bind_param("ii", $user_id, $rated_id);
+        $check_stmt->execute();
+        $check_result = $check_stmt->get_result();
+        $row = $check_result->fetch_assoc();
+        $count = $row['count'];
 
-        $results = $stmt->affected_rows;
+        $this->con->begin_transaction();
 
-        return $results > 0 ? true : false;
+        if ($count > 0) {
+            $update_sql = "UPDATE ocene_user SET tip = ? WHERE user_id = ? AND rated_id = ?";
+            $update_stmt = $this->con->prepare($update_sql);
+            $update_stmt->bind_param("iii", $type, $user_id, $rated_id);
+            $update_stmt->execute();
+            $rows_affected = $update_stmt->affected_rows;
+        } else {
+            $insert_sql = "INSERT INTO ocene_user (user_id, rated_id, tip) VALUES (?, ?, ?)";
+            $insert_stmt = $this->con->prepare($insert_sql);
+            $insert_stmt->bind_param("iii", $user_id, $rated_id, $type);
+            $insert_stmt->execute();
+            $rows_affected = $insert_stmt->affected_rows;
+        }
+
+        $this->con->commit();
+
+        $success = $rows_affected > 0;
+
+        return $success;
+
     }
 
-    public function isRated($user_id, $rated_id){
+    public function isRated($user_id, $rated_id)
+    {
         $sql = "SELECT * FROM ocene_user 
                 WHERE user_id = ? AND rated_id = ?";
         $stmt = $this->con->prepare($sql);
@@ -981,24 +1003,26 @@ class User
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if($result->num_rows > 0){
+        if ($result->num_rows > 0) {
             return $result->fetch_assoc();
-        }
-        else 
+        } else
             return null;
     }
 
-    public function returnRates($rated_id){
+    public function returnRates($rated_id)
+    {
         $sql = "SELECT
                  (SELECT count(*) FROM `ocene_user` WHERE rated_id = ? AND tip = 1) AS broj_pozitivnih, 
                  (SELECT count(*) FROM `ocene_user` WHERE rated_id = ? AND tip = 0) AS broj_negativnih; ";
+
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("ii", $rated_id, $rated_id);
         $stmt->execute();
 
         $result = $stmt->get_result();
-        if($result->num_rows > 0){
+        if ($result->num_rows > 0) {
             return $result->fetch_assoc();
         }
+        return null;
     }
 }
