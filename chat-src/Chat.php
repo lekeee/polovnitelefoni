@@ -54,7 +54,7 @@ class Chat implements MessageComponentInterface
 
         $data = json_decode($msg, true);
 
-        if($data['action'] == "update_seen"){
+        if(isset($data['action']) && $data['action'] == "update_seen"){
             //$senderData = json_decode($this->user->returnOtherUser($data['senderId']), true);
             $receiverData = json_decode($this->user->returnOtherUser($data['receiverId']), true);
 

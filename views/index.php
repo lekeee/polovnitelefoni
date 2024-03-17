@@ -465,8 +465,9 @@ require_once "../inc/headTag.php";
                                     data-wf-element-id="76941605-2b56-9887-edca-674a10bd80eb">
 
                                     <?php
-                                    $jsonContent = file_get_contents('../public/JSON/sortedData.json');
+                                    $jsonContent = file_get_contents('../public/JSON/sortedDataNew.json');
                                     $dataJSON = json_decode($jsonContent, true);
+                                    $ourData = json_decode($phone->returnBrandsAndModels(), true);
 
 
                                     if (json_last_error() !== JSON_ERROR_NONE) {
@@ -474,30 +475,41 @@ require_once "../inc/headTag.php";
                                     }
 
                                     foreach ($dataJSON as $brand) {
-                                        if (!empty($brand["device_list"])) {
-                                            echo "
-                                                    <div class='custom-dropdown-menu'>
-                                                        <div class='dropdown-click-toggler'>
-                                                            <div class='custom-checkbox-group'>
-                                                                <input type='checkbox' id='{$brand['key']}Checkbox' class='custom-brand-checkbox' data-target='{$brand['key']}Dropdown'>
-                                                                <label for='{$brand['key']}Checkbox'>{$brand['brand_name']}</label>
-                                                            </div>
-                                                            <label class='openDropDown'>+</label>
-                                                        </div>";
 
-                                            echo "
-                                                        <div class='custom-dropdown' id='{$brand['key']}Dropdown'>";
-                                            foreach ($brand['device_list'] as $model) {
-                                                if (stripos($model['device_name'], "watch") === false) {
+                                        foreach($ourData as $ourBrand){
+
+                                            if ($ourBrand['brand'] === $brand['brand_name']) {
+
+                                                if (!empty($brand["device_list"])) {
                                                     echo "
-                                                                <div class='custom-dropdown-item' brand-selector={$brand['brand_name']}>
-                                                                    <input type='checkbox' id='{$model['device_name']}Checkbox'>
-                                                                    <label for='{$model['device_name']}Checkbox'>{$model['device_name']}</label>
-                                                                </div>
-                                                            ";
+                                                            <div class='custom-dropdown-menu'>
+                                                                <div class='dropdown-click-toggler'>
+                                                                    <div class='custom-checkbox-group'>
+                                                                        <input type='checkbox' id='{$brand['key']}Checkbox' class='custom-brand-checkbox' data-target='{$brand['key']}Dropdown'>
+                                                                        <label for='{$brand['key']}Checkbox'>{$brand['brand_name']}</label>
+                                                                    </div>
+                                                                    <label class='openDropDown'>+</label>
+                                                                </div>";
+
+                                                    echo "
+                                                                <div class='custom-dropdown' id='{$brand['key']}Dropdown'>";
+                                                    foreach ($brand['device_list'] as $model) {
+                                                        foreach($ourData as $ourModel){
+                                                            if (stripos($model['device_name'], "watch") === false && $model['device_name'] === $ourModel['model']) {
+                                                                echo "
+                                                                        <div class='custom-dropdown-item' brand-selector={$brand['brand_name']}>
+                                                                            <input type='checkbox' id='{$model['device_name']}Checkbox'>
+                                                                            <label for='{$model['device_name']}Checkbox'>{$model['device_name']}</label>
+                                                                        </div>
+                                                                    ";
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                    echo "</div></div>";
+                                                    break;
                                                 }
                                             }
-                                            echo "</div></div>";
                                         }
                                     }
                                     ?>

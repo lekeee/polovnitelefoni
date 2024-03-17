@@ -735,4 +735,17 @@ class Phone extends Ad
             throw new BRANDS_PRECENTAGE_ERROR();
         }
     }
+
+    public function returnBrandsAndModels(){
+        try{
+            $sql = "SELECT DISTINCT brand, model FROM oglasi";
+            $stmt = $this->con->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return json_encode($result->fetch_all(MYSQLI_ASSOC));
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }

@@ -553,6 +553,10 @@
     }
 }
 
+.hide {
+    display: none;
+}
+
 /* 
 body {
     display: flex;

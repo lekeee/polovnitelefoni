@@ -3,7 +3,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     $brandName = $data['brandName'];
 
-    $jsonContent = file_get_contents('../public/JSON/sortedData.json');
+    $jsonContent = file_get_contents('../public/JSON/sortedDataNew.json');
     $dataJSON = json_decode($jsonContent, true);
 
     if (json_last_error() !== JSON_ERROR_NONE) {
@@ -23,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $options = '';
 
         foreach ($foundBrand['device_list'] as $model) {
-            $options .= "<option value='{$model['device_name']}'>{$model['device_name']}</option>";
+            if (stripos($model['device_name'], "watch") === false) 
+                $options .= "<option value='{$model['device_name']}'>{$model['device_name']}</option>";
         }
 
         $response = array(

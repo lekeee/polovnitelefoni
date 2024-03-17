@@ -21,6 +21,20 @@ if ($user->isLogged()) {
         $mySaves = 0;
 }
 ?>
+
+<?php
+if ($user->isLogged()) {
+?> 
+<script src="../public/js/websocket.js" type="module"></script>
+<audio src="../public/audio/alert_tone.mp3" id="audio-tag" muted style="display:none"></audio>
+<?php
+    $token = $user->getToken($_SESSION['user_id']);
+    echo "<script>";
+    echo "localStorage.setItem('token', '" . $token . "');";
+    echo "</script>";
+}
+?>
+
 <section class="header">
     <div class="w-layout-blockcontainer container firstnavbar w-container">
         <div class="w-layout-blockcontainer container-2 w-container"><a href="../views/about-us.php"

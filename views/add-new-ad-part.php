@@ -79,7 +79,7 @@
                 <div class="div-block-747 slider-container">
                     <input type="range" min="0" max="10" step="0.1" value="0" id="myRange" oninput="updateValue()">
                     <div
-                        style="display: flex; flex-direction: row; align-item: center; justify-content: space-between; width: 100%">
+                        style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%">
                         <p style="display: inline-block;">0</p>
                         <p style="display: inline-block;">10</p>
 

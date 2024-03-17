@@ -1,5 +1,5 @@
 <?php
-    $jsonContent = file_get_contents('../public/JSON/sortedData.json');
+    $jsonContent = file_get_contents('../public/JSON/sortedDataNew.json');
     $dataJSON = json_decode($jsonContent, true);
 
     if (json_last_error() !== JSON_ERROR_NONE) {
