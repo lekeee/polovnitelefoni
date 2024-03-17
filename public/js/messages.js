@@ -10,7 +10,7 @@ let userElements = [];
 let receiverId = '';
 //let con;
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     //let token = $('#user-token').val();
     //con = new WebSocket(`ws://localhost:8080?token=${token}`);
     let user_id = $('#login-user-id').val();
@@ -175,13 +175,13 @@ export async function showMessages(div) {
                     // <img src="icons/${seen}" style="display:${displaySeen}; width:16px; height:16px;"></img>
 
                     $('.chat-div').append(htmlData);
-                    
+
                     $('.chat-div').scrollTop($('.chat-div')[0].scrollHeight);
                 }
                 console.log(response[response.length - 1])
                 console.log(user_id)
-                
-                if(response[response.length - 1].receiver_id == user_id){
+
+                if (response[response.length - 1].receiver_id == user_id) {
                     let obj = {
                         action: "update_seen",
                         receiverId: receiverId,
@@ -189,12 +189,12 @@ export async function showMessages(div) {
                     }
                     con.send(JSON.stringify(obj));
                 }
-                else{
+                else {
                     console.log("uso")
                     showDeliveredOrSeenIcon();
                 }
-                    
-                setShowHide(); 
+
+                setShowHide();
             }
         });
 }
@@ -207,6 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessages(container);
         });
     });
+    if (needClickContainer !== null && needClickContainer !== undefined) {
+        needClickContainer.click();
+    }
 });
 
 function showDeliveredOrSeenIcon(show = 'block', seen = false) {
@@ -221,18 +224,18 @@ function showDeliveredOrSeenIcon(show = 'block', seen = false) {
     }
 }
 
-function setShowHide(){
+function setShowHide() {
     const senderDivs = document.querySelectorAll('.sender-div');
     const receiverDivs = document.querySelectorAll('.receiver-div');
 
     senderDivs.forEach(element => {
-        element.addEventListener("click", function(){
+        element.addEventListener("click", function () {
             showHideTime(element);
         })
     });
 
     receiverDivs.forEach(element => {
-        element.addEventListener("click", function(){
+        element.addEventListener("click", function () {
             showHideTime(element);
         })
     });
@@ -312,10 +315,6 @@ function makeChatArea(receiverName, receiverId) {
         mainElement.classList.remove('active');
         mainElement.classList.add('deactive');
     })
-}
-
-if (needClickContainer !== null && needClickContainer !== undefined) {
-    needClickContainer.click();
 }
 
 senderContainers.forEach(container => {
