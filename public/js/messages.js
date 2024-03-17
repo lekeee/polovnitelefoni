@@ -1,15 +1,19 @@
+import { con } from "./websocket.js";
+
 const chatDiv = document.querySelector(".chat-form-div");
 const usersDiv = document.querySelector(".users-div");
 const mainChatDiv = document.querySelector('.main-chat-div');
 const needClickContainer = document.querySelector('.needClick');
-
+const senderContainers = document.querySelectorAll('.sender-container');
+const searchBar = document.querySelector("#search-bar");
+let userElements = [];
 let receiverId = '';
-let con;
-$(document).ready(function () {
-    let token = $('#user-token').val();
-    con = new WebSocket(`ws://localhost:8080?token=${token}`);
-    let user_id = $('#login-user-id').val();
+//let con;
 
+document.addEventListener("DOMContentLoaded", function() {
+    //let token = $('#user-token').val();
+    //con = new WebSocket(`ws://localhost:8080?token=${token}`);
+    let user_id = $('#login-user-id').val();
 
     con.onopen = function (e) {
         console.log("uspesna konekcija!");
@@ -37,7 +41,7 @@ $(document).ready(function () {
         if (receiverId == data.userId || data.from == "Me") {
             showDeliveredOrSeenIcon('none');
             let htmlData = `
-                <div class=${klasa} style="margin-bottom: 5px;" onclick="showHideTime(this)" title="${data.dt.slice(0, 10)}"> 
+                <div class=${klasa} style="margin-bottom: 5px;" title="${data.dt.slice(0, 10)}"> 
                     <p class="message-data">${data.message}</p>
                     <small class="small-data" style="display: none">
                         ${data.dt.slice(-8).slice(0, 5)}
@@ -46,6 +50,8 @@ $(document).ready(function () {
                 </div>
                     `;
             $('.chat-div').append(htmlData);
+            setShowHide();
+
             $('.chat-form-div .chat-div').scrollTop($('.chat-form-div .chat-div')[0].scrollHeight);
             if (klasa == "receiver-div") {
                 let obj = {
@@ -59,8 +65,8 @@ $(document).ready(function () {
             showDeliveredOrSeenIcon();
         }
         else {
-            console.log("Primio si poruku");
-            if (data.action == "update_seen") {
+            //console.log("Primio si poruku");
+            if (data.action == "update_seen" && data.receiverId == user_id) {
                 console.log("azuriraj seen");
                 showDeliveredOrSeenIcon('block', true);
             }
@@ -72,7 +78,6 @@ $(document).ready(function () {
             count++;
             $(`.count-unread-div.unread-msg-div-${data.userId}`).text(count);
             $(`.count-unread-div.unread-msg-div-${data.userId}`).css('display', 'flex');
-
         }
     }
 
@@ -91,7 +96,6 @@ $(document).ready(function () {
                 message: msg,
                 receiverId: receiverId,
             }
-
             con.send(JSON.stringify(data));
         }
 
@@ -107,7 +111,7 @@ function removeAllActiveSender() {
     });
 }
 
-async function showMessages(div) {
+export async function showMessages(div) {
 
     const mainElement = document.querySelector(".messages-main-div");
     mainElement.classList.remove('deactive');
@@ -159,9 +163,8 @@ async function showMessages(div) {
                         displaySeen = "none";
                     }
 
-
                     let htmlData = `
-                        <div class=${klasa} style="margin-bottom: 5px;" onclick="showHideTime(this)" title="${getMounthAndYear(response[i].sent_at)}"> 
+                        <div class=${klasa} style="margin-bottom: 5px;" title="${getMounthAndYear(response[i].sent_at)}"> 
                             <p class="message-data">${response[i].msg}</p>
                             <small class="small-data" style="display: none">
                                 ${getHoursAndMinutes(response[i].sent_at)}
@@ -172,17 +175,39 @@ async function showMessages(div) {
                     // <img src="icons/${seen}" style="display:${displaySeen}; width:16px; height:16px;"></img>
 
                     $('.chat-div').append(htmlData);
+                    
                     $('.chat-div').scrollTop($('.chat-div')[0].scrollHeight);
                 }
-                let obj = {
-                    action: "update_seen",
-                    receiverId: receiverId
+                console.log(response[response.length - 1])
+                console.log(user_id)
+                
+                if(response[response.length - 1].receiver_id == user_id){
+                    let obj = {
+                        action: "update_seen",
+                        receiverId: receiverId,
+                        senderId: user_id
+                    }
+                    con.send(JSON.stringify(obj));
                 }
-                con.send(JSON.stringify(obj));
-                showDeliveredOrSeenIcon();
+                else{
+                    console.log("uso")
+                    showDeliveredOrSeenIcon();
+                }
+                    
+                setShowHide(); 
             }
         });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const senderContainers = document.querySelectorAll('.sender-container');
+
+    senderContainers.forEach(container => {
+        container.addEventListener('click', () => {
+            showMessages(container);
+        });
+    });
+});
 
 function showDeliveredOrSeenIcon(show = 'block', seen = false) {
     const senderDivs = document.querySelectorAll(".sender-div");
@@ -196,6 +221,22 @@ function showDeliveredOrSeenIcon(show = 'block', seen = false) {
     }
 }
 
+function setShowHide(){
+    const senderDivs = document.querySelectorAll('.sender-div');
+    const receiverDivs = document.querySelectorAll('.receiver-div');
+
+    senderDivs.forEach(element => {
+        element.addEventListener("click", function(){
+            showHideTime(element);
+        })
+    });
+
+    receiverDivs.forEach(element => {
+        element.addEventListener("click", function(){
+            showHideTime(element);
+        })
+    });
+}
 
 function showHideTime(div) {
     const element = div.querySelector('small');
@@ -276,3 +317,19 @@ function makeChatArea(receiverName, receiverId) {
 if (needClickContainer !== null && needClickContainer !== undefined) {
     needClickContainer.click();
 }
+
+senderContainers.forEach(container => {
+    const usernameElement = container.querySelector('.user-name');
+    const username = usernameElement.textContent.trim();
+    userElements.push({ username: username.toLowerCase(), element: container });
+});
+
+searchBar.addEventListener("input", e => {
+    const value = e.target.value;
+    userElements.forEach(p => {
+        const isVisible = p.username.includes(value);
+        p.element.classList.toggle("hide", !isVisible);
+    })
+});
+
+

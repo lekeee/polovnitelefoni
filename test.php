@@ -6,7 +6,9 @@ require "app/config/config.php";
 require "app/classes/Phone.php";
 require "app/classes/User.php";
 require "app/classes/Support.php";
+require "app/classes/Messages.php";
 
 $phone = new Phone();
 $user = new User();
 $support = new Support();
+$message = new Messages();

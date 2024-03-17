@@ -54,4 +54,5 @@ abstract class Ad
     abstract public function deleteImagesFolder($ad_id);
     abstract public function returnUserAds($table, $id);
     abstract public function brandsPrecentage($id);
+    abstract public function returnBrandsAndModels();
 }
