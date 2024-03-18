@@ -475,11 +475,11 @@ require_once "../inc/headTag.php";
                                     }
 
                                     foreach ($dataJSON as $brand) {
-                                        foreach($ourData as $ourBrand){
+                                        foreach ($ourData as $ourBrand) {
 
                                             if ($ourBrand['brand'] === $brand['brand_name']) {
 
-                                                if (!empty($brand["device_list"])) {
+                                                if (!empty ($brand["device_list"])) {
                                                     echo "
                                                             <div class='custom-dropdown-menu'>
                                                                 <div class='dropdown-click-toggler'>
@@ -493,7 +493,7 @@ require_once "../inc/headTag.php";
                                                     echo "
                                                                 <div class='custom-dropdown' id='{$brand['key']}Dropdown'>";
                                                     foreach ($brand['device_list'] as $model) {
-                                                        foreach($ourData as $ourModel){
+                                                        foreach ($ourData as $ourModel) {
                                                             if (stripos($model['device_name'], "watch") === false && $model['device_name'] === $ourModel['model']) {
                                                                 echo "
                                                                         <div class='custom-dropdown-item' brand-selector={$brand['brand_name']}>
@@ -503,7 +503,7 @@ require_once "../inc/headTag.php";
                                                                     ";
                                                             }
                                                         }
-                                                        
+
                                                     }
                                                     echo "</div></div>";
                                                     break;
@@ -611,8 +611,6 @@ require_once "../inc/headTag.php";
     </section>
     <?php
     require_once "../inc/message-button.php";
-    ?>
-    <?php
     require_once "../inc/subscribeForm.php";
     require_once "../inc/footer.php";
     ?>

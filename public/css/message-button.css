@@ -69,7 +69,7 @@
     }
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     .message-btn-container {
         bottom: 100px;
     }

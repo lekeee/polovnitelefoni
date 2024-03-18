@@ -23,11 +23,11 @@ require_once "../inc/headTag.php";
     <section class="dashboard">
         <div class="div-block-676">
             <div class="div-block-677">
-                <?php require_once('../inc/dashboard-navigation.php') ?>
+                <?php require_once ('../inc/dashboard-navigation.php') ?>
                 <script>
                     document.querySelectorAll('.dashboardlinks')[2].classList.add('active');
                 </script>
-                <?php require_once('edit-ad-part.php') ?>
+                <?php require_once ('edit-ad-part.php') ?>
             </div>
         </div>
     </section>
@@ -49,6 +49,7 @@ require_once "../inc/headTag.php";
     </div>
 
     <?php
+    require_once "../inc/message-button.php";
     require_once "../inc/subscribeForm.php";
     require_once "../inc/footer.php";
     ?>
