@@ -6,7 +6,7 @@ include_once '../app/exceptions/userExceptions.php';
 
 $phone = new Phone();
 $adId = $_GET['ad_id'];
-if (isset($adId)) {
+if (isset ($adId)) {
     try {
         $phoneAd = $phone->read($adId);
         $adData = json_decode($phoneAd, true);
@@ -29,7 +29,7 @@ if (isset($adId)) {
         header('Location: index.php');
     }
 }
-if (!isset($phoneAd)) {
+if (!isset ($phoneAd)) {
     header('Location: index.php');
 }
 ?>
@@ -83,20 +83,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                                                    {
-                                                                                                        "items": [{
-                                                                                                            "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                                                            "origFileName": "<?php echo $file; ?>",
-                                                                                                            "fileName": "<?php echo $file; ?>",
-                                                                                                            "fileSize": <?php echo filesize($putanja); ?>,
-                                                                                                            "height": <?php echo $height; ?>,
-                                                                                                            "url": "<?php echo $putanja; ?>",
-                                                                                                            "width": <?php echo $width; ?>,
-                                                                                                            "type": "image"
-                                                                                                        }],
-                                                                                                        "group": "phoneImage"
-                                                                                                    }
-                                                                                                </script>
+                                                                                                                                                    {
+                                                                                                                                                        "items": [{
+                                                                                                                                                            "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                                                                                            "origFileName": "<?php echo $file; ?>",
+                                                                                                                                                            "fileName": "<?php echo $file; ?>",
+                                                                                                                                                            "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                                                                                            "height": <?php echo $height; ?>,
+                                                                                                                                                            "url": "<?php echo $putanja; ?>",
+                                                                                                                                                            "width": <?php echo $width; ?>,
+                                                                                                                                                            "type": "image"
+                                                                                                                                                        }],
+                                                                                                                                                        "group": "phoneImage"
+                                                                                                                                                    }
+                                                                                                                                                </script>
                                             </a>
                                         </div>
 
@@ -193,7 +193,7 @@ require_once "../inc/headTag.php";
                                             alt="Available" class="image-31" />
                                         <div class="text-block-48">Na stanju</div>
                                     </div>
-                                    <?php if (!empty($adData['damage'])) { ?>
+                                    <?php if (!empty ($adData['damage'])) { ?>
                                         <div class="div-block-699">
                                             <div class="text-block-49">OŠTEĆENJE</div>
                                         </div>
@@ -238,7 +238,7 @@ require_once "../inc/headTag.php";
                                 <div class="div-block-701">
                                     <h2 class="heading-8">
                                         <?php
-                                        if (empty($adData['price'])) {
+                                        if (empty ($adData['price'])) {
                                             echo "Dogovor";
                                         } else {
                                             echo '€' . $adData['price'];
@@ -247,8 +247,8 @@ require_once "../inc/headTag.php";
                                     </h2>
                                     <h2 class="heading-9">
                                         <?php
-                                        if (!empty($adData['old_price'])) {
-                                            if (!empty($adData['price'])) {
+                                        if (!empty ($adData['old_price'])) {
+                                            if (!empty ($adData['price'])) {
                                                 echo '€' . $adData['old_price'];
                                             }
                                         }
@@ -303,7 +303,15 @@ require_once "../inc/headTag.php";
                                         </div>
                                     </div>
                                     <div class="div-block-721">
-                                        <div class="div-block-705">
+                                        <div class="div-block-705" <?php
+                                        if ($user->isLogged()) {
+                                            ?>
+                                                onclick="checkIsSaved(event, this,<?php echo $user->getId() ?>, <?php echo $_GET['ad_id'] ?>, '#818ea0') "
+                                                <?php
+                                        } else {
+                                            ?> onclick="checkIsSaved2(event)" <?php
+                                        }
+                                        ?>>
                                             <svg fill="<?php echo $saved == 1 ? "red" : "none" ?>"
                                                 stroke="<?php echo $saved == 1 ? "red" : "#818ea0" ?>" width="20"
                                                 height="20" stroke-linecap="round" stroke-linejoin="round"
@@ -311,7 +319,7 @@ require_once "../inc/headTag.php";
                                                 <path
                                                     d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                                             </svg>
-                                            <div class="text-block-51">
+                                            <div class="text-block-51" id="saved-identificator">
                                                 <?php
                                                 if ($saved == 1) {
                                                     echo "Ukloni iz sačuvanih oglasa";
@@ -361,14 +369,14 @@ require_once "../inc/headTag.php";
                         </div>
                     </div>
                     <div class="div-block-724">
-                        <?php if (!empty($adData['accessories'])) { ?>
+                        <?php if (!empty ($adData['accessories'])) { ?>
                             <div class="text-block-58">Dodatna oprema:
                                 <strong>
                                     <?php echo substr($adData['accessories'], 0, -2) ?>
                                 </strong>
                             </div>
                         <?php } ?>
-                        <?php if (!empty($adData['damage'])) { ?>
+                        <?php if (!empty ($adData['damage'])) { ?>
                             <div class="text-block-59">Oštećenja: <span class="text-span-4">
                                     <?php echo substr($adData['damage'], 0, -2) ?>
                                 </span></div>
@@ -405,7 +413,7 @@ require_once "../inc/headTag.php";
                             <div class="div-block-738 specsdiv">
                                 <div class="loadingSpecifications">
                                     <?php
-                                    include_once('../inc/loadingSpecifications.php');
+                                    include_once ('../inc/loadingSpecifications.php');
                                     ?>
                                 </div>
                                 <!-- <div id="loader-container"

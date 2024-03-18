@@ -267,8 +267,7 @@ function showWidget($ads)
                             $cleaned_text = strip_tags($ads[$i]['description']);
                             if (strlen($cleaned_text) > 60) {
                                 $shortened_string2 = substr($cleaned_text, 0, 57);
-                                echo $shortened_string2 . '...' . '<a href="#" style="color: #ed6969; margin-left: 5px;">Pročitaj još</a>';
-
+                                echo $shortened_string2 . '... <a href="./ad.php?ad_id=' . $ads[$i]['ad_id'] . '" style="color: #ed6969; margin-left: 5px;">Pročitaj još</a>';
                             } else {
                                 echo $ads[$i]['description'];
                             }

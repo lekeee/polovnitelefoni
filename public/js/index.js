@@ -33,6 +33,12 @@ async function addToFavourite(x, user_id, ad_id) {
                 counter++;
                 savesContainer.style.display = 'flex';
                 savesCounter.innerHTML = counter;
+
+                // Menjam tekst koji ide uz srce (Ako postoji)
+                const heartText = document.querySelector('#saved-identificator');
+                if (heartText !== null && heartText !== undefined) {
+                    heartText.innerHTML = "Ukloni iz sačuvanih oglasa";
+                }
             }
         })
         .catch(error => {
@@ -40,7 +46,7 @@ async function addToFavourite(x, user_id, ad_id) {
         });
 }
 
-async function removeFromFavourite(x, user_id, ad_id) {
+async function removeFromFavourite(x, user_id, ad_id, color) {
     await fetch('../app/controllers/adController.php', {
         method: 'POST',
         headers: {
@@ -69,10 +75,16 @@ async function removeFromFavourite(x, user_id, ad_id) {
                 if (x !== null) {
                     x.querySelector("svg").classList.add('redLoveAnimation');
                     x.querySelector("svg").style.fill = "none";
-                    x.querySelector("svg").style.stroke = "black";
+                    x.querySelector("svg").style.stroke = color;
                     setTimeout(function () {
                         x.querySelector("svg").classList.remove('redLoveAnimation')
                     }, 300);
+
+                    // Menjam tekst koji ide uz srce (Ako postoji)
+                    const heartText = document.querySelector('#saved-identificator');
+                    if (heartText !== null && heartText !== undefined) {
+                        heartText.innerHTML = "Sačuvaj oglas";
+                    }
                 }
                 const savesContainer = document.querySelector("#mySavesContainer");
                 const savesCounter = document.querySelector('#mySavesCount');
@@ -120,7 +132,7 @@ async function isSaved(user_id, ad_id) {
         });
 }
 
-async function checkIsSaved(event, x, user_id, ad_id) {
+async function checkIsSaved(event, x, user_id, ad_id, color = 'black') {
     event.stopPropagation();
     await fetch('../app/controllers/adController.php', {
         method: 'POST',
@@ -142,7 +154,7 @@ async function checkIsSaved(event, x, user_id, ad_id) {
         })
         .then(data => {
             if (data.status === 'exist') {
-                removeFromFavourite(x, user_id, ad_id);
+                removeFromFavourite(x, user_id, ad_id, color);
             } else if (data.status === 'not-exist') {
                 addToFavourite(x, user_id, ad_id);
             }
@@ -170,7 +182,6 @@ async function FilterData(params, restart) {
             if (data.status === 'success') {
                 if (data.message.length == 0) {
                     console.log("nema rezultata");
-                    // ! Dodati identifikator da nema rezultata
                     const div1 = document.createElement('div');
                     div1.classList.add('no-result-main-container');
                     const img1 = document.createElement('img');
