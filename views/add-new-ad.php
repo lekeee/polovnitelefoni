@@ -48,6 +48,7 @@ require_once "../inc/headTag.php";
     </section>
 
     <?php
+    require_once "../inc/message-button.php";
     require_once "../inc/subscribeForm.php";
     require_once "../inc/footer.php";
     ?>
