@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__ . '/../exceptions/adExceptions.php');
+include_once (__DIR__ . '/../exceptions/adExceptions.php');
 
 abstract class Ad
 {
@@ -55,4 +55,5 @@ abstract class Ad
     abstract public function returnUserAds($table, $id);
     abstract public function brandsPrecentage($id);
     abstract public function returnBrandsAndModels();
+    abstract public function selectByTitle($title);
 }

@@ -24,17 +24,17 @@ if ($user->isLogged()) {
 
 <?php
 if ($user->isLogged()) {
-?> 
-<script src="../public/js/websocket.js" type="module"></script>
-<audio src="../public/audio/alert_tone.mp3" id="audio-tag" muted style="display:none"></audio>
-<?php
+    ?>
+    <script src="../public/js/websocket.js" type="module"></script>
+    <audio src="../public/audio/alert_tone.mp3" id="audio-tag" muted style="display:none"></audio>
+    <?php
     $token = $user->getToken($_SESSION['user_id']);
     echo "<script>";
     echo "localStorage.setItem('token', '" . $token . "');";
     echo "</script>";
 }
 ?>
-
+<link rel="stylesheet" href="../public/css/list-widget.css?v=<?php echo time(); ?>">
 <section class="header">
     <div class="w-layout-blockcontainer container firstnavbar w-container">
         <div class="w-layout-blockcontainer container-2 w-container"><a href="../views/about-us.php"
@@ -109,11 +109,24 @@ if ($user->isLogged()) {
                 <div class="w-form-fail"></div>
             </div>
         </div> -->
-        <div class="div-block-2">
+        <div class="div-block-2 search-cont" style="position: relative">
             <input type="text" placeholder="Pretraži...">
             <button class="searchbutton">
                 <img src="../public/src/search-icon.svg" loading="lazy" width="22" alt="Search Icon" />
             </button>
+            <div class="search-result-container">
+                <div class="search-tutorial-container">
+                    <img src="../public/src/search-identificator.svg" alt="Search Identificator">
+                    <p>Pretražujte oglase na osnovu njihovog naslova ili unosom ključnih reči</p>
+                </div>
+                <div class="search-tutorial-container search-not-found">
+                    <img src="../public/src/not-found.svg" alt="Not Found">
+                    <p>Nije pronađen nijedan rezultat</p>
+                </div>
+                <div class="search-result">
+
+                </div>
+            </div>
         </div>
         <div class="div-block-5">
             <div class="div-block-6 div-block-7">
@@ -132,7 +145,7 @@ if ($user->isLogged()) {
                                 $userData = json_decode($userData, true);
                                 if ($userData !== null) {
                                     $userDataDecoded = json_decode($user->returnUser(), true);
-                                    if (!empty($userDataDecoded['username'])) {
+                                    if (!empty ($userDataDecoded['username'])) {
                                         echo $userDataDecoded['username'];
                                     } else {
                                         echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];
@@ -299,3 +312,4 @@ if ($user->isLogged()) {
 </section>
 <div class="div-block-13 lineseparator"></div>
 <div data-w-id="2312cd45-42d1-6acc-59ef-08dd05adea72" class="div-block-55"></div>
+<script src="../public/js/search.js?v=<?php echo time(); ?>"></script>
