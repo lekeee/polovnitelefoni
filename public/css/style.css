@@ -6550,3 +6550,61 @@ textarea.w-select {
   font-size: 16px;
   margin-top: 10px;
 }
+
+.search-result-container {
+  position: absolute;
+  bottom: -300px;
+  left: 0;
+  width: 100%;
+  max-height: 300px;
+  background: white;
+  z-index: 1002;
+  border: 1px solid var(--border-color);
+  display: none;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  overflow-y: auto;
+}
+
+.search-result-container::-webkit-scrollbar {
+  display: none;
+}
+
+.search-tutorial-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 300px;
+}
+
+.search-tutorial-container img {
+  width: 120px;
+}
+
+.search-tutorial-container p {
+  width: 70%;
+  color: var(--greytext);
+  margin-top: 10px;
+  text-align: center;
+}
+
+.search-not-found {
+  display: none;
+  height: 300px;
+}
+
+.search-result {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  padding-top: 0;
+  overflow-y: auto;
+  display: none;
+}
+
+.search-result::-webkit-scrollbar {
+  display: none;
+}

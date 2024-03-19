@@ -11,7 +11,7 @@ $phoneAds = new Phone();
 $limit = 4;
 function addToFavourite($data, $phoneAds)
 {
-    if (isset($data['user_id']) && isset($data['ad_id'])) {
+    if (isset ($data['user_id']) && isset ($data['ad_id'])) {
         try {
             $user_id = $data['user_id'];
             $ad_id = $data['ad_id'];
@@ -50,7 +50,7 @@ function addToFavourite($data, $phoneAds)
 
 function removeFromFavourite($data, $phoneAds)
 {
-    if (isset($data['user_id']) && isset($data['ad_id'])) {
+    if (isset ($data['user_id']) && isset ($data['ad_id'])) {
         try {
             $user_id = $data['user_id'];
             $ad_id = $data['ad_id'];
@@ -89,7 +89,7 @@ function removeFromFavourite($data, $phoneAds)
 
 function checkIsFavourite($data, $user)
 {
-    if (isset($data['user_id']) && isset($data['ad_id'])) {
+    if (isset ($data['user_id']) && isset ($data['ad_id'])) {
         try {
             $user_id = $data['user_id'];
             $ad_id = $data['ad_id'];
@@ -163,11 +163,11 @@ function getAds($phoneAds)
 function newAds($data, $user, $phoneAds)
 {
     if (
-        isset($data['title']) && isset($data['brand'])
-        && isset($data['model']) && isset($data['deviceState'])
-        && isset($data['stateRange']) && isset($data['images'])
-        && isset($data['description']) && isset($data['deal'])
-        && isset($data['price']) && isset($data['terms'])
+        isset ($data['title']) && isset ($data['brand'])
+        && isset ($data['model']) && isset ($data['deviceState'])
+        && isset ($data['stateRange']) && isset ($data['images'])
+        && isset ($data['description']) && isset ($data['deal'])
+        && isset ($data['price']) && isset ($data['terms'])
     ) {
 
         $userID = $user->getId();
@@ -273,10 +273,97 @@ function countFiltered($phoneAds)
     }
     return $response;
 }
+function getSearchData($title, $phoneAds)
+{
+    try {
+        $result = $phoneAds->selectByTitle($title);
+        if ($result != '[]') {
+            $response = [
+                'status' => 'success',
+                'message' => createSearchResult(json_decode($result, true))
+            ];
+        } else {
+            $response = [
+                'status' => 'empty',
+                'message' => 'Nema rezultata'
+            ];
+        }
+    } catch (Exception $ex) {
+        $response = [
+            'status' => 'error',
+            'message' => 'Došlo je do greške prilikom pribavljanja search-ovanih oglasa'
+        ];
+    }
+    return $response;
+}
+
+function createSearchResult($ads)
+{
+    $result = '';
+    for ($i = 0; $i < count($ads); $i++) {
+        $folderPath = "../../uploads/" . $ads[$i]['images'];
+        $putanja = '../public/src/noimage-icon.svg';
+        $imagesCounter = 0;
+        if (is_dir($folderPath)) {
+            $files = array_diff(scandir($folderPath), array('..', '.'));
+            foreach ($files as $file) {
+                $imagesCounter++;
+                $fileNameWithoutExtension = pathinfo($file, PATHINFO_FILENAME);
+                if (strtolower($fileNameWithoutExtension) === 'mainimage') {
+                    $putanja = "../uploads/" . $ads[$i]['images'] . '/' . $file;
+                    break;
+                }
+            }
+        }
+        ob_start();
+        ?>
+        <div class="list-widget">
+            <div style="display: flex">
+                <div class="widget-image">
+                    <img src="<?php echo $putanja ?>" alt="Main Image">
+                </div>
+                <div class="widget-title-city" style="margin-left: 20px">
+                    <a href="../views/ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>">
+                        <?php
+                        if (strlen($ads[$i]['title']) > 40) {
+                            $padded_string = substr($ads[$i]['title'], 0, 37);
+                            echo $padded_string . '...';
+                        } else {
+                            echo $ads[$i]['title'];
+                        }
+                        ?>
+                    </a>
+                    <p>
+                        <?php
+                        echo $ads[$i]['city'];
+                        ?>
+                    </p>
+                </div>
+            </div>
+            <div class="widget-price">
+                <p>
+                    <?php
+                    if ($ads[$i]['price'] !== NULL) {
+                        echo '€' . $ads[$i]['price'];
+                    } else {
+                        echo "Dogovor";
+                    }
+                    ?>
+                </p>
+            </div>
+        </div>
+        <?php
+        $result .= ob_get_clean();
+    }
+    return $result;
+}
+
+
+
 if ($user->isLogged()) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);
-        if (isset($data['action'])) {
+        if (isset ($data['action'])) {
             if ($data['action'] === 'newAd') {
                 $response = newAds($data, $user, $phoneAds);
             }
@@ -289,6 +376,10 @@ if ($user->isLogged()) {
             if ($data['action'] === 'checkIsFavourite') {
                 $response = checkIsFavourite($data, $user);
             }
+        }
+    } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ($_GET['action'] === 'search') {
+            $response = getSearchData($_GET['title'], $phoneAds);
         }
     } else {
         $response = array(
@@ -306,6 +397,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     if ($_GET['action'] === 'countFilteredData') {
         $response = countFiltered($phoneAds);
+    }
+    if ($_GET['action'] === 'search') {
+        $response = getSearchData($_GET['title'], $phoneAds);
     }
 }
 
