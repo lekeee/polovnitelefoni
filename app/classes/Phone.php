@@ -238,8 +238,10 @@ class Phone extends Ad
                     if ($models !== null && !empty ($models)) {
                         for ($i = 0; $i < count($models); $i++) {
                             if (in_array($brand, $models[$i])) {
-                                $model = $models[$i]['model'];
-                                $brandConditions[] = "(brand = '$brand' AND model = '$model')";
+                                $brand2 = strtolower($brand);
+                                $model = strtolower($models[$i]['model']);
+
+                                $brandConditions[] = "(LOWER(brand) = '$brand2' AND LOWER(model) = '$model')";
                                 $exist = 1;
                             }
                         }
