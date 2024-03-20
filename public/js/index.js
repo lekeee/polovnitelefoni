@@ -167,6 +167,8 @@ function checkIsSaved2(event) {
     event.stopPropagation();
 }
 
+let firstTime = true;
+
 async function FilterData(params, restart) {
     const loadingAnimationContainer = document.querySelectorAll('.loading-animation');
     loadingAnimationContainer.forEach(element => {
@@ -178,7 +180,7 @@ async function FilterData(params, restart) {
         method: 'GET'
     })
         .then(response => response.json())
-        .then(data => {
+        .then(async (data) => {
             if (data.status === 'success') {
                 if (data.message.length == 0) {
                     console.log("nema rezultata");
@@ -193,11 +195,14 @@ async function FilterData(params, restart) {
                     const mainElement = document.querySelector('.productsmaincontainer');
                     mainElement.innerHTML = '';
                     mainElement.appendChild(div1);
-                    document.querySelector('.loadmorecontainer').style.display = 'none';
-                    scrollIntoAds();
+                    // document.querySelector('.loadmorecontainer').style.display = 'none';
+                    showLoadMoreButton();
+                    if (!firstTime) {
+                        scrollIntoAds();
+                    }
                     return;
                 }
-                document.querySelector('.loadmorecontainer').style.display = 'flex';
+
                 cacheAdsCounter(data.message.length);
                 loadingAnimationContainer.forEach(element => {
                     document.querySelectorAll('.productsmaincontainer')[0].removeChild(element);
@@ -208,14 +213,26 @@ async function FilterData(params, restart) {
                 }
                 let jsonmodels = JSON.stringify(data.message);
                 updateWidgets(jsonmodels);
-                if (restart) scrollIntoAds();
+                if (restart && !firstTime) scrollIntoAds();
                 // params.action = 'countFilteredData';
                 params.set('action', 'countFilteredData');
-                showAllAdsCounter(params);
+                await showAllAdsCounter(params);
+                firstTime = false;
+                showLoadMoreButton();
             }
         })
         .catch(error => console.error('Došlo je do greške:', error));
 }
+
+function showLoadMoreButton() {
+    const btn = document.querySelector('.loadmorebutton');
+    if (allAdsCounter <= loadedAdsCounter) {
+        btn.style.display = 'none';
+    } else {
+        btn.style.display = 'flex';
+    }
+}
+
 function scrollIntoAds() {
     var mainContainer = document.querySelector('.productsmaincontainer');
 
@@ -246,7 +263,8 @@ async function updateWidgets(ads) {
         .then(data => {
             document.querySelectorAll('.productsmaincontainer')[0].innerHTML += data;
 
-            checkLoadMoreButton();
+            // checkLoadMoreButton();
+            showLoadMoreButton();
 
             const elements = document.getElementsByClassName('widgetimagescontainer');
             for (let i = 0; i < elements.length; i++) {
@@ -281,17 +299,15 @@ async function updateWidgets(ads) {
         });
 }
 
-function checkLoadMoreButton() {
-    const loadedAdsCounter = localStorage.getItem('loadedAdsCounter');
-    const allAdsCounter = localStorage.getItem('allAdsCounter');
-    if (loadedAdsCounter && allAdsCounter) {
-        const loadedAdsCounterInitialData = JSON.parse(loadedAdsCounter);
-        const allAdsCounterInitialData = JSON.parse(allAdsCounter);
-        if (Number(loadedAdsCounterInitialData.counter) === Number(allAdsCounterInitialData.counter)) {
-            document.querySelectorAll('.loadmorebutton')[0].style.display = 'none';
-        }
-    }
-}
+// function checkLoadMoreButton() {
+//     if (loadedAdsCounter && allAdsCounter) {
+//         const loadedAdsCounterInitialData = JSON.parse(loadedAdsCounter);
+//         const allAdsCounterInitialData = JSON.parse(allAdsCounter);
+//         if (Number(loadedAdsCounterInitialData.counter) === Number(allAdsCounterInitialData.counter)) {
+//             document.querySelectorAll('.loadmorebutton')[0].style.display = 'none';
+//         }
+//     }
+// }
 
 function loadMore(x) {
     let currentPage = x.getAttribute('current-page');

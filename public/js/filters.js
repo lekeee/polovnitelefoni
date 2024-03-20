@@ -1,8 +1,10 @@
 window.onload = function () {
-    localStorage.removeItem('filterData');
+    // localStorage.removeItem('filterData');
+    cacheFilterData(0, 2500, false, false, false);
     // localStorage.removeItem('loadedAdsCounter');
     document.querySelector('#resetFilters').disabled = true;
     //showAllAdsCounter();
+    checkURL();
 };
 
 const brandsCheckboxes = document.querySelectorAll('.custom-brand-checkbox');
@@ -10,16 +12,35 @@ const sortSelect = document.querySelector('#sorting');
 const limitChange = document.querySelector('#showCount');
 
 
-let brandsSelected = [];
-let modelsSelected = [];
-let sort = 0;
-let minPrice = 0;
-let maxPrice = 2500;
-let oldState = false;
-let newState = false;
-let damagedState = false;
+function checkURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let brand = urlParams.get('brand');
+    let model = urlParams.get('model');
 
-getAds(0, true);
+    if (brand !== null) {
+        brand = brand.toLowerCase();
+        const checkb = document.querySelector(`#${brand}Checkbox`);
+        checkb.checked = true;
+        if (model !== null) {
+            model = model.toLowerCase();
+            let idVal = model;
+            idVal = idVal.replace(/\s+/g, '');
+            idVal += 'Checkbox';
+            const checkm = document.querySelector('#' + idVal);
+            checkm.checked = true;
+        } else {
+            checkb.dispatchEvent(new Event('change'));
+        }
+        showFilters();
+    }
+
+    // model = model.toLowerCase();
+}
+
+setTimeout(() => {
+    getAds(0, true);
+}, 300);
+
 function checkBransSelecter(element) {
     if (element.checked) {
         const parentElement = element.parentNode;
@@ -27,6 +48,27 @@ function checkBransSelecter(element) {
         if (!brandsSelected.includes(labela.innerHTML)) {
             brandsSelected.push(labela.innerHTML);
         }
+
+        const allModelsElements = element.parentNode.parentNode.parentNode.querySelectorAll('.custom-dropdown-item');
+        allModelsElements.forEach(x => {
+            const checkbox = x.querySelector(`input[type="checkbox"]`);
+            const exist = modelsSelected.find((element) => element.model.toLowerCase() == x.querySelector('label').innerHTML.toLowerCase());
+            if (checkbox.checked) {
+                // console.log(exist);
+                if (exist == undefined) {
+                    modelsSelected.push({
+                        brand: labela.innerHTML,
+                        model: x.querySelector('label').innerHTML
+                    })
+                }
+            } else {
+                if (exist != undefined) {
+                    modelsSelected = modelsSelected.filter((element) => {
+                        return element.model.toLowerCase() != x.querySelector('label').innerHTML.toLowerCase();
+                    });
+                }
+            }
+        });
     } else {
         const parentElement = element.parentNode;
         const labela = parentElement.querySelector('label');
@@ -54,27 +96,34 @@ brandsCheckboxes.forEach(element => {
 const modelsCheckboxes = document.querySelectorAll('.custom-dropdown-item');
 
 function checkModelSelected(element) {
-    const checkbox = element.querySelector(`input[type="checkbox"]`);
-    if (checkbox.checked) {
-        const parentBrandCheckbox = element.parentNode.parentNode.querySelector('.custom-brand-checkbox');
-        checkBransSelecter(parentBrandCheckbox);
+    // const checkbox = element.querySelector(`input[type="checkbox"]`);
+    const parentBrandCheckbox = element.parentNode.parentNode.querySelector('.custom-brand-checkbox');
+    checkBransSelecter(parentBrandCheckbox);
+    // if (checkbox.checked) {
+    //     const parentBrandCheckbox = element.parentNode.parentNode.querySelector('.custom-brand-checkbox');
 
-        const brandvalue = element.getAttribute('brand-selector');
-        const labela = element.querySelector('label');
-        modelsSelected.push({
-            brand: brandvalue,
-            model: labela.innerHTML
-        }
-        );
-    } else {
-        const parentBrandCheckbox = element.parentNode.parentNode.querySelector('.custom-brand-checkbox');
-        checkBransSelecter(parentBrandCheckbox);
+    //     const brandvalue = element.getAttribute('brand-selector');
+    //     const labela = element.querySelector('label');
+    //     modelsSelected.push({
+    //         brand: brandvalue,
+    //         model: labela.innerHTML
+    //     }
+    //     );
+    // } else {
+    //     console.log("brisem ih");
+    //     const parentBrandCheckbox = element.parentNode.parentNode.querySelector('.custom-brand-checkbox');
+    //     checkBransSelecter(parentBrandCheckbox);
 
-        const labela = element.querySelector('label');
-        modelsSelected = modelsSelected.filter(function (element) {
-            return element.model !== labela.innerHTML;
-        });
-    }
+    //     const labela = element.querySelector('label');
+    //     let novaLista = [];
+    //     modelsSelected.forEach(element => {
+    //         if (element.model != labela.innerHTML) {
+    //             novaLista.push(element);
+    //         }
+    //     });
+    //     modelsSelected = novaLista;
+    // }
+    // console.log(modelsSelected);
 }
 
 function checkModelSelected2(element) {
@@ -109,12 +158,19 @@ function getPrice() {
 function getState() {
     if (document.querySelector("#oldState").checked) {
         oldState = true;
+    } else {
+        oldState = false;
     }
     if (document.querySelector("#newState").checked) {
         newState = true;
     }
+    else {
+        newState = false;
+    }
     if (document.querySelector("#damagedState").checked) {
         damagedState = true;
+    } else {
+        damagedState = false;
     }
 }
 
@@ -187,7 +243,17 @@ function showFilters() {
 
 document.querySelector("#sumbitFilters").addEventListener("click", function (e) {
     e.preventDefault();
-    localStorage.removeItem('loadedAdsCounter');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    for (const key of urlParams.keys()) {
+        urlParams.delete(key);
+    }
+    window.history.replaceState({}, document.title, window.location.pathname);
+
+    localStorage.removeItem('filterData');
+
+    loadedAdsCounter = 0;
+    allAdsCounter = 0;
     getState();
     getPrice();
     cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState);
@@ -217,14 +283,7 @@ function cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState) {
 }
 
 function getLimit() {
-    const savedLimitDataJSON = localStorage.getItem('limitData');
-    // let limit = 16;
-    let limit = 2;
-    if (savedLimitDataJSON) {
-        const savedInitialData = JSON.parse(savedLimitDataJSON);
-        limit = savedInitialData.limit;
-    }
-    return limit;
+    return numberOfLoads;
 }
 
 function getAds(currentPage, restart) {
@@ -272,23 +331,18 @@ function getAds(currentPage, restart) {
 }
 
 sortSelect.addEventListener("change", function () {
-    localStorage.removeItem('loadedAdsCounter');
+    loadedAdsCounter = 0;
     firstTry = false;
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
     getAds(0, true);
 });
 
 function cahceLimitData(value) {
-    const initialDataToSave = {
-        limit: value,
-    };
-
-    const initialDataJson = JSON.stringify(initialDataToSave);
-    localStorage.setItem('limitData', initialDataJson);
+    numberOfLoads = parseInt(value);
 }
 
 limitChange.addEventListener("change", function () {
-    localStorage.removeItem('loadedAdsCounter');
+    loadedAdsCounter = 0;
     firstTry = false;
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
     cahceLimitData(this.value);
@@ -297,33 +351,23 @@ limitChange.addEventListener("change", function () {
 
 let firstTry = true;
 function cacheAdsCounter(value) {
-    let initialDataToSave;
     if (firstTry) {
-        initialDataToSave = {
-            counter: 2,
-        }
+        loadedAdsCounter = numberOfLoads;
         firstTry = false;
     } else {
-        const loadedAdsCounter = localStorage.getItem('loadedAdsCounter');
-
-        let currentCounter = 0;
-        if (loadedAdsCounter) {
-            const savedInitialData = JSON.parse(loadedAdsCounter);
-            currentCounter += Number(savedInitialData.counter);
-        }
-
-        initialDataToSave = {
-            counter: currentCounter + value,
-        };
+        loadedAdsCounter += parseInt(value);
     }
-    const initialDataJson = JSON.stringify(initialDataToSave);
-    localStorage.setItem('loadedAdsCounter', initialDataJson);
 }
 
 function resetFilters() {
-    localStorage.removeItem('loadedAdsCounter');
+    const urlParams = new URLSearchParams(window.location.search);
+    for (const key of urlParams.keys()) {
+        urlParams.delete(key);
+    }
+    window.history.replaceState({}, document.title, window.location.pathname);
+    loadedAdsCounter = 0;
+    allAdsCounter = 0;
     localStorage.removeItem('filterData');
-    localStorage.removeItem('loadedAdsCounter');
     firstTry = false;
 
     const brandsCheckboxes = document.querySelectorAll('.custom-brand-checkbox');
@@ -351,6 +395,7 @@ function resetFilters() {
     document.querySelector('#damagedState').checked = false;
 
     document.querySelectorAll('.filterstlabela')[0].style.display = 'none';
+
     getAds(0, true);
 }
 
@@ -368,10 +413,5 @@ mobileMenuTriggerClose.addEventListener('click', function () {
 });
 
 function cacheAllAdsCounter(value) {
-    const initialDataToSave = {
-        counter: Number(value),
-    };
-
-    const initialDataJson = JSON.stringify(initialDataToSave);
-    localStorage.setItem('allAdsCounter', initialDataJson);
+    allAdsCounter = parseInt(value);
 }
