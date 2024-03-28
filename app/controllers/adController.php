@@ -143,10 +143,11 @@ function getAds($phoneAds)
     $damagedState = $_GET['damagedState'];
     $limit = $_GET['limit'];
     $offset = $_GET['page'] * $limit;
+    $deal = $_GET['deal'];
 
 
     try {
-        $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit);
+        $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
         $response = array(
             'status' => 'success',
             'message' => $result
@@ -257,10 +258,10 @@ function countFiltered($phoneAds)
     $damagedState = $_GET['damagedState'];
     $limit = $_GET['limit'];
     $offset = $_GET['page'] * $limit;
-
+    $deal = $_GET['deal'];
 
     try {
-        $result = $phoneAds->countAllFilteredAds($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit);
+        $result = $phoneAds->countAllFilteredAds($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
         $response = array(
             'status' => 'success',
             'message' => $result

@@ -225,11 +225,15 @@ async function FilterData(params, restart) {
 }
 
 function showLoadMoreButton() {
-    const btn = document.querySelector('.loadmorebutton');
+    const btn = document.querySelector('.loadmorecontainer');
+    const progressIndicator = btn.querySelector('.loadmoreindicatormain');
+
     if (allAdsCounter <= loadedAdsCounter) {
         btn.style.display = 'none';
     } else {
         btn.style.display = 'flex';
+        const progress = loadedAdsCounter / allAdsCounter * 100;
+        progressIndicator.style.width = `${progress}%`;
     }
 }
 

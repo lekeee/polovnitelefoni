@@ -214,7 +214,7 @@ class Phone extends Ad
             throw new SAVE_CANNOT_BE_DELETED();
         }
     }
-    public function filter($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24)
+    public function filter($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24, $deal = true)
     {
         try {
             if ($sort !== null && $sort == 0) {
@@ -263,11 +263,16 @@ class Phone extends Ad
             }
 
             if ($minPrice !== null) {
-                $sql .= " AND (price >= $minPrice OR price IS NULL)";
+                $sql .= " AND ((price >= $minPrice";
             }
 
             if ($maxPrice !== null) {
-                $sql .= " AND (price <= $maxPrice OR price IS NULL)";
+                $sql .= " AND price <= $maxPrice)";
+            }
+            if ($deal == 'true') {
+                $sql .= " OR price IS NULL)";
+            } else {
+                $sql .= " AND price IS NOT NULL)";
             }
 
             if ($new === 'true' && $used === 'false' && $damaged === 'false') {
@@ -300,8 +305,8 @@ class Phone extends Ad
             }
 
             $sql .= " LIMIT $limit OFFSET $offset";
+
             $result = $this->con->query($sql);
-            // echo $sql;
             if (!$result) {
                 throw new Exception("Database error: " . $this->con->error);
             }
@@ -471,7 +476,7 @@ class Phone extends Ad
     }
 
 
-    public function countAllFilteredAds($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24)
+    public function countAllFilteredAds($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24, $deal = true)
     {
         try {
             $sql = "SELECT COUNT(*) as ukupno_oglasa FROM oglasi WHERE 1";
@@ -513,12 +518,18 @@ class Phone extends Ad
             }
 
             if ($minPrice !== null) {
-                $sql .= " AND (price >= $minPrice OR price IS NULL)";
+                $sql .= " AND ((price >= $minPrice";
             }
 
             if ($maxPrice !== null) {
-                $sql .= " AND (price <= $maxPrice OR price IS NULL)";
+                $sql .= " AND price <= $maxPrice)";
             }
+            if ($deal == 'true') {
+                $sql .= " OR price IS NULL)";
+            } else {
+                $sql .= " AND price IS NOT NULL)";
+            }
+
 
             if ($new === 'true' && $used === 'false' && $damaged === 'false') {
                 $sql .= " AND state = 1"; // novi
@@ -535,7 +546,6 @@ class Phone extends Ad
             } elseif ($new === 'true' && $used === 'true' && $damaged === 'true') {
                 $sql .= " AND (state = 1 OR state = 0 OR damage IS NOT NULL)"; // svi
             }
-            //echo $sql;
             $result = $this->con->query($sql);
             if (!$result) {
                 throw new Exception("Database error: " . $this->con->error);
