@@ -55,4 +55,5 @@ abstract class Ad
     abstract public function returnUserAds($table, $id);
     abstract public function brandsPrecentage($id);
     abstract public function returnBrandsAndModels();
+    abstract public function selectByTitle($title);
 }

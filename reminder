@@ -70,7 +70,7 @@ na sajtu polovni telefoni
 TERMS OF SERVICES 
 -na formi za registraciju
 
-BAG ZA IPHONE (BROJ TELEFONA)
+BAG ZA IPHONE (BROJ TELEFONA) -----------------------------------------------------------------------------------(URADJENO)
 
 DODATI SLANJE EMAILA ZA POTVRDU PRI PRIJAVLJUVANJU --------------------------------------------------------------(URADJENO)
 
@@ -97,7 +97,7 @@ PROMENA SEARCH BARA ------------------------------------------------------------
 
 PROMENA HEADERA -------------------------------------------------------------------------------------------------(URADJENO)
 
-EXCEPTIONI ZA MESSAGES
+EXCEPTIONI ZA MESSAGES ------------------------------------------------------------------------------------------(URADJENO)
 
 PAGINACIJA KOD KORISNIKOVIH OGLASA
 
@@ -111,11 +111,11 @@ DODATI IDENTIFIKATOR UKOLIKO KORISNIK NEMA PORUKE NISAKIM ----------------------
 
 NAPRAVITI PRETPLATI SE
 
-NAPRAVITI DODATNI FILTRE ZA ODABIR "DOGOVOR" (KAO CENA)
+NAPRAVITI DODATNI FILTERE ZA ODABIR "DOGOVOR" (KAO CENA) I DODATI ODABIR GRADA
 
 UMESTO ZVEZDICA NA KORISNIKOV PROFIL DODATI STIKLIRANO I X ------------------------------------------------------(URADJENO)
 
-NAPRAVITI SEARCH ZA TELEFONE
+NAPRAVITI SEARCH ZA TELEFONE ------------------------------------------------------------------------------------(URADJENO)
 
 POVEZATI SVE LINKOVE
 
@@ -123,7 +123,7 @@ BAG SA TEXT EDITOROM SIRI SE
 
 MAILOVI DA SE OFORME support, team..
 
-USER EXCEPTIONI
+USER EXCEPTIONI -------------------------------------------------------------------------------------------------(URADJENO)
 
 OBAVESTENJA O PRISTIZANJU PORUKA --------------------------------------------------------------------------------(URADJENO)
 
@@ -133,6 +133,4 @@ STAMPANJE MODELA KOJIH IMA U BAZI ----------------------------------------------
 
 KLIKOM NA PROCITAJ JOS DA VODI NA OGLAS ILI DA ISPISE CEO OPIS
 
-BAG NA DASHBOARD ZA PLAVU BOJU
-
-NEED CLICK NE RADI
+AKO NASTUPI GRESKA PRILIKOM GOOGLE LOGIN DA JE NE PRIKAZUJE

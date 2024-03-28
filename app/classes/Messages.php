@@ -77,61 +77,82 @@ class Messages
 
     public function saveMessage()
     {
-        $query = "INSERT INTO messages (sender_id, receiver_id, msg, status, sent_at) 
+        try{
+            $query = "INSERT INTO messages (sender_id, receiver_id, msg, status, sent_at) 
                   VALUES(?,?,?,?,?)";
-        $statement = $this->con->prepare($query);
-        $statement->bind_param("iisis", $this->sender_id, $this->receiver_id, $this->message, $this->status, $this->sent_at);
-        $statement->execute();
+            $statement = $this->con->prepare($query);
+            $statement->bind_param("iisis", $this->sender_id, $this->receiver_id, $this->message, $this->status, $this->sent_at);
+            $statement->execute();
 
-        return $this->con->insert_id;
+            return $this->con->insert_id;
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     public function getMessages()
     {
-        $query = "SELECT a.name as senderName, b.name as receiverName, msg, sent_at,
-         status, sender_id, receiver_id
-         FROM messages
-         INNER JOIN users a
-            ON messages.sender_id = a.user_id
-         INNER JOIN users b
-            ON messages.receiver_id = b.user_id
-         WHERE(messages.sender_id = ? AND messages.receiver_id = ?)
-         OR(messages.sender_id = ? AND messages.receiver_id = ?)";
+        try{
+            $query = "SELECT a.name as senderName, b.name as receiverName, msg, sent_at,
+            status, sender_id, receiver_id
+            FROM messages
+            INNER JOIN users a
+                ON messages.sender_id = a.user_id
+            INNER JOIN users b
+                ON messages.receiver_id = b.user_id
+            WHERE(messages.sender_id = ? AND messages.receiver_id = ?)
+            OR(messages.sender_id = ? AND messages.receiver_id = ?)";
 
-        $statement = $this->con->prepare($query);
-        $statement->bind_param("iiii", $this->sender_id, $this->receiver_id, $this->receiver_id, $this->sender_id);
-        $statement->execute();
+            $statement = $this->con->prepare($query);
+            $statement->bind_param("iiii", $this->sender_id, $this->receiver_id, $this->receiver_id, $this->sender_id);
+            $statement->execute();
 
-        $result = $statement->get_result();
-        $messages = $result->fetch_all(MYSQLI_ASSOC);
+            $result = $statement->get_result();
+            $messages = $result->fetch_all(MYSQLI_ASSOC);
 
-        return $messages;
+            return $messages;
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     public function updateMessageStatus()
     {
-        $query = "UPDATE messages 
-                  SET status = ?
-                  WHERE id = ?";
-        $statement = $this->con->prepare($query);
-        $statement->bind_param("ii", $this->status, $this->id);
-        $statement->execute();
+        try{
+            $query = "UPDATE messages 
+                    SET status = ?
+                    WHERE id = ?";
+            $statement = $this->con->prepare($query);
+            $statement->bind_param("ii", $this->status, $this->id);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     public function changeChatStatus()
     {
-        $query = "UPDATE messages 
-                  SET status = 1
-                  WHERE sender_id = ?
-                  AND receiver_id = ?
-                  AND status = 0";
-        $statement = $this->con->prepare($query);
-        $statement->bind_param("ii", $this->sender_id, $this->receiver_id);
-        $statement->execute();
+        try{
+            $query = "UPDATE messages 
+                    SET status = 1
+                    WHERE sender_id = ?
+                    AND receiver_id = ?
+                    AND status = 0";
+            $statement = $this->con->prepare($query);
+            $statement->bind_param("ii", $this->sender_id, $this->receiver_id);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     public function getUnreadMessages($id)
     {
+        try{
         $query = "SELECT COUNT(*) as count_unread, sender_id FROM `messages` WHERE receiver_id = ? AND status = 0 GROUP BY sender_id";
         $statement = $this->con->prepare($query);
         $statement->bind_param("i", $id);
@@ -141,33 +162,47 @@ class Messages
         $ids = $result->fetch_all(MYSQLI_ASSOC);
 
         return $ids;
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     public function selectUsersWithMessages($id)
     {
-        $sql = "SELECT DISTINCT u.* FROM users u 
-                INNER JOIN messages m 
-                ON u.user_id = m.sender_id OR u.user_id = m.receiver_id 
-                WHERE u.user_id <> ? AND (m.sender_id = ? OR m.receiver_id = ?)";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("iii", $id, $id, $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            return $result->fetch_all();
+        try{
+            $sql = "SELECT DISTINCT u.* FROM users u 
+                    INNER JOIN messages m 
+                    ON u.user_id = m.sender_id OR u.user_id = m.receiver_id 
+                    WHERE u.user_id <> ? AND (m.sender_id = ? OR m.receiver_id = ?)";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("iii", $id, $id, $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                return $result->fetch_all();
+            }
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
         }
     }
 
     public function returnLastMessage()
     {
-        $query = "SELECT * FROM `messages` WHERE receiver_id = ? OR sender_id = ? ORDER BY sent_at DESC LIMIT 1";
-        $statement = $this->con->prepare($query);
-        $statement->bind_param("ii", $this->sender_id, $this->sender_id);
-        $statement->execute();
+        try{
+            $query = "SELECT * FROM `messages` WHERE receiver_id = ? OR sender_id = ? ORDER BY sent_at DESC LIMIT 1";
+            $statement = $this->con->prepare($query);
+            $statement->bind_param("ii", $this->sender_id, $this->sender_id);
+            $statement->execute();
 
-        $result = $statement->get_result();
-        $message = $result->fetch_all(MYSQLI_ASSOC);
+            $result = $statement->get_result();
+            $message = $result->fetch_all(MYSQLI_ASSOC);
 
-        return $message;
+            return $message;
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 }

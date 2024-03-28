@@ -748,4 +748,23 @@ class Phone extends Ad
             echo $e->getMessage();
         }
     }
+
+    public function selectByTitle($title){
+        try{
+            $sql = "SELECT o.ad_id, o.title, o.price, o.images, u.city 
+                    FROM oglasi as o
+                    INNER JOIN users as u
+                    ON o.user_id = u.user_id
+                    WHERE LOWER(title) LIKE ?";
+            $stmt = $this->con->prepare($sql);
+            $title = "%" . strtolower($title) . "%";
+            $stmt->bind_param("s", $title);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return json_encode($result->fetch_all(MYSQLI_ASSOC));
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }

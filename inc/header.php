@@ -24,17 +24,18 @@ if ($user->isLogged()) {
 
 <?php
 if ($user->isLogged()) {
-?> 
+    $token = $user->getToken($_SESSION['user_id']);
+    echo "
+    <script type='module'>
+        localStorage.setItem('token', '" . $token . "');
+    </script>
+    ";
+ ?>
 <script src="../public/js/websocket.js" type="module"></script>
 <audio src="../public/audio/alert_tone.mp3" id="audio-tag" muted style="display:none"></audio>
-<?php
-    $token = $user->getToken($_SESSION['user_id']);
-    echo "<script>";
-    echo "localStorage.setItem('token', '" . $token . "');";
-    echo "</script>";
+<?php 
 }
 ?>
-
 <section class="header">
     <div class="w-layout-blockcontainer container firstnavbar w-container">
         <div class="w-layout-blockcontainer container-2 w-container"><a href="../views/about-us.php"
