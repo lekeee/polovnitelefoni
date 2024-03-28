@@ -52,12 +52,16 @@ require_once "../inc/headTag.php";
     <link href="../public/css/loading-animation.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <section class="phoneview">
         <div class="div-block-687">
-            <div class="div-block-688"><a href="#" class="lightlink">Pocetna</a>
-                <div class="text-block-45 lighttext">/</div><a href="#" class="lightlink">
+            <div class="div-block-688">
+                <a href="../views/index.php" class="lightlink">Pocetna</a>
+                <div class="text-block-45 lighttext">/</div>
+                <a href="../views/index.php?brand=<?php echo $adData["brand"] ?>#productscontainer" class="lightlink">
                     <?php echo $adData["brand"] ?>
                 </a>
-                <div class="text-block-45 lighttext">/</div><a href="#" class="link">
-                    <?php echo $adData['title'] ?>
+                <div class="text-block-45 lighttext">/</div>
+                <a href="../views/index.php?brand=<?php echo $adData["brand"] ?>&model=<?php echo $adData['model'] ?>#productscontainer"
+                    class="link">
+                    <?php echo $adData['model'] ?>
                 </a>
             </div>
             <div class="div-block-689">
@@ -83,20 +87,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                                                                                                        {
-                                                                                                                                                            "items": [{
-                                                                                                                                                                "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                                                                                                                "origFileName": "<?php echo $file; ?>",
-                                                                                                                                                                "fileName": "<?php echo $file; ?>",
-                                                                                                                                                                "fileSize": <?php echo filesize($putanja); ?>,
-                                                                                                                                                                "height": <?php echo $height; ?>,
-                                                                                                                                                                "url": "<?php echo $putanja; ?>",
-                                                                                                                                                                "width": <?php echo $width; ?>,
-                                                                                                                                                                "type": "image"
-                                                                                                                                                            }],
-                                                                                                                                                            "group": "phoneImage"
-                                                                                                                                                        }
-                                                                                                                                                    </script>
+                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                "items": [{
+                                                                                                                                                                                                                                    "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                                                                                                                                                                    "origFileName": "<?php echo $file; ?>",
+                                                                                                                                                                                                                                    "fileName": "<?php echo $file; ?>",
+                                                                                                                                                                                                                                    "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                                                                                                                                                                    "height": <?php echo $height; ?>,
+                                                                                                                                                                                                                                    "url": "<?php echo $putanja; ?>",
+                                                                                                                                                                                                                                    "width": <?php echo $width; ?>,
+                                                                                                                                                                                                                                    "type": "image"
+                                                                                                                                                                                                                                }],
+                                                                                                                                                                                                                                "group": "phoneImage"
+                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                        </script>
                                             </a>
                                         </div>
 

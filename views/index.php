@@ -431,9 +431,13 @@ require_once "../inc/headTag.php";
                 </div>
             </div>
             <div class="currentpageindicator">
-                <div class="pocetnalabel">Početna</div>
+                <div class="pocetnalabel">
+                    <a href="../views/index.php" style="color: #818ea0">Početna</a>
+                </div>
                 <div class="separatorlabel">/</div>
-                <div class="pocetnalabel blackones">Šop</div>
+                <div class="pocetnalabel blackones">
+                    <a onclick="scrollIntoAds()" style="color: black;">Šop</a>
+                </div>
             </div>
             <div class="showindpropertzcontainer">
                 <div data-w-id="74356a1c-d9dd-5682-428a-0e61ff5c9155" class="filtericoncontainer"
@@ -631,7 +635,7 @@ require_once "../inc/headTag.php";
                         </div>
                     </div>
                 </div>
-                <div class="productscontainer">
+                <div class="productscontainer" id="productscontainer">
                     <div class="filterstlabela"></div>
 
                     <div class="productsmainconatinerhead">

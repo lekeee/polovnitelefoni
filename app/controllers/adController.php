@@ -320,7 +320,7 @@ function createSearchResult($ads)
         ?>
         <div class="list-widget">
             <div style="display: flex">
-                <div class="widget-image">
+                <div class="widget-image" style="width: 50px; height: 50px">
                     <img src="<?php echo $putanja ?>" alt="Main Image">
                 </div>
                 <div class="widget-title-city" style="margin-left: 20px">

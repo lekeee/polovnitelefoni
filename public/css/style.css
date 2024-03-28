@@ -4011,6 +4011,11 @@ textarea.w-select {
   padding-top: 30px;
   padding-bottom: 30px;
   padding-left: 20px;
+  transition-duration: .3s;
+}
+
+.div-block-688 a:hover {
+  text-decoration: underline;
 }
 
 .text-block-45 {
@@ -6607,4 +6612,8 @@ textarea.w-select {
 
 .search-result::-webkit-scrollbar {
   display: none;
+}
+
+.text-block-33:hover {
+  text-decoration: underline;
 }

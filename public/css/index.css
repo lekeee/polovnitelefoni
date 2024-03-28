@@ -2196,4 +2196,11 @@ input[type="range"]::-moz-range-thumb {
   text-decoration: underline;
 }
 
-.deal-container {}
+.pocetnalabel a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pocetnalabel a:hover {
+  text-decoration: underline;
+}
