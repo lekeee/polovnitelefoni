@@ -80,122 +80,8 @@
                 <div class="div-block-44"><img src="../public/src/youtube_icon.png" loading="lazy" alt="" /></div>
             </div>
         </div>
-        <div class="div-block-45">
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Apple</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Apple Satovi</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Apple iPhone 15 Pro Max</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">HD</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">HTC</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">HTC One</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Ipad</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Ipad 4 16Gb</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Ipad Mini</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Samsung</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Samsung Galaxy</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Samsung Galaxy S32</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Samsung Galaxy M11</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Samsung Galaxy M31</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Samsung Galaxy S5 - 64Gb</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Samsung Galaxy Tab 4</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Xiaomi</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Xiaomi Redmi Note 10 Pro</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Xiaomi Redmi Note 9s</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Xiaomi 12X</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Huawei</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Huawei Nova 9 SE 8Gb</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
-            <div class="div-block-46"><a href="#" class="link-block-8 w-inline-block">
-                    <div class="text-block-33">Huawei Honor 9 Lite</div>
-                </a>
-                <div class="text-block-32"> | </div>
-            </div>
+        <div class="div-block-45" id="quick-phone-models">
+
         </div>
         <div class="div-block-47">
             <div class="text-block-34">© 2024 Polovni Telefoni. Sva prava zadržana. Napravljeno od strane
@@ -216,3 +102,4 @@
         </div>
     </div>
 </section>
+<script type="module" src="../public/js/footer.js"></script>

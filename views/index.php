@@ -431,9 +431,13 @@ require_once "../inc/headTag.php";
                 </div>
             </div>
             <div class="currentpageindicator">
-                <div class="pocetnalabel">Početna</div>
+                <div class="pocetnalabel">
+                    <a href="../views/index.php" style="color: #818ea0">Početna</a>
+                </div>
                 <div class="separatorlabel">/</div>
-                <div class="pocetnalabel blackones">Šop</div>
+                <div class="pocetnalabel blackones">
+                    <a onclick="scrollIntoAds()" style="color: black;">Šop</a>
+                </div>
             </div>
             <div class="showindpropertzcontainer">
                 <div data-w-id="74356a1c-d9dd-5682-428a-0e61ff5c9155" class="filtericoncontainer"
@@ -556,7 +560,7 @@ require_once "../inc/headTag.php";
                             <div class="pricefiltercontainer">
 
                                 <div class="priceslidercontainer">
-                                    <div class="sliderneeded" style="padding-right: 20px; padding-bottom: 30px">
+                                    <div class="sliderneeded" style="padding-right: 20px;">
                                         <div class="price-input">
                                             <div class="field">
                                                 <span>Min</span>
@@ -567,6 +571,7 @@ require_once "../inc/headTag.php";
                                                 <span>Max</span>
                                                 <input type="number" class="input-max" value="2500">
                                             </div>
+
                                         </div>
                                         <div class="slider" style="background-color: #ddd">
                                             <div class="progress"></div>
@@ -576,6 +581,19 @@ require_once "../inc/headTag.php";
                                                 step="50">
                                             <input type="range" class="range-max" min="0" max="2500" value="2500"
                                                 step="50">
+                                        </div>
+
+                                        <div class="deal-container">
+                                            <div class="statechecklboxcontainer" style="margin: 0; paddign: 0">
+                                                <label class="w-checkbox statedevicecheckbox">
+                                                    <input type="checkbox" id="deal" name="deal"
+                                                        data-name="deal selected" class="w-checkbox-input statecheckbox"
+                                                        checked />
+                                                    <span class="statecheckboxlabel w-form-label" for="oldState">
+                                                        Dogovor
+                                                    </span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -617,7 +635,7 @@ require_once "../inc/headTag.php";
                         </div>
                     </div>
                 </div>
-                <div class="productscontainer">
+                <div class="productscontainer" id="productscontainer">
                     <div class="filterstlabela"></div>
 
                     <div class="productsmainconatinerhead">
@@ -628,7 +646,10 @@ require_once "../inc/headTag.php";
                         </div>
                     </div>
                     <div class="loadmorecontainer">
-                        <a href="#" current-page="0" class="loadmorebutton w-button" onclick="loadMore(this)">Učitaj
+                        <div class="loadmoreindicator">
+                            <div class="loadmoreindicatormain"></div>
+                        </div>
+                        <a href="#" current-page="0" class="loadmorebutton" onclick="loadMore(this)">Učitaj
                             još</a>
                     </div>
                 </div>

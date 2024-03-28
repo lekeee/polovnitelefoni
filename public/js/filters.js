@@ -1,9 +1,6 @@
 window.onload = function () {
-    // localStorage.removeItem('filterData');
-    cacheFilterData(0, 2500, false, false, false);
-    // localStorage.removeItem('loadedAdsCounter');
+    cacheFilterData();
     document.querySelector('#resetFilters').disabled = true;
-    //showAllAdsCounter();
     checkURL();
 };
 
@@ -96,34 +93,8 @@ brandsCheckboxes.forEach(element => {
 const modelsCheckboxes = document.querySelectorAll('.custom-dropdown-item');
 
 function checkModelSelected(element) {
-    // const checkbox = element.querySelector(`input[type="checkbox"]`);
     const parentBrandCheckbox = element.parentNode.parentNode.querySelector('.custom-brand-checkbox');
     checkBransSelecter(parentBrandCheckbox);
-    // if (checkbox.checked) {
-    //     const parentBrandCheckbox = element.parentNode.parentNode.querySelector('.custom-brand-checkbox');
-
-    //     const brandvalue = element.getAttribute('brand-selector');
-    //     const labela = element.querySelector('label');
-    //     modelsSelected.push({
-    //         brand: brandvalue,
-    //         model: labela.innerHTML
-    //     }
-    //     );
-    // } else {
-    //     console.log("brisem ih");
-    //     const parentBrandCheckbox = element.parentNode.parentNode.querySelector('.custom-brand-checkbox');
-    //     checkBransSelecter(parentBrandCheckbox);
-
-    //     const labela = element.querySelector('label');
-    //     let novaLista = [];
-    //     modelsSelected.forEach(element => {
-    //         if (element.model != labela.innerHTML) {
-    //             novaLista.push(element);
-    //         }
-    //     });
-    //     modelsSelected = novaLista;
-    // }
-    // console.log(modelsSelected);
 }
 
 function checkModelSelected2(element) {
@@ -155,23 +126,14 @@ function getPrice() {
     }
 }
 
+function getDeal() {
+    deal = document.querySelector('#deal').checked;
+}
+
 function getState() {
-    if (document.querySelector("#oldState").checked) {
-        oldState = true;
-    } else {
-        oldState = false;
-    }
-    if (document.querySelector("#newState").checked) {
-        newState = true;
-    }
-    else {
-        newState = false;
-    }
-    if (document.querySelector("#damagedState").checked) {
-        damagedState = true;
-    } else {
-        damagedState = false;
-    }
+    oldState = document.querySelector("#oldState").checked;
+    newState = document.querySelector("#newState").checked;
+    damagedState = document.querySelector("#damagedState").checked;
 }
 
 function showFilters() {
@@ -190,6 +152,7 @@ function showFilters() {
         const oldState2 = savedInitialData.oldState;
         const newState2 = savedInitialData.newState;
         const damagedState2 = savedInitialData.damagedState;
+        const deal2 = savedInitialData.deal;
 
         const deleteFilters = document.createElement('a');
         deleteFilters.setAttribute('href', '#');
@@ -238,6 +201,9 @@ function showFilters() {
             state.innerHTML = "X Oštećenje";
             filtersLabel.appendChild(state);
         }
+        if (!deal2) {
+            document.querySelector('#deal').checked = false;
+        }
     }
 }
 
@@ -256,7 +222,9 @@ document.querySelector("#sumbitFilters").addEventListener("click", function (e) 
     allAdsCounter = 0;
     getState();
     getPrice();
-    cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState);
+    getDeal();
+
+    cacheFilterData();
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
     getAds(0, true);
     var sirinaProzora = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -267,19 +235,20 @@ document.querySelector("#sumbitFilters").addEventListener("click", function (e) 
     showFilters();
 });
 
-function cacheFilterData(minPrice, maxPrice, oldState, newState, damagedState) {
-    const initialDataToSave = {
+function cacheFilterData() {
+    initialDataToSave = {
         brandsSelected: brandsSelected,
         modelsSelected: modelsSelected,
         minPrice: minPrice,
         maxPrice: maxPrice,
         oldState: oldState,
         newState: newState,
-        damagedState: damagedState
+        damagedState: damagedState,
+        deal: deal
     };
-
     const initialDataJson = JSON.stringify(initialDataToSave);
     localStorage.setItem('filterData', initialDataJson);
+    console.log('Azurirano');
 }
 
 function getLimit() {
@@ -295,6 +264,7 @@ function getAds(currentPage, restart) {
     let oldState2 = false;
     let newState2 = false;
     let damagedState2 = false;
+    let deal2 = true;
 
     if (savedFilterDataJson) {
         const savedInitialData = JSON.parse(savedFilterDataJson);
@@ -305,6 +275,7 @@ function getAds(currentPage, restart) {
         oldState2 = savedInitialData.oldState;
         newState2 = savedInitialData.newState;
         damagedState2 = savedInitialData.damagedState;
+        deal2 = savedInitialData.deal;
     }
 
     sort = sortSelect.value;
@@ -312,7 +283,6 @@ function getAds(currentPage, restart) {
     let jsonmodels = JSON.stringify(modelsSelected2);
     let encodedModels = encodeURIComponent(jsonmodels);
     const limit = getLimit();
-
     const params = new URLSearchParams({
         action: 'getAds',
         sort: sort,
@@ -325,6 +295,7 @@ function getAds(currentPage, restart) {
         damagedState: damagedState2,
         page: currentPage,
         limit: limit,
+        deal: deal2,
     });
 
     FilterData(params, restart);
