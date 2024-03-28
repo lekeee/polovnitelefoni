@@ -1,17 +1,25 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+
+
 require_once "../classes/User.php";
 require_once "../config/config.php";
 require_once "../classes/Phone.php";
 include_once '../exceptions/userExceptions.php';
+require_once '../../vendor/autoload.php';
+
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 $user = new User();
+$cache = new FilesystemAdapter();
 $phoneAds = new Phone();
 $limit = 4;
+
 function addToFavourite($data, $phoneAds)
 {
-    if (isset ($data['user_id']) && isset ($data['ad_id'])) {
+    if (isset($data['user_id']) && isset($data['ad_id'])) {
         try {
             $user_id = $data['user_id'];
             $ad_id = $data['ad_id'];
@@ -50,7 +58,7 @@ function addToFavourite($data, $phoneAds)
 
 function removeFromFavourite($data, $phoneAds)
 {
-    if (isset ($data['user_id']) && isset ($data['ad_id'])) {
+    if (isset($data['user_id']) && isset($data['ad_id'])) {
         try {
             $user_id = $data['user_id'];
             $ad_id = $data['ad_id'];
@@ -89,7 +97,7 @@ function removeFromFavourite($data, $phoneAds)
 
 function checkIsFavourite($data, $user)
 {
-    if (isset ($data['user_id']) && isset ($data['ad_id'])) {
+    if (isset($data['user_id']) && isset($data['ad_id'])) {
         try {
             $user_id = $data['user_id'];
             $ad_id = $data['ad_id'];
@@ -131,6 +139,11 @@ function checkIsFavourite($data, $user)
     return $response;
 }
 
+function compareModels($a, $b)
+{
+    return strcmp($a['model'], $b['model']);
+}
+
 function getAds($phoneAds)
 {
     $sort = $_GET['sort'];
@@ -145,9 +158,17 @@ function getAds($phoneAds)
     $offset = $_GET['page'] * $limit;
     $deal = $_GET['deal'];
 
-
+    $cache = new FilesystemAdapter();
     try {
-        $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
+        $cacheItem = $cache->getItem('ads-' . $offset . '-' . $limit);
+        $cachedValue = $cacheItem->get();
+        if ($cachedValue === null) {
+            $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
+            $cacheItem->set($result)->expiresAfter(180);
+            $cache->save($cacheItem);
+        } else {
+            $result = $cachedValue;
+        }
         $response = array(
             'status' => 'success',
             'message' => $result
@@ -164,11 +185,11 @@ function getAds($phoneAds)
 function newAds($data, $user, $phoneAds)
 {
     if (
-        isset ($data['title']) && isset ($data['brand'])
-        && isset ($data['model']) && isset ($data['deviceState'])
-        && isset ($data['stateRange']) && isset ($data['images'])
-        && isset ($data['description']) && isset ($data['deal'])
-        && isset ($data['price']) && isset ($data['terms'])
+        isset($data['title']) && isset($data['brand'])
+        && isset($data['model']) && isset($data['deviceState'])
+        && isset($data['stateRange']) && isset($data['images'])
+        && isset($data['description']) && isset($data['deal'])
+        && isset($data['price']) && isset($data['terms'])
     ) {
 
         $userID = $user->getId();
@@ -364,7 +385,7 @@ function createSearchResult($ads)
 if ($user->isLogged()) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);
-        if (isset ($data['action'])) {
+        if (isset($data['action'])) {
             if ($data['action'] === 'newAd') {
                 $response = newAds($data, $user, $phoneAds);
             }
