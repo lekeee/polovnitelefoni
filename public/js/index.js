@@ -37,7 +37,7 @@ async function addToFavourite(x, user_id, ad_id) {
                 // Menjam tekst koji ide uz srce (Ako postoji)
                 const heartText = document.querySelector('#saved-identificator');
                 if (heartText !== null && heartText !== undefined) {
-                    heartText.innerHTML = "Ukloni iz sačuvanih oglasa";
+                    heartText.innerHTML = "Ukloni";
                 }
             }
         })
