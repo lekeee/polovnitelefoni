@@ -4060,13 +4060,17 @@ textarea.w-select {
 
 .div-block-691 {
   width: 100%;
-  height: 650px;
+  /* height: 650px; */
   border-bottom: 1px none var(--border-color);
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
   padding-left: 10px;
   display: flex;
+}
+
+.div-block-691 h1 {
+  margin-bottom: 15px;
 }
 
 .div-block-692 {
@@ -4545,7 +4549,7 @@ textarea.w-select {
   /* height: 200px; */
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   display: flex;
 }
 
@@ -6224,7 +6228,6 @@ textarea.w-select {
   }
 
   .heading-6 {
-    font-size: 20px;
     line-height: 30px;
   }
 
@@ -6351,7 +6354,7 @@ textarea.w-select {
 
   .div-block-719 {
     width: 100%;
-    height: 150px;
+    /* height: 150px; */
     max-width: none;
     margin-top: 20px;
     margin-left: 0;
@@ -6482,16 +6485,18 @@ textarea.w-select {
 }
 
 .deviceState {
-  padding: 7px 15px;
+  padding: 4px 15px;
   background: #f4faf6;
   border-radius: 5px;
   border: 1px solid lightgreen;
   display: inline-block;
+  margin-right: 10px;
 }
 
 .deviceState p {
   margin: 0;
   padding: 0;
+  font-weight: bold;
 }
 
 .delete-account-text {
@@ -6616,4 +6621,61 @@ textarea.w-select {
 
 .text-block-33:hover {
   text-decoration: underline;
+}
+
+.access-damaged-container {
+  margin-top: 10px;
+  border-radius: 5px;
+  width: 100%;
+  /* height: 150px; */
+  border: 1px solid var(--border-color)
+}
+
+.access-damaged-actions-container {
+  width: 100%;
+  display: flex;
+}
+
+.access-action-container {
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  cursor: pointer;
+  transition-duration: .3s;
+}
+
+.access-action-container p {
+  margin: 0;
+}
+
+.access-action-container.active {
+  background-color: rgba(0, 0, 0, .1);
+  border: none;
+}
+
+.access-container,
+.damaged-container {
+  width: 100%;
+  overflow: auto;
+  padding: 12px 7.5px;
+}
+
+.access-item,
+.damaged-item {
+  padding: 6px 20px;
+  display: inline-block;
+  color: white;
+  border-radius: 5px;
+  margin: 2.5px;
+}
+
+.access-item {
+  background-color: var(--third-color);
+}
+
+.damaged-item {
+  background-color: var(--main-color);
 }

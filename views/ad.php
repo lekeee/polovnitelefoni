@@ -6,7 +6,7 @@ include_once '../app/exceptions/userExceptions.php';
 
 $phone = new Phone();
 $adId = $_GET['ad_id'];
-if (isset ($adId)) {
+if (isset($adId)) {
     try {
         $phoneAd = $phone->read($adId);
         $adData = json_decode($phoneAd, true);
@@ -29,7 +29,7 @@ if (isset ($adId)) {
         header('Location: index.php');
     }
 }
-if (!isset ($phoneAd)) {
+if (!isset($phoneAd)) {
     header('Location: index.php');
 }
 ?>
@@ -87,20 +87,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                                                                                                                                                                            {
-                                                                                                                                                                                                                                "items": [{
-                                                                                                                                                                                                                                    "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                                                                                                                                                                                    "origFileName": "<?php echo $file; ?>",
-                                                                                                                                                                                                                                    "fileName": "<?php echo $file; ?>",
-                                                                                                                                                                                                                                    "fileSize": <?php echo filesize($putanja); ?>,
-                                                                                                                                                                                                                                    "height": <?php echo $height; ?>,
-                                                                                                                                                                                                                                    "url": "<?php echo $putanja; ?>",
-                                                                                                                                                                                                                                    "width": <?php echo $width; ?>,
-                                                                                                                                                                                                                                    "type": "image"
-                                                                                                                                                                                                                                }],
-                                                                                                                                                                                                                                "group": "phoneImage"
-                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                        </script>
+                                                                                                                                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                                                                                                                                    "items": [{
+                                                                                                                                                                                                                                                                                                                                                                                                        "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                                                                                                                                                                                                                                                                                                                                        "origFileName": "<?php echo $file; ?>",
+                                                                                                                                                                                                                                                                                                                                                                                                        "fileName": "<?php echo $file; ?>",
+                                                                                                                                                                                                                                                                                                                                                                                                        "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                                                                                                                                                                                                                                                                                                                                        "height": <?php echo $height; ?>,
+                                                                                                                                                                                                                                                                                                                                                                                                        "url": "<?php echo $putanja; ?>",
+                                                                                                                                                                                                                                                                                                                                                                                                        "width": <?php echo $width; ?>,
+                                                                                                                                                                                                                                                                                                                                                                                                        "type": "image"
+                                                                                                                                                                                                                                                                                                                                                                                                    }],
+                                                                                                                                                                                                                                                                                                                                                                                                    "group": "phoneImage"
+                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                            </script>
                                             </a>
                                         </div>
 
@@ -157,22 +157,19 @@ require_once "../inc/headTag.php";
                                     </a>
                                 </div>
                                 <div class="div-block-695">
-                                    <div class="div-block-734">
-                                        <img src="<?php
-                                        if ($adData['stateRange'] < 2) {
-                                            echo "../public/src/start-rating1.png";
-                                        } else if ($adData['stateRange'] < 4) {
-                                            echo "../public/src/start-rating2.png";
-                                        } else if ($adData['stateRange'] < 6) {
-                                            echo "../public/src/start-rating3.png";
-                                        } else if ($adData['stateRange'] < 8) {
-                                            echo "../public/src/start-rating4.png";
-                                        } else {
-                                            echo "../public/src/start-rating5.png";
+                                    <div class="deviceState">
+                                        <?php
+                                        if ($adData['state'] === 0) {
+                                            echo "<p><b>" . $adData['stateRange'] . " / 10</b></p>";
+                                            echo '<script>
+                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "#FBBD28";
+                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#FBBD28";
+                                                document.getElementsByClassName("deviceState")[0].style.borderRadius = "20px";
+                                            </script>';
+                                        } else if ($adData['state'] === 1) {
+                                            echo "<p><b>Novo</b></p>";
                                         }
-                                        ?>" loading="lazy" data-w-id="7be535bf-1c91-1e9c-1d34-3ebf71a74e93"
-                                            sizes="(max-width: 479px) 100vw, (max-width: 767px) 23vw, 120px"
-                                            alt="Star Rating of 5" class="image-30" />
+                                        ?>
                                     </div>
                                     <div class="div-block-696">
                                         <div class="text-block-47">
@@ -197,52 +194,17 @@ require_once "../inc/headTag.php";
                                             alt="Available" class="image-31" />
                                         <div class="text-block-48">Na stanju</div>
                                     </div>
-                                    <?php if (!empty ($adData['damage'])) { ?>
-                                        <div class="div-block-699">
+                                    <?php if (!empty($adData['damage'])) { ?>
+                                        <!-- <div class="div-block-699">
                                             <div class="text-block-49">OŠTEĆENJE</div>
-                                        </div>
+                                        </div> -->
                                     <?php } ?>
-                                    <div class="deviceState">
-                                        <?php
-                                        if ($adData['state'] === 0) {
-                                            echo "<p><b>" . $adData['stateRange'] . " / 10</b></p>";
-                                            if ($adData['stateRange'] <= 3) {
-                                                echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "red";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#fff4f4";
-                                            </script>';
-                                            } else if ($adData['stateRange'] <= 5) {
-                                                echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "orange";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#fff8ec";
-                                            </script>';
-                                            } else if ($adData['stateRange'] <= 7) {
-                                                echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "blue";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#f2f2ff";
-                                            </script>';
-                                            } else if ($adData['stateRange'] <= 9) {
-                                                echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "#90eeea";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#edfffe";
-                                            </script>';
-                                            } else {
-                                                echo '<script>
-                                                document.getElementsByClassName("deviceState")[0].style.borderColor = "lightgreen";
-                                                document.getElementsByClassName("deviceState")[0].style.backgroundColor = "#f4faf6";
-                                            </script>';
-                                            }
-                                        } else if ($adData['state'] === 1) {
-                                            echo "<p><b>Novo</b></p>";
-                                        }
-                                        ?>
 
-                                    </div>
                                 </div>
                                 <div class="div-block-701">
                                     <h2 class="heading-8">
                                         <?php
-                                        if (empty ($adData['price'])) {
+                                        if (empty($adData['price'])) {
                                             echo "Dogovor";
                                         } else {
                                             echo '€' . $adData['price'];
@@ -251,8 +213,8 @@ require_once "../inc/headTag.php";
                                     </h2>
                                     <h2 class="heading-9">
                                         <?php
-                                        if (!empty ($adData['old_price'])) {
-                                            if (!empty ($adData['price'])) {
+                                        if (!empty($adData['old_price'])) {
+                                            if (!empty($adData['price'])) {
                                                 echo '€' . $adData['old_price'];
                                             }
                                         }
@@ -276,7 +238,26 @@ require_once "../inc/headTag.php";
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="access-damaged-container">
+                            <div class="access-damaged-actions-container">
+                                <div class="access-action-container active"
+                                    style="border-left: none; border-right:none;">
+                                    <p>Dodatna oprema</p>
+                                </div>
+                                <div class="access-action-container" style="border-right: none;">
+                                    <p>Oštećenja</p>
+                                </div>
+                            </div>
+                            <div class="access-container">
+                                <p class="access-item">Punjač</p>
+                                <p class="access-item">Zaštitno staklo</p>
+                                <p class="access-item">Zaštitna maska</p>
+                            </div>
+                            <div class="damaged-container" style="display: none">
+                                <p class="damaged-item">Napukao ekran</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;">
                             <div class="div-block-702">
                                 <div class="div-block-703">
                                     <div class="div-block-720">
@@ -326,7 +307,7 @@ require_once "../inc/headTag.php";
                                             <div class="text-block-51" id="saved-identificator">
                                                 <?php
                                                 if ($saved == 1) {
-                                                    echo "Ukloni iz sačuvanih oglasa";
+                                                    echo "Ukloni";
                                                 } else {
                                                     echo "Sačuvaj oglas";
                                                 }
@@ -347,8 +328,8 @@ require_once "../inc/headTag.php";
                                 <div class="text-block-52">Način isporuke u dogovoru sa vlasnikom</div>
                             </div>
                         </div>
-                        <div class="div-block-707"><img src="../public/src/bag-orange.png" loading="lazy" alt="Bag Icon"
-                                class="image-40" />
+                        <div class="div-block-707" style="margin-top: 10px;"><img src="../public/src/bag-orange.png"
+                                loading="lazy" alt="Bag Icon" class="image-40" />
                             <div>
                                 <div class="text-block-53">Drugi ljudi žele ovaj proizvod. </div>
                                 <div class="text-block-54">
@@ -373,14 +354,14 @@ require_once "../inc/headTag.php";
                         </div>
                     </div>
                     <div class="div-block-724">
-                        <?php if (!empty ($adData['accessories'])) { ?>
+                        <?php if (!empty($adData['accessories'])) { ?>
                             <div class="text-block-58">Dodatna oprema:
                                 <strong>
                                     <?php echo substr($adData['accessories'], 0, -2) ?>
                                 </strong>
                             </div>
                         <?php } ?>
-                        <?php if (!empty ($adData['damage'])) { ?>
+                        <?php if (!empty($adData['damage'])) { ?>
                             <div class="text-block-59">Oštećenja: <span class="text-span-4">
                                     <?php echo substr($adData['damage'], 0, -2) ?>
                                 </span></div>
