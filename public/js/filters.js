@@ -44,6 +44,15 @@ function checkBransSelecter(element) {
         const labela = parentElement.querySelector('label');
         if (!brandsSelected.includes(labela.innerHTML)) {
             brandsSelected.push(labela.innerHTML);
+            brandsSelected.sort(function (a, b) {
+                if (a.toUpperCase() > b.toUpperCase()) {
+                    return 1;
+                }
+                if (a.toUpperCase() < b.toUpperCase()) {
+                    return -1;
+                }
+                return 0;
+            });
         }
 
         const allModelsElements = element.parentNode.parentNode.parentNode.querySelectorAll('.custom-dropdown-item');
@@ -56,7 +65,17 @@ function checkBransSelecter(element) {
                     modelsSelected.push({
                         brand: labela.innerHTML,
                         model: x.querySelector('label').innerHTML
-                    })
+                    });
+
+                    modelsSelected.sort(function (a, b) {
+                        if (a.model.toUpperCase() > b.model.toUpperCase()) {
+                            return 1;
+                        }
+                        if (a.model.toUpperCase() < b.model.toUpperCase()) {
+                            return -1;
+                        }
+                        return 0;
+                    });
                 }
             } else {
                 if (exist != undefined) {
@@ -279,6 +298,8 @@ function getAds(currentPage, restart) {
     }
 
     sort = sortSelect.value;
+
+
 
     let jsonmodels = JSON.stringify(modelsSelected2);
     let encodedModels = encodeURIComponent(jsonmodels);
