@@ -87,20 +87,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "items": [{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "origFileName": "<?php echo $file; ?>",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "fileName": "<?php echo $file; ?>",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "fileSize": <?php echo filesize($putanja); ?>,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "height": <?php echo $height; ?>,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "url": "<?php echo $putanja; ?>",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "width": <?php echo $width; ?>,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "type": "image"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }],
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "group": "phoneImage"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </script>
+                                                                    {
+                                                                        "items": [{
+                                                                            "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                            "origFileName": "<?php echo $file; ?>",
+                                                                            "fileName": "<?php echo $file; ?>",
+                                                                            "fileSize": <?php echo filesize($putanja); ?>,
+                                                                            "height": <?php echo $height; ?>,
+                                                                            "url": "<?php echo $putanja; ?>",
+                                                                            "width": <?php echo $width; ?>,
+                                                                            "type": "image"
+                                                                        }],
+                                                                        "group": "phoneImage"
+                                                                    }
+                                                                </script>
                                             </a>
                                         </div>
 
@@ -114,6 +114,17 @@ require_once "../inc/headTag.php";
                                     <img src="../public/src/arrow_right_icon.svg" alt="Right Left"
                                         srcset="../public/src/arrow_right_icon.svg">
                                 </div>
+
+                                <?php
+                                if ($adData['damage'] !== NULL) {
+                                    ?>
+                                    <div class="damage-identificator" title="Uređaj je oštećen">
+                                        <img src="../public/src/broken-phone.svg" alt="" srcset="">
+                                    </div>
+
+                                    <?php
+                                }
+                                ?>
                             </div>
 
                         </div>
@@ -268,7 +279,6 @@ require_once "../inc/headTag.php";
                                 ?>
                             </div>
                             <div class="damaged-container" style="display: none">
-                                <p class="damaged-item">Napukao ekran</p>
                                 <?php
                                 if ($adData['damage'] !== NULL && $adData['damage'] !== '') {
                                     $damages = explode(',', $adData['damage']);
@@ -282,7 +292,7 @@ require_once "../inc/headTag.php";
                                         }
                                     }
                                 } else {
-                                    echo "<i>Nema oštećenja</i>";
+                                    echo "<i style='margin: 5px;'>Nema oštećenja</i>";
                                 }
                                 ?>
                             </div>
