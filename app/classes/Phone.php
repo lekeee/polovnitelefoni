@@ -313,11 +313,8 @@ class Phone extends Ad
     public function mostViewedAd()
     {
         try {
-            $sql = "SELECT o.*, COUNT(*) AS broj_poseta 
-                    FROM visitors p
-                    INNER JOIN oglasi o ON p.ad_id = o.ad_id
-                    GROUP BY o.ad_id 
-                    ORDER BY broj_poseta DESC LIMIT 1";
+            $sql = "SELECT * FROM oglasi
+                    ORDER BY views DESC LIMIT 1";
 
             $result = $this->con->query($sql);
             $mostViewedAd = $result->fetch_assoc();
@@ -762,6 +759,22 @@ class Phone extends Ad
             $stmt->execute();
             $result = $stmt->get_result();
             return json_encode($result->fetch_all(MYSQLI_ASSOC));
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function addPhoneView($ad_id)
+    {
+        try{
+            $sql = "UPDATE oglasi 
+                    SET views = views + 1 
+                    WHERE ad_id = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $ad_id);
+            $stmt->execute();
+            return $stmt->affected_rows > 0 ? true : false;
         }
         catch (Exception $e) {
             echo $e->getMessage();

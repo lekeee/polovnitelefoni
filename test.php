@@ -13,6 +13,8 @@ $phone = new Phone();
 $user = new User();
 $support = new Support();
 $message = new Messages();
+$newsleter = new Newsletter("jalesksa388@gmail.com");
 
+print_r($newsleter->subscribe());
 
 

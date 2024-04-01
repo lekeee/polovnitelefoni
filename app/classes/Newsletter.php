@@ -34,17 +34,26 @@ class Newsletter{
 
     public function subscribe(){
         try{
-            $sql = "INSERT INTO newsletter (email)
-                    VALUES (?)";
-            $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("s", $this->email);
-            $stmt->execute();
+            $checkSql = "SELECT COUNT(*) as count FROM newsletter WHERE email = ?";
+            $checkStmt = $this->con->prepare($checkSql);
+            $checkStmt->bind_param("s", $this->email);
+            $checkStmt->execute();
+            $checkResult = $checkStmt->get_result();
+            $count = $checkResult->fetch_assoc()['count'];
             
-            return $stmt->affected_rows > 0 ? true : false;
+            if($count > 0) {
+                return false;
+            }
+            
+            $insertSql = "INSERT INTO newsletter (email) VALUES (?)";
+            $insertStmt = $this->con->prepare($insertSql);
+            $insertStmt->bind_param("s", $this->email);
+            $insertStmt->execute();
+            
+            return $insertStmt->affected_rows > 0 ? true : false;
         }
         catch(Exception $e){
             echo $e->getMessage();
         }
     }
-
 }

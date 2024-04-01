@@ -56,4 +56,5 @@ abstract class Ad
     abstract public function brandsPrecentage($id);
     abstract public function returnBrandsAndModels();
     abstract public function selectByTitle($title);
+    abstract public function addPhoneView($ad_id);
 }
