@@ -1,6 +1,36 @@
+<?php
+$selectedBrand = null;
+$selectedModel = null;
+
+if (isset ($_GET['brand'])) {
+    $selectedBrand = $_GET['brand'];
+}
+if (isset ($_GET['model'])) {
+    $selectedModel = $_GET['model'];
+}
+
+?>
+
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
     data-wf-site="655506e07faa7f82a5f25610">
+
+<script src="../public/js/filter-preload.js?v=<?php echo time() ?>"></script>
+<script>
+    <?php
+    if ($selectedBrand !== null) {
+        ?>
+        addBrand('<?php echo $selectedBrand ?>');
+        <?php
+        if ($selectedModel !== null) {
+            ?>
+            addModel('<?php echo $selectedBrand ?>', '<?php echo $selectedModel ?>');
+            <?php
+        }
+    }
+    ?>
+</script>
+
 
 <?php
 require_once "../inc/headTag.php";
@@ -401,9 +431,13 @@ require_once "../inc/headTag.php";
                 </div>
             </div>
             <div class="currentpageindicator">
-                <div class="pocetnalabel">Početna</div>
+                <div class="pocetnalabel">
+                    <a href="../views/index.php" style="color: #818ea0">Početna</a>
+                </div>
                 <div class="separatorlabel">/</div>
-                <div class="pocetnalabel blackones">Šop</div>
+                <div class="pocetnalabel blackones">
+                    <a onclick="scrollIntoAds()" style="color: black;">Šop</a>
+                </div>
             </div>
             <div class="showindpropertzcontainer">
                 <div data-w-id="74356a1c-d9dd-5682-428a-0e61ff5c9155" class="filtericoncontainer"
@@ -475,16 +509,16 @@ require_once "../inc/headTag.php";
                                     }
 
                                     foreach ($dataJSON as $brand) {
-                                        foreach($ourData as $ourBrand){
+                                        foreach ($ourData as $ourBrand) {
 
                                             if ($ourBrand['brand'] === $brand['brand_name']) {
 
-                                                if (!empty($brand["device_list"])) {
+                                                if (!empty ($brand["device_list"])) {
                                                     echo "
                                                             <div class='custom-dropdown-menu'>
                                                                 <div class='dropdown-click-toggler'>
                                                                     <div class='custom-checkbox-group'>
-                                                                        <input type='checkbox' id='{$brand['key']}Checkbox' class='custom-brand-checkbox' data-target='{$brand['key']}Dropdown'>
+                                                                        <input type='checkbox' id='{$brand['key']}Checkbox' name='{$brand['key']}' class='custom-brand-checkbox' data-target='{$brand['key']}Dropdown'>
                                                                         <label for='{$brand['key']}Checkbox'>{$brand['brand_name']}</label>
                                                                     </div>
                                                                     <label class='openDropDown'>+</label>
@@ -493,17 +527,20 @@ require_once "../inc/headTag.php";
                                                     echo "
                                                                 <div class='custom-dropdown' id='{$brand['key']}Dropdown'>";
                                                     foreach ($brand['device_list'] as $model) {
-                                                        foreach($ourData as $ourModel){
+                                                        foreach ($ourData as $ourModel) {
                                                             if (stripos($model['device_name'], "watch") === false && $model['device_name'] === $ourModel['model']) {
+                                                                $newID = strtolower($model['device_name']);
+                                                                $newID = str_replace(' ', '', $newID);
+                                                                $newID .= 'Checkbox';
                                                                 echo "
                                                                         <div class='custom-dropdown-item' brand-selector={$brand['brand_name']}>
-                                                                            <input type='checkbox' id='{$model['device_name']}Checkbox'>
-                                                                            <label for='{$model['device_name']}Checkbox'>{$model['device_name']}</label>
+                                                                            <input type='checkbox' id='" . $newID . "'>
+                                                                            <label for='" . $newID . "'>{$model['device_name']}</label>
                                                                         </div>
                                                                     ";
                                                             }
                                                         }
-                                                        
+
                                                     }
                                                     echo "</div></div>";
                                                     break;
@@ -523,7 +560,7 @@ require_once "../inc/headTag.php";
                             <div class="pricefiltercontainer">
 
                                 <div class="priceslidercontainer">
-                                    <div class="sliderneeded" style="padding-right: 20px; padding-bottom: 30px">
+                                    <div class="sliderneeded" style="padding-right: 20px;">
                                         <div class="price-input">
                                             <div class="field">
                                                 <span>Min</span>
@@ -534,6 +571,7 @@ require_once "../inc/headTag.php";
                                                 <span>Max</span>
                                                 <input type="number" class="input-max" value="2500">
                                             </div>
+
                                         </div>
                                         <div class="slider" style="background-color: #ddd">
                                             <div class="progress"></div>
@@ -543,6 +581,19 @@ require_once "../inc/headTag.php";
                                                 step="50">
                                             <input type="range" class="range-max" min="0" max="2500" value="2500"
                                                 step="50">
+                                        </div>
+
+                                        <div class="deal-container">
+                                            <div class="statechecklboxcontainer" style="margin: 0; paddign: 0">
+                                                <label class="w-checkbox statedevicecheckbox">
+                                                    <input type="checkbox" id="deal" name="deal"
+                                                        data-name="deal selected" class="w-checkbox-input statecheckbox"
+                                                        checked />
+                                                    <span class="statecheckboxlabel w-form-label" for="oldState">
+                                                        Dogovor
+                                                    </span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -584,7 +635,7 @@ require_once "../inc/headTag.php";
                         </div>
                     </div>
                 </div>
-                <div class="productscontainer">
+                <div class="productscontainer" id="productscontainer">
                     <div class="filterstlabela"></div>
 
                     <div class="productsmainconatinerhead">
@@ -595,7 +646,10 @@ require_once "../inc/headTag.php";
                         </div>
                     </div>
                     <div class="loadmorecontainer">
-                        <a href="#" current-page="0" class="loadmorebutton w-button" onclick="loadMore(this)">Učitaj
+                        <div class="loadmoreindicator">
+                            <div class="loadmoreindicatormain"></div>
+                        </div>
+                        <a href="#" current-page="0" class="loadmorebutton" onclick="loadMore(this)">Učitaj
                             još</a>
                     </div>
                 </div>
@@ -611,8 +665,6 @@ require_once "../inc/headTag.php";
     </section>
     <?php
     require_once "../inc/message-button.php";
-    ?>
-    <?php
     require_once "../inc/subscribeForm.php";
     require_once "../inc/footer.php";
     ?>

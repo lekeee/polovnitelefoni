@@ -1,14 +1,22 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+
+
 require_once "../classes/User.php";
 require_once "../config/config.php";
 require_once "../classes/Phone.php";
 include_once '../exceptions/userExceptions.php';
+require_once '../../vendor/autoload.php';
+
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 $user = new User();
+$cache = new FilesystemAdapter();
 $phoneAds = new Phone();
 $limit = 4;
+
 function addToFavourite($data, $phoneAds)
 {
     if (isset($data['user_id']) && isset($data['ad_id'])) {
@@ -131,6 +139,11 @@ function checkIsFavourite($data, $user)
     return $response;
 }
 
+function compareModels($a, $b)
+{
+    return strcmp($a['model'], $b['model']);
+}
+
 function getAds($phoneAds)
 {
     $sort = $_GET['sort'];
@@ -143,10 +156,19 @@ function getAds($phoneAds)
     $damagedState = $_GET['damagedState'];
     $limit = $_GET['limit'];
     $offset = $_GET['page'] * $limit;
+    $deal = $_GET['deal'];
 
-
+    $cache = new FilesystemAdapter();
     try {
-        $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit);
+        $cacheItem = $cache->getItem('ads-' . $offset . '-' . $limit);
+        $cachedValue = $cacheItem->get();
+        if ($cachedValue === null) {
+            $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
+            $cacheItem->set($result)->expiresAfter(180);
+            $cache->save($cacheItem);
+        } else {
+            $result = $cachedValue;
+        }
         $response = array(
             'status' => 'success',
             'message' => $result
@@ -257,10 +279,10 @@ function countFiltered($phoneAds)
     $damagedState = $_GET['damagedState'];
     $limit = $_GET['limit'];
     $offset = $_GET['page'] * $limit;
-
+    $deal = $_GET['deal'];
 
     try {
-        $result = $phoneAds->countAllFilteredAds($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit);
+        $result = $phoneAds->countAllFilteredAds($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
         $response = array(
             'status' => 'success',
             'message' => $result
@@ -273,6 +295,30 @@ function countFiltered($phoneAds)
     }
     return $response;
 }
+
+function getSearchData($title, $phoneAds)
+{
+    try {
+        $result = $phoneAds->selectByTitle($title);
+        if ($result != '[]') {
+            $response = [
+                'status' => 'success',
+                'message' => createSearchResult(json_decode($result, true))
+            ];
+        } else {
+            $response = [
+                'status' => 'empty',
+                'message' => 'Nema rezultata'
+            ];
+        }
+    } catch (Exception $ex) {
+        $response = [
+            'status' => 'error',
+            'message' => 'Došlo je do greške prilikom pribavljanja search-ovanih oglasa'
+        ];
+    }
+}
+
 
 function addView($data, $phoneAds){
     try{
@@ -291,6 +337,69 @@ function addView($data, $phoneAds){
     return $response;
 }
 
+
+function createSearchResult($ads)
+{
+    $result = '';
+    for ($i = 0; $i < count($ads); $i++) {
+        $folderPath = "../../uploads/" . $ads[$i]['images'];
+        $putanja = '../public/src/noimage-icon.svg';
+        $imagesCounter = 0;
+        if (is_dir($folderPath)) {
+            $files = array_diff(scandir($folderPath), array('..', '.'));
+            foreach ($files as $file) {
+                $imagesCounter++;
+                $fileNameWithoutExtension = pathinfo($file, PATHINFO_FILENAME);
+                if (strtolower($fileNameWithoutExtension) === 'mainimage') {
+                    $putanja = "../uploads/" . $ads[$i]['images'] . '/' . $file;
+                    break;
+                }
+            }
+        }
+        ob_start();
+        ?>
+        <div class="list-widget">
+            <div style="display: flex">
+                <div class="widget-image" style="width: 50px; height: 50px">
+                    <img src="<?php echo $putanja ?>" alt="Main Image">
+                </div>
+                <div class="widget-title-city" style="margin-left: 20px">
+                    <a href="../views/ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>">
+                        <?php
+                        if (strlen($ads[$i]['title']) > 40) {
+                            $padded_string = substr($ads[$i]['title'], 0, 37);
+                            echo $padded_string . '...';
+                        } else {
+                            echo $ads[$i]['title'];
+                        }
+                        ?>
+                    </a>
+                    <p>
+                        <?php
+                        echo $ads[$i]['city'];
+                        ?>
+                    </p>
+                </div>
+            </div>
+            <div class="widget-price">
+                <p>
+                    <?php
+                    if ($ads[$i]['price'] !== NULL) {
+                        echo '€' . $ads[$i]['price'];
+                    } else {
+                        echo "Dogovor";
+                    }
+                    ?>
+                </p>
+            </div>
+        </div>
+        <?php
+        $result .= ob_get_clean();
+    }
+    return $result;
+}
+
+
 if ($user->isLogged()) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -308,6 +417,10 @@ if ($user->isLogged()) {
                 $response = checkIsFavourite($data, $user);
             }
         }
+    } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ($_GET['action'] === 'search') {
+            $response = getSearchData($_GET['title'], $phoneAds);
+        }
     } else {
         $response = array(
             'status' => 'error',
@@ -315,12 +428,12 @@ if ($user->isLogged()) {
         );
     }
 }
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($data['action'] === 'addView') {
         $response = addView($data, $phoneAds);
     }
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($_GET['action'] === 'getAds') {
@@ -332,7 +445,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($_GET['action'] === 'countFilteredData') {
         $response = countFiltered($phoneAds);
     }
+    if ($_GET['action'] === 'search') {
+        $response = getSearchData($_GET['title'], $phoneAds);
+    }
 }
-
 
 echo json_encode($response);

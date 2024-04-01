@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__ . '/../exceptions/adExceptions.php');
+include_once (__DIR__ . '/../exceptions/adExceptions.php');
 
 abstract class Ad
 {
@@ -37,7 +37,7 @@ abstract class Ad
     abstract public function countSaves($ad_id);
     abstract public function save($user_id, $ad_id);
     abstract public function deleteSave($user_id, $ad_id);
-    abstract public function filter($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24);
+    abstract public function filter($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24, $deal = true);
     abstract public function mostViewedAd();
     abstract public function mostSavedAd();
     abstract public function newestAd();
@@ -46,7 +46,7 @@ abstract class Ad
     abstract public function deleteAdfromVisit($ad_id);
     abstract public function saveDeletedAdData($ad_id);
     abstract public function countAllAds();
-    abstract public function countAllFilteredAds($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24);
+    abstract public function countAllFilteredAds($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24, $deal = true);
     abstract public function updateAd($ad_id, $brand, $model, $title, $state, $stateRange, $description, $price, $images, $availability, $damage, $accessories);
     abstract public function getAdFolder($ad_id);
     abstract public function getDeviceImage($brandName, $modelName);

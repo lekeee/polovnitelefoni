@@ -33,6 +33,12 @@ async function addToFavourite(x, user_id, ad_id) {
                 counter++;
                 savesContainer.style.display = 'flex';
                 savesCounter.innerHTML = counter;
+
+                // Menjam tekst koji ide uz srce (Ako postoji)
+                const heartText = document.querySelector('#saved-identificator');
+                if (heartText !== null && heartText !== undefined) {
+                    heartText.innerHTML = "Ukloni";
+                }
             }
         })
         .catch(error => {
@@ -40,7 +46,7 @@ async function addToFavourite(x, user_id, ad_id) {
         });
 }
 
-async function removeFromFavourite(x, user_id, ad_id) {
+async function removeFromFavourite(x, user_id, ad_id, color) {
     await fetch('../app/controllers/adController.php', {
         method: 'POST',
         headers: {
@@ -69,10 +75,16 @@ async function removeFromFavourite(x, user_id, ad_id) {
                 if (x !== null) {
                     x.querySelector("svg").classList.add('redLoveAnimation');
                     x.querySelector("svg").style.fill = "none";
-                    x.querySelector("svg").style.stroke = "black";
+                    x.querySelector("svg").style.stroke = color;
                     setTimeout(function () {
                         x.querySelector("svg").classList.remove('redLoveAnimation')
                     }, 300);
+
+                    // Menjam tekst koji ide uz srce (Ako postoji)
+                    const heartText = document.querySelector('#saved-identificator');
+                    if (heartText !== null && heartText !== undefined) {
+                        heartText.innerHTML = "Sačuvaj oglas";
+                    }
                 }
                 const savesContainer = document.querySelector("#mySavesContainer");
                 const savesCounter = document.querySelector('#mySavesCount');
@@ -120,7 +132,7 @@ async function isSaved(user_id, ad_id) {
         });
 }
 
-async function checkIsSaved(event, x, user_id, ad_id) {
+async function checkIsSaved(event, x, user_id, ad_id, color = 'black') {
     event.stopPropagation();
     await fetch('../app/controllers/adController.php', {
         method: 'POST',
@@ -142,7 +154,7 @@ async function checkIsSaved(event, x, user_id, ad_id) {
         })
         .then(data => {
             if (data.status === 'exist') {
-                removeFromFavourite(x, user_id, ad_id);
+                removeFromFavourite(x, user_id, ad_id, color);
             } else if (data.status === 'not-exist') {
                 addToFavourite(x, user_id, ad_id);
             }
@@ -155,6 +167,8 @@ function checkIsSaved2(event) {
     event.stopPropagation();
 }
 
+let firstTime = true;
+
 async function FilterData(params, restart) {
     const loadingAnimationContainer = document.querySelectorAll('.loading-animation');
     loadingAnimationContainer.forEach(element => {
@@ -166,11 +180,10 @@ async function FilterData(params, restart) {
         method: 'GET'
     })
         .then(response => response.json())
-        .then(data => {
+        .then(async (data) => {
             if (data.status === 'success') {
                 if (data.message.length == 0) {
                     console.log("nema rezultata");
-                    // ! Dodati identifikator da nema rezultata
                     const div1 = document.createElement('div');
                     div1.classList.add('no-result-main-container');
                     const img1 = document.createElement('img');
@@ -182,11 +195,14 @@ async function FilterData(params, restart) {
                     const mainElement = document.querySelector('.productsmaincontainer');
                     mainElement.innerHTML = '';
                     mainElement.appendChild(div1);
-                    document.querySelector('.loadmorecontainer').style.display = 'none';
-                    scrollIntoAds();
+                    // document.querySelector('.loadmorecontainer').style.display = 'none';
+                    showLoadMoreButton();
+                    if (!firstTime) {
+                        scrollIntoAds();
+                    }
                     return;
                 }
-                document.querySelector('.loadmorecontainer').style.display = 'flex';
+
                 cacheAdsCounter(data.message.length);
                 loadingAnimationContainer.forEach(element => {
                     document.querySelectorAll('.productsmaincontainer')[0].removeChild(element);
@@ -197,14 +213,30 @@ async function FilterData(params, restart) {
                 }
                 let jsonmodels = JSON.stringify(data.message);
                 updateWidgets(jsonmodels);
-                if (restart) scrollIntoAds();
+                if (restart && !firstTime) scrollIntoAds();
                 // params.action = 'countFilteredData';
                 params.set('action', 'countFilteredData');
-                showAllAdsCounter(params);
+                await showAllAdsCounter(params);
+                firstTime = false;
+                showLoadMoreButton();
             }
         })
         .catch(error => console.error('Došlo je do greške:', error));
 }
+
+function showLoadMoreButton() {
+    const btn = document.querySelector('.loadmorecontainer');
+    const progressIndicator = btn.querySelector('.loadmoreindicatormain');
+
+    if (allAdsCounter <= loadedAdsCounter) {
+        btn.style.display = 'none';
+    } else {
+        btn.style.display = 'flex';
+        const progress = loadedAdsCounter / allAdsCounter * 100;
+        progressIndicator.style.width = `${progress}%`;
+    }
+}
+
 function scrollIntoAds() {
     var mainContainer = document.querySelector('.productsmaincontainer');
 
@@ -235,7 +267,8 @@ async function updateWidgets(ads) {
         .then(data => {
             document.querySelectorAll('.productsmaincontainer')[0].innerHTML += data;
 
-            checkLoadMoreButton();
+            // checkLoadMoreButton();
+            showLoadMoreButton();
 
             const elements = document.getElementsByClassName('widgetimagescontainer');
             for (let i = 0; i < elements.length; i++) {
@@ -270,17 +303,15 @@ async function updateWidgets(ads) {
         });
 }
 
-function checkLoadMoreButton() {
-    const loadedAdsCounter = localStorage.getItem('loadedAdsCounter');
-    const allAdsCounter = localStorage.getItem('allAdsCounter');
-    if (loadedAdsCounter && allAdsCounter) {
-        const loadedAdsCounterInitialData = JSON.parse(loadedAdsCounter);
-        const allAdsCounterInitialData = JSON.parse(allAdsCounter);
-        if (Number(loadedAdsCounterInitialData.counter) === Number(allAdsCounterInitialData.counter)) {
-            document.querySelectorAll('.loadmorebutton')[0].style.display = 'none';
-        }
-    }
-}
+// function checkLoadMoreButton() {
+//     if (loadedAdsCounter && allAdsCounter) {
+//         const loadedAdsCounterInitialData = JSON.parse(loadedAdsCounter);
+//         const allAdsCounterInitialData = JSON.parse(allAdsCounter);
+//         if (Number(loadedAdsCounterInitialData.counter) === Number(allAdsCounterInitialData.counter)) {
+//             document.querySelectorAll('.loadmorebutton')[0].style.display = 'none';
+//         }
+//     }
+// }
 
 function loadMore(x) {
     let currentPage = x.getAttribute('current-page');

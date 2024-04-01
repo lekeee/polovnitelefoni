@@ -1,5 +1,6 @@
 <?php
 require_once "../classes/Phone.php";
+require_once "../classes/User.php";
 require_once "../config/config.php";
 include_once '../exceptions/adExceptions.php';
 
@@ -8,7 +9,7 @@ ini_set('display_errors', 1);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
-    if (isset($data['action'])) {
+    if (isset ($data['action'])) {
         $phone = new Phone();
         if ($data['action'] === 'getUserAds') {
             $userID = $data['userID'];
@@ -89,6 +90,7 @@ function getMainImagePath($ad)
 
 function showListWidget($ad, $putanja)
 {
+    $user = new User();
     $result = "";
     ob_start();
     ?>
@@ -185,14 +187,43 @@ function showListWidget($ad, $putanja)
             </div>
         </div>
         <div class="action-container">
-            <div class="action-compare-container">
-                <div class="content-container">
-                    <img src="../public/src/compare-icon.svg" alt="">
-                </div>
+            <div class="action-compare-container" style="cursor: pointer;" <?php
+            if ($user->isLogged()) {
+                ?>
+                    onclick="checkIsSaved(event, this, <?php echo $user->getId() ?>, <?php echo $ad['ad_id'] ?>)" <?php
+            } else {
+                ?> onclick="checkIsSaved2(event)" <?php
+            }
+            ?>>
+                <?php if ($user->isLogged()) {
+                    $myData = $user->mySaves(0, 1000);
+                    $mySaves = null;
+                    if ($myData !== null) {
+                        $mySaves = json_decode($user->mySaves(0, 1000), true);
+                    }
+                    $savedAdsIds = [];
+                    if ($mySaves !== null) {
+                        $savedAdsIds = array_column($mySaves, 'ad_id');
+                    }
+
+                    $exist = in_array($ad['ad_id'], $savedAdsIds); ?>
+                    <svg fill="<?php echo $exist ? "red" : "none" ?>" stroke="<?php echo $exist ? "red" : "black" ?>"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"
+                        height="20">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                <?php } else { ?>
+                    <svg fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                <?php } ?>
             </div>
             <div class="action-compare-container">
                 <div class="content-container">
-                    <img src="../public/src/love-icon.svg" alt="">
+                    <img src="../public/src/compare-icon.svg" alt="">
                 </div>
             </div>
         </div>

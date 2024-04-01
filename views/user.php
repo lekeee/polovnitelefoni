@@ -1,6 +1,6 @@
 <?php
 require_once "../app/auth/userAuthentification.php";
-if (isset($_GET['id'])) {
+if (isset ($_GET['id'])) {
     $userID = $_GET['id'];
     $myId = $user->getId();
     if ($userID == $myId) {
@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
         exit;
     }
 } else {
-    if (isset($_SERVER['HTTP_REFERER'])) {
+    if (isset ($_SERVER['HTTP_REFERER'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else {
         header('Location: index.php');
@@ -37,6 +37,7 @@ require_once "../inc/headTag.php";
     $profileData = json_decode($user->getUserDataFromId($userID), true);
     ?>
     <link href="../public/css/loading-animation.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    <link href="../public/css/index.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <section class="mainpageselection">
         <div class="mainpagediv">
             <div class="user-image-short-container">
@@ -307,7 +308,7 @@ require_once "../inc/headTag.php";
                             <div class="ads-container">
                                 <div class="loading-container">
                                     <?php
-                                    include_once("../inc/loadingWidgetList.php");
+                                    include_once ("../inc/loadingWidgetList.php");
                                     ?>
                                 </div>
                                 <div class="not-found-container">
@@ -374,6 +375,7 @@ require_once "../inc/headTag.php";
 
 
     <?php
+    require_once "../inc/message-button.php";
     require_once "../inc/subscribeForm.php";
     require_once "../inc/footer.php";
     ?>
@@ -385,5 +387,6 @@ require_once "../inc/headTag.php";
         <script src="../public/js/user.js?v=<?php echo time(); ?>"></script>
         <script src="../public/js-public/jquery.js?v=<?php echo time(); ?>" type="text/javascript"></script>
         <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+        <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 
 </html>

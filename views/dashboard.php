@@ -20,7 +20,7 @@ require_once "../inc/headTag.php";
     <section class="dashboard">
         <div class="div-block-676">
             <div class="div-block-677">
-                <?php require_once('../inc/dashboard-navigation.php') ?>
+                <?php require_once ('../inc/dashboard-navigation.php') ?>
                 <script>
                     document.querySelectorAll('.dashboardlinks')[0].classList.add('active');
                 </script>
@@ -74,6 +74,7 @@ require_once "../inc/headTag.php";
     </section>
 
     <?php
+    require_once "../inc/message-button.php";
     require_once "../inc/subscribeForm.php";
     require_once "../inc/footer.php";
     ?>
