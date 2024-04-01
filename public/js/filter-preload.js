@@ -40,3 +40,22 @@ function addModel(brand, model) {
         return 0;
     });
 }
+
+function removeBrand(value) {
+    const index = brandsSelected.findIndex((element) => element == value);
+    if (index !== -1) brandsSelected.splice(index, 1);
+}
+
+function removeModel(brand, model) {
+    const index = modelsSelected.findIndex((element) => element.brand == brand && element.model == model);
+    if (index !== -1) modelsSelected.splice(index, 1);
+}
+function removeModelOnlyBrand(brand) {
+    let index = 1;
+    while (index !== -1) {
+        index = modelsSelected.findIndex((element) => element.brand == brand);
+        console.log(modelsSelected[index]);
+        if (index !== -1)
+            modelsSelected.splice(index, 1);
+    }
+}
