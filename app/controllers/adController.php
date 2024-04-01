@@ -321,6 +321,7 @@ function getSearchData($title, $phoneAds)
             'message' => 'Došlo je do greške prilikom pribavljanja search-ovanih oglasa'
         ];
     }
+    return $response;
 }
 
 
