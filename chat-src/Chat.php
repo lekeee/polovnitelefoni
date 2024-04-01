@@ -54,17 +54,17 @@ class Chat implements MessageComponentInterface
 
         $data = json_decode($msg, true);
 
-        if(isset($data['action']) && $data['action'] == "update_seen"){
+        if (isset($data['action']) && $data['action'] == "update_seen") {
             //$senderData = json_decode($this->user->returnOtherUser($data['senderId']), true);
             $receiverData = json_decode($this->user->returnOtherUser($data['receiverId']), true);
 
-            if(isset($data['msgId'])){
+            if (isset($data['msgId'])) {
                 $this->messages->setStatus(1);
                 $this->messages->setId($data['msgId']);
                 $this->messages->updateMessageStatus();
             }
-            
-            foreach($this->clients as $client) {
+
+            foreach ($this->clients as $client) {
                 if ($client->resourceId == $receiverData['user_connection_id'] || $from == $client) {
                     $client->send(json_encode($data));
                 }

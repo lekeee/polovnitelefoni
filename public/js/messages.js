@@ -21,14 +21,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     con.onmessage = function (e) {
         let data = JSON.parse(e.data);
-
-        if (data.status_type == "Online") {
-            $(`#status-div-${data.user_id_status}`).removeClass("offline-status-div");
-            $(`#status-div-${data.user_id_status}`).addClass("online-status-div");
-        }
-        else if (data.status_type == "Offline") {
-            $(`#status-div-${data.user_id_status}`).removeClass("online-status-div");
-            $(`#status-div-${data.user_id_status}`).addClass("offline-status-div");
+        
+        if(data.status_type != ""){
+            localStorage.setItem("status_type", data.status_type);
+            setTimeout(() => {
+                if (localStorage.getItem("status_type") == "Online") {
+                    $(`#status-div-${data.user_id_status}`).removeClass("offline-status-div");
+                    $(`#status-div-${data.user_id_status}`).addClass("online-status-div");
+                }
+                else if (localStorage.getItem("status_type") == "Offline") {
+                    $(`#status-div-${data.user_id_status}`).removeClass("online-status-div");
+                    $(`#status-div-${data.user_id_status}`).addClass("offline-status-div");
+                }
+            }, 3000);
         }
 
         let klasa = "";

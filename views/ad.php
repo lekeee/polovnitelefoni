@@ -10,7 +10,8 @@ if (isset($adId)) {
     try {
         $phoneAd = $phone->read($adId);
         $adData = json_decode($phoneAd, true);
-        $visitorsData = $phone->totalVisits($adId);
+        //$visitorsData = $phone->totalVisits($adId);
+        $visitorsData = $adData['views'];
         $adOwner = json_decode($user->getUserDataFromId($adData['user_id']), true);
         $savesCount = $phone->countSaves($adId);
 
@@ -87,20 +88,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                    {
-                                                                        "items": [{
-                                                                            "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                            "origFileName": "<?php echo $file; ?>",
-                                                                            "fileName": "<?php echo $file; ?>",
-                                                                            "fileSize": <?php echo filesize($putanja); ?>,
-                                                                            "height": <?php echo $height; ?>,
-                                                                            "url": "<?php echo $putanja; ?>",
-                                                                            "width": <?php echo $width; ?>,
-                                                                            "type": "image"
-                                                                        }],
-                                                                        "group": "phoneImage"
-                                                                    }
-                                                                </script>
+                                                                            {
+                                                                                "items": [{
+                                                                                    "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                    "origFileName": "<?php echo $file; ?>",
+                                                                                    "fileName": "<?php echo $file; ?>",
+                                                                                    "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                    "height": <?php echo $height; ?>,
+                                                                                    "url": "<?php echo $putanja; ?>",
+                                                                                    "width": <?php echo $width; ?>,
+                                                                                    "type": "image"
+                                                                                }],
+                                                                                "group": "phoneImage"
+                                                                            }
+                                                                        </script>
                                             </a>
                                         </div>
 
@@ -265,7 +266,7 @@ require_once "../inc/headTag.php";
                                 if ($adData['accessories'] !== NULL && $adData['accessories'] !== '') {
                                     $access = explode(',', $adData['accessories']);
                                     for ($i = 0; $i < count($access); $i++) {
-                                        if ($access[$i] !== '') {
+                                        if ($access[$i] !== '' && $access[$i] !== ' ') {
                                             ?>
                                             <p class="access-item">
                                                 <?php echo $access[$i] ?>
@@ -283,7 +284,7 @@ require_once "../inc/headTag.php";
                                 if ($adData['damage'] !== NULL && $adData['damage'] !== '') {
                                     $damages = explode(',', $adData['damage']);
                                     for ($i = 0; $i < count($damages); $i++) {
-                                        if ($damages[$i] !== '') {
+                                        if ($damages[$i] !== '' && $damages[$i] !== ' ') {
                                             ?>
                                             <p class="damaged-item">
                                                 <?php echo $damages[$i] ?>

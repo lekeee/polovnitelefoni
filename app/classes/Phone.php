@@ -24,12 +24,12 @@ class Phone extends Ad
                     VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $this->con->prepare($sql);
             if (!$stmt) {
-                die ('Error in SQL query: ' . $this->con->error);
+                die('Error in SQL query: ' . $this->con->error);
             }
             $imageFolder = $this->createImageFolder($user_id);
             $isVerified = 1;
             $deal = NULL;
-            $newPrice = empty ($price) ? $deal : $price;
+            $newPrice = empty($price) ? $deal : $price;
             $stmt->bind_param("isssssssssss", $user_id, $brand, $model, $title, $state, $stateRange, $description, $newPrice, $imageFolder, $isVerified, $damage, $accessories);
 
             $result = $stmt->execute();
@@ -104,57 +104,57 @@ class Phone extends Ad
             throw new AD_CANNOT_BE_READ();
         }
     }
-    public function checkVisit($ip, $ad_id)
-    {
-        try {
-            $sql = "SELECT * FROM visitors WHERE ip_address=? AND ad_id=?";
-            $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("si", $ip, $ad_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
+    // public function checkVisit($ip, $ad_id)
+    // {
+    //     try {
+    //         $sql = "SELECT * FROM visitors WHERE ip_address=? AND ad_id=?";
+    //         $stmt = $this->con->prepare($sql);
+    //         $stmt->bind_param("si", $ip, $ad_id);
+    //         $stmt->execute();
+    //         $result = $stmt->get_result();
 
-            return $result->num_rows == 0 ? true : false;
-        } catch (Exception $e) {
-            throw new CHECK_VISIT_ERROR();
-        }
-    }
+    //         return $result->num_rows == 0 ? true : false;
+    //     } catch (Exception $e) {
+    //         throw new CHECK_VISIT_ERROR();
+    //     }
+    // }
 
-    public function addVisit($ip, $ad_id)
-    {
-        try {
-            if ($this->checkVisit($ip, $ad_id)) {
-                $sql = "INSERT INTO visitors (ip_address, ad_id) 
-                    VALUES (?,?)";
+    // public function addVisit($ip, $ad_id)
+    // {
+    //     try {
+    //         if ($this->checkVisit($ip, $ad_id)) {
+    //             $sql = "INSERT INTO visitors (ip_address, ad_id) 
+    //                 VALUES (?,?)";
 
-                $stmt = $this->con->prepare($sql);
-                $stmt->bind_param("si", $ip, $ad_id);
+    //             $stmt = $this->con->prepare($sql);
+    //             $stmt->bind_param("si", $ip, $ad_id);
 
-                $stmt->execute();
-                $results = $stmt->affected_rows;
+    //             $stmt->execute();
+    //             $results = $stmt->affected_rows;
 
-                return $results > 0 ? true : false;
-            }
-            return false;
-        } catch (Exception $e) {
-            throw new ADD_VISIT_ERROR();
-        }
-    }
+    //             return $results > 0 ? true : false;
+    //         }
+    //         return false;
+    //     } catch (Exception $e) {
+    //         throw new ADD_VISIT_ERROR();
+    //     }
+    // }
 
-    public function totalVisits($ad_id)
-    {
-        try {
-            $sql = "SELECT COUNT(*) as count FROM visitors WHERE ad_id=?";
-            $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("i", $ad_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
+    // public function totalVisits($ad_id)
+    // {
+    //     try {
+    //         $sql = "SELECT COUNT(*) as count FROM visitors WHERE ad_id=?";
+    //         $stmt = $this->con->prepare($sql);
+    //         $stmt->bind_param("i", $ad_id);
+    //         $stmt->execute();
+    //         $result = $stmt->get_result();
+    //         $row = $result->fetch_assoc();
 
-            return $row['count'];
-        } catch (Exception $e) {
-            throw new TOTAL_VISIT_ERROR();
-        }
-    }
+    //         return $row['count'];
+    //     } catch (Exception $e) {
+    //         throw new TOTAL_VISIT_ERROR();
+    //     }
+    // }
     public function countSaves($ad_id)
     {
         try {
@@ -226,7 +226,7 @@ class Phone extends Ad
             }
 
             $models = json_decode(urldecode($models), true);
-            if ($brands !== null && !empty ($brands)) {
+            if ($brands !== null && !empty($brands)) {
                 $brandConditions = [];
                 $brandsArray = explode(",", $brands);
 
@@ -235,7 +235,7 @@ class Phone extends Ad
                 $brandWithModels = [];
                 foreach ($brandsArray as $brand) {
                     $exist = 0;
-                    if ($models !== null && !empty ($models)) {
+                    if ($models !== null && !empty($models)) {
                         for ($i = 0; $i < count($models); $i++) {
                             if (in_array($brand, $models[$i])) {
                                 $brand2 = strtolower($brand);
@@ -253,11 +253,11 @@ class Phone extends Ad
                     $br++;
                 }
                 $insertedBrands = array_unique($insertedBrands);
-                if (!empty ($models) && !empty ($insertedBrands)) {
+                if (!empty($models) && !empty($insertedBrands)) {
                     $sql .= " AND (" . implode(" OR ", $brandConditions) . ")" . " OR brand IN (" . implode(", ", $insertedBrands) . ')';
-                } else if (empty ($models) && !empty ($insertedBrands)) {
+                } else if (empty($models) && !empty($insertedBrands)) {
                     $sql .= " AND brand IN (" . implode(", ", $insertedBrands) . ')';
-                } else if (!empty ($models) && empty ($insertedBrands)) {
+                } else if (!empty($models) && empty($insertedBrands)) {
                     $sql .= " AND (" . implode(" OR ", $brandConditions) . ")";
                 }
             }
@@ -305,7 +305,7 @@ class Phone extends Ad
             }
 
             $sql .= " LIMIT $limit OFFSET $offset";
-
+            // echo $sql;
             $result = $this->con->query($sql);
             if (!$result) {
                 throw new Exception("Database error: " . $this->con->error);
@@ -320,11 +320,8 @@ class Phone extends Ad
     public function mostViewedAd()
     {
         try {
-            $sql = "SELECT o.*, COUNT(*) AS broj_poseta 
-                    FROM visitors p
-                    INNER JOIN oglasi o ON p.ad_id = o.ad_id
-                    GROUP BY o.ad_id 
-                    ORDER BY broj_poseta DESC LIMIT 1";
+            $sql = "SELECT * FROM oglasi
+                    ORDER BY views DESC LIMIT 1";
 
             $result = $this->con->query($sql);
             $mostViewedAd = $result->fetch_assoc();
@@ -483,7 +480,7 @@ class Phone extends Ad
 
 
             $models = json_decode(urldecode($models), true);
-            if ($brands !== null && !empty ($brands)) {
+            if ($brands !== null && !empty($brands)) {
                 $brandConditions = [];
                 $brandsArray = explode(",", $brands);
 
@@ -492,7 +489,7 @@ class Phone extends Ad
                 $brandWithModels = [];
                 foreach ($brandsArray as $brand) {
                     $exist = 0;
-                    if ($models !== null && !empty ($models)) {
+                    if ($models !== null && !empty($models)) {
                         for ($i = 0; $i < count($models); $i++) {
                             if (in_array($brand, $models[$i])) {
                                 $model = $models[$i]['model'];
@@ -508,11 +505,11 @@ class Phone extends Ad
                     $br++;
                 }
                 $insertedBrands = array_unique($insertedBrands);
-                if (!empty ($models) && !empty ($insertedBrands)) {
+                if (!empty($models) && !empty($insertedBrands)) {
                     $sql .= " AND (" . implode(" OR ", $brandConditions) . ")" . " OR brand IN (" . implode(", ", $insertedBrands) . ')';
-                } else if (empty ($models) && !empty ($insertedBrands)) {
+                } else if (empty($models) && !empty($insertedBrands)) {
                     $sql .= " AND brand IN (" . implode(", ", $insertedBrands) . ')';
-                } else if (!empty ($models) && empty ($insertedBrands)) {
+                } else if (!empty($models) && empty($insertedBrands)) {
                     $sql .= " AND (" . implode(" OR ", $brandConditions) . ")";
                 }
             }
@@ -563,7 +560,7 @@ class Phone extends Ad
             $stmt = $this->con->prepare($sql);
 
             if (!$stmt) {
-                die ('Error in SQL query: ' . $this->con->error);
+                die('Error in SQL query: ' . $this->con->error);
             }
             $imageFolder = null;
             $stmt->bind_param("i", $ad_id);
@@ -586,34 +583,34 @@ class Phone extends Ad
                     WHERE ad_id=?";
             $stmt = $this->con->prepare($sql);
             if (!$stmt) {
-                die ('Error in SQL query: ' . $this->con->error);
+                die('Error in SQL query: ' . $this->con->error);
             }
 
             $adData = json_decode($this->read($ad_id), true);
 
-            $brand = empty ($brand) ? $adData['brand'] : $brand;
-            $model = empty ($model) ? $adData['model'] : $model;
-            $title = empty ($title) ? $adData['title'] : $title;
-            $state = empty ($state) ? $adData['state'] : $state;
-            $stateRange = empty ($stateRange) ? $adData['stateRange'] : $stateRange;
-            $description = empty ($description) ? $adData['description'] : $description;
+            $brand = empty($brand) ? $adData['brand'] : $brand;
+            $model = empty($model) ? $adData['model'] : $model;
+            $title = empty($title) ? $adData['title'] : $title;
+            $state = empty($state) ? $adData['state'] : $state;
+            $stateRange = empty($stateRange) ? $adData['stateRange'] : $stateRange;
+            $description = empty($description) ? $adData['description'] : $description;
 
-            if (empty ($price)) {
+            if (empty($price)) {
                 $price = $adData['price'];
                 $oldprice = $adData['old_price'];
             } else {
                 $oldprice = $adData['price'];
             }
 
-            $damage = empty ($damage) ? $adData['damage'] : $damage;
-            $accessories = empty ($accessories) ? $adData['accessories'] : $accessories;
+            $damage = empty($damage) ? $adData['damage'] : $damage;
+            $accessories = empty($accessories) ? $adData['accessories'] : $accessories;
 
             $stmt->bind_param("ssssssssssi", $brand, $model, $title, $state, $stateRange, $description, $price, $oldprice, $damage, $accessories, $ad_id);
             $result = $stmt->execute();
             $affectedRows = $stmt->affected_rows;
 
             if ($result && $affectedRows > 0) {
-                if (!empty ($images)) {
+                if (!empty($images)) {
                     $adFolder = $this->getAdFolder($ad_id);
                     $this->deleteImagesFromFolder($adFolder);
                     $imagesUploaded = $this->saveImages('../../uploads/' . $adFolder, $images);
@@ -635,7 +632,7 @@ class Phone extends Ad
             $jsonData = file_get_contents($jsonFilePath);
             $data = json_decode($jsonData, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
-                die ('Greška prilikom dekodiranja JSON fajla.');
+                die('Greška prilikom dekodiranja JSON fajla.');
             }
 
             foreach ($data as $brand) {
@@ -718,7 +715,7 @@ class Phone extends Ad
             $brandCounts = [];
             foreach ($activeAds as $ad) {
                 $brand = $ad['brand'];
-                if (!isset ($brandCounts[$brand])) {
+                if (!isset($brandCounts[$brand])) {
                     $brandCounts[$brand] = 1;
                 } else {
                     $brandCounts[$brand]++;
@@ -727,7 +724,7 @@ class Phone extends Ad
 
             foreach ($deletedAds as $ad) {
                 $brand = $ad['brand'];
-                if (!isset ($brandCounts[$brand])) {
+                if (!isset($brandCounts[$brand])) {
                     $brandCounts[$brand] = 1;
                 } else {
                     $brandCounts[$brand]++;
@@ -760,6 +757,7 @@ class Phone extends Ad
             echo $e->getMessage();
         }
     }
+
     public function selectByTitle($title)
     {
         try {
@@ -774,6 +772,20 @@ class Phone extends Ad
             $stmt->execute();
             $result = $stmt->get_result();
             return json_encode($result->fetch_all(MYSQLI_ASSOC));
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function addPhoneView($ad_id)
+    {
+        try {
+            $sql = "UPDATE oglasi 
+                    SET views = views + 1 
+                    WHERE ad_id = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $ad_id);
+            $stmt->execute();
+            return $stmt->affected_rows > 0 ? true : false;
         } catch (Exception $e) {
             echo $e->getMessage();
         }

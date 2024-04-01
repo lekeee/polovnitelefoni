@@ -31,9 +31,9 @@ abstract class Ad
     abstract public function saveImages($uploadDirectory, $imageSrcArray);
     abstract public function select24();
     abstract public function read($user_id);
-    abstract public function checkVisit($ip, $ad_id);
-    abstract public function addVisit($ip, $ad_id);
-    abstract public function totalVisits($ad_id);
+    // abstract public function checkVisit($ip, $ad_id);
+    // abstract public function addVisit($ip, $ad_id);
+    // abstract public function totalVisits($ad_id);
     abstract public function countSaves($ad_id);
     abstract public function save($user_id, $ad_id);
     abstract public function deleteSave($user_id, $ad_id);
@@ -56,4 +56,5 @@ abstract class Ad
     abstract public function brandsPrecentage($id);
     abstract public function returnBrandsAndModels();
     abstract public function selectByTitle($title);
+    abstract public function addPhoneView($ad_id);
 }

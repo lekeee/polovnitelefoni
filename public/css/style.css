@@ -3347,6 +3347,12 @@ textarea.w-select {
   border-bottom-left-radius: 5px;
   margin-bottom: 0;
   padding-bottom: 8px;
+  border: none;
+  font-weight: bold;
+}
+
+.text-field-4::placeholder {
+  font-weight: normal;
 }
 
 .submit-button-4 {

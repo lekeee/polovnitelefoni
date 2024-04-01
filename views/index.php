@@ -2,10 +2,10 @@
 $selectedBrand = null;
 $selectedModel = null;
 
-if (isset ($_GET['brand'])) {
+if (isset($_GET['brand'])) {
     $selectedBrand = $_GET['brand'];
 }
-if (isset ($_GET['model'])) {
+if (isset($_GET['model'])) {
     $selectedModel = $_GET['model'];
 }
 
@@ -235,19 +235,20 @@ require_once "../inc/headTag.php";
                 </div>
             </div> -->
             <div class="threeinrowcontainers">
-                <div class="mostvisitedcontainer">
-                    <?php
-                    try {
-                        $mostViewedAdData = $phone->mostViewedAd();
-                        $mostViewedAd = NULL;
-                        if ($mostViewedAdData !== NULL) {
-                            $mostViewedAd = json_decode($mostViewedAdData, true);
-                            //print_r($mostViewedAd);
-                        }
-                    } catch (Exception $e) {
-                        echo "GRESKA";
+                <?php
+                try {
+                    $mostViewedAdData = $phone->mostViewedAd();
+                    $mostViewedAd = NULL;
+                    if ($mostViewedAdData !== NULL) {
+                        $mostViewedAd = json_decode($mostViewedAdData, true);
+                        //print_r($mostViewedAd);
                     }
-                    ?>
+                } catch (Exception $e) {
+                    echo "GRESKA";
+                }
+                ?>
+                <div class="mostvisitedcontainer" style="cursor: pointer"
+                    onclick="window.location.href='../views/ad.php?ad_id=<?php echo $mostViewedAd['ad_id'] ?>'">
                     <div class="mostvisitedleft">
                         <div class="mostviewedbrandmodelcont">
 
@@ -301,19 +302,20 @@ require_once "../inc/headTag.php";
                             class="mostvisitedrightimage" />
                     </div>
                 </div>
-                <div class="mostsavedcontainer">
-                    <?php
-                    try {
-                        $mostSavedAdData = $phone->mostSavedAd();
-                        $mostSavedAd = NULL;
-                        if ($mostSavedAdData !== NULL) {
-                            $mostSavedAd = json_decode($mostSavedAdData, true);
-                            //print_r($mostViewedAd);
-                        }
-                    } catch (Exception $e) {
-                        echo "GRESKA";
+                <?php
+                try {
+                    $mostSavedAdData = $phone->mostSavedAd();
+                    $mostSavedAd = NULL;
+                    if ($mostSavedAdData !== NULL) {
+                        $mostSavedAd = json_decode($mostSavedAdData, true);
+                        //print_r($mostViewedAd);
                     }
-                    ?>
+                } catch (Exception $e) {
+                    echo "GRESKA";
+                }
+                ?>
+                <div class="mostsavedcontainer" style="cursor: pointer"
+                    onclick="window.location.href='../views/ad.php?ad_id=<?php echo $mostSavedAd['ad_id'] ?>'">
                     <div class="mostvisitedleft">
                         <div class="mostsavedheadcontainer">
                             <div class="mostsavedheadtitle">
@@ -366,19 +368,20 @@ require_once "../inc/headTag.php";
                             class="mostvisitedrightimage" class="mostvisitedrightimage" />
                     </div>
                 </div>
-                <div class="newestcontainer">
-                    <?php
-                    try {
-                        $newestAdData = $phone->newestAd();
-                        $newestAd = NULL;
-                        if ($newestAdData !== NULL) {
-                            $newestAd = json_decode($newestAdData, true);
-                            //print_r($mostViewedAd);
-                        }
-                    } catch (Exception $e) {
-                        echo "GRESKA";
+                <?php
+                try {
+                    $newestAdData = $phone->newestAd();
+                    $newestAd = NULL;
+                    if ($newestAdData !== NULL) {
+                        $newestAd = json_decode($newestAdData, true);
+                        //print_r($mostViewedAd);
                     }
-                    ?>
+                } catch (Exception $e) {
+                    echo "GRESKA";
+                }
+                ?>
+                <div class="newestcontainer" style="cursor: pointer"
+                    onclick="window.location.href='../views/ad.php?ad_id=<?php echo $newestAd['ad_id'] ?>'">
                     <div class="mostvisitedleft">
                         <div class="newestheadcontainer">
                             <div class="newestheadtitle">Najnoviji oglas</div>
@@ -505,7 +508,7 @@ require_once "../inc/headTag.php";
 
 
                                     if (json_last_error() !== JSON_ERROR_NONE) {
-                                        die ('Greška pri čitanju JSON datoteke.');
+                                        die('Greška pri čitanju JSON datoteke.');
                                     }
 
                                     foreach ($dataJSON as $brand) {
@@ -513,7 +516,7 @@ require_once "../inc/headTag.php";
 
                                             if ($ourBrand['brand'] === $brand['brand_name']) {
 
-                                                if (!empty ($brand["device_list"])) {
+                                                if (!empty($brand["device_list"])) {
                                                     echo "
                                                             <div class='custom-dropdown-menu'>
                                                                 <div class='dropdown-click-toggler'>

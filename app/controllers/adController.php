@@ -160,14 +160,18 @@ function getAds($phoneAds)
 
     $cache = new FilesystemAdapter();
     try {
-        $cacheItem = $cache->getItem('ads-' . $offset . '-' . $limit);
-        $cachedValue = $cacheItem->get();
-        if ($cachedValue === null) {
-            $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
-            $cacheItem->set($result)->expiresAfter(180);
-            $cache->save($cacheItem);
+        if ($brandsSelected == NULL && $modelsSelected == NULL) {
+            $cacheItem = $cache->getItem('ads-' . $offset . '-' . $limit);
+            $cachedValue = $cacheItem->get();
+            if ($cachedValue === null) {
+                $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
+                $cacheItem->set($result)->expiresAfter(180);
+                $cache->save($cacheItem);
+            } else {
+                $result = $cachedValue;
+            }
         } else {
-            $result = $cachedValue;
+            $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
         }
         $response = array(
             'status' => 'success',
@@ -295,6 +299,7 @@ function countFiltered($phoneAds)
     }
     return $response;
 }
+
 function getSearchData($title, $phoneAds)
 {
     try {
@@ -316,8 +321,26 @@ function getSearchData($title, $phoneAds)
             'message' => 'Došlo je do greške prilikom pribavljanja search-ovanih oglasa'
         ];
     }
+}
+
+
+function addView($data, $phoneAds)
+{
+    try {
+        $result = $phoneAds->addPhoneView($data['adId']);
+        $response = array(
+            'status' => 'success',
+            'message' => $result
+        );
+    } catch (Exception $e) {
+        $response = array(
+            'status' => 'error',
+            'message' => 'Došlo je do greške prilikom dodavanja pregleda oglasa'
+        );
+    }
     return $response;
 }
+
 
 function createSearchResult($ads)
 {
@@ -381,7 +404,6 @@ function createSearchResult($ads)
 }
 
 
-
 if ($user->isLogged()) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -410,6 +432,13 @@ if ($user->isLogged()) {
         );
     }
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($data['action'] === 'addView') {
+        $response = addView($data, $phoneAds);
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($_GET['action'] === 'getAds') {
         $response = getAds($phoneAds);

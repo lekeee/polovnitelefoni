@@ -6,7 +6,7 @@ require_once "Verification.php";
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include_once(__DIR__ . '/../exceptions/userExceptions.php');
+include_once (__DIR__ . '/../exceptions/userExceptions.php');
 
 
 class User
@@ -835,194 +835,251 @@ class User
 
     public function updateLoginStatus($id, $status)
     {
-        // 0 logout 1 login
-        $sql = "UPDATE users
-                SET login_status = ?
-                WHERE user_id = ?";
-        $statement = $this->con->prepare($sql);
-        $statement->bind_param("ii", $status, $id);
-        $statement->execute();
-        $result = $statement->affected_rows;
-        if ($result == 1) {
-            return true;
+        try {
+            // 0 logout 1 login
+            $sql = "UPDATE users
+                    SET login_status = ?
+                    WHERE user_id = ?";
+            $statement = $this->con->prepare($sql);
+            $statement->bind_param("ii", $status, $id);
+            $statement->execute();
+            $result = $statement->affected_rows;
+            if ($result == 1) {
+                return true;
+            }
+            return false;
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-        return false;
     }
-
     public function updateOnlineStatus($id, $status)
     {
         // 0 logout 1 login
-        $sql = "UPDATE users
+        try {
+            $sql = "UPDATE users
                 SET online_status = ?
                 WHERE user_id = ?";
-        $statement = $this->con->prepare($sql);
-        $statement->bind_param("ii", $status, $id);
-        $statement->execute();
-        $result = $statement->affected_rows;
-        if ($result == 1) {
-            return true;
+            $statement = $this->con->prepare($sql);
+            $statement->bind_param("ii", $status, $id);
+            $statement->execute();
+            $result = $statement->affected_rows;
+            if ($result == 1) {
+                return true;
+            }
+            return false;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
         }
-        return false;
     }
-
     public function updateToken($id, $token)
     {
-        $sql = "UPDATE users SET
-                user_token = '$token'
-                WHERE user_id = '$id'";
-        $result = $this->con->query($sql);
-        if ($result == true) {
-            return true;
+        try {
+            $sql = "UPDATE users SET
+                user_token = ?
+                WHERE user_id = ?";
+            $statement = $this->con->prepare($sql);
+            $statement->bind_param("si", $token, $id);
+            $statement->execute();
+            $result = $statement->affected_rows;
+            if ($result == 1) {
+                return true;
+            }
+            return false;
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-        return false;
     }
 
     public function getToken($id)
     {
-        $sql = "SELECT user_token FROM users WHERE user_id = '$id'";
-        $result = $this->con->query($sql);
+        try {
+            $sql = "SELECT user_token FROM users WHERE user_id = ?";
+            $statement = $this->con->prepare($sql);
+            $statement->bind_param("i", $id);
+            $statement->execute();
+            $result = $statement->get_result();
 
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $token = $row['user_token'];
-            return $token;
-        } else {
-            // Korisnik nije pronađen
-            return null;
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $token = $row['user_token'];
+                return $token;
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 
     public function getUserIdFromToken($token)
     {
-        $sql = "SELECT user_id FROM users WHERE user_token = '$token'";
-        $result = $this->con->query($sql);
+        try {
+            $sql = "SELECT user_id FROM users WHERE user_token = ?";
+            $statement = $this->con->prepare($sql);
+            $statement->bind_param("s", $token);
+            $statement->execute();
+            $result = $statement->get_result();
 
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $id = $row['user_id'];
-            return $id;
-        } else {
-            // Korisnik nije pronađen
-            return null;
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $id = $row['user_id'];
+                return $id;
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
+
     public function updateUserConnectionId($token, $userConnectionId)
     {
-        $sql = "UPDATE users SET
-                user_connection_id = '$userConnectionId'
-                WHERE user_token = '$token'";
-        $result = $this->con->query($sql);
-        if ($result === TRUE) {
-            return true;
+        try {
+            $sql = "UPDATE users SET
+                user_connection_id = ?
+                WHERE user_token = ?";
+            $statement = $this->con->prepare($sql);
+            $statement->bind_param("ss", $userConnectionId, $token);
+            $statement->execute();
+            $result = $statement->affected_rows;
+            if ($result === TRUE) {
+                return true;
+            }
+            return false;
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-        return false;
     }
 
     public function loginStatus($name)
     {
-        $sql = "SELECT user_id FROM users WHERE name = '$name'";
-        $result = $this->con->query($sql);
+        try {
+            $sql = "SELECT user_id FROM users WHERE name = ?";
+            $statement = $this->con->prepare($sql);
+            $statement->bind_param("s", $name);
+            $statement->execute();
+            $result = $statement->get_result();
 
-        if ($result == true) {
-            // Korisnik pronađen, vraćamo ID
-            $row = $result->fetch_assoc();
-            $idKorisnika = $row['user_id'];
-            return $idKorisnika;
-        } else {
-            // Korisnik nije pronađen
-            return null;
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $idKorisnika = $row['user_id'];
+                return $idKorisnika;
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 
     public function returnOtherUser($id)
     {
-        $sql = "SELECT * FROM users WHERE user_id=?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("s", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        try {
+            $sql = "SELECT * FROM users WHERE user_id=?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("s", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        $user = $result->fetch_assoc();
+            $user = $result->fetch_assoc();
 
-        //ako kojim slucajem nema user vraca null
-        return $user ? json_encode($user) : null;
+            return $user ? json_encode($user) : null;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function reportUser($userId, $reportedId, $msg)
     {
-        $sql = "INSERT INTO prijave (user_id, reported_id, report_msg)
+        try {
+            $sql = "INSERT INTO prijave (user_id, reported_id, report_msg)
                 VALUES(?,?,?)";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("iis", $userId, $reportedId, $msg);
-        $stmt->execute();
-        $results = $stmt->affected_rows;
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("iis", $userId, $reportedId, $msg);
+            $stmt->execute();
+            $results = $stmt->affected_rows;
 
-        return $results > 0 ? true : false;
+            return $results > 0 ? true : false;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function addRate($user_id, $rated_id, $type)
     {
-        $check_sql = "SELECT COUNT(*) as count FROM ocene_user WHERE user_id = ? AND rated_id = ?";
-        $check_stmt = $this->con->prepare($check_sql);
-        $check_stmt->bind_param("ii", $user_id, $rated_id);
-        $check_stmt->execute();
-        $check_result = $check_stmt->get_result();
-        $row = $check_result->fetch_assoc();
-        $count = $row['count'];
+        try {
+            $check_sql = "SELECT COUNT(*) as count FROM ocene_user WHERE user_id = ? AND rated_id = ?";
+            $check_stmt = $this->con->prepare($check_sql);
+            $check_stmt->bind_param("ii", $user_id, $rated_id);
+            $check_stmt->execute();
+            $check_result = $check_stmt->get_result();
+            $row = $check_result->fetch_assoc();
+            $count = $row['count'];
 
-        $this->con->begin_transaction();
+            $this->con->begin_transaction();
 
-        if ($count > 0) {
-            $update_sql = "UPDATE ocene_user SET tip = ? WHERE user_id = ? AND rated_id = ?";
-            $update_stmt = $this->con->prepare($update_sql);
-            $update_stmt->bind_param("iii", $type, $user_id, $rated_id);
-            $update_stmt->execute();
-            $rows_affected = $update_stmt->affected_rows;
-        } else {
-            $insert_sql = "INSERT INTO ocene_user (user_id, rated_id, tip) VALUES (?, ?, ?)";
-            $insert_stmt = $this->con->prepare($insert_sql);
-            $insert_stmt->bind_param("iii", $user_id, $rated_id, $type);
-            $insert_stmt->execute();
-            $rows_affected = $insert_stmt->affected_rows;
+            if ($count > 0) {
+                $update_sql = "UPDATE ocene_user SET tip = ? WHERE user_id = ? AND rated_id = ?";
+                $update_stmt = $this->con->prepare($update_sql);
+                $update_stmt->bind_param("iii", $type, $user_id, $rated_id);
+                $update_stmt->execute();
+                $rows_affected = $update_stmt->affected_rows;
+            } else {
+                $insert_sql = "INSERT INTO ocene_user (user_id, rated_id, tip) VALUES (?, ?, ?)";
+                $insert_stmt = $this->con->prepare($insert_sql);
+                $insert_stmt->bind_param("iii", $user_id, $rated_id, $type);
+                $insert_stmt->execute();
+                $rows_affected = $insert_stmt->affected_rows;
+            }
+
+            $this->con->commit();
+
+            $success = $rows_affected > 0;
+
+            return $success;
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-
-        $this->con->commit();
-
-        $success = $rows_affected > 0;
-
-        return $success;
-
     }
 
     public function isRated($user_id, $rated_id)
     {
-        $sql = "SELECT * FROM ocene_user 
+        try {
+            $sql = "SELECT * FROM ocene_user 
                 WHERE user_id = ? AND rated_id = ?";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("ii", $user_id, $rated_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("ii", $user_id, $rated_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
-        } else
-            return null;
+            if ($result->num_rows > 0) {
+                return $result->fetch_assoc();
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function returnRates($rated_id)
     {
-        $sql = "SELECT
-                 (SELECT count(*) FROM `ocene_user` WHERE rated_id = ? AND tip = 1) AS broj_pozitivnih, 
-                 (SELECT count(*) FROM `ocene_user` WHERE rated_id = ? AND tip = 0) AS broj_negativnih; ";
+        try {
+            $sql = "SELECT
+                    (SELECT count(*) FROM `ocene_user` WHERE rated_id = ? AND tip = 1) AS broj_pozitivnih, 
+                    (SELECT count(*) FROM `ocene_user` WHERE rated_id = ? AND tip = 0) AS broj_negativnih; ";
 
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("ii", $rated_id, $rated_id);
-        $stmt->execute();
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("ii", $rated_id, $rated_id);
+            $stmt->execute();
 
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                return $result->fetch_assoc();
+            }
+            return null;
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-        return null;
     }
 }

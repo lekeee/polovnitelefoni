@@ -1,7 +1,7 @@
-let token = localStorage.getItem('token');
 let con;
 
-con = new WebSocket(`ws://localhost:8080?token=${token}`);
+con = new WebSocket(`ws://localhost:8080?token=${localStorage.getItem('token')}`);
+
 
 con.onopen = function (e) {
     console.log("uspesna konekcija");
@@ -22,6 +22,7 @@ con.onmessage = function (e) {
 }
 
 con.onclose = function (e) {
+    localStorage.removeItem('token');
     console.log("zatvorena konekcija");
 }
 
