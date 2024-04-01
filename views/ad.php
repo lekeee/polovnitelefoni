@@ -10,7 +10,8 @@ if (isset($adId)) {
     try {
         $phoneAd = $phone->read($adId);
         $adData = json_decode($phoneAd, true);
-        $visitorsData = $phone->totalVisits($adId);
+        //$visitorsData = $phone->totalVisits($adId);
+        $visitorsData = $adData['views'];
         $adOwner = json_decode($user->getUserDataFromId($adData['user_id']), true);
         $savesCount = $phone->countSaves($adId);
 

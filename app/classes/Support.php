@@ -76,12 +76,17 @@ class Support
 
     public function sendSupportMessage()
     {
-        $sql = "INSERT INTO support (name, lastname, email, problem, description)
-                VALUES (?,?,?,?,?)";
-        $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("sssss", $this->name, $this->lastname, $this->email, $this->problem, $this->description);
-        $stmt->execute();
+        try{
+            $sql = "INSERT INTO support (name, lastname, email, problem, description)
+                    VALUES (?,?,?,?,?)";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("sssss", $this->name, $this->lastname, $this->email, $this->problem, $this->description);
+            $stmt->execute();
 
-        return $stmt->affected_rows > 0 ? true : false;
+            return $stmt->affected_rows > 0 ? true : false;
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 }

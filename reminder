@@ -70,7 +70,7 @@ na sajtu polovni telefoni
 TERMS OF SERVICES 
 -na formi za registraciju
 
-BAG ZA IPHONE (BROJ TELEFONA)
+BAG ZA IPHONE (BROJ TELEFONA) -----------------------------------------------------------------------------------(URADJENO)
 
 DODATI SLANJE EMAILA ZA POTVRDU PRI PRIJAVLJUVANJU --------------------------------------------------------------(URADJENO)
 
@@ -97,7 +97,7 @@ PROMENA SEARCH BARA ------------------------------------------------------------
 
 PROMENA HEADERA -------------------------------------------------------------------------------------------------(URADJENO)
 
-EXCEPTIONI ZA MESSAGES
+EXCEPTIONI ZA MESSAGES ------------------------------------------------------------------------------------------(URADJENO)
 
 PAGINACIJA KOD KORISNIKOVIH OGLASA
 
@@ -111,7 +111,7 @@ DODATI IDENTIFIKATOR UKOLIKO KORISNIK NEMA PORUKE NISAKIM ----------------------
 
 NAPRAVITI PRETPLATI SE
 
-NAPRAVITI DODATNI FILTRE ZA ODABIR "DOGOVOR" (KAO CENA) ---------------------------------------------------------(URADJENO)
+NAPRAVITI DODATNI FILTERE ZA ODABIR "DOGOVOR" (KAO CENA) I DODATI ODABIR GRADA
 
 UMESTO ZVEZDICA NA KORISNIKOV PROFIL DODATI STIKLIRANO I X ------------------------------------------------------(URADJENO)
 
@@ -121,7 +121,7 @@ POVEZATI SVE LINKOVE
 
 MAILOVI DA SE OFORME support, team..
 
-USER EXCEPTIONI
+USER EXCEPTIONI -------------------------------------------------------------------------------------------------(URADJENO)
 
 OBAVESTENJA O PRISTIZANJU PORUKA --------------------------------------------------------------------------------(URADJENO)
 
@@ -133,6 +133,19 @@ KLIKOM NA PROCITAJ JOS DA VODI NA OGLAS ILI DA ISPISE CEO OPIS -----------------
 
 BAG NA DASHBOARD ZA PLAVU BOJU ----------------------------------------------------------------------------------(URADJENO)
 
+
 NEED CLICK NE RADI ----------------------------------------------------------------------------------------------(URADJENO)
 
 DODATI IDENTIFIKATOR PORUKE NA SVIM STRANICAMA ------------------------------------------------------------------(URADJENO)
+
+AKO NASTUPI GRESKA PRILIKOM GOOGLE LOGIN DA JE NE PRIKAZUJE -----------------------------------------------------(URADJENO)
+
+SLANJE MEJLA ZBOG PRISTIGLE PORUKE KADA KORISNIK NIJE ULOGOVAN
+
+DIZAJN DA SE PROMENI NA PRIKAZU OGLASA
+
+DA SE NAPRAVE RUTE
+
+DA SE PREPRAVI FUNKCIONALNOST ZA RASPORED SLIKE 
+
+DA SE SALJE MAIL ZA NEWSLETTER
