@@ -104,6 +104,14 @@ function closeFiltersContainer() {
     }, 300);
 }
 
+function formatirajBroj(broj) {
+    if (broj >= 1000 && broj < 1000000) {
+        return (broj / 1000).toFixed(1) + 'k';
+    } else {
+        return broj;
+    }
+}
+
 function openQuickView(x) {
     document.querySelector('body').style.overflowY = "hidden";
 
@@ -117,7 +125,8 @@ function openQuickView(x) {
     const model = x.getAttribute('model');
     const state = x.getAttribute('state');
     const rate = x.getAttribute('rate');
-    const visitors = x.getAttribute('visitors');
+    let visitors = x.getAttribute('visitors');
+    visitors = formatirajBroj(visitors);
     const saves = x.getAttribute('saves');
     const damage = x.getAttribute('damage');
     const accessories = x.getAttribute('accessories');

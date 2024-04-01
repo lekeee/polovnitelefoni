@@ -160,14 +160,18 @@ function getAds($phoneAds)
 
     $cache = new FilesystemAdapter();
     try {
-        $cacheItem = $cache->getItem('ads-' . $offset . '-' . $limit);
-        $cachedValue = $cacheItem->get();
-        if ($cachedValue === null) {
-            $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
-            $cacheItem->set($result)->expiresAfter(180);
-            $cache->save($cacheItem);
+        if ($brandsSelected == NULL && $modelsSelected == NULL) {
+            $cacheItem = $cache->getItem('ads-' . $offset . '-' . $limit);
+            $cachedValue = $cacheItem->get();
+            if ($cachedValue === null) {
+                $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
+                $cacheItem->set($result)->expiresAfter(180);
+                $cache->save($cacheItem);
+            } else {
+                $result = $cachedValue;
+            }
         } else {
-            $result = $cachedValue;
+            $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
         }
         $response = array(
             'status' => 'success',
@@ -320,15 +324,15 @@ function getSearchData($title, $phoneAds)
 }
 
 
-function addView($data, $phoneAds){
-    try{
+function addView($data, $phoneAds)
+{
+    try {
         $result = $phoneAds->addPhoneView($data['adId']);
         $response = array(
             'status' => 'success',
             'message' => $result
         );
-    }
-    catch (Exception $e) {
+    } catch (Exception $e) {
         $response = array(
             'status' => 'error',
             'message' => 'Došlo je do greške prilikom dodavanja pregleda oglasa'

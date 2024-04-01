@@ -54,9 +54,12 @@ deleteMainContainer.addEventListener("click", function (e) {
     e.stopPropagation();
 });
 
-function showDeleteConfirm(adID) {
+function showDeleteConfirm(adID, title) {
     const deleteBtn = document.querySelector("#delete-btn");
+    const deleteTitle = document.querySelector('#delete-title');
     deleteBtn.setAttribute('adID', adID);
+
+    deleteTitle.innerHTML = title;
 
     deleteBackgroundContainer.style.display = "flex";
     deleteMainContainer.classList.remove('close');

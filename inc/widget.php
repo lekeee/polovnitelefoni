@@ -17,7 +17,7 @@ function showWidget($ads)
     $result = "";
 
     for ($i = 0; $i < count($ads); $i++) {
-        $views = $phone->totalVisits($ads[$i]['ad_id']);
+        $views = $ads[$i]['views'];
         $saves = $phone->countSaves($ads[$i]['ad_id']);
         $ownerData = json_decode($user->getUserDataFromId($ads[$i]['user_id']), true);
 
@@ -187,7 +187,11 @@ function showWidget($ads)
                             <div class="viewslabel">
                                 <?php
                                 if ($views !== NULL) {
-                                    echo $views;
+                                    if ($views >= 1000 && $views < 1000000) {
+                                        echo number_format($views / 1000, 1) . 'k';
+                                    } else {
+                                        echo $views;
+                                    }
                                 } else {
                                     echo 0;
                                 }

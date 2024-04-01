@@ -132,10 +132,11 @@ function savedWidget($ads)
                 $user = new User();
                 $userID = $user->getId();
                 $adID = $ads[$i]['ad_id'];
+                $title = $ads[$i]['title'];
                 ?>
                 <div style="display: flex; flex-direction: column;">
                     <div title="Obriši oglas" class="delete-edit-buttons" style="background: #ed6969;"
-                        onclick="showDeleteConfirm(<?php echo $adID ?>)">
+                        onclick="showDeleteConfirm(<?php echo $adID ?>, '<?php echo $title ?>')">
                         <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obriši">
                     </div>
                     <div title="Uredi oglas" class="delete-edit-buttons" style="background: #041e42;"
