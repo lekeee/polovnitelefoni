@@ -41,7 +41,6 @@ function getIdfromUrl(){
 document.addEventListener("DOMContentLoaded", async () => {    
     let visitedArray = JSON.parse(localStorage.getItem("visitedAds"));
     const ad_id = getIdfromUrl();
-    console.log(visitedArray)
 
     if(ad_id != null){
         if(visitedArray === null || !visitedArray.includes(ad_id)){
