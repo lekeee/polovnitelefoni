@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../public/css/saved-ads.css?v=<?php echo time() ?>">
 <section class="section-2">
     <div class="div-block-37">
         <div class="div-block-34">

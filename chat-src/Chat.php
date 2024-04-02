@@ -4,6 +4,9 @@ namespace MyApp;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
+use \PHPMailer\PHPMailer\PHPMailer;
+use \PHPMailer\PHPMailer\Exception;
+
 class Chat implements MessageComponentInterface
 {
     protected $clients;
@@ -105,6 +108,14 @@ class Chat implements MessageComponentInterface
                     $this->messages->setStatus(0);
                     $this->messages->setId($chat_message_id);
                     $this->messages->updateMessageStatus();
+                }
+                if($this->user->returnOnlineStatus($data['receiverId'])['online_status'] == 0){
+                    if (isset($_SESSION['last_run']) && (time() - $_SESSION['last_run'] < 5 * 60)) {
+                        return;
+                    }
+                    $this->user->sendNotificationEmail($data['receiverId']);
+                    $_SESSION['last_run'] = time();
+                    
                 }
             }
         }

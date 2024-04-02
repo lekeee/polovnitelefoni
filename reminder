@@ -58,25 +58,11 @@ PRIKAZ OGLASA ZA OSTECENE UREDJAJE ---------------------------------------------
 
 PORUKE --------------------------------------------------------------------------------------------------------(URADJENO)
 
-
-
-
-DODAJ U COMPARE
-
-REGISTRACIJA
--Prilikom registracije, slazem se sa uslovima korsicenja 
-na sajtu polovni telefoni
-
-TERMS OF SERVICES 
--na formi za registraciju
-
 BAG ZA IPHONE (BROJ TELEFONA) -----------------------------------------------------------------------------------(URADJENO)
 
 DODATI SLANJE EMAILA ZA POTVRDU PRI PRIJAVLJUVANJU --------------------------------------------------------------(URADJENO)
 
 PRIJAVA PROFILA -------------------------------------------------------------------------------------------------(URADJENO)
-
-RESITI BAG ZA SLIKE NA OGLASU
 
 OCENI KORISNIKA -------------------------------------------------------------------------------------------------(URADJENO)
 
@@ -87,7 +73,7 @@ PRETRAZIVANJE ------------------------------------------------------------------
 
 KORISNIKOV PROFIL (POVEZATI SA FUNKCIJAMA) ----------------------------------------------------------------------(URADJENO)
 
-PREGLEDI OGLASA
+PREGLEDI OGLASA -------------------------------------------------------------------------------------------------(URADJENO)
 
 DODATI NA SVIM MESTIMA DODAVANJE U OMILJENO ---------------------------------------------------------------------(URADJENO)
 
@@ -99,27 +85,11 @@ PROMENA HEADERA ----------------------------------------------------------------
 
 EXCEPTIONI ZA MESSAGES ------------------------------------------------------------------------------------------(URADJENO)
 
-PAGINACIJA KOD KORISNIKOVIH OGLASA
-
-PAGINACIJA KOD PORUKE
-
-DA SE OBRISU ZAREZI KOD OPREME I OSTECENJA
-
-MAIL DA SE PROMENI U FJE ZA SLANJE 
-
 DODATI IDENTIFIKATOR UKOLIKO KORISNIK NEMA PORUKE NISAKIM -------------------------------------------------------(URADJENO)
-
-NAPRAVITI PRETPLATI SE
-
-NAPRAVITI DODATNI FILTERE ZA ODABIR "DOGOVOR" (KAO CENA) I DODATI ODABIR GRADA
 
 UMESTO ZVEZDICA NA KORISNIKOV PROFIL DODATI STIKLIRANO I X ------------------------------------------------------(URADJENO)
 
 NAPRAVITI SEARCH ZA TELEFONE ------------------------------------------------------------------------------------(URADJENO)
-
-POVEZATI SVE LINKOVE
-
-MAILOVI DA SE OFORME support, team..
 
 USER EXCEPTIONI -------------------------------------------------------------------------------------------------(URADJENO)
 
@@ -133,19 +103,41 @@ KLIKOM NA PROCITAJ JOS DA VODI NA OGLAS ILI DA ISPISE CEO OPIS -----------------
 
 BAG NA DASHBOARD ZA PLAVU BOJU ----------------------------------------------------------------------------------(URADJENO)
 
-
 NEED CLICK NE RADI ----------------------------------------------------------------------------------------------(URADJENO)
 
 DODATI IDENTIFIKATOR PORUKE NA SVIM STRANICAMA ------------------------------------------------------------------(URADJENO)
 
 AKO NASTUPI GRESKA PRILIKOM GOOGLE LOGIN DA JE NE PRIKAZUJE -----------------------------------------------------(URADJENO)
 
-SLANJE MEJLA ZBOG PRISTIGLE PORUKE KADA KORISNIK NIJE ULOGOVAN
+SLANJE MEJLA ZBOG PRISTIGLE PORUKE KADA KORISNIK NIJE ULOGOVAN --------------------------------------------------(URADJENO)
 
-DIZAJN DA SE PROMENI NA PRIKAZU OGLASA
+DIZAJN DA SE PROMENI NA PRIKAZU OGLASA --------------------------------------------------------------------------(URADJENO)
+
+DA SE SALJE MAIL ZA NEWSLETTER ----------------------------------------------------------------------------------(URADJENO)
+
+NAPRAVITI PRETPLATI SE ------------------------------------------------------------------------------------------(URADJENO)
+
+NAPRAVITI DODATNI FILTERE ZA ODABIR "DOGOVOR" (KAO CENA) I DODATI ODABIR GRADA ----------------------------------(URADJENO)
+
+POVEZATI SVE LINKOVE --------------------------------------------------------------------------------------------(URADJENO)
+
+MAILOVI DA SE OFORME support, team.. ----------------------------------------------------------------------------(URADJENO)
 
 DA SE NAPRAVE RUTE
 
 DA SE PREPRAVI FUNKCIONALNOST ZA RASPORED SLIKE 
 
-DA SE SALJE MAIL ZA NEWSLETTER
+DODAJ U COMPARE
+
+REGISTRACIJA
+-Prilikom registracije, slazem se sa uslovima korsicenja 
+na sajtu polovni telefoni
+
+TERMS OF SERVICES 
+-na formi za registraciju
+
+RESITI BAG ZA SLIKE NA OGLASU
+
+PAGINACIJA KOD KORISNIKOVIH OGLASA
+
+PAGINACIJA KOD PORUKE
