@@ -7,7 +7,7 @@ window.onload = function () {
 const brandsCheckboxes = document.querySelectorAll('.custom-brand-checkbox');
 const sortSelect = document.querySelector('#sorting');
 const limitChange = document.querySelector('#showCount');
-
+const submitBtn = document.querySelector("#sumbitFilters");
 
 function checkURL() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -173,51 +173,92 @@ function showFilters() {
         const damagedState2 = savedInitialData.damagedState;
         const deal2 = savedInitialData.deal;
 
-        const deleteFilters = document.createElement('a');
-        deleteFilters.setAttribute('href', '#');
-        deleteFilters.innerHTML = "X Obriši filtere";
-        deleteFilters.addEventListener('click', resetFilters);
-        deleteFilters.classList.add("removeFiltersLabel");
-        filtersLabel.appendChild(deleteFilters);
+        if (brandsSelected2.length !== 0 ||
+            modelsSelected2.length !== 0 ||
+            (minPrice2 !== null && maxPrice2 !== null && minPrice2 !== '0' && maxPrice2 !== '2500') ||
+            oldState2 ||
+            newState2 ||
+            damagedState2 ||
+            !deal2) {
 
-        if (brandsSelected2 !== null) {
+            const deleteFilters = document.createElement('a');
+            deleteFilters.setAttribute('href', '#');
+            deleteFilters.innerHTML = "X Obriši filtere";
+            deleteFilters.addEventListener('click', resetFilters);
+            deleteFilters.classList.add("removeFiltersLabel");
+            filtersLabel.appendChild(deleteFilters);
+        } else {
+            resetFilters();
+        }
+        if (brandsSelected2 != []) {
             for (let i = 0; i < brandsSelected2.length; i++) {
                 const brand = document.createElement('a');
                 brand.setAttribute('href', '#');
                 brand.innerHTML = "X " + brandsSelected2[i];
+                brand.classList.add("removeFiltersLabel");
+                brand.addEventListener('click', function () {
+                    removeBrand(brandsSelected2[i]);
+                    removeModelOnlyBrand(brandsSelected2[i]);
+                    submitBtn.click();
+                });
                 filtersLabel.appendChild(brand);
             }
         }
-        if (modelsSelected2 !== null) {
+        if (modelsSelected2 != []) {
             for (let i = 0; i < modelsSelected2.length; i++) {
                 const models = document.createElement('a');
                 models.setAttribute('href', '#');
                 models.innerHTML = "X " + modelsSelected2[i].model;
+                models.classList.add('removeFiltersLabel');
+                models.addEventListener('click', function () {
+                    removeModel(modelsSelected2[i].brand, modelsSelected2[i].model);
+                    submitBtn.click();
+                });
                 filtersLabel.appendChild(models);
             }
         }
-        if (minPrice2 !== null && maxPrice2 !== null) {
+        if (minPrice2 !== null && maxPrice2 !== null && minPrice2 !== '0' && maxPrice2 !== '2500') {
             const price = document.createElement('a');
             price.setAttribute('href', '#');
             price.innerHTML = "X " + '€' + minPrice2 + ' - ' + '€' + maxPrice2;
+            price.classList.add('removeFiltersLabel');
+            price.addEventListener('click', function () {
+                removePriceFilter();
+                submitBtn.click();
+            });
             filtersLabel.appendChild(price);
         }
         if (oldState2) {
             const state = document.createElement('a');
             state.setAttribute('href', '#');
-            state.innerHTML = "X Novo";
+            state.innerHTML = "X Polovno";
+            state.classList.add('removeFiltersLabel');
+            state.addEventListener('click', function () {
+                document.querySelector('#oldState').checked = false;
+                submitBtn.click();
+            });
             filtersLabel.appendChild(state);
         }
         if (newState2) {
             const state = document.createElement('a');
             state.setAttribute('href', '#');
-            state.innerHTML = "X Polovno";
+            state.innerHTML = "X Novo";
+            state.classList.add('removeFiltersLabel');
+            state.addEventListener('click', function () {
+                document.querySelector('#newState').checked = false;
+                submitBtn.click();
+            });
             filtersLabel.appendChild(state);
         }
         if (damagedState2) {
             const state = document.createElement('a');
             state.setAttribute('href', '#');
             state.innerHTML = "X Oštećenje";
+            state.classList.add('removeFiltersLabel');
+            state.addEventListener('click', function () {
+                document.querySelector('#damagedState').checked = false;
+                submitBtn.click();
+            });
             filtersLabel.appendChild(state);
         }
         if (!deal2) {

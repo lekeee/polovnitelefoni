@@ -49,21 +49,30 @@ function sendTitle(title) {
             console.log(data);
             const searchResultMain = document.querySelector('.search-result');
             const notFound = document.querySelector('.search-not-found');
-            if (data.status === 'success') {
-                searchTutorial.style.display = 'none';
-                notFound.style.display = 'none';
-                searchResultMain.style.display = 'block';
+            if (data !== null) {
+                if (data.status === 'success') {
+                    searchTutorial.style.display = 'none';
+                    notFound.style.display = 'none';
+                    searchResultMain.style.display = 'block';
 
-                searchResultMain.innerHTML = data.message;
-                const height = searchResult.offsetHeight;
-                console.log(height);
-                searchResult.style.bottom = `-${height}px`;
+                    searchResultMain.innerHTML = data.message;
+                    const height = searchResult.offsetHeight;
+                    console.log(height);
+                    searchResult.style.bottom = `-${height}px`;
 
-                if (mobile) {
-                    showMobileSearchResult(data.status, data.message);
+                    if (mobile) {
+                        showMobileSearchResult(data.status, data.message);
+                    }
+
+                } else if (data.status === 'empty') {
+                    searchResultMain.style.display = 'none';
+                    notFound.style.display = "flex";
+                    searchResult.style.bottom = `-300px`;
+                    if (mobile) {
+                        showMobileSearchResult(data.status, data.message);
+                    }
                 }
-
-            } else if (data.status === 'empty') {
+            } else {
                 searchResultMain.style.display = 'none';
                 notFound.style.display = "flex";
                 searchResult.style.bottom = `-300px`;

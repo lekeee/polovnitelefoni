@@ -39,3 +39,14 @@ rangeInput.forEach((input) => {
     }
   });
 });
+
+function removePriceFilter() {
+  minPrice = 0;
+  maxPrice = 2500;
+  rangeInput[0].value = 0;
+  rangeInput[1].value = 2500;
+  range.style.left = "0%";
+  range.style.right = "0%";
+  priceInput[0].value = 0;
+  priceInput[1].value = 2500;
+}
