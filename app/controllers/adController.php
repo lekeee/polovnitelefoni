@@ -304,10 +304,11 @@ function getSearchData($title, $phoneAds)
 {
     try {
         $result = $phoneAds->selectByTitle($title);
+        $widgets = createSearchResult(json_decode($result, true));
         if ($result != '[]') {
             $response = [
                 'status' => 'success',
-                'message' => createSearchResult(json_decode($result, true))
+                'message' => $widgets
             ];
         } else {
             $response = [
@@ -403,6 +404,7 @@ function createSearchResult($ads)
     }
     return $result;
 }
+
 
 
 if ($user->isLogged()) {
