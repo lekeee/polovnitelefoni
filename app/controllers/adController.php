@@ -146,6 +146,7 @@ function compareModels($a, $b)
 
 function getAds($phoneAds)
 {
+    $title = $_GET['title'];
     $sort = $_GET['sort'];
     $brandsSelected = $_GET['brandsSelected'];
     $modelsSelected = $_GET['modelsSelected'];
@@ -157,6 +158,7 @@ function getAds($phoneAds)
     $limit = $_GET['limit'];
     $offset = $_GET['page'] * $limit;
     $deal = $_GET['deal'];
+    $city = $_GET['city'];
 
     $cache = new FilesystemAdapter();
     try {
@@ -164,14 +166,14 @@ function getAds($phoneAds)
             $cacheItem = $cache->getItem('ads-' . $offset . '-' . $limit);
             $cachedValue = $cacheItem->get();
             if ($cachedValue === null) {
-                $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
+                $result = $phoneAds->filter($title, $sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal, $city);
                 $cacheItem->set($result)->expiresAfter(180);
                 $cache->save($cacheItem);
             } else {
                 $result = $cachedValue;
             }
         } else {
-            $result = $phoneAds->filter($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
+            $result = $phoneAds->filter($title, $sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal, $city);
         }
         $response = array(
             'status' => 'success',
@@ -273,6 +275,7 @@ function countData($phoneAds)
 
 function countFiltered($phoneAds)
 {
+    $title = $_GET['title'];
     $sort = $_GET['sort'];
     $brandsSelected = $_GET['brandsSelected'];
     $modelsSelected = $_GET['modelsSelected'];
@@ -284,9 +287,10 @@ function countFiltered($phoneAds)
     $limit = $_GET['limit'];
     $offset = $_GET['page'] * $limit;
     $deal = $_GET['deal'];
+    $city = $_GET['city'];
 
     try {
-        $result = $phoneAds->countAllFilteredAds($sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal);
+        $result = $phoneAds->countAllFilteredAds($title, $sort, $brandsSelected, $modelsSelected, $minPrice, $maxPrice, $newState, $oldState, $damagedState, $offset, $limit, $deal, $city);
         $response = array(
             'status' => 'success',
             'message' => $result
@@ -324,7 +328,6 @@ function getSearchData($title, $phoneAds)
     }
     return $response;
 }
-
 
 function addView($data, $phoneAds)
 {
@@ -437,6 +440,7 @@ if ($user->isLogged()) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
     if ($data['action'] === 'addView') {
         $response = addView($data, $phoneAds);
     }

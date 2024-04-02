@@ -25,16 +25,16 @@ if ($user->isLogged()) {
 <link rel="stylesheet" href="../public/css/list-widget.css?v=<?php echo time(); ?>">
 <?php
 if ($user->isLogged()) {
-      $token = $user->getToken($_SESSION['user_id']);
-      echo "
+    $token = $user->getToken($_SESSION['user_id']);
+    echo "
       <script type='module'>
           localStorage.setItem('token', '" . $token . "');
       </script>
       ";
-   ?>
-  <script src="../public/js/websocket.js" type="module"></script>
-  <audio src="../public/audio/alert_tone.mp3" id="audio-tag" muted style="display:none"></audio>
-<?php 
+    ?>
+    <script src="../public/js/websocket.js" type="module"></script>
+    <audio src="../public/audio/alert_tone.mp3" id="audio-tag" muted style="display:none"></audio>
+<?php
 }
 ?>
 <section class="header">
@@ -112,7 +112,7 @@ if ($user->isLogged()) {
             </div>
         </div> -->
         <div class="div-block-2 search-cont" style="position: relative">
-            <input type="text" placeholder="Pretraži...">
+            <input type="text" placeholder="Pretraži..." id="searchtext">
             <button class="searchbutton">
                 <img src="../public/src/search-icon.svg" loading="lazy" width="22" alt="Search Icon" />
             </button>
@@ -147,7 +147,7 @@ if ($user->isLogged()) {
                                 $userData = json_decode($userData, true);
                                 if ($userData !== null) {
                                     $userDataDecoded = json_decode($user->returnUser(), true);
-                                    if (!empty ($userDataDecoded['username'])) {
+                                    if (!empty($userDataDecoded['username'])) {
                                         echo $userDataDecoded['username'];
                                     } else {
                                         echo $userDataDecoded['name'] . ' ' . $userDataDecoded['lastname'];

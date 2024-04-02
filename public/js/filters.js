@@ -8,6 +8,8 @@ const brandsCheckboxes = document.querySelectorAll('.custom-brand-checkbox');
 const sortSelect = document.querySelector('#sorting');
 const limitChange = document.querySelector('#showCount');
 const submitBtn = document.querySelector("#sumbitFilters");
+const selectCity = document.querySelector('.select-city');
+const searchBtn = document.querySelector('.searchbutton');
 
 function checkURL() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -164,6 +166,7 @@ function showFilters() {
     if (savedFilterDataJson) {
         const savedInitialData = JSON.parse(savedFilterDataJson);
 
+        const title2 = savedInitialData.title;
         const brandsSelected2 = savedInitialData.brandsSelected;
         const modelsSelected2 = savedInitialData.modelsSelected;
         const minPrice2 = savedInitialData.minPrice;
@@ -172,15 +175,17 @@ function showFilters() {
         const newState2 = savedInitialData.newState;
         const damagedState2 = savedInitialData.damagedState;
         const deal2 = savedInitialData.deal;
+        const city2 = savedInitialData.city;
 
-        if (brandsSelected2.length !== 0 ||
+        if ((brandsSelected2.length !== 0 ||
             modelsSelected2.length !== 0 ||
-            (minPrice2 !== null && maxPrice2 !== null && minPrice2 !== '0' && maxPrice2 !== '2500') ||
+            (minPrice2 != '0' || maxPrice2 !== '2500' || minPrice2 != 0 || maxPrice2 != 2500) ||
             oldState2 ||
             newState2 ||
             damagedState2 ||
-            !deal2) {
-
+            !deal2 ||
+            city2 !== '0') && (
+                title2 === null || title2 === '')) {
             const deleteFilters = document.createElement('a');
             deleteFilters.setAttribute('href', '#');
             deleteFilters.innerHTML = "X Obriši filtere";
@@ -188,7 +193,16 @@ function showFilters() {
             deleteFilters.classList.add("removeFiltersLabel");
             filtersLabel.appendChild(deleteFilters);
         } else {
-            resetFilters();
+            if (title2 !== null) {
+                const titleEl = document.createElement('a');
+                titleEl.setAttribute('href', '#');
+                titleEl.innerHTML = "X " + title2;
+                titleEl.classList.add('removeFiltersLabel');
+                titleEl.addEventListener('click', resetFilters);
+                filtersLabel.appendChild(titleEl);
+            } else {
+                resetFilters();
+            }
         }
         if (brandsSelected2 != []) {
             for (let i = 0; i < brandsSelected2.length; i++) {
@@ -217,7 +231,7 @@ function showFilters() {
                 filtersLabel.appendChild(models);
             }
         }
-        if (minPrice2 !== null && maxPrice2 !== null && minPrice2 !== '0' && maxPrice2 !== '2500') {
+        if (minPrice2 !== null && maxPrice2 !== null && (minPrice2 != '0' || maxPrice2 !== '2500' || minPrice2 != 0 || maxPrice2 != 2500)) {
             const price = document.createElement('a');
             price.setAttribute('href', '#');
             price.innerHTML = "X " + '€' + minPrice2 + ' - ' + '€' + maxPrice2;
@@ -264,12 +278,45 @@ function showFilters() {
         if (!deal2) {
             document.querySelector('#deal').checked = false;
         }
+        if (city2 !== '0') {
+            const cityEl = document.createElement('a');
+            cityEl.setAttribute('href', '#');
+            cityEl.innerHTML = "X " + city2;
+            cityEl.classList.add('removeFiltersLabel');
+            cityEl.addEventListener('click', function () {
+                selectCity.value = selectCity.querySelector('option').value;
+                city = '0';
+                submitBtn.click();
+            });
+            filtersLabel.appendChild(cityEl);
+        }
+
     }
 }
 
-document.querySelector("#sumbitFilters").addEventListener("click", function (e) {
-    e.preventDefault();
+selectCity.addEventListener('change', function () {
+    city = this.value;
+});
 
+searchBtn.addEventListener('click', function () {
+    brandsSelected = [];
+    modelsSelected = [];
+    minPrice = '0';
+    maxPrice = '2500';
+    oldState = false;
+    newState = false;
+    damagedState = false;
+    deal = true;
+    city = '0';
+    resetFilters(false);
+    setTimeout(() => {
+        title = document.querySelector('#searchtext').value;
+        submitFilters(false);
+    }, 300);
+});
+
+
+function submitFilters(reset = true) {
     const urlParams = new URLSearchParams(window.location.search);
     for (const key of urlParams.keys()) {
         urlParams.delete(key);
@@ -280,19 +327,30 @@ document.querySelector("#sumbitFilters").addEventListener("click", function (e) 
 
     loadedAdsCounter = 0;
     allAdsCounter = 0;
-    getState();
-    getPrice();
-    getDeal();
+    if (reset) {
+        title = null;
+        document.querySelector('#searchtext').value = null;
+        getState();
+        getPrice();
+        getDeal();
+    }
 
     cacheFilterData();
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
-    getAds(0, true);
+    setTimeout(() => {
+        getAds(0, true);
+    }, 300);
     var sirinaProzora = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     if (sirinaProzora <= 991) {
         closeFilters();
         closeFiltersContainer();
     }
     showFilters();
+}
+
+document.querySelector("#sumbitFilters").addEventListener("click", function (e) {
+    e.preventDefault();
+    submitFilters();
 });
 
 function cacheFilterData() {
@@ -304,11 +362,12 @@ function cacheFilterData() {
         oldState: oldState,
         newState: newState,
         damagedState: damagedState,
-        deal: deal
+        deal: deal,
+        city: city,
+        title: title,
     };
     const initialDataJson = JSON.stringify(initialDataToSave);
     localStorage.setItem('filterData', initialDataJson);
-    console.log('Azurirano');
 }
 
 function getLimit() {
@@ -325,9 +384,13 @@ function getAds(currentPage, restart) {
     let newState2 = false;
     let damagedState2 = false;
     let deal2 = true;
+    let city2 = '0';
+    let title2 = null;
 
     if (savedFilterDataJson) {
         const savedInitialData = JSON.parse(savedFilterDataJson);
+
+        title2 = savedInitialData.title;
         brandsSelected2 = savedInitialData.brandsSelected;
         modelsSelected2 = savedInitialData.modelsSelected;
         minPrice2 = savedInitialData.minPrice;
@@ -336,11 +399,10 @@ function getAds(currentPage, restart) {
         newState2 = savedInitialData.newState;
         damagedState2 = savedInitialData.damagedState;
         deal2 = savedInitialData.deal;
+        city2 = savedInitialData.city;
     }
 
     sort = sortSelect.value;
-
-
 
     let jsonmodels = JSON.stringify(modelsSelected2);
     let encodedModels = encodeURIComponent(jsonmodels);
@@ -348,6 +410,7 @@ function getAds(currentPage, restart) {
     const params = new URLSearchParams({
         action: 'getAds',
         sort: sort,
+        title: title2,
         brandsSelected: brandsSelected2.join(','),
         modelsSelected: encodedModels,
         minPrice: minPrice2,
@@ -358,6 +421,7 @@ function getAds(currentPage, restart) {
         page: currentPage,
         limit: limit,
         deal: deal2,
+        city: city2,
     });
 
     FilterData(params, restart);
@@ -392,7 +456,7 @@ function cacheAdsCounter(value) {
     }
 }
 
-function resetFilters() {
+function resetFilters(reset = true) {
     const urlParams = new URLSearchParams(window.location.search);
     for (const key of urlParams.keys()) {
         urlParams.delete(key);
@@ -429,7 +493,14 @@ function resetFilters() {
 
     document.querySelectorAll('.filterstlabela')[0].style.display = 'none';
 
-    getAds(0, true);
+    selectCity.value = selectCity.querySelector('option').value;
+    city = '0';
+
+    if (reset) {
+        document.querySelector('#searchtext').value = null;
+        title = null;
+        getAds(0, true);
+    }
 }
 
 document.querySelector('#resetFilters').addEventListener('click', resetFilters);

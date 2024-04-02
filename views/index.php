@@ -558,10 +558,20 @@ require_once "../inc/headTag.php";
                                 <div class="w-form-fail"></div>
                             </div>
                         </div>
+                        <div class="filterleftcontainer">
+                            <div class="brandtitlecontainer">
+                                <h2 class="brandmodeltitle">Grad</h2>
+                            </div>
+                            <div class="brandsandmodelscontainer city">
+                                <select value="Izaberite grad" class="select-city">
+                                    <option value="0">Svi gradovi</option>
+                                    <?php include_once ('../inc/gradovi.php') ?>
+                                </select>
+                            </div>
+                        </div>
                         <div class="pricefiltercontainer">
                             <h2 class="pricefiltertitle">Filtriraj po ceni</h2>
                             <div class="pricefiltercontainer">
-
                                 <div class="priceslidercontainer">
                                     <div class="sliderneeded" style="padding-right: 20px;">
                                         <div class="price-input">
@@ -657,13 +667,13 @@ require_once "../inc/headTag.php";
                     </div>
                 </div>
             </div>
-            <div class="recentlyviewedcontainer">
+            <!-- <div class="recentlyviewedcontainer">
                 <div class="recentlytextconatainer">
                     <h3 class="receantlylabel">Poslednje pogledani oglasi</h3>
                 </div>
                 <div class="recentlymaincontainer">
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
     <?php
