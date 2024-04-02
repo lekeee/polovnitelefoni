@@ -214,15 +214,35 @@ class Phone extends Ad
             throw new SAVE_CANNOT_BE_DELETED();
         }
     }
-    public function filter($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24, $deal = true)
+    public function filter($title = null, $sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24, $deal = true, $city = null)
     {
         try {
             if ($sort !== null && $sort == 0) {
                 $sql = "SELECT o.*, COUNT(so.ad_id) AS broj_sacuvanih 
                 FROM oglasi o LEFT JOIN sacuvani_oglasi so 
-                ON o.ad_id = so.ad_id WHERE 1";
+                ON o.ad_id = so.ad_id";
+                if ($city !== null && $city !== '0') {
+                    $sql .= " INNER JOIN users u ON u.user_id = o.user_id WHERE u.city='$city'";
+                } else {
+                    $sql .= " WHERE 1";
+                }
+
+                if ($title != 'null') {
+                    $title = strtolower($title);
+                    $sql .= " AND LOWER(o.title) LIKE '%$title%'";
+                }
             } else {
-                $sql = "SELECT * FROM oglasi WHERE 1";
+                $sql = "SELECT * FROM oglasi";
+                if ($city !== null && $city !== '0') {
+                    $sql .= " INNER JOIN users u ON u.user_id = oglasi.user_id WHERE u.city='$city'";
+                } else {
+                    $sql .= " WHERE 1";
+                }
+
+                if ($title != 'null') {
+                    $title = strtolower($title);
+                    $sql .= " AND LOWER(oglasi.title) LIKE '%$title%'";
+                }
             }
 
             $models = json_decode(urldecode($models), true);
@@ -473,12 +493,20 @@ class Phone extends Ad
     }
 
 
-    public function countAllFilteredAds($sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24, $deal = true)
+    public function countAllFilteredAds($title = null, $sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24, $deal = true, $city = null)
     {
         try {
-            $sql = "SELECT COUNT(*) as ukupno_oglasa FROM oglasi WHERE 1";
+            $sql = "SELECT COUNT(*) as ukupno_oglasa FROM oglasi";
+            if ($city !== null && $city !== '0') {
+                $sql .= " INNER JOIN users u on u.user_id = oglasi.user_id WHERE u.city = '$city'";
+            } else {
+                $sql .= " WHERE 1";
+            }
 
-
+            if ($title != 'null') {
+                $title = strtolower($title);
+                $sql .= " AND LOWER(oglasi.title) LIKE '%$title%'";
+            }
             $models = json_decode(urldecode($models), true);
             if ($brands !== null && !empty($brands)) {
                 $brandConditions = [];
@@ -761,7 +789,7 @@ class Phone extends Ad
     public function selectByTitle($title)
     {
         try {
-            $sql = "SELECT o.ad_id, o.title, o.price, o.images, u.city 
+            $sql = "SELECT *
                     FROM oglasi as o
                     INNER JOIN users as u
                     ON o.user_id = u.user_id
