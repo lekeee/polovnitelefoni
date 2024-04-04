@@ -1157,8 +1157,8 @@ class User
                         <h1><b>Nove poruke na Polovni Telefoni!</b></h1>
                         <p>Imate nove poruke koje čekaju na vašem nalogu na polovni-telefoni.rs </p>
                         
-                        <p>Da biste pročitali svoje poruke, molimo vas da se prijavite na svoj nalog i posetite svoj inbox.<p>
-                        <div style='display:flex; justify-content: center; align-items: center; padding: 20px;'>
+                        <p>Da biste pročitali svoje poruke, molimo vas da se prijavite na svoj nalog i posetite svoj inbox.</p>
+                        <div style='text-align: center; padding: 20px;'>
                             <a href='https://polovni-telefoni.rs/views/messages.php' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>
                             Proveri inbox &#9993;
                             </a>
