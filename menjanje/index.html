@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .divs{
+            margin-top: 200px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+            overflow: hidden;
+            position: relative;
+            background-size: cover; /* Slika će biti proporcionalno zategnuta unutar diva */
+            background-position: center; /* Pozicija slike u sredini diva */
+        }
+
+        .drop-target {
+            border: 2px dashed #000; 
+        }
+    </style>
+</head>
+<body>
+    <div class="divs" id="1" style="background-color: red;">1</div>
+    <div class="divs" id="2" style="background-color: blue;">2</div>
+    <div class="divs" id="3" style="background-color: green;">3</div>
+    <div class="divs" id="4" style="background-color: yellow;">4</div>
+    <div class="divs" id="5" style="background-color: orange;">5</div>
+    <div class="divs" id="6" style="background-color: purple;">6</div>
+    <div class="divs" id="7" style="background-color: pink;">7</div>
+    <div class="divs" id="8" style="background-color: cyan;">8</div>
+    <div class="divs" id="9" style="background-color: brown;">9</div>
+    <div class="divs" id="10" style="background-color: gray;">10</div>
+</body>
+</html>
+<script src="app.js"></script>
