@@ -851,7 +851,8 @@ class User
             echo $e->getMessage();
         }
     }
-    public function returnOnlineStatus($user_id){
+    public function returnOnlineStatus($user_id)
+    {
         try {
             $sql = "SELECT online_status FROM users
                     WHERE user_id = ?";
@@ -861,8 +862,7 @@ class User
 
             $result = $stmt->get_result();
             return $result->fetch_assoc();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -1097,8 +1097,9 @@ class User
         }
     }
 
-    public function returnEmail($user_id){
-        try{
+    public function returnEmail($user_id)
+    {
+        try {
             $sql = "SELECT email FROM users WHERE user_id = ?";
             $stmt = $this->con->prepare($sql);
             $stmt->bind_param("i", $user_id);
@@ -1112,13 +1113,13 @@ class User
             }
 
             return NULL;
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function sendNotificationEmail($user_id){
+    public function sendNotificationEmail($user_id)
+    {
         require_once __DIR__ . '/../../PHPMailer/src/Exception.php';
         require_once __DIR__ . '/../../PHPMailer/src/PHPMailer.php';
         require_once __DIR__ . '/../../PHPMailer/src/SMTP.php';
@@ -1157,8 +1158,8 @@ class User
                         <h1><b>Nove poruke na Polovni Telefoni!</b></h1>
                         <p>Imate nove poruke koje čekaju na vašem nalogu na polovni-telefoni.rs </p>
                         
-                        <p>Da biste pročitali svoje poruke, molimo vas da se prijavite na svoj nalog i posetite svoj inbox.<p>
-                        <div style='display:flex; justify-content: center; align-items: center; padding: 20px;'>
+                        <p>Da biste pročitali svoje poruke, molimo vas da se prijavite na svoj nalog i posetite svoj inbox.</p>
+                        <div style='text-align: center; padding: 20px;'>
                             <a href='https://polovni-telefoni.rs/views/messages.php' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>
                             Proveri inbox &#9993;
                             </a>
@@ -1185,8 +1186,7 @@ class User
             $mail->send();
 
             return true;
-        }
-        catch (Exception $e) {  
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
