@@ -568,14 +568,14 @@ class User
         try {
             $mail = new PHPMailer(true);
             $mail->isSMTP();
-            $mail->Host = "smtp.gmail.com";
+            $mail->Host = "mail.polovni-telefoni.rs";
             $mail->SMTPAuth = true;
-            $mail->Username = 'polovnitelefoni383@gmail.com';
-            $mail->Password = 'oava ufgw rplr zhbq';
+            $mail->Username = 'team@polovni-telefoni.rs';
+            $mail->Password = 'i.l;n&iuy9Tg';
             $mail->SMTPSecure = "ssl";
             $mail->Port = 465;
 
-            $mail->setFrom("polovnitelefoni383@gmail.com");
+            $mail->setFrom("team@polovni-telefoni.rs");
             $mail->addAddress($email);
             $mail->isHTML(true);
 
@@ -633,7 +633,6 @@ class User
         }
     }
 
-
     public function sendChangePasswordMail($email)
     {
         require "../../PHPMailer/src/Exception.php";
@@ -643,14 +642,14 @@ class User
         try {
             $mail = new PHPMailer(true);
             $mail->isSMTP();
-            $mail->Host = "smtp.gmail.com";
+            $mail->Host = "mail.polovni-telefoni.rs";
             $mail->SMTPAuth = true;
-            $mail->Username = 'polovnitelefoni383@gmail.com';
-            $mail->Password = 'oava ufgw rplr zhbq';
+            $mail->Username = 'team@polovni-telefoni.rs';
+            $mail->Password = 'i.l;n&iuy9Tg';
             $mail->SMTPSecure = "ssl";
             $mail->Port = 465;
 
-            $mail->setFrom("polovnitelefoni383@gmail.com");
+            $mail->setFrom("team@polovni-telefoni.rs");
             $mail->addAddress($email);
             $mail->isHTML(true);
 
@@ -848,6 +847,21 @@ class User
                 return true;
             }
             return false;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function returnOnlineStatus($user_id)
+    {
+        try {
+            $sql = "SELECT online_status FROM users
+                    WHERE user_id = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            return $result->fetch_assoc();
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -1078,6 +1092,100 @@ class User
                 return $result->fetch_assoc();
             }
             return null;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function returnEmail($user_id)
+    {
+        try {
+            $sql = "SELECT email FROM users WHERE user_id = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+
+            $results = $stmt->get_result();
+
+            if ($results->num_rows == 1) {
+                $user = $results->fetch_assoc();
+                return $user["email"];
+            }
+
+            return NULL;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function sendNotificationEmail($user_id)
+    {
+        require_once __DIR__ . '/../../PHPMailer/src/Exception.php';
+        require_once __DIR__ . '/../../PHPMailer/src/PHPMailer.php';
+        require_once __DIR__ . '/../../PHPMailer/src/SMTP.php';
+
+
+        try {
+            $email = $this->returnEmail($user_id);
+
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = "mail.polovni-telefoni.rs";
+            $mail->SMTPAuth = true;
+            $mail->Username = 'team@polovni-telefoni.rs';
+            $mail->Password = 'i.l;n&iuy9Tg';
+            $mail->SMTPSecure = "ssl";
+            $mail->Port = 465;
+
+            $mail->setFrom("team@polovni-telefoni.rs");
+            $mail->addAddress($email);
+            $mail->isHTML(true);
+
+            $mail->Subject = "Pristigle su nove poruke";
+            $mail->Body =
+                "
+                <div style='font-family: Arial, sans-serif; color:000; width: 600px; background-color: #fff; padding: 10px 0px 20px 0px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>
+
+                    <div style='padding-top: 0; padding-bottom: 10px; text-align: center; display: block;'>
+                        <img src='https://polovni-telefoni.rs/public/src/polovnitelefoni.png' alt='' style='width: 50%; height:50%'>
+                    </div>
+
+                    <div style='padding: 20px; text-align: center; display: block; background-color: #ED6969; '>
+                        <img src='https://polovni-telefoni.rs/public/src/mail-icon.png' alt='' style='width: 50px; height: 50px;'>
+                    </div>
+
+                    <div style='text-align: left; padding: 0px 20px 20px 20px; color:000'>
+                        <h1><b>Nove poruke na Polovni Telefoni!</b></h1>
+                        <p>Imate nove poruke koje čekaju na vašem nalogu na polovni-telefoni.rs </p>
+                        
+                        <p>Da biste pročitali svoje poruke, molimo vas da se prijavite na svoj nalog i posetite svoj inbox.</p>
+                        <div style='text-align: center; padding: 20px;'>
+                            <a href='https://polovni-telefoni.rs/views/messages.php' style='display: inline-block; padding: 15px 20px; color: #fff; background-color: #ed6969; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; text-transform: uppercase; transition: background-color 0.3s ease;'>
+                            Proveri inbox &#9993;
+                            </a>
+                        </div>
+                        <p>Ako imate bilo kakvih pitanja ili problema, slobodno nas kontaktirajte.<p>
+
+                        <p>Drago nam je što ste ovde!</p>
+                        <p>Vaš Polovni Telefoni tim.</p>
+                    </div>
+
+                    <hr style='margin: 20px 0; border: 0; border-top: 2px solid #ccc;'>
+
+                    <div style='text-align: center; padding: 20px;'>
+                        <img src='https://polovni-telefoni.rs/public/src/icons-instagram.png' alt='' style='width: 40px; height: 40px;'>
+                        <img src='https://polovni-telefoni.rs/public/src/icons-facebook.png' alt='' style='width: 40px; height: 40px;'>
+                    </div>
+
+                    <footer style='background-color: rgb(33, 32, 32); padding: 20px; text-align: center;'>
+                        <p style='color: white;'>© polovni-telefoni.rs, Inc. Sva prava su zadrzana.</p>
+                    </footer>
+
+                </div>
+            ";
+            $mail->send();
+
+            return true;
         } catch (Exception $e) {
             echo $e->getMessage();
         }
