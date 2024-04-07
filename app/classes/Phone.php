@@ -388,8 +388,8 @@ class Phone extends Ad
     {
         try {
             $this->deleteAdfromSaves($ad_id);
-            $this->deleteAdfromVisit($ad_id);
-
+            // $this->deleteAdfromVisit($ad_id);
+            // echo "tu sam";
             if ($this->saveDeletedAdData($ad_id)) {
                 $sql = "DELETE FROM oglasi WHERE ad_id = ?";
                 $stmt = $this->con->prepare($sql);
@@ -427,24 +427,24 @@ class Phone extends Ad
         }
     }
 
-    public function deleteAdfromVisit($ad_id)
-    {
-        try {
-            $sql = "DELETE FROM visitors WHERE ad_id = ?";
+    // public function deleteAdfromVisit($ad_id)
+    // {
+    //     try {
+    //         $sql = "DELETE FROM visitors WHERE ad_id = ?";
 
-            $stmt = $this->con->prepare($sql);
-            $stmt->bind_param("i", $ad_id);
+    //         $stmt = $this->con->prepare($sql);
+    //         $stmt->bind_param("i", $ad_id);
 
 
-            $stmt->execute();
-            if ($stmt->error) {
-                throw new Exception("SQL execution error: " . $stmt->error);
-            }
-            return true;
-        } catch (Exception $e) {
-            throw new DELETE_AD_FROM_VISITS_ERROR();
-        }
-    }
+    //         $stmt->execute();
+    //         if ($stmt->error) {
+    //             throw new Exception("SQL execution error: " . $stmt->error);
+    //         }
+    //         return true;
+    //     } catch (Exception $e) {
+    //         throw new DELETE_AD_FROM_VISITS_ERROR();
+    //     }
+    // }
 
     public function saveDeletedAdData($ad_id)
     {

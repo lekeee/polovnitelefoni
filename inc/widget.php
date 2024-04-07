@@ -117,7 +117,8 @@ function showWidget($ads)
                             accessories="<?php echo $ads[$i]['accessories'] ?>" price="<?php echo $ads[$i]['price'] ?>"
                             old-price="<?php echo $ads[$i]['old_price'] ?>" name="<?php echo $ownerData['name'] ?>"
                             lastname="<?php echo $ownerData['lastname'] ?>" city="<?php echo $ownerData['city'] ?>"
-                            address="<?php echo $ownerData['address'] ?>" phone="<?php echo $ownerData['phone'] ?>">
+                            address="<?php echo $ownerData['address'] ?>" phone="<?php echo $ownerData['phone'] ?>"
+                            owner-id="<?php echo $ownerData['user_id'] ?>">
                             <img src="../public/src/eye-icon.svg" loading="lazy" alt="Quick View Icon" style="width: 20px;" />
                         </div>
                     </div>

@@ -72,12 +72,25 @@
     <div class="div-block-41">
         <div class="div-block-42"><img src="../public/src/polovnitelefoni.svg" loading="lazy" alt="" class="image-14" />
             <div class="div-block-43">
-                <div class="div-block-44"><img src="../public/src/facebook_icon.png" loading="lazy" alt="" /></div>
-                <div class="div-block-44"><img src="../public/src/x_icon.png" loading="lazy" alt="" /></div>
-                <div class="div-block-44"><img src="../public/src/in_icon.png" loading="lazy" alt="" /></div>
-                <div class="div-block-44"><img src="../public/src/pinterest_icon.png" loading="lazy" alt="" /></div>
-                <div class="div-block-44"><img src="../public/src/instagram_icon.png" loading="lazy" alt="" /></div>
-                <div class="div-block-44"><img src="../public/src/youtube_icon.png" loading="lazy" alt="" /></div>
+                <div class="div-block-44" style="background-color: #ed6969; cursor: pointer"
+                    onclick="window.location.href = 'https://www.instagram.com/polovni_telefoni.rs/'">
+                    <img src="../public/src/instagram_icon.png" loading="lazy" alt="Instagram Icon" />
+                </div>
+                <div class="div-block-44" title="Uskoro!">
+                    <img src="../public/src/facebook_icon.png" loading="lazy" alt="Facebook Icon" />
+                </div>
+                <div class="div-block-44" title="Uskoro!">
+                    <img src="../public/src/x_icon.png" loading="lazy" alt="X Icon" />
+                </div>
+                <div class="div-block-44" title="Uskoro!">
+                    <img src="../public/src/in_icon.png" loading="lazy" alt="LinkedIn Icon" />
+                </div>
+                <div class="div-block-44" title="Uskoro!">
+                    <img src="../public/src/pinterest_icon.png" loading="lazy" alt="Pinterest Icon" />
+                </div>
+                <div class="div-block-44" title="Uskoro!">
+                    <img src="../public/src/youtube_icon.png" loading="lazy" alt="Youtube Icon" />
+                </div>
             </div>
         </div>
         <div class="div-block-45" id="quick-phone-models">
