@@ -544,7 +544,7 @@ class User
     public function getUserDataFromId($user_id)
     {
         try {
-            $sql = "SELECT name, lastname, username, email, phone, city, address, member_since FROM users WHERE user_id=?";
+            $sql = "SELECT user_id, name, lastname, username, email, phone, city, address, member_since FROM users WHERE user_id=?";
             $stmt = $this->con->prepare($sql);
             $stmt->bind_param("i", $user_id);
             $stmt->execute();

@@ -43,7 +43,7 @@ abstract class Ad
     abstract public function newestAd();
     abstract public function deleteAd($ad_id);
     abstract public function deleteAdfromSaves($ad_id);
-    abstract public function deleteAdfromVisit($ad_id);
+    // abstract public function deleteAdfromVisit($ad_id);
     abstract public function saveDeletedAdData($ad_id);
     abstract public function countAllAds();
     abstract public function countAllFilteredAds($title = null, $sort = null, $brands = null, $models = null, $minPrice = null, $maxPrice = null, $new = false, $used = false, $damaged = false, $offset = 0, $limit = 24, $deal = true, $city = null);

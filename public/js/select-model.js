@@ -2,8 +2,11 @@ const brandSelect = document.querySelector('#brandSelect');
 const modelSelect = document.querySelector('#modelSelect');
 
 const modelSelect2 = document.querySelector('.modelSelect');
-window.addEventListener('load', function () {
-    getModel(brandSelect.value);
+window.addEventListener('load', async function () {
+    await getModel(brandSelect.value);
+    const model = modelSelect.getAttribute('model-to-select');
+    console.log(model);
+    modelSelect.value = model;
 });
 
 
@@ -11,8 +14,8 @@ brandSelect.addEventListener("change", function () {
     getModel(this.value);
 });
 
-function getModel(value) {
-    fetch('../inc/models.php', {
+async function getModel(value) {
+    await fetch('../inc/models.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -30,6 +33,7 @@ function getModel(value) {
         })
         .then(data => {
             if (data.status === 'success') {
+                modelSelect.innerHTML = '';
                 modelSelect.innerHTML += data.message;
             }
         })

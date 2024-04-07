@@ -66,7 +66,7 @@ if (isset($adId)) {
                         ?>
                     </select>
                     <select id="modelSelect" name="Model select" data-name="Model"
-                        class="select-field w-select">
+                        class="select-field w-select" model-to-select='<?php echo $adData['model'] ?>'>
                         <option value="<?php echo $adData['model'] ?>">
                             <?php echo $adData['model'] ?>
                         </option>
@@ -130,7 +130,7 @@ if (isset($adId)) {
                             </div>
                         </div>
                     </label>
-                    <ul class="image-preview-container" id="imagePreviewContainer">
+                    <div class="sortable ui-sortable" id="imagePreviewContainer">
                     <?php
                         $folderPath = "../uploads/" . $adData['images'];
                         if (is_dir($folderPath)) {
@@ -161,7 +161,7 @@ if (isset($adId)) {
                             }
                         }
                     ?>
-                    </ul>
+                    </div>
                 </div>
             </div>
             <div class="div-block-745">
@@ -312,7 +312,7 @@ if (isset($adId)) {
 </div>
 
 <script src="../public/js-public/jquery.js?v=<?php echo time() ?>"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js?v=<?php echo time() ?>"></script>
 <script src="../public/js/add-images.js?v=<?php echo time() ?>" type="text/javascript"></script>
 <script src="../public/js/text-editor.js?v=<?php echo time() ?>" type="text/javascript"></script>
 <script src="../public/js/animations.js?v=<?php echo time() ?>" type="text/javascript"></script>

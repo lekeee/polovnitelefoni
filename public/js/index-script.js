@@ -137,6 +137,7 @@ function openQuickView(x) {
     const city = x.getAttribute('city');
     const address = x.getAttribute('address');
     const phone = x.getAttribute('phone');
+    const ownerID = x.getAttribute('owner-id');
 
     darkBackground.style.display = 'block';
     quickViewContainer.classList.remove('deactive');
@@ -182,10 +183,18 @@ function openQuickView(x) {
         document.querySelector('#quick-view-old-price').innerHTML = '';
     }
 
+    document.querySelector("#quick-view-user-container").addEventListener('click', function () {
+        window.location.href = '../views/user.php?id=' + ownerID;
+    });
     document.querySelector("#quick-view-user").innerHTML = name + ' ' + lastname;
     document.querySelector("#quick-view-city").innerHTML = city;
     document.querySelector("#quick-view-address").innerHTML = address;
     document.querySelector("#quick-view-phone").innerHTML = phone;
+
+    const quickViewContact = document.querySelector('#quick-view-contact');
+    if (quickViewContact != undefined || quickViewContact != null) {
+        quickViewContact.setAttribute('ownerid', ownerID);
+    }
 }
 
 function closeQuickView() {
