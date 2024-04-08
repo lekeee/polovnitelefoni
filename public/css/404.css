@@ -1,0 +1,35 @@
+.not-found-main-div {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.not-found-main-div img {
+    width: 100%;
+    max-width: 500px;
+}
+
+.not-found-main-div h1 {
+    font-size: 34px;
+    font-weight: medium;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.not-found-main-div p {
+    color: #818ea0;
+    text-align: center;
+}
+
+.not-found-main-div button {
+    padding: 15px 30px;
+    margin-top: 15px;
+    background-color: #ed6969;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}

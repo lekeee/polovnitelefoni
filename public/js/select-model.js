@@ -5,7 +5,7 @@ const modelSelect2 = document.querySelector('.modelSelect');
 window.addEventListener('load', async function () {
     await getModel(brandSelect.value);
     const model = modelSelect.getAttribute('model-to-select');
-    console.log(model);
+    // console.log(model);
     modelSelect.value = model;
 });
 

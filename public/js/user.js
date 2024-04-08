@@ -83,7 +83,7 @@ async function sendReportRequest(userId, reportedId, msg) {
             if (data.status === 'error') {
                 console.log("Doslo je do greske: " + data.message);
             } else {
-                console.log(data.message)
+                // console.log(data.message)
                 reportContent.style.display = "none";
                 reportSuccess.style.display = "block";
                 const lbl = secondButton.querySelector('label');

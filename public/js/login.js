@@ -35,7 +35,7 @@ function login(email, password) {
             }
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             stopLoadingAnimation("login-submit");
             if (data.status === 'error') {
                 if (data.message === 'Pogrešna email adresa ili lozinka' ||
@@ -45,7 +45,7 @@ function login(email, password) {
                     showNotification2(4, data.message, true);
                 }
             } else {
-                console.log('Uspesno ste se prijavili.');
+                // console.log('Uspesno ste se prijavili.');
                 window.location.href = "../views/index.php";
                 //showNotification(2, email);
             }
@@ -146,7 +146,7 @@ function resendVerificationLink2(email) {
             }
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if (data.status === 'error') {
                 showNotification2(1, data.message);
             } else {

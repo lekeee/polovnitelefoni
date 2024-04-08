@@ -22,10 +22,10 @@ deleteBtn.addEventListener('click', function () {
             }
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if (data['status'] === 'success') {
                 window.location.href = "../views/index.php";
-            }else if(data['status'] === 'error'){
+            } else if (data['status'] === 'error') {
 
             }
         })
@@ -34,7 +34,7 @@ deleteBtn.addEventListener('click', function () {
         });
 });
 
-deleteLink.addEventListener('click', function(){
+deleteLink.addEventListener('click', function () {
     this.style.color = "#ed6969";
     const deleteContainer = document.querySelector('#delete-account-container');
     deleteContainer.style.display = "block";
