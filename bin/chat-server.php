@@ -84,4 +84,4 @@ $server = IoServer::factory(
 );
 
 $server->run();
-
+echo "pokrenuto";
