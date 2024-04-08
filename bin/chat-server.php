@@ -20,5 +20,6 @@ $server = IoServer::factory(
     ),
     9000
 );
-
+echo "Posle server";
 $server->run();
+echo "Posle startovanja";
