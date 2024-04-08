@@ -36,11 +36,13 @@ $server = IoServer::factory(
         )
     ),
     443, // Port 443 za HTTPS
-    '185.119.89.240', // Slušaj sve dostupne IP adrese
+    '0.0.0.0', // Slušaj sve dostupne IP adrese
     stream_context_create([
         'ssl' => [
             'local_cert' => '/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
             'local_pk' => '/ssl/keys/b4b59_a2387_54abf26b019597734ff123ea1d2fdf22.key',
+            'allow_self_signed' => true, 
+            'verify_peer' => false
             // Dodatne SSL opcije po potrebi
         ]
     ])
