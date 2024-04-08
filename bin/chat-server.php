@@ -69,7 +69,7 @@ $server = IoServer::factory(
             new WsSecureServer( // Promenjeno
                 new Chat($user, $messages)
             ),
-            ['localhost', '127.0.0.1', 'www.polovni-telefoni.rs'] // Dopusti samo ove origin URL-ove
+            ['www.polovni-telefoni.rs'] // Dopusti samo ove origin URL-ove
         )
     ),
     443, // Promenjeno na port 443 za HTTPS
