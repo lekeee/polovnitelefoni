@@ -1,6 +1,6 @@
 let con;
 
-con = new WebSocket(`wss://polovni-telefoni.rs:8080?token=${localStorage.getItem('token')}`);
+con = new WebSocket(`wss://185.119.89.240:8080?token=${localStorage.getItem('token')}`);
 
 
 con.onopen = function (e) {
