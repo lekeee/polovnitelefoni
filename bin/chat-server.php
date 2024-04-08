@@ -68,8 +68,7 @@ $server = IoServer::factory(
         new OriginCheck(
             new WsSecureServer( // Promenjeno
                 new Chat($user, $messages)
-            ),
-            ['www.polovni-telefoni.rs'] // Dopusti samo ove origin URL-ove
+            )
         )
     ),
     443, // Promenjeno na port 443 za HTTPS
