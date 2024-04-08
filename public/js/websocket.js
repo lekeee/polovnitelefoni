@@ -1,13 +1,6 @@
 let con;
 
-const addressS = `wss://185.119.89.240?token=${localStorage.getItem('token')}`;
-
-con = new WebSocket(addressS, {
-    headers:{
-        'user-agent': 'Mozilla'
-    }
-});
-//con = new WebSocket(`wss://polovni-telefoni.rs`);
+con = new WebSocket(`wss://185.119.89.240:8080?token=${localStorage.getItem('token')}`);
 
 con.onopen = function (e) {
     console.log("uspesna konekcija");
