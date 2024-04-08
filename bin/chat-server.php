@@ -45,7 +45,7 @@ $messages = new Messages();
 $loop = Factory::create();
 
 $webSocketServer = new WsServer(new Chat($user, $messages));
-$webSocketServer->disableVersion(0);
+// $webSocketServer->disableVersion(0);
 
 $httpServer = new HttpServer($webSocketServer);
 
