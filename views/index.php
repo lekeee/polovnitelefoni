@@ -8,7 +8,7 @@ if (isset($_GET['brand'])) {
 if (isset($_GET['model'])) {
     $selectedModel = $_GET['model'];
 }
-
+echo "Aleksa Legenda";
 ?>
 
 <!DOCTYPE html>
