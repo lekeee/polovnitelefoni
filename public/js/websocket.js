@@ -1,6 +1,6 @@
 let con;
 
-con = new WebSocket(`wss://ws.${document.location.host}?token=${localStorage.getItem('token')}`);
+con = new WebSocket(`wss://${document.location.host}:8080?token=${localStorage.getItem('token')}`);
 
 con.onopen = function (e) {
     console.log("uspesna konekcija");
