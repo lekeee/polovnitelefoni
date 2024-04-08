@@ -22,8 +22,8 @@ $server = IoServer::factory(
 );
 $server->socketContext = stream_context_create([
     'ssl' => [
-        'local_cert' => '/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
-        'local_pk' => '/ssl/keys/af196_82b39_0afff1aaa1bd2b52167b45c318447661.key',
+        'local_cert' => '/etc/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
+        'local_pk' => '/etc/ssl/keys/af196_82b39_0afff1aaa1bd2b52167b45c318447661.key',
         // Dodatne SSL opcije po potrebi
     ]
 ]);
