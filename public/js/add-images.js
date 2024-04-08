@@ -1,9 +1,21 @@
 const MAX_IMAGES = 10;
+let images = [];
+let counter = 0;
 
-document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+$(function () {
+    $(".sortable").sortable({
+        update: function (event, ui) {
+            getIdsOfImages();
+        },
+        tolerance: "pointer",
+        cursor: "move",
+    });
+});
+
+document.querySelector('#fileInput').addEventListener('change', handleFileSelect);
 
 function handleFileSelect(event) {
-    const numberOfUploadedImages = document.getElementsByClassName("uploadedImage").length;
+    let numberOfUploadedImages = document.querySelectorAll(".listitemClass").length;
     const files = event.target?.files || event;
 
     if (!files) {
@@ -15,67 +27,89 @@ function handleFileSelect(event) {
         alert("Maksimalan broj slika koje možete otpremiti po oglasu je 10");
         return;
     }
-
-    const previewContainer = document.getElementById('imagePreviewContainer');
+    let counter = 0;
+    let counter2 = numberOfUploadedImages;
+    const previewContainer = document.querySelector('#imagePreviewContainer');
     for (const file of files) {
         const reader = new FileReader();
 
         reader.onloadend = function () {
-            const image = document.createElement('li');
-            image.classList.add('image-preview');
-            image.classList.add('uploadedImage');
+            const imageDiv = document.createElement('div');
+            imageDiv.id = `imageNo${counter++}`;
+            imageDiv.setAttribute('index', ++counter2);
+            // imageDiv.classList.add('image-preview');
+            // imageDiv.classList.add('uploadedImage');
+            imageDiv.classList.add('listitemClass');
+            imageDiv.style.backgroundImage = `url('${reader.result}')`;
 
-            const imgElement = document.createElement('img');
-            imgElement.src = reader.result;
+            $(imageDiv).click(function () {
+                if (psuedoClick(this).after) {
+                    this.style.display = 'none';
+                    previewContainer.removeChild(this);
+                    getIdsOfImages()
+                }
+            })
 
 
-            const deleteIcon = document.createElement('div');
-            deleteIcon.classList.add('delete-icon');
-            deleteIcon.innerHTML = 'X';
-
-            deleteIcon.addEventListener('click', function () {
-                previewContainer.removeChild(image);
-            });
-
-            image.appendChild(imgElement);
-            image.appendChild(deleteIcon);
-
-            previewContainer.appendChild(image);
+            // imageDiv.appendChild(insideDiv);
+            previewContainer.appendChild(imageDiv);
         };
 
         reader.readAsDataURL(file);
     }
 }
-$(function () {
-    $("#imagePreviewContainer").sortable({
-        revert: false,
-        containment: 'parent',
-        tolerance: 'pointer',
-        cursor: 'grabbing',
-        helper: 'clone'
-    }).disableSelection();
+function psuedoClick(parentElem) {
 
-    const dropArea = document.getElementById('dropArea');
+    var beforeClicked,
+        afterClicked;
 
-    dropArea.addEventListener('dragover', function (event) {
-        event.preventDefault();
-        dropArea.classList.add('dragover');
-        this.style.borderRadius = "5px";
-        this.style.backgroundColor = "#ddd";
-    });
+    var parentLeft = parseInt(parentElem.getBoundingClientRect().left, 10),
+        parentTop = parseInt(parentElem.getBoundingClientRect().top, 10);
 
-    dropArea.addEventListener('dragleave', function (event) {
-        event.preventDefault();
-        dropArea.classList.remove('dragover');
-        this.style.backgroundColor = "white";
-    });
+    var parentWidth = parseInt(window.getComputedStyle(parentElem).width, 10),
+        parentHeight = parseInt(window.getComputedStyle(parentElem).height, 10);
 
-    dropArea.addEventListener('drop', function (event) {
-        event.preventDefault();
-        dropArea.classList.remove('dragover');
-        this.style.backgroundColor = "white";
+    var before = window.getComputedStyle(parentElem, ':before');
 
-        const files = event.dataTransfer.files;
-        handleFileSelect(files);
-    });
-});
+    var beforeStart = parentLeft + (parseInt(before.getPropertyValue("left"), 10)),
+        beforeEnd = beforeStart + parseInt(before.width, 10);
+
+    var beforeYStart = parentTop + (parseInt(before.getPropertyValue("top"), 10)),
+        beforeYEnd = beforeYStart + parseInt(before.height, 10);
+
+    var after = window.getComputedStyle(parentElem, ':after');
+
+    var afterStart = parentLeft + (parseInt(after.getPropertyValue("left"), 10)),
+        afterEnd = afterStart + parseInt(after.width, 10);
+
+    var afterYStart = parentTop + (parseInt(after.getPropertyValue("top"), 10)),
+        afterYEnd = afterYStart + parseInt(after.height, 10);
+
+    var mouseX = event.clientX,
+        mouseY = event.clientY;
+
+    beforeClicked = (mouseX >= beforeStart && mouseX <= beforeEnd && mouseY >= beforeYStart && mouseY <= beforeYEnd ? true : false);
+
+    afterClicked = (mouseX >= afterStart && mouseX <= afterEnd && mouseY >= afterYStart && mouseY <= afterYEnd ? true : false);
+
+    return {
+        "before": beforeClicked,
+        "after": afterClicked
+
+    };
+
+}
+
+function getIdsOfImages() {
+    let counter = 0;
+    document.querySelectorAll('.listitemClass').forEach(element => {
+
+        // console.log(counter);
+        element.setAttribute('index', ++counter);
+    })
+    // var values = [];
+    // $('.listitemClass').each(function (index) {
+    //     values.push($(this).attr("id").replace("imageNo", ""));
+    // });
+    // $('#outputvalues').val(values);
+}

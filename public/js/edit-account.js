@@ -1,5 +1,5 @@
 const editAccountForm = document.querySelector('#edit-account-form');
-editAccountForm.addEventListener('submit', function(e){
+editAccountForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
     startLoadingAnimation("saveButton");
@@ -14,39 +14,39 @@ editAccountForm.addEventListener('submit', function(e){
     const userNewPassword = editAccountForm.querySelector('#UserNewPassword');
     const userConfirmedNewPassword = editAccountForm.querySelector('#UserConfirmedNewPassword');
 
-    if(userName.value.trim() === ''){
+    if (userName.value.trim() === '') {
         showErrorNotification('error', 'Polje Ime je obavezno!');
         return;
-    }else if(userSurname.value.trim() === ''){
+    } else if (userSurname.value.trim() === '') {
         showErrorNotification('error', 'Polje Prezime je obavezno!');
         return;
-    }else if(userUsername.value.trim() === ''){
+    } else if (userUsername.value.trim() === '') {
         showErrorNotification('error', 'Polje Korisnicko Ime je obavezno!');
         return;
-    }else if(userUsername.value.length < 6 || userUsername.value.length > 20){
-        showErrorNotification('error', 'Korisnicko ime nije adekvatno! (mora imati više od 6 a manje od 20 karaktera)' );
+    } else if (userUsername.value.length < 6 || userUsername.value.length > 20) {
+        showErrorNotification('error', 'Korisnicko ime nije adekvatno! (mora imati više od 6 a manje od 20 karaktera)');
         return;
-    }else if(userCity.value.trim() === ''){
+    } else if (userCity.value.trim() === '') {
         showErrorNotification('error', 'Polje Grad je obavezno!');
         return;
-    }else if(userAddress.value.trim() === ''){
+    } else if (userAddress.value.trim() === '') {
         showErrorNotification('error', 'Polje Adresa je obavezno!');
         return;
     }
-    if(userOldPassword.value.trim() === ''){
-        if(userNewPassword.value.trim() !== '' || userConfirmedNewPassword.value.trim() !== ''){
+    if (userOldPassword.value.trim() === '') {
+        if (userNewPassword.value.trim() !== '' || userConfirmedNewPassword.value.trim() !== '') {
             showErrorNotification('error', 'Polje Trenutna Lozinka je obavezno!');
             return;
         }
-    }else{
-        if(userNewPassword.value.trim() === ''){
+    } else {
+        if (userNewPassword.value.trim() === '') {
             showErrorNotification('error', 'Polje Nova Lozinka je obavezno!');
             return;
-        }else if(userConfirmedNewPassword.value === ''){
+        } else if (userConfirmedNewPassword.value === '') {
             showErrorNotification('error', 'Polje Potvrdi Lozinku je obavezno!');
             return;
-        }else{
-            if(userNewPassword.value !== userConfirmedNewPassword.value){
+        } else {
+            if (userNewPassword.value !== userConfirmedNewPassword.value) {
                 showErrorNotification('error', 'Morate ispravno potvrditi novu loiznku!');
                 return;
             }
@@ -56,18 +56,18 @@ editAccountForm.addEventListener('submit', function(e){
     updateUserData(userName.value, userSurname.value, userUsername.value, userOldPassword.value, userNewPassword.value, userPhone.value, userCity.value, userAddress.value);
 });
 
-function showErrorNotification(status, message){
+function showErrorNotification(status, message) {
     stopLoadingAnimation("saveButton");
     stopLoadingAnimation("saveButton");
-    console.log(`${status} ${message}`);
+    // console.log(`${status} ${message}`);
     const errorDiv = document.querySelector('#edit-account-message');
     const errorText = errorDiv.querySelector('div');
     errorText.innerHTML = message;
 
-    if(status === 'success'){
+    if (status === 'success') {
         errorDiv.classList.remove('edit-error');
         errorDiv.classList.add('edit-success');
-    }else{
+    } else {
         errorDiv.classList.remove('edit-success');
         errorDiv.classList.add('edit-error');
 
@@ -76,9 +76,9 @@ function showErrorNotification(status, message){
     window.location.href = "#edit-account-message";
 }
 
-function updateUserData(name, lastname, username, oldPassword, newPassword, mobilePhone, city, address){
-    
-    fetch('../app/controllers/userController.php',{
+function updateUserData(name, lastname, username, oldPassword, newPassword, mobilePhone, city, address) {
+
+    fetch('../app/controllers/userController.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -95,33 +95,33 @@ function updateUserData(name, lastname, username, oldPassword, newPassword, mobi
             address: address
         })
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
-        }
-    })
-    .then(data => {
-        stopLoadingAnimation("saveButton");
-        showErrorNotification(data.status, data.message);
-    })
-    .catch(error => {
-        console.log('Greska:', error);
-    });
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Doslo je do greske prilikom prihvatanja zahteva.');
+            }
+        })
+        .then(data => {
+            stopLoadingAnimation("saveButton");
+            showErrorNotification(data.status, data.message);
+        })
+        .catch(error => {
+            console.log('Greska:', error);
+        });
 }
 
 showMyCity();
-function showMyCity(){
+function showMyCity() {
     const citySelect = document.querySelector('#UserCity');
     const myCity = citySelect.getAttribute('value');
-    if(myCity !== ''){
+    if (myCity !== '') {
         const cityOption = citySelect.querySelector(`option[value=${myCity}]`);
         cityOption.setAttribute('selected', 'selected');
     }
 }
 
-function showPassword(x){
+function showPassword(x) {
     const showPasswordElement = document.querySelector(`#show${x}`);
     const hidePasswordElement = document.querySelector(`#hide${x}`);
 
@@ -132,7 +132,7 @@ function showPassword(x){
     const password = document.querySelector(`#${passwordInputID}`);
     password.type = "text";
 }
-function hidePassword(x){
+function hidePassword(x) {
     const showPasswordElement = document.querySelector(`#show${x}`);
     const hidePasswordElement = document.querySelector(`#hide${x}`);
 

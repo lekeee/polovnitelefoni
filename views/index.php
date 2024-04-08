@@ -142,8 +142,9 @@ require_once "../inc/headTag.php";
                                             </h2>
                                         </div>
                                     </div>
-                                    <div data-w-id="0eacc543-0b81-e5be-a1e1-d7c3709a619c" class="div-block-719"><img
-                                            src="../public/src/userShow.png" loading="lazy" alt="User Profile Image"
+                                    <div data-w-id="0eacc543-0b81-e5be-a1e1-d7c3709a619c" class="div-block-719"
+                                        id="quick-view-user-container">
+                                        <img src="../public/src/userShow.png" loading="lazy" alt="User Profile Image"
                                             class="image-39" />
                                         <h1 class="heading-10" id="quick-view-user" style="text-align: center;">
                                         </h1>
@@ -162,11 +163,33 @@ require_once "../inc/headTag.php";
                                                         <div class="text-block-56" id="quick-view-phone">
                                                         </div>
                                                         <div class="div-block-704">
-                                                            <div class="div-block-716"><img
+                                                            <?php
+                                                            if ($user->isLogged()) {
+                                                                ?>
+                                                                <div class="div-block-716" id="quick-view-contact"
+                                                                    myid="<?php echo $user->getId(); ?>"
+                                                                    onclick="openMessages(this)">
+                                                                    <img src="../public/src/message-icon.png" loading="lazy"
+                                                                        alt="Message" class="image-32 messagebtn" />
+                                                                    <div class="text-block-50">Kontaktiraj vlasnika</div>
+                                                                </div>
+                                                                <?php
+                                                            } else {
+                                                                ?>
+                                                                <div class="div-block-716"
+                                                                    onclick="window.location.href = '../views/login.php'">
+                                                                    <img src="../public/src/message-icon.png" loading="lazy"
+                                                                        alt="Message" class="image-32 messagebtn" />
+                                                                    <div class="text-block-50">Kontaktiraj vlasnika</div>
+                                                                </div>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                            <!-- <div class="div-block-716"><img
                                                                     src="../public/src/message-icon.png" loading="lazy"
                                                                     alt="Message" class="image-32 messagebtn" />
                                                                 <div class="text-block-50">Kontaktiraj vlasnika</div>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
                                                     <div data-w-id="3a24efa4-af9d-9de5-42c6-e9ec9ee2e77d"
@@ -506,16 +529,13 @@ require_once "../inc/headTag.php";
                                     $dataJSON = json_decode($jsonContent, true);
                                     $ourData = json_decode($phone->returnBrandsAndModels(), true);
 
-
                                     if (json_last_error() !== JSON_ERROR_NONE) {
                                         die('Greška pri čitanju JSON datoteke.');
                                     }
 
                                     foreach ($dataJSON as $brand) {
                                         foreach ($ourData as $ourBrand) {
-
                                             if ($ourBrand['brand'] === $brand['brand_name']) {
-
                                                 if (!empty($brand["device_list"])) {
                                                     echo "
                                                             <div class='custom-dropdown-menu'>
@@ -531,7 +551,7 @@ require_once "../inc/headTag.php";
                                                                 <div class='custom-dropdown' id='{$brand['key']}Dropdown'>";
                                                     foreach ($brand['device_list'] as $model) {
                                                         foreach ($ourData as $ourModel) {
-                                                            if (stripos($model['device_name'], "watch") === false && $model['device_name'] === $ourModel['model']) {
+                                                            if (stripos($model['device_name'], "watch") === false && ($model['device_name'] === $ourModel['model'] && $brand['brand_name'] === $ourModel['brand'])) {
                                                                 $newID = strtolower($model['device_name']);
                                                                 $newID = str_replace(' ', '', $newID);
                                                                 $newID .= 'Checkbox';
@@ -689,6 +709,8 @@ require_once "../inc/headTag.php";
     <script src="../public/js/filter-range-slider.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/ad-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/openMessages.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+
 </body>
 
 </html>

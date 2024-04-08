@@ -121,8 +121,8 @@ var allDamages = [
     "Problem s portom za punjenje"
 ];
 
-if (typeof selectedDamagesTemp !== 'undefined') {
-    selectedDamagesTemp.forEach(element => {
+if (typeof selectedDamages !== 'undefined') {
+    selectedDamages.forEach(element => {
         selectedDamages.push(element);
         const ind = allDamages.indexOf(element);
         allDamages.splice(ind, 1);
@@ -260,7 +260,7 @@ function showErrorNotification(status, value) {
 }
 
 function titleValidation(title) {
-    console.log('tu sam');
+    // console.log('tu sam');
     if (title.trim() === '') {
         showErrorNotification(0, "GRESKA: Naslov oglasa je obavezan!");
         return false;
@@ -403,13 +403,14 @@ function sendDataToController(
 //#region slanje podataka
 const saveDataBtn = document.querySelector("#saveData");
 saveDataBtn.addEventListener("click", function () {
-    console.log("Kliknuto");
+    // console.log("Kliknuto");
     const titleInput = document.querySelector("#Title").value;
     const brandInput = document.querySelector("#brandSelect").value;
     const modelInput = document.querySelector("#modelSelect").value;
     const deviceStateRadio = document.querySelector('input[name="deviceState"]:checked').value;
     const stateRangeValue = document.querySelector("#myRange").value;
-    const images = document.querySelectorAll(".uploadedImage img");
+    // const images = document.querySelectorAll(".uploadedImage img");
+    const images = document.querySelectorAll(".listitemClass");
     const description = document.querySelector("#editor").innerHTML;
     const deal = document.querySelector('input[name="deal"]');
     const price = document.querySelector('#price').value;
@@ -429,7 +430,8 @@ saveDataBtn.addEventListener("click", function () {
     }
     var imagesSrc = [];
     images.forEach(element => {
-        imagesSrc.push(element.src);
+        let backgroundImage = window.getComputedStyle(element).getPropertyValue('background-image');
+        imagesSrc.push(backgroundImage);
     });
     if (titleValidation(titleInput) && brandValidation(brandInput) && modelValidation(modelInput)
         && imageValidations(images) && descriptionValidation(description)) {

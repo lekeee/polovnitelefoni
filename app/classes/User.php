@@ -544,7 +544,7 @@ class User
     public function getUserDataFromId($user_id)
     {
         try {
-            $sql = "SELECT name, lastname, username, email, phone, city, address, member_since FROM users WHERE user_id=?";
+            $sql = "SELECT user_id, name, lastname, username, email, phone, city, address, member_since FROM users WHERE user_id=?";
             $stmt = $this->con->prepare($sql);
             $stmt->bind_param("i", $user_id);
             $stmt->execute();
@@ -851,7 +851,8 @@ class User
             echo $e->getMessage();
         }
     }
-    public function returnOnlineStatus($user_id){
+    public function returnOnlineStatus($user_id)
+    {
         try {
             $sql = "SELECT online_status FROM users
                     WHERE user_id = ?";
@@ -861,8 +862,7 @@ class User
 
             $result = $stmt->get_result();
             return $result->fetch_assoc();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -1097,8 +1097,9 @@ class User
         }
     }
 
-    public function returnEmail($user_id){
-        try{
+    public function returnEmail($user_id)
+    {
+        try {
             $sql = "SELECT email FROM users WHERE user_id = ?";
             $stmt = $this->con->prepare($sql);
             $stmt->bind_param("i", $user_id);
@@ -1112,13 +1113,13 @@ class User
             }
 
             return NULL;
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function sendNotificationEmail($user_id){
+    public function sendNotificationEmail($user_id)
+    {
         require_once __DIR__ . '/../../PHPMailer/src/Exception.php';
         require_once __DIR__ . '/../../PHPMailer/src/PHPMailer.php';
         require_once __DIR__ . '/../../PHPMailer/src/SMTP.php';
@@ -1185,8 +1186,7 @@ class User
             $mail->send();
 
             return true;
-        }
-        catch (Exception $e) {  
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }

@@ -46,7 +46,7 @@ function sendTitle(title) {
             }
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             const searchResultMain = document.querySelector('.search-result');
             const notFound = document.querySelector('.search-not-found');
             if (data !== null) {
@@ -57,7 +57,7 @@ function sendTitle(title) {
 
                     searchResultMain.innerHTML = data.message;
                     const height = searchResult.offsetHeight;
-                    console.log(height);
+                    // console.log(height);
                     searchResult.style.bottom = `-${height}px`;
 
                     if (mobile) {

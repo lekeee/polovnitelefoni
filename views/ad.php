@@ -88,20 +88,20 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                            {
-                                                                                "items": [{
-                                                                                    "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                                    "origFileName": "<?php echo $file; ?>",
-                                                                                    "fileName": "<?php echo $file; ?>",
-                                                                                    "fileSize": <?php echo filesize($putanja); ?>,
-                                                                                    "height": <?php echo $height; ?>,
-                                                                                    "url": "<?php echo $putanja; ?>",
-                                                                                    "width": <?php echo $width; ?>,
-                                                                                    "type": "image"
-                                                                                }],
-                                                                                "group": "phoneImage"
-                                                                            }
-                                                                        </script>
+                                                                                                                        {
+                                                                                                                            "items": [{
+                                                                                                                                "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                                                                "origFileName": "<?php echo $file; ?>",
+                                                                                                                                "fileName": "<?php echo $file; ?>",
+                                                                                                                                "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                                                                "height": <?php echo $height; ?>,
+                                                                                                                                "url": "<?php echo $putanja; ?>",
+                                                                                                                                "width": <?php echo $width; ?>,
+                                                                                                                                "type": "image"
+                                                                                                                            }],
+                                                                                                                            "group": "phoneImage"
+                                                                                                                        }
+                                                                                                                    </script>
                                             </a>
                                         </div>
 
@@ -206,11 +206,6 @@ require_once "../inc/headTag.php";
                                             alt="Available" class="image-31" />
                                         <div class="text-block-48">Na stanju</div>
                                     </div>
-                                    <?php if (!empty($adData['damage'])) { ?>
-                                        <!-- <div class="div-block-699">
-                                            <div class="text-block-49">OŠTEĆENJE</div>
-                                        </div> -->
-                                    <?php } ?>
 
                                 </div>
                                 <div class="div-block-701">
@@ -308,14 +303,29 @@ require_once "../inc/headTag.php";
                                                     <?php echo $adOwner['phone'] ?>
                                                 </div>
                                                 <div class="div-block-704">
-                                                    <div class="div-block-716"
-                                                        ownerid="<?php echo $adData['user_id'] ?>"
-                                                        myid="<?php echo $user->getId(); ?>"
-                                                        onclick="openMessages(this)">
-                                                        <img src="../public/src/message-icon.png" loading="lazy"
-                                                            alt="Message" class="image-32 messagebtn" />
-                                                        <div class="text-block-50">Kontaktiraj vlasnika</div>
-                                                    </div>
+                                                    <?php
+                                                    if ($user->isLogged()) {
+                                                        ?>
+                                                        <div class="div-block-716"
+                                                            ownerid="<?php echo $adData['user_id'] ?>"
+                                                            myid="<?php echo $user->getId(); ?>"
+                                                            onclick="openMessages(this)">
+                                                            <img src="../public/src/message-icon.png" loading="lazy"
+                                                                alt="Message" class="image-32 messagebtn" />
+                                                            <div class="text-block-50">Kontaktiraj vlasnika</div>
+                                                        </div>
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <div class="div-block-716"
+                                                            onclick="window.location.href = '../views/login.php'">
+                                                            <img src="../public/src/message-icon.png" loading="lazy"
+                                                                alt="Message" class="image-32 messagebtn" />
+                                                            <div class="text-block-50">Kontaktiraj vlasnika</div>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                             <div data-w-id="3a24efa4-af9d-9de5-42c6-e9ec9ee2e77d" class="div-block-713">
@@ -455,6 +465,7 @@ require_once "../inc/headTag.php";
     <script src="../public/js/specifications.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/index.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="../public/js/ad.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/openMessages.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>
 
 </html>

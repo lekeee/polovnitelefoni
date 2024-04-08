@@ -12,7 +12,7 @@ let title = null;
 
 //! PROMENITI U 16 || 32...
 
-let numberOfLoads = 2;
+let numberOfLoads = 2; let initialNumberOfLoads = 2;
 let allAdsCounter = 0;
 let loadedAdsCounter = 0;
 
@@ -57,7 +57,7 @@ function removeModelOnlyBrand(brand) {
     let index = 1;
     while (index !== -1) {
         index = modelsSelected.findIndex((element) => element.brand == brand);
-        console.log(modelsSelected[index]);
+        // console.log(modelsSelected[index]);
         if (index !== -1)
             modelsSelected.splice(index, 1);
     }

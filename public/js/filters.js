@@ -1,7 +1,22 @@
 window.onload = function () {
+
+    const loadingAnimationContainer = document.querySelectorAll('.loading-animation');
+    loadingAnimationContainer.forEach(element => {
+        document.querySelectorAll('.productsmaincontainer')[0].appendChild(element);
+        element.style.display = 'inline-block';
+    });
+
+    const gotoAd = localStorage.getItem('gotoAd');
+    if (gotoAd == 'true') {
+        numberOfLoads = parseInt(localStorage.getItem('loadedAdsCounter'));
+        showFilters();
+    }
     cacheFilterData();
     document.querySelector('#resetFilters').disabled = true;
     checkURL();
+    setTimeout(() => {
+        getAds(0, true);
+    }, 300);
 };
 
 const brandsCheckboxes = document.querySelectorAll('.custom-brand-checkbox');
@@ -35,11 +50,6 @@ function checkURL() {
 
     // model = model.toLowerCase();
 }
-
-setTimeout(() => {
-    getAds(0, true);
-}, 300);
-
 function checkBransSelecter(element) {
     if (element.checked) {
         const parentElement = element.parentNode;
@@ -354,20 +364,22 @@ document.querySelector("#sumbitFilters").addEventListener("click", function (e) 
 });
 
 function cacheFilterData() {
-    initialDataToSave = {
-        brandsSelected: brandsSelected,
-        modelsSelected: modelsSelected,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-        oldState: oldState,
-        newState: newState,
-        damagedState: damagedState,
-        deal: deal,
-        city: city,
-        title: title,
-    };
-    const initialDataJson = JSON.stringify(initialDataToSave);
-    localStorage.setItem('filterData', initialDataJson);
+    if (localStorage.getItem('gotoAd') == 'false') {
+        initialDataToSave = {
+            brandsSelected: brandsSelected,
+            modelsSelected: modelsSelected,
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            oldState: oldState,
+            newState: newState,
+            damagedState: damagedState,
+            deal: deal,
+            city: city,
+            title: title,
+        };
+        const initialDataJson = JSON.stringify(initialDataToSave);
+        localStorage.setItem('filterData', initialDataJson);
+    }
 }
 
 function getLimit() {
@@ -423,12 +435,13 @@ function getAds(currentPage, restart) {
         deal: deal2,
         city: city2,
     });
-
     FilterData(params, restart);
+    // numberOfLoads = initialNumberOfLoads;
 }
 
 sortSelect.addEventListener("change", function () {
     loadedAdsCounter = 0;
+    localStorage.setItem('loadedAdsCounter', 0);
     firstTry = false;
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
     getAds(0, true);
@@ -440,8 +453,10 @@ function cahceLimitData(value) {
 
 limitChange.addEventListener("change", function () {
     loadedAdsCounter = 0;
+    localStorage.setItem('loadedAdsCounter', 0);
     firstTry = false;
     document.querySelectorAll('.loadmorebutton')[0].setAttribute('current-page', 0);
+    initialNumberOfLoads = this.value;
     cahceLimitData(this.value);
     getAds(0, true);
 });
@@ -450,9 +465,13 @@ let firstTry = true;
 function cacheAdsCounter(value) {
     if (firstTry) {
         loadedAdsCounter = numberOfLoads;
+        // console.log("Pocetni brojac:" + loadedAdsCounter);
+        localStorage.setItem('loadedAdsCounter', loadedAdsCounter);
         firstTry = false;
     } else {
+
         loadedAdsCounter += parseInt(value);
+        localStorage.setItem('loadedAdsCounter', loadedAdsCounter);
     }
 }
 
@@ -463,6 +482,7 @@ function resetFilters(reset = true) {
     }
     window.history.replaceState({}, document.title, window.location.pathname);
     loadedAdsCounter = 0;
+    localStorage.setItem('loadedAdsCounter', 0);
     allAdsCounter = 0;
     localStorage.removeItem('filterData');
     firstTry = false;

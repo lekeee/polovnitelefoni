@@ -117,7 +117,8 @@ function showWidget($ads)
                             accessories="<?php echo $ads[$i]['accessories'] ?>" price="<?php echo $ads[$i]['price'] ?>"
                             old-price="<?php echo $ads[$i]['old_price'] ?>" name="<?php echo $ownerData['name'] ?>"
                             lastname="<?php echo $ownerData['lastname'] ?>" city="<?php echo $ownerData['city'] ?>"
-                            address="<?php echo $ownerData['address'] ?>" phone="<?php echo $ownerData['phone'] ?>">
+                            address="<?php echo $ownerData['address'] ?>" phone="<?php echo $ownerData['phone'] ?>"
+                            owner-id="<?php echo $ownerData['user_id'] ?>">
                             <img src="../public/src/eye-icon.svg" loading="lazy" alt="Quick View Icon" style="width: 20px;" />
                         </div>
                     </div>
@@ -170,7 +171,7 @@ function showWidget($ads)
                         </div>
                     </div>
                     <div class="widgettitlecontainer" style="height: 41.82px; overflow: hidden;">
-                        <a href="./ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>" class="link">
+                        <a href="./ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>" class="link" onclick="localStorage.setItem('gotoAd', true)">
                             <?php
                             if (strlen($ads[$i]['title']) > 60) {
                                 $shortened_string = substr($ads[$i]['title'], 0, 60);
