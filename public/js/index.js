@@ -171,10 +171,6 @@ let firstTime = true;
 
 async function FilterData(params, restart) {
     const loadingAnimationContainer = document.querySelectorAll('.loading-animation');
-    loadingAnimationContainer.forEach(element => {
-        document.querySelectorAll('.productsmaincontainer')[0].appendChild(element);
-        element.style.display = 'inline-block';
-    });
     const url = '../app/controllers/adController.php?' + params;
     await fetch(url, {
         method: 'GET'
@@ -183,7 +179,7 @@ async function FilterData(params, restart) {
         .then(async (data) => {
             if (data.status === 'success') {
                 if (data.message.length == 0) {
-                    console.log("nema rezultata");
+                    // console.log("nema rezultata");
                     const div1 = document.createElement('div');
                     div1.classList.add('no-result-main-container');
                     const img1 = document.createElement('img');
@@ -202,7 +198,7 @@ async function FilterData(params, restart) {
                     }
                     return;
                 }
-
+                // console.log(data.message.length);
                 cacheAdsCounter(data.message.length);
                 loadingAnimationContainer.forEach(element => {
                     document.querySelectorAll('.productsmaincontainer')[0].removeChild(element);
@@ -235,6 +231,8 @@ function showLoadMoreButton() {
         const progress = loadedAdsCounter / allAdsCounter * 100;
         progressIndicator.style.width = `${progress}%`;
     }
+    numberOfLoads = initialNumberOfLoads;
+    localStorage.setItem('gotoAd', false);
 }
 
 function scrollIntoAds() {

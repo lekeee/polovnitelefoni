@@ -1,0 +1,2 @@
+RewriteEngine On
+ErrorDocument 404 http://localhost/polovnitelefoni/views/404.php

@@ -171,7 +171,7 @@ function showWidget($ads)
                         </div>
                     </div>
                     <div class="widgettitlecontainer" style="height: 41.82px; overflow: hidden;">
-                        <a href="./ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>" class="link">
+                        <a href="./ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>" class="link" onclick="localStorage.setItem('gotoAd', true)">
                             <?php
                             if (strlen($ads[$i]['title']) > 60) {
                                 $shortened_string = substr($ads[$i]['title'], 0, 60);

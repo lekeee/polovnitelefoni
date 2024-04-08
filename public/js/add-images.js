@@ -104,7 +104,7 @@ function getIdsOfImages() {
     let counter = 0;
     document.querySelectorAll('.listitemClass').forEach(element => {
 
-        console.log(counter);
+        // console.log(counter);
         element.setAttribute('index', ++counter);
     })
     // var values = [];

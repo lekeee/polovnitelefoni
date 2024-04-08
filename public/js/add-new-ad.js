@@ -260,7 +260,7 @@ function showErrorNotification(status, value) {
 }
 
 function titleValidation(title) {
-    console.log('tu sam');
+    // console.log('tu sam');
     if (title.trim() === '') {
         showErrorNotification(0, "GRESKA: Naslov oglasa je obavezan!");
         return false;
@@ -403,7 +403,7 @@ function sendDataToController(
 //#region slanje podataka
 const saveDataBtn = document.querySelector("#saveData");
 saveDataBtn.addEventListener("click", function () {
-    console.log("Kliknuto");
+    // console.log("Kliknuto");
     const titleInput = document.querySelector("#Title").value;
     const brandInput = document.querySelector("#brandSelect").value;
     const modelInput = document.querySelector("#modelSelect").value;

@@ -16,13 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let user_id = $('#login-user-id').val();
 
     con.onopen = function (e) {
-        console.log("uspesna konekcija!");
+        // console.log("uspesna konekcija!");
     }
 
     con.onmessage = function (e) {
         let data = JSON.parse(e.data);
-        
-        if(data.status_type != ""){
+
+        if (data.status_type != "") {
             localStorage.setItem("status_type", data.status_type);
             setTimeout(() => {
                 if (localStorage.getItem("status_type") == "Online") {

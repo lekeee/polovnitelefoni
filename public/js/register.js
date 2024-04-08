@@ -48,13 +48,13 @@ function register(username, email, password, repeatedPassword) {
             }
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             stopLoadingAnimation("register-submit");
             if (data.status === 'error') {
-                console.log(data.message);
+                // console.log(data.message);
                 showNotification(1, data.message);
             } else {
-                console.log('Uspesna registracija');
+                // console.log('Uspesna registracija');
                 //window.location.href = "../views/index.php";
                 showNotification(2, email);
             }
@@ -139,7 +139,7 @@ function resendVerificationLink(email) {
             }
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             stopLoadingAnimation("register-submit");
             if (data.status === 'error') {
                 showNotification(1, data.message);
