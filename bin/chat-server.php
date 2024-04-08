@@ -9,16 +9,16 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 require dirname(__DIR__) . "/app/config/config.php";
 require dirname(__DIR__) . "/app/auth/userAuthentification.php";
 require dirname(__DIR__) . "/app/classes/Messages.php";
-echo "Posle require"
+echo "Posle require";
 $messages = new Messages();
-
+echo "Posle messages";
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
             new Chat($user, $messages)
         )
     ),
-    8080
+    9000
 );
 
 $server->run();
