@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 require_once dirname(__DIR__) . "../config/config.php";
 require_once dirname(__DIR__) . "../classes/Messages.php";
 
-if (isset($_POST)) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
     if ($data["action"] == "fetch_chat") {
         $message = new Messages();
