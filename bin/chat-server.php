@@ -12,19 +12,36 @@ require dirname(__DIR__) . "/app/classes/Messages.php";
 
 $messages = new Messages();
 
+// $server = IoServer::factory(
+//     new HttpServer(
+//         new WsServer(
+//             new Chat($user, $messages)
+//         )
+//     ),
+//     80
+// );
+// $server->socketContext = stream_context_create([
+//     'ssl' => [
+//         'local_cert' => '/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
+//         'local_pk' => '/ssl/keys/b4b59_a2387_54abf26b019597734ff123ea1d2fdf22.key',
+//         // Dodatne SSL opcije po potrebi
+//     ]
+// ]);
+// $server->run();
+
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
             new Chat($user, $messages)
         )
     ),
-    80
+    443, // Port 443 za HTTPS
+    '0.0.0.0', // Slušaj sve dostupne IP adrese
+    stream_context_create([
+        'ssl' => [
+            'local_cert' => '/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
+            'local_pk' => '/ssl/keys/b4b59_a2387_54abf26b019597734ff123ea1d2fdf22.key',
+            // Dodatne SSL opcije po potrebi
+        ]
+    ])
 );
-$server->socketContext = stream_context_create([
-    'ssl' => [
-        'local_cert' => '/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
-        'local_pk' => '/ssl/keys/b4b59_a2387_54abf26b019597734ff123ea1d2fdf22.key',
-        // Dodatne SSL opcije po potrebi
-    ]
-]);
-$server->run();
