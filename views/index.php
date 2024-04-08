@@ -597,7 +597,7 @@ require_once "../inc/headTag.php";
                                         </div>
 
                                         <div class="deal-container">
-                                            <div class="statechecklboxcontainer" style="margin: 0; paddign: 0">
+                                            <div class="statechecklboxcontainer" style="margin: 0; padding: 0">
                                                 <label class="w-checkbox statedevicecheckbox">
                                                     <input type="checkbox" id="deal" name="deal"
                                                         data-name="deal selected" class="w-checkbox-input statecheckbox"
