@@ -12,14 +12,14 @@ require dirname(__DIR__) . "/app/classes/Messages.php";
 
 $messages = new Messages();
 
-// $server = IoServer::factory(
-//     new HttpServer(
-//         new WsServer(
-//             new Chat($user, $messages)
-//         )
-//     ),
-//     80
-// );
+$server = IoServer::factory(
+    new HttpServer(
+        new WsServer(
+            new Chat($user, $messages)
+        )
+    ),
+    443
+);
 // $server->socketContext = stream_context_create([
 //     'ssl' => [
 //         'local_cert' => '/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
@@ -27,22 +27,22 @@ $messages = new Messages();
 //         // Dodatne SSL opcije po potrebi
 //     ]
 // ]);
-// $server->run();
+$server->run();
 
-$server = IoServer::factory(
-    new HttpServer(
-        new WsServer(
-            new Chat($user, $messages)
-        )
-    ),
-    443, // Port 443 za HTTPS
-    '0.0.0.0', // Slušaj sve dostupne IP adrese
-    stream_context_create([
-        'ssl' => [
-            'local_cert' => '/home/polovtel/ssl/certs/www_socket_polovni_telefoni_rs_bc925_3a359_1720381154_4306ad3f9ba75e9d5a03046f9fabca0c.crt',
-            'local_pk' => '/home/polovtel/ssl/keys/bc925_3a359_6d3ceb2b1330a45f8ad294a214f447f0.key'
-            // Dodatne SSL opcije po potrebi
-        ]
-    ])
-);
+// $server = IoServer::factory(
+//     new HttpServer(
+//         new WsServer(
+//             new Chat($user, $messages)
+//         )
+//     ),
+//     443, // Port 443 za HTTPS
+//     '0.0.0.0', // Slušaj sve dostupne IP adrese
+//     stream_context_create([
+//         'ssl' => [
+//             'local_cert' => '/home/polovtel/ssl/certs/www_socket_polovni_telefoni_rs_bc925_3a359_1720381154_4306ad3f9ba75e9d5a03046f9fabca0c.crt',
+//             'local_pk' => '/home/polovtel/ssl/keys/bc925_3a359_6d3ceb2b1330a45f8ad294a214f447f0.key'
+//             // Dodatne SSL opcije po potrebi
+//         ]
+//     ])
+// );
 
