@@ -44,13 +44,10 @@ $server->run();
 //     'local_cert' => 'home/polovtel/public_html/ssl/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
 //     'local_pk' => 'home/polovtel/public_html/ssl/b4b59_a2387_54abf26b019597734ff123ea1d2fdf22.key'
 // ));
-
 // $webServer = new HttpServer(
 //     new WsServer(
 //         new Chat($user, $messages)
 //     )
 // );
-
 // $server = new IoServer($webServer, $server, $loop);
-
 // $server->run(); 
