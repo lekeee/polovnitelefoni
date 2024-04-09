@@ -1,30 +1,16 @@
-<?php
-session_abort();
-use Ratchet\Http\HttpServer;
-use Ratchet\WebSocket\WsServer;
-use Ratchet\Server\Proxy;
-use MyApp\Chat;
 
+// session_abort();
 // use Ratchet\Server\IoServer;
 // use Ratchet\Http\HttpServer;
 // use Ratchet\WebSocket\WsServer;
 // use MyApp\Chat;
 
+// require dirname(__DIR__) . '/vendor/autoload.php';
+// require dirname(__DIR__) . "/app/config/config.php";
+// require dirname(__DIR__) . "/app/auth/userAuthentification.php";
+// require dirname(__DIR__) . "/app/classes/Messages.php";
 
-require dirname(__DIR__) . '/vendor/autoload.php';
-require dirname(__DIR__) . "/app/config/config.php";
-require dirname(__DIR__) . "/app/auth/userAuthentification.php";
-require dirname(__DIR__) . "/app/classes/Messages.php";
-
-
-$messages = new Messages();
-
-
-$server = new Proxy('0.0.0.0', 443); // Postavite adresu i port proksija prema vašim potrebama
-
-$server->route('/wss2', new Chat($user, $messages));
-
-$server->run();
+// $messages = new Messages();
 
 // $server = IoServer::factory(
 //     new HttpServer(
@@ -32,10 +18,39 @@ $server->run();
 //             new Chat($user, $messages)
 //         )
 //     ),
-//     443
+//     8080
 // );
 
 // $server->run();
 
+<?php
+session_abort();
+use Ratchet\Server\IoServer;
+use Ratchet\Http\HttpServer;
+use Ratchet\WebSocket\WsServer;
+use MyApp\Chat;
 
+require dirname(__DIR__) . '/vendor/autoload.php';
+require dirname(__DIR__) . "/app/config/config.php";
+require dirname(__DIR__) . "/app/auth/userAuthentification.php";
+require dirname(__DIR__) . "/app/classes/Messages.php";
 
+$loop = React\EventLoop\Factory::create();
+
+$messages = new Messages();
+
+$server = new React\Socket\TcpServer(443);
+$server = new React\Socket\SecureServer($server, null, array(
+    'local_cert' => 'home/polovtel/public_html/ssl/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
+    'local_pk' => 'home/polovtel/public_html/ssl/b4b59_a2387_54abf26b019597734ff123ea1d2fdf22.key'
+));
+
+$webServer = new HttpServer(
+    new WsServer(
+        new Chat($user, $messages)
+    )
+);
+
+$server = new IoServer($webServer, $server, $loop);
+
+$server->run();
