@@ -1,4 +1,4 @@
-
+<?php
 session_abort();
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
