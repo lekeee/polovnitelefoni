@@ -12,14 +12,21 @@ require dirname(__DIR__) . "/app/classes/Messages.php";
 
 $messages = new Messages();
 
-$server = IoServer::factory(
-    new HttpServer(
-        new WsServer(
-            new Chat($user, $messages)
-        )
-    ),
-    443
-);
+
+$server = new Proxy('0.0.0.0', 443); // Postavite adresu i port proksija prema vašim potrebama
+
+$server->route('/wss2', new Chat($user, $messages));
+
+$server->run();
+
+// $server = IoServer::factory(
+//     new HttpServer(
+//         new WsServer(
+//             new Chat($user, $messages)
+//         )
+//     ),
+//     443
+// );
 // $server->socketContext = stream_context_create([
 //     'ssl' => [
 //         'local_cert' => '/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
