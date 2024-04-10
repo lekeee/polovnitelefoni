@@ -13,7 +13,7 @@ require dirname(__DIR__) . "/app/classes/Messages.php";
 $messages = new Messages();
 
 $loop = React\EventLoop\Factory::create();
-$webSock = new React\Socket\Server('0.0.0.0:443', $loop);
+$webSock = new React\Socket\Server('0.0.0.0:8443', $loop);
 $webSock = new React\Socket\SecureServer($webSock, $loop, [
     'local_cert'        => 'home/polovtel/public_html/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt', // path to your cert
     'local_pk'          => 'home/polovtel/public_html/ssl/keys/b4b59_a2387_54abf26b019597734ff123ea1d2fdf22.key', // path to your server private key
