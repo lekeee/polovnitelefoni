@@ -4,6 +4,9 @@ use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use MyApp\Chat;
+use React\EventLoop\Factory;
+use React\Socket\Server;
+use React\Socket\SecureServer;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 require dirname(__DIR__) . "/app/config/config.php";
