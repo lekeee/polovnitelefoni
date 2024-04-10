@@ -1,6 +1,6 @@
 let con;
 
-con = new WebSocket(`wss://polovni-telefoni.rs:443?token=${localStorage.getItem('token')}`);
+con = new WebSocket(`wss://polovni-telefoni.rs:3000?token=${localStorage.getItem('token')}`);
 
 con.onopen = function (e) {
     console.log("uspesna konekcija");
