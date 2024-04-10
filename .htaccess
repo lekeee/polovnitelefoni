@@ -1,2 +1,2 @@
 RewriteEngine On
-ErrorDocument 404 https://polovni-telefoni.rs/views/404.php
+#ErrorDocument 404 https://polovni-telefoni.rs/views/404.php
