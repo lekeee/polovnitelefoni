@@ -18,8 +18,7 @@ $server = IoServer::factory(
         new WsServer(
             new Chat($user, $messages)
         )
-    ),
-    8443
+    )
 );
 
 $server->run();
