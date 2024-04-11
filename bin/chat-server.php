@@ -14,7 +14,7 @@ require dirname(__DIR__) . "/app/classes/Messages.php";
 $messages = new Messages();
 
 // Promenite ovo na adresu i port vašeg proxy servera
-$proxyServerAddress = 'http://localhost/proxy.php'; // Promenite ovo u stvarnu adresu vašeg PHP proxy servera
+$proxyServerAddress = 'https://polovni-telefoni.rs/bin/proxy-server.php'; // Promenite ovo u stvarnu adresu vašeg PHP proxy servera
 $proxyServerPort = 80; // Promenite ovo ako je potrebno, u zavisnosti od port-a koji vaš proxy server koristi
 
 $server = IoServer::factory(
