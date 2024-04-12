@@ -1,2 +1,20 @@
 RewriteEngine On
 ErrorDocument 404 https://polovni-telefoni.rs/views/404.php
+
+
+<VirtualHost *:443>
+    ServerName example.com
+    ServerAlias www.example.com
+
+    SSLEngine on
+    SSLCertificateFile /home/polovtel/ssl/certs/polovni_telefoni_rs_b998f_b98c1_1711657925_8c13706ad3cf629c6dc9d27f0ce4d84a.crt
+
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+
+    ProxyPreserveHost On
+    ProxyPass / http://185.119.89.240:8080/
+    ProxyPassReverse / http://185.119.89.240:8080/
+</VirtualHost>
