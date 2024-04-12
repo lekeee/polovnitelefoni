@@ -3,11 +3,15 @@ subTriggers.forEach(element => {
     element.addEventListener('click', scrollToSubscribe);
 });
 
-
-document.querySelector('.shopTrigger').addEventListener('click', function () {
-    if (window.location.href.indexOf("/index.php") <= -1) {
-        window.location.href = '../views/index.php';
-    }
+const shopTriggers = document.querySelectorAll('.shopTrigger');
+shopTriggers.forEach((element) => {
+    element.addEventListener('click', openShop);
+});
+function openShop() {
+    document.querySelector("#mobile-menu-close").click();
+    window.location.href = '../views/index.php#productscontainer';
+}
+function scrollToShop() {
     var shopContainer = document.querySelector('.filtersandproductscontainer');
 
     var shopContainerTop = shopContainer.getBoundingClientRect().top;
@@ -15,8 +19,7 @@ document.querySelector('.shopTrigger').addEventListener('click', function () {
         top: window.scrollY + shopContainerTop - 50,
         behavior: 'smooth'
     });
-});
-
+}
 function scrollToSubscribe() {
     document.querySelector("#mobile-menu-close").click();
     var subscribeContainer = document.querySelector('.subscribecontainer');
