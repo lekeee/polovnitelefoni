@@ -18,8 +18,7 @@ $server = IoServer::factory(
             new Chat($user, $messages)
         )
     ),
-    443,
-    '0.0.0.0'
+    80
 );
 
 $server->run();
