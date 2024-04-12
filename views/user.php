@@ -1,6 +1,6 @@
 <?php
 require_once "../app/auth/userAuthentification.php";
-if (isset ($_GET['id'])) {
+if (isset($_GET['id'])) {
     $userID = $_GET['id'];
     $myId = $user->getId();
     if ($userID == $myId) {
@@ -8,7 +8,7 @@ if (isset ($_GET['id'])) {
         exit;
     }
 } else {
-    if (isset ($_SERVER['HTTP_REFERER'])) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else {
         header('Location: index.php');
@@ -57,7 +57,6 @@ require_once "../inc/headTag.php";
                                     <line stroke-linecap="round" x1="15" y1="9" x2="15" y2="9" />
                                     <circle cx="12" cy="12" r="10" />
                                 </svg>
-
                                 <p id="positive-rates">0</p>
                             </div>
                             <div class="positive-negative-container" style="margin-left: 10px">
