@@ -79,7 +79,7 @@ if ($user->isLogged()) {
     <div class="div-block"><a data-w-id="dececed3-f170-003e-2db2-631e28dd94b9" href="#" class="w-inline-block"><img
                 src="../public/src/hamburger_menu.svg" id='mobile-menu-open' width="30" height="30" alt="Hamburger Menu"
                 class="image-6" /></a>
-        <div class="div-block-57" style="cursor: pointer;" onclick="window.location.href='/polovnitelefoni'"><img
+        <div class="div-block-57" style="cursor: pointer;" onclick="window.location.href='https://polovni-telefoni.rs'"><img
                 src="../public/src/polovnitelefoni.svg" loading="lazy" height="60" alt="Logo" class="image" /></div>
         <!-- <div class="div-block-2">
             <div class="div-block-3">
