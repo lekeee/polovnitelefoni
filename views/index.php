@@ -40,7 +40,7 @@ require_once "../inc/headTag.php";
     <div class="temporary-container">
         <div class="main-temp-container">
             <img src="../public/src/polovnitelefoni.svg" alt="PolovniTelefoni Logo">
-            <h1>Sajt je u izradi!</h1>
+            <h1>Sajt je u izradi</h1>
             <p>Hvala Vam što ste posetili našu stranicu! Trenutno radimo na unapređenju i optimizaciji sadržaja kako
                 bismo
                 vam pružili bolje korisničko iskustvo. Molimo vas za strpljenje dok radimo na tome.</p>
