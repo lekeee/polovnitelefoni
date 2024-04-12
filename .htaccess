@@ -2,9 +2,18 @@ RewriteEngine On
 ErrorDocument 404 https://polovni-telefoni.rs/views/404.php
 
 
+<VirtualHost *:80>
+    ServerName polovni-telefoni.rs
+    ServerAlias www.polovni-telefoni.rs
+    
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</VirtualHost>
+
 <VirtualHost *:443>
-    ServerName example.com
-    ServerAlias www.example.com
+    ServerName polovni-telefoni.rs
+    ServerAlias www.polovni-telefoni.rs
 
     SSLEngine on
     SSLCertificateFile /home/polovtel/ssl/certs/polovni_telefoni_rs_b998f_b98c1_1711657925_8c13706ad3cf629c6dc9d27f0ce4d84a.crt
