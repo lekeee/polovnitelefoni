@@ -8,7 +8,6 @@ if (isset($_GET['brand'])) {
 if (isset($_GET['model'])) {
     $selectedModel = $_GET['model'];
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -37,11 +36,12 @@ require_once "../inc/headTag.php";
 ?>
 <script>localStorage.removeItem('limitData');</script>
 
+
 <body class="body">
-    <!-- <div class="temporary-container">
-        <div class="main-temp-container">
+    <div class="temporary-container">
+        <!--<div class="main-temp-container">
             <img src="../public/src/polovnitelefoni.svg" alt="PolovniTelefoni Logo">
-            <h1>Sajt je u izradi!</h1>
+            <h1>Sajt je u izradi</h1>
             <p>Hvala Vam što ste posetili našu stranicu! Trenutno radimo na unapređenju i optimizaciji sadržaja kako
                 bismo
                 vam pružili bolje korisničko iskustvo. Molimo vas za strpljenje dok radimo na tome.</p>
@@ -629,7 +629,7 @@ require_once "../inc/headTag.php";
                                         </div>
 
                                         <div class="deal-container">
-                                            <div class="statechecklboxcontainer" style="margin: 0; paddign: 0">
+                                            <div class="statechecklboxcontainer" style="margin: 0; padding: 0">
                                                 <label class="w-checkbox statedevicecheckbox">
                                                     <input type="checkbox" id="deal" name="deal"
                                                         data-name="deal selected" class="w-checkbox-input statecheckbox"

@@ -34,7 +34,7 @@ function hiddeMobileSearch() {
     mobileSearchContainer.classList.add('close');
     setTimeout(() => {
         document.body.style.overflowY = 'auto';
-        mobileSearchIcon.src = '../public/src/search_icon.png.';
+        mobileSearchIcon.src = '../public/src/search_icon.png';
         mobileSearchText.style.display = "block";
     }, 350);
 }

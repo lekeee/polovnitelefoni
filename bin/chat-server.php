@@ -18,7 +18,12 @@ $server = IoServer::factory(
             new Chat($user, $messages)
         )
     ),
-    8080
+    8443
 );
 
 $server->run();
+
+
+//     'local_cert' => 'home/polovtel/public_html/ssl/certs/polovni_telefoni_rs_b4b59_a2387_1716933709_083f0ab670ff5a8169bdd1424fb29ea7.crt',
+//     'local_pk' => 'home/polovtel/public_html/ssl/keys/b4b59_a2387_54abf26b019597734ff123ea1d2fdf22.key'
+
