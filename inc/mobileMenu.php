@@ -20,12 +20,17 @@
             </div>
             <div class="div-block-62"></div>
             <a href="../views/index.php" class="link-block-10 w-inline-block">
-                <div class="text-block-36">Početna</div>
+                <div class="div-block-81">
+                    <img src="../public/src/home-navigator.svg" loading="lazy" alt="Mobile Phone Icon" class="image-20"
+                        style="width: 18px" />
+                    <div class="text-block-36">Početna</div>
+                </div>
             </a>
-            <a href="" class="shopTrigger link-block-10 w-inline-block">
+            <a href="#" class="shopTrigger link-block-10 w-inline-block">
                 <div class="div-block-63">
-                    <div class="div-block-81"><img src="../public/src/shop-icon.svg" loading="lazy"
-                            alt="Mobile Phone Icon" class="image-20" />
+                    <div class="div-block-81">
+                        <img src="../public/src/shop-icon.svg" loading="lazy" alt="Mobile Phone Icon" class="image-20"
+                            style="width: 18px" />
                         <div class="text-block-36">Šop</div>
                     </div>
                 </div>
@@ -40,7 +45,9 @@
                 </div>
             </a><a href="#" class="link-block-10 w-inline-block">
                 <div class="div-block-63">
-                    <div class="div-block-82">
+                    <div class="div-block-81">
+                        <img src="../public/src/contact-navigator.svg" loading="lazy" alt="Mobile Phone Icon"
+                            class="image-20" style="width: 18px" />
                         <div class="text-block-36">Kontakt</div>
                     </div>
                 </div>
@@ -48,7 +55,7 @@
             <a href="#" class="link-block-10 w-inline-block">
                 <div class="div-block-63">
                     <div class="div-block-82"><img src="../public/src/blog-icon.svg" loading="lazy"
-                            alt="Headphones Icon" class="image-20" />
+                            alt="Headphones Icon" class="image-20" style="width: 18px" />
                         <div class="text-block-36">Blog</div>
                     </div>
                 </div>
@@ -110,12 +117,13 @@
                         <div class="text-block-38">Sve Kategorije</div>
                     </div>
                 </a>
-                <div class="div-block-62 separator"></div><a data-w-id="63e5604a-0a71-d76e-43d6-bf09460ef0fe" href="#"
-                    class="link-block-10 w-inline-block">
+                <div class="div-block-62 separator"></div>
+                <a href="#" class="link-block-10 w-inline-block">
                     <div class="div-block-63">
                         <div class="div-block-80"><img src="../public/src/headphones_icon.png" loading="lazy"
                                 alt="Headphones Icon" class="image-20" />
-                            <div class="text-block-36">Slušalice</div>
+                            <div class="text-block-36">Slušalice <span
+                                    style="color: #ed6969; margin-left: 5px; font-weight: bold;">(Uskoro!)</span></div>
                         </div>
                     </div>
                 </a><a data-w-id="1d179b74-692a-aaea-ce9e-bd31a82128ec" href="#" class="link-block-10 w-inline-block">
@@ -126,62 +134,65 @@
                         </div><img src="../public/src/arrow_right.png" loading="lazy" width="14"
                             alt="Arrow Forward Icon" />
                     </div>
-                </a><a data-w-id="ca980254-75c4-5ee4-6747-a6d0c30faea4" href="#" class="link-block-10 w-inline-block">
+                </a><a href="#" class="link-block-10 w-inline-block">
                     <div class="div-block-63">
                         <div class="div-block-80"><img src="../public/src/other_icon.png" loading="lazy"
                                 alt="Other Icon" class="image-20" />
-                            <div class="text-block-36">Oprema i Dodaci</div>
+                            <div class="text-block-36">Oprema i Dodaci <span
+                                    style="color: #ed6969; margin-left: 5px; font-weight: bold;">(Uskoro!)</span>
+                            </div>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
         <div class="div-block-672">
-            <div class="div-block-675"><a data-w-id="3834342d-1026-5795-3ca5-1e6711b6df30" href="#"
-                    class="link-block-11 w-inline-block">
+            <div class="div-block-675">
+                <a data-w-id="3834342d-1026-5795-3ca5-1e6711b6df30" href="#" class="link-block-11 w-inline-block">
                     <div class="div-block-68"><img src="../public/src/arrow_left.png" loading="lazy"
                             alt="Arrow Back Icon" class="image-23" />
                         <div class="text-block-38">Mobilni Telefoni</div>
                     </div>
                 </a>
-                <div class="div-block-62 separator"></div><a data-w-id="104784b1-9220-3257-7c17-2b37f6b3ffaa" href="#"
-                    class="link-block-10 w-inline-block">
+                <div class="div-block-62 separator"></div>
+                <a href="../views/index.php?brand=Apple" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Apple</div>
-                </a><a data-w-id="e4f7b96d-35f3-be59-e4f4-aa7bdb4d9b48" href="#" class="link-block-10 w-inline-block">
+                </a>
+                <a href="../views/index.php?brand=Samsung" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Samsung</div>
-                </a><a data-w-id="72b33b24-5092-2555-b596-8e2609217451" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Xiaomi" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Xiaomi</div>
-                </a><a data-w-id="11cb6888-3dea-c29d-4b0b-22ebb65d7b91" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Huawei" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Huawei</div>
-                </a><a data-w-id="a3bb10a6-110f-48f8-43fe-5e4a9793079d" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Motorola" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Motorola</div>
-                </a><a data-w-id="7007f930-7b58-4651-4389-4224035dbc32" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Nokia" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Nokia</div>
-                </a><a data-w-id="33573269-274b-cf85-4988-2c8fcb708012" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Google" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Google</div>
-                </a><a data-w-id="bf5bcbf7-5a5e-90e7-d1c8-276cdf8d8558" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=OnePlus" class="link-block-10 w-inline-block">
                     <div class="text-block-36">OnePlus</div>
-                </a><a data-w-id="f1090ee1-3fe3-e121-5276-376b710063fc" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Honor" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Honor</div>
-                </a><a data-w-id="3291cb17-61ff-4167-2a2f-8614ecd8f979" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Alcatel" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Alcatel</div>
-                </a><a data-w-id="5cc68d84-c479-c10b-9043-e232c14cd11e" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Poco" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Poco</div>
-                </a><a data-w-id="f6afccce-4908-f912-a427-89285457e138" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Realme" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Realme</div>
-                </a><a data-w-id="1a0b938e-4a76-18fe-e828-ba3f924cfef9" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Tesla" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Tesla</div>
-                </a><a data-w-id="42d0b3fc-d715-aeb1-fdd5-8da71e85ae93" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=LG" class="link-block-10 w-inline-block">
                     <div class="text-block-36">LG</div>
-                </a><a data-w-id="c25af369-f99f-8e14-2a30-853dafce7b37" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Microsoft" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Microsoft</div>
-                </a><a data-w-id="2088fff5-3feb-13a4-c548-9dca1becc375" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=ZTE" class="link-block-10 w-inline-block">
                     <div class="text-block-36">ZTE</div>
-                </a><a data-w-id="6640ee30-c9c8-3198-f0b9-03f27d3c86a6" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Oppo" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Oppo</div>
-                </a><a data-w-id="f9e9e50f-b4f3-eb36-03d1-3fcb59503d03" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Vivo" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Vivo</div>
-                </a><a data-w-id="18209f60-9aa0-354c-3ec7-9308b4d052e0" href="#" class="link-block-10 w-inline-block">
+                </a><a href="../views/index.php?brand=Blackberry" class="link-block-10 w-inline-block">
                     <div class="text-block-36">Blackberry</div>
                 </a>
             </div>

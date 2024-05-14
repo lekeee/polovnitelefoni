@@ -6,14 +6,15 @@ window.onload = function () {
         element.style.display = 'inline-block';
     });
 
+    checkURL();
     const gotoAd = localStorage.getItem('gotoAd');
     if (gotoAd == 'true') {
         numberOfLoads = parseInt(localStorage.getItem('loadedAdsCounter'));
         showFilters();
     }
     cacheFilterData();
+    showFilters();
     document.querySelector('#resetFilters').disabled = true;
-    checkURL();
     setTimeout(() => {
         getAds(0, true);
     }, 300);
@@ -35,6 +36,7 @@ function checkURL() {
         brand = brand.toLowerCase();
         const checkb = document.querySelector(`#${brand}Checkbox`);
         checkb.checked = true;
+        // addBrand(brand);
         if (model !== null) {
             model = model.toLowerCase();
             let idVal = model;
@@ -42,13 +44,22 @@ function checkURL() {
             idVal += 'Checkbox';
             const checkm = document.querySelector('#' + idVal);
             checkm.checked = true;
+            // addModel(brand, model);
         } else {
             checkb.dispatchEvent(new Event('change'));
         }
-        showFilters();
+        scrollToShop();
+        deleteULRParams();
+        localStorage.setItem("gotoAd", false);
+        localStorage.removeItem('loadedAdsCounter');
     }
+}
+function deleteULRParams() {
+    var currentUrl = window.location.href;
 
-    // model = model.toLowerCase();
+    var cleanUrl = currentUrl.split('?')[0];
+
+    history.replaceState(null, null, cleanUrl);
 }
 function checkBransSelecter(element) {
     if (element.checked) {

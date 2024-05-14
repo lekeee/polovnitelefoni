@@ -300,7 +300,8 @@ async function rateUser(tip) {
                     negativeRates.innerHTML = parseInt(negativeRates.innerHTML) + 1;
                 }
             }
-            else if (data.status === 'empty') {
+            else if (data.status === 'not-logged') {
+                alert("Morate biti prijavljeni da biste ocenili korisnika!");
             } else {
                 console.log("Doslo je do greske: " + data.message);
             }

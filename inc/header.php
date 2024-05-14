@@ -34,7 +34,7 @@ if ($user->isLogged()) {
     ?>
     <script src="../public/js/websocket.js" type="module"></script>
     <audio src="../public/audio/alert_tone.mp3" id="audio-tag" muted style="display:none"></audio>
-<?php
+    <?php
 }
 ?>
 <section class="header">
@@ -56,19 +56,20 @@ if ($user->isLogged()) {
             </a> -->
             <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
                 <div class="dropdown-toggle seconddropdown w-dropdown-toggle">
-                    <div class="text-block-5">
+                    <div class="text-block-5" style="margin-right: 0px;">
                         Srpski
                     </div>
-                    <img src="../public/src/arrow_down.png" loading="lazy" width="14" height="14"
-                        alt="Arrow Down Icon" />
+                    <!-- <img src="../public/src/arrow_down.png" loading="lazy" width="14" height="14"
+                        alt="Arrow Down Icon" /> -->
                 </div>
                 <!-- <nav class="dropdown-list w-dropdown-list"><a href="#" class="dropdown-link w-dropdown-link">English</a>
                 </nav> -->
             </div>
             <div data-hover="false" data-delay="0" class="dropdown seconddropdown w-dropdown">
                 <div class="dropdown-toggle seconddropdown w-dropdown-toggle">
-                    <div class="text-block-5">EUR</div><img src="../public/src/arrow_down.png" loading="lazy" width="14"
-                        height="14" alt="Arrow Down Icon" />
+                    <div class="text-block-5" style="margin-right: 0px;">EUR</div>
+                    <!-- <img src="../public/src/arrow_down.png" loading="lazy" width="14"
+                        height="14" alt="Arrow Down Icon" /> -->
                 </div>
                 <!-- <nav class="dropdown-list w-dropdown-list"><a href="#" class="dropdown-link w-dropdown-link">RSD</a>
                 </nav> -->
@@ -215,80 +216,61 @@ if ($user->isLogged()) {
                         <div class="div-block-71" id="header-phone-list" style="display: none;">
                             <div class="div-block-72">
                                 <div class="text-block-40">Mobilni Telefoni</div>
-                                <a href="../views/index.php?brand=Apple#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Apple" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Apple</div>
                                 </a>
-                                <a href="../views/index.php?brand=Samsung#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Samsung" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Samsung</div>
                                 </a>
-                                <a href="../views/index.php?brand=Xiaomi#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Xiaomi" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Xiaomi</div>
                                 </a>
-                                <a href="../views/index.php?brand=Huawei#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Huawei" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Huawei</div>
                                 </a>
-                                <a href="../views/index.php?brand=Motorola#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Motorola" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Motorola</div>
                                 </a>
-                                <a href="../views/index.php?brand=Nokia#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Nokia" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Nokia</div>
                                 </a>
-                                <a href="../views/index.php?brand=Google#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Google" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Google</div>
                                 </a>
-                                <a href="../views/index.php?brand=OnePlus#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=OnePlus" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">OnePlus</div>
                                 </a>
-                                <a href="../views/index.php?brand=Honor#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Honor" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Honor</div>
                                 </a>
-                                <a href="../views/index.php?brand=Alcatel#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Alcatel" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Alcatel</div>
                                 </a>
-                                <a href="../views/index.php?brand=Poco#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Poco" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Poco</div>
                                 </a>
-                                <a href="../views/index.php?brand=Realme#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Realme" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Realme</div>
                                 </a>
-                                <a href="../views/index.php?brand=Tesla#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Tesla" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Tesla</div>
                                 </a>
-                                <a href="../views/index.php?brand=LG#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=LG" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">LG</div>
                                 </a>
-                                <a href="../views/index.php?brand=Microsoft#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Microsoft" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Microsoft</div>
                                 </a>
-                                <a href="../views/index.php?brand=ZTE#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=ZTE" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">ZTE</div>
                                 </a>
-                                <a href="../views/index.php?brand=Oppo#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Oppo" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Oppo</div>
                                 </a>
-                                <a href="../views/index.php?brand=Vivo#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Vivo" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Vivo</div>
                                 </a>
-                                <a href="../views/index.php?brand=Blackberry#productscontainer"
-                                    class="link-block-12 w-inline-block">
+                                <a href="../views/index.php?brand=Blackberry" class="link-block-12 w-inline-block">
                                     <div class="mobilephonebrand">Blackberry</div>
                                 </a>
                             </div>
@@ -312,27 +294,33 @@ if ($user->isLogged()) {
         </div>
         <div class="div-block-15">
             <a href="../views/index.php" class="link-block-4 w-inline-block">
+                <img src="../public/src/home-navigator.svg" loading="lazy" width="20" height="20" alt="Home Icon"
+                    class="image-4" />
                 <div class="text-block-13">Početna</div>
             </a>
             <a href="#" class="shopTrigger link-block-4 w-inline-block">
-                <img src="../public/src/shop-icon.svg" loading="lazy" width="20" height="20" alt="Headphones Icon"
+                <img src="../public/src/shop-icon.svg" loading="lazy" width="20" height="20" alt="Shop Icon"
                     class="image-4" />
                 <div class="text-block-13">Šop</div>
             </a>
             <a href="#" class="subscribeTrigger link-block-4 w-inline-block">
-                <img src="../public/src/subscribe-icon.svg" loading="lazy" width="16" height="16" alt="Headphones Icon"
+                <img src="../public/src/subscribe-icon.svg" loading="lazy" width="16" height="16" alt="Subscribe Icon"
                     class="image-4" />
                 <div class="text-block-13">Pretplati se</div>
             </a>
             <a href="#" class="link-block-4 w-inline-block">
+                <img src="../public/src/contact-navigator.svg" loading="lazy" width="18" height="18" alt="Contact Icon"
+                    class="image-4" />
                 <div class="text-block-13">Kontakt</div>
             </a>
             <a href="#" class="link-block-4 w-inline-block" title="Uskoro!">
-                <img src="../public/src/blog-icon.svg" loading="lazy" width="22" height="22" alt="Headphones Icon"
+                <img src="../public/src/blog-icon.svg" loading="lazy" width="20" height="20" alt="Blog Icon"
                     class="image-4" />
                 <div class="text-block-13" title="Uskoro!">Blog</div>
             </a>
             <a href="../views/support.php" class="link-block-4 w-inline-block">
+                <img src="../public/src/support-navigator.svg" loading="lazy" width="20" height="20" alt="Support Icon"
+                    class="image-4" />
                 <div class="text-block-13">Podrška</div>
             </a>
         </div>

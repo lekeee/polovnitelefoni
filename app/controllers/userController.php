@@ -306,18 +306,26 @@ function rateUser($user, $data)
     try {
         $userId = $data['userID'];
         $type = $data['tip'];
-        $result = $user->addRate($user->getId(), $userId, $type);
-        if ($result !== false) {
-            $response = [
-                'status' => 'success',
-                'message' => $result,
-            ];
+        if ($user->isLogged()) {
+            $result = $user->addRate($user->getId(), $userId, $type);
+            if ($result !== false) {
+                $response = [
+                    'status' => 'success',
+                    'message' => $result,
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Došlo je do greške prilikom ocenjivanja korisnika'
+                ];
+            }
         } else {
             $response = [
-                'status' => 'error',
-                'message' => 'Došlo je do greške prilikom ocenjivanja korisnika'
+                'status' => 'not-logged',
+                'message' => 'Niste prijavljeni'
             ];
         }
+
     } catch (Exception $e) {
         $response = [
             'status' => 'error',
