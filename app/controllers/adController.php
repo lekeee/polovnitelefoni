@@ -370,7 +370,7 @@ function createSearchResult($ads)
         <div class="list-widget">
             <div style="display: flex">
                 <div class="widget-image" style="width: 50px; height: 50px">
-                    <img src="<?php echo $putanja ?>" alt="Main Image">
+                    <img src="<?php echo $putanja ?>" alt="<?php echo $ads[$i]['brand'] ?> <?php echo $ads[$i]['model'] ?>">
                 </div>
                 <div class="widget-title-city" style="margin-left: 20px">
                     <a href="../views/ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>">

@@ -84,7 +84,7 @@ function savedWidget($ads)
         ?>
         <tr id="row_<?php echo $ads[$i]['ad_id'] ?>">
             <td class="table-image">
-                <img src="<?php echo $putanja; ?>" alt="Slika proizvoda 1">
+                <img src="<?php echo $putanja; ?>" alt="<?php echo $ads[$i]['brand'] ?> <?php echo $ads[$i]['model'] ?>">
             </td>
             <td>
                 <a href="../views/ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>" class="saved-title">
@@ -137,11 +137,11 @@ function savedWidget($ads)
                 <div style="display: flex; flex-direction: column;">
                     <div title="Obriši oglas" class="delete-edit-buttons" style="background: #ed6969;"
                         onclick="showDeleteConfirm(<?php echo $adID ?>, '<?php echo $title ?>')">
-                        <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obriši">
+                        <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Ibrisi oglas">
                     </div>
                     <div title="Uredi oglas" class="delete-edit-buttons" style="background: #041e42;"
                         onclick="window.location.href='../views/edit-ad.php?ad_id=<?php echo $adID ?>'">
-                        <img src="../public/src/edit-icon.svg?v=<?php echo time(); ?>" alt="Obriši">
+                        <img src="../public/src/edit-icon.svg?v=<?php echo time(); ?>" alt="Uredi oglas">
                     </div>
                 </div>
 

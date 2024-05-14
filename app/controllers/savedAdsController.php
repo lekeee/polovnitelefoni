@@ -60,7 +60,7 @@ function savedWidget($ads)
         ?>
         <tr id="row_<?php echo $ads[$i]['ad_id'] ?>">
             <td class="table-image">
-                <img src="<?php echo $putanja; ?>" alt="Slika proizvoda 1">
+                <img src="<?php echo $putanja; ?>" alt="<?php echo $ads[$i]['brand'] ?> <?php echo $ads[$i]['model'] ?>">
             </td>
             <td>
                 <a href="../views/ad.php?ad_id=<?php echo $ads[$i]['ad_id'] ?>" class="saved-title">

@@ -3,7 +3,7 @@ include_once "../app/auth/checkAuthState.php";
 ?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <?php
 require_once "../inc/headTag.php";
@@ -38,11 +38,11 @@ require_once "../inc/headTag.php";
                 <strong>Na prodaju novi iPhone 15 Pro Max</strong>
             </p>
             <div class="delete-confirm" onclick="deleteAd()">
-                <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obriši" id="delete-btn">
+                <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obrisi oglas" id="delete-btn">
                 Obriši oglas
             </div>
             <div class="delete-confirm">
-                <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Obriši">
+                <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Otkazi">
                 Otkaži
             </div>
         </div>

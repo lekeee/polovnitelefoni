@@ -6,17 +6,17 @@
         <div class="div-block-2" style="display: flex">
             <input type="text" placeholder="Pretraži..." class="mobileSearch">
             <button class="searchbutton">
-                <img src="../public/src/search-icon.svg" loading="lazy" width="22" alt="Search Icon" />
+                <img src="../public/src/search-icon.svg" loading="lazy" width="22" alt="Pretrazi telefone" />
             </button>
         </div>
         <div class="search-identificator">
             <div class="mobile-search-identificator">
-                <img src="../public/src/search-identificator.svg" alt="Search Identificator">
+                <img src="../public/src/search-identificator.svg" alt="Pretrazi telefone">
                 <p class="mobile-search-p">Pretražujte oglase na osnovu njihovog naslova ili unosom ključnih reči</p>
             </div>
             <div class="mobile-search-result"></div>
             <div class="mobile-search-identificator not-found">
-                <img src="../public/src/not-found.svg" alt="Search Identificator">
+                <img src="../public/src/not-found.svg" alt="Nije pronadjen telefon">
                 <p class="mobile-search-p">Nije pronađen nijedan rezultat</p>
             </div>
         </div>

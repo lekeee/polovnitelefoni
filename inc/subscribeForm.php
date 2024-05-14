@@ -34,10 +34,10 @@
             najnovije vesti, savete i posebne ponude koje su
             ekskluzivne samo za naše pretplatnike.</p>
         <div class="delete-confirm close-newsletter">
-            <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Obriši" ">
-                Zatvori
-            </div>
+            <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Zatvori">
+            Zatvori
         </div>
     </div>
+</div>
 </div>
 <script src=" ../public/js/newsletter.js?v=<?php echo time(); ?>"></script>

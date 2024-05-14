@@ -12,7 +12,7 @@ if (isset($_GET['model'])) {
 
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <script src="../public/js/filter-preload.js?v=<?php echo time() ?>"></script>
 <script>
@@ -36,9 +36,10 @@ require_once "../inc/headTag.php";
 ?>
 <script>localStorage.removeItem('limitData');</script>
 
-<body class="body active"> -->
+
+<body class="body">
     <div class="temporary-container">
-        <div class="main-temp-container">
+        <!--<div class="main-temp-container">
             <img src="../public/src/polovnitelefoni.svg" alt="PolovniTelefoni Logo">
             <h1>Sajt je u izradi</h1>
             <p>Hvala Vam što ste posetili našu stranicu! Trenutno radimo na unapređenju i optimizaciji sadržaja kako
@@ -46,7 +47,7 @@ require_once "../inc/headTag.php";
                 vam pružili bolje korisničko iskustvo. Molimo vas za strpljenje dok radimo na tome.</p>
             <p>Vaš <b>PolovniTelefoni Tim</b></p>
         </div>
-    </div>
+    </div> -->
 
     <?php
     require_once "../inc/header.php";
@@ -71,7 +72,7 @@ require_once "../inc/headTag.php";
                         <div class="quickclosecont">
                             <div data-w-id="3f23a2f6-5da1-b2b6-03b3-6f1d670aeb62" class="quickviewclosecontainer"
                                 onclick="closeQuickView()"><img src="../public/src/close-icon.svg" loading="lazy"
-                                    alt="Close Icon" class="closequickviewicon" /></div>
+                                    alt="Zatvori" class="closequickviewicon" /></div>
                         </div>
                         <div class="quickviewmaindatacontainer">
                             <div class="imagescontainerquickview" style="padding: 20px; padding-right: 10px;">
@@ -120,22 +121,22 @@ require_once "../inc/headTag.php";
                                                 <div class="div-block-696">
                                                     <div class="text-block-47">
                                                         <p id="quick-view-visitors"></p>
-                                                        <img src="../public/src/eye-icon.svg" alt="Eye" srcset="">
+                                                        <img src="../public/src/eye-icon.svg" alt="Pogledaj oglas">
                                                     </div>
                                                 </div>
 
                                                 <div class="div-block-696">
                                                     <div class="text-block-47">
                                                         <p id="quick-view-saves"></p>
-                                                        <img src="../public/src/favourite_icon.png" alt="Eye" srcset=""
-                                                            style="width: 20px">
+                                                        <img src="../public/src/favourite_icon.png" alt="Omiljeni oglas"
+                                                            srcset="" style="width: 20px">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="div-block-700">
                                             <div class="div-block-697"><img src="../public/src/done-icon.png"
-                                                    loading="lazy" alt="Available" class="image-31" />
+                                                    loading="lazy" alt="Uredjaj na stanju" class="image-31" />
                                                 <div class="text-block-48">
                                                     Na stanju
                                                 </div>
@@ -153,8 +154,8 @@ require_once "../inc/headTag.php";
                                     </div>
                                     <div data-w-id="0eacc543-0b81-e5be-a1e1-d7c3709a619c" class="div-block-719"
                                         id="quick-view-user-container">
-                                        <img src="../public/src/userShow.png" loading="lazy" alt="User Profile Image"
-                                            class="image-39" />
+                                        <img src="../public/src/userShow.png" loading="lazy"
+                                            alt="Korisnikova profilna slika" class="image-39" />
                                         <h1 class="heading-10" id="quick-view-user" style="text-align: center;">
                                         </h1>
                                         <div class="text-block-57" id="quick-view-city" style="text-align: center;">
@@ -179,7 +180,8 @@ require_once "../inc/headTag.php";
                                                                     myid="<?php echo $user->getId(); ?>"
                                                                     onclick="openMessages(this)">
                                                                     <img src="../public/src/message-icon.png" loading="lazy"
-                                                                        alt="Message" class="image-32 messagebtn" />
+                                                                        alt="Kontaktiraj vlasnika"
+                                                                        class="image-32 messagebtn" />
                                                                     <div class="text-block-50">Kontaktiraj vlasnika</div>
                                                                 </div>
                                                                 <?php
@@ -188,7 +190,8 @@ require_once "../inc/headTag.php";
                                                                 <div class="div-block-716"
                                                                     onclick="window.location.href = '../views/login.php'">
                                                                     <img src="../public/src/message-icon.png" loading="lazy"
-                                                                        alt="Message" class="image-32 messagebtn" />
+                                                                        alt="Kontaktiraj vlasnika"
+                                                                        class="image-32 messagebtn" />
                                                                     <div class="text-block-50">Kontaktiraj vlasnika</div>
                                                                 </div>
                                                                 <?php
@@ -204,12 +207,12 @@ require_once "../inc/headTag.php";
                                                     <div data-w-id="3a24efa4-af9d-9de5-42c6-e9ec9ee2e77d"
                                                         class="div-block-713">
                                                         <img src="../public/src/call-icon.png" loading="lazy"
-                                                            alt="Call User" class="image-37" />
+                                                            alt="Pozovi vlasnika" class="image-37" />
                                                     </div>
                                                     <div data-w-id="6938d356-7183-26a9-3423-51e3d414b225"
                                                         class="div-block-715">
                                                         <img src="../public/src/close_icon.png" loading="lazy"
-                                                            alt="Close Icon" class="image-38" />
+                                                            alt="Zatvori" class="image-38" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -228,12 +231,12 @@ require_once "../inc/headTag.php";
                                         </div>
                                     </div>
                                     <div class="div-block-706"><img src="../public/src/delivery.png" loading="lazy"
-                                            alt="Delivery" class="image-34" />
+                                            alt="Isporuka uredjaja" class="image-34" />
                                         <div class="text-block-52">Način isporuke u dogovoru sa vlasnikom</div>
                                     </div>
                                 </div>
                                 <div class="div-block-707" style="margin-top: 20px">
-                                    <img src="../public/src/bag-orange.png" loading="lazy" alt="Bag Icon"
+                                    <img src="../public/src/bag-orange.png" loading="lazy" alt="Dodaj u korpu"
                                         class="image-40" />
                                     <div>
                                         <div class="text-block-53">Drugi ljudi žele ovaj proizvod. </div>
@@ -478,7 +481,7 @@ require_once "../inc/headTag.php";
                 <div data-w-id="74356a1c-d9dd-5682-428a-0e61ff5c9155" class="filtericoncontainer"
                     onclick="openFilters()"><img
                         src="https://assets-global.website-files.com/65830899613e5c9e21ea6f21/6585c71b4e111a123b652fb1_9044512_filter_icon.svg"
-                        loading="lazy" width="20" alt="Filter Icon" class="filtericonslika" />
+                        loading="lazy" width="20" alt="Filtriraj proizvode" class="filtericonslika" />
                     <div class="filtertitle">Filtriraj proizvode</div>
                 </div>
                 <div class="showingcountercontainer">
@@ -509,9 +512,9 @@ require_once "../inc/headTag.php";
                                 <option value="8">64 oglasa</option>
                             </select>
                             <div class="sortingseparator"></div><img
-                                src="../public/src/grid-icon.svg?v=<?php echo time() ?>" alt="GridView Icon"
+                                src="../public/src/grid-icon.svg?v=<?php echo time() ?>" alt="Prikazi kao resetka"
                                 class="gridviewicon" /><img src="../public/src/list-icon.svg?v=<?php echo time(); ?>"
-                                width="22" alt="List View Icon" class="listviewicon" />
+                                width="22" alt="Prikazi kao lista" class="listviewicon" />
                         </form>
                         <div class="w-form-done"></div>
                         <div class="w-form-fail"></div>
@@ -521,7 +524,7 @@ require_once "../inc/headTag.php";
             <div class="filtersandproductscontainer">
                 <div class="filterleftmaincontainer">
                     <div class="closefiltercontainer" onclick="closeFilters()"><img src="../public/src/close-icon.svg"
-                            loading="lazy" data-w-id="946eb081-061a-dfbf-c305-7bd716350914" alt="Close Icon"
+                            loading="lazy" data-w-id="946eb081-061a-dfbf-c305-7bd716350914" alt="Zatvori"
                             class="closeicon" /></div>
                     <div class="filterleftcontainer">
                         <div class="brandtitlecontainer">

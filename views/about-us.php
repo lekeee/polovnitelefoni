@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <?php
 require_once "../inc/headTag.php";
@@ -20,7 +20,7 @@ require_once "../inc/headTag.php";
         <div class="mainpagediv">
             <div class="aboutuscontent">
                 <div class="rightaboutuscontainer">
-                    <img src="../public/src/team.svg" alt="">
+                    <img src="../public/src/team.svg" alt="Polovni telefoni">
                 </div>
                 <div class="leftaboutuscontainer">
                     <h1>O Polovni Telefoni</h1>

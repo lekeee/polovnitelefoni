@@ -3,7 +3,7 @@ include_once "../app/auth/checkAuthStateForLogin.php";
 ?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <?php
 require_once "../inc/headTag.php";
@@ -45,10 +45,10 @@ require_once "../inc/headTag.php";
                                         class="text-field-2 w-input" maxlength="256" name="login-email"
                                         data-name="login-email" placeholder="" id="login-email" required="" />
                                     <div class="div-block-22"><label for="email-2" class="field-label2">Lozinka
-                                            *</label><img width="20" loading="lazy" alt="Show Password Icon"
+                                            *</label><img width="20" loading="lazy" alt="Prikazi lozinku"
                                             src="../public/src/show_password_icon.png" class="image-8"
                                             id="login-show-password" title="Prikaži lozinku" /><img width="20"
-                                            loading="lazy" alt="Hide Password Icon"
+                                            loading="lazy" alt="Sakrij lozinku"
                                             src="../public/src/hide_password_icon.png" class="image-7"
                                             id="login-hide-password" style="cursor: pointer;" title="Sakrij lozinku" />
                                     </div><input type="password" class="text-field-2 textfieldpassword w-input"
@@ -68,7 +68,7 @@ require_once "../inc/headTag.php";
                                             <div class="googleWideContainer">
                                                 <a href="<?php echo $loginUrl ?>" class="googleIcon">
                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
-                                                        alt="Google Logo">
+                                                        alt="Google">
                                                 </a>
                                             </div>
                                         </div>
@@ -108,20 +108,20 @@ require_once "../inc/headTag.php";
                                         name="signup-email" data-name="signup-email" placeholder="" id="signup-email"
                                         required="" />
                                     <div class="div-block-22"><label for="email-4" class="field-label2">Lozinka
-                                            *</label><img width="20" loading="lazy" alt="Show Password Icon"
+                                            *</label><img width="20" loading="lazy" alt="Prikazi lozinku"
                                             src="../public/src/show_password_icon.png" class="image-8"
                                             id="register-show-password" /><img width="20" loading="lazy"
-                                            alt="Hide Password Icon" src="../public/src/hide_password_icon.png"
+                                            alt="Sakrij lozinku" src="../public/src/hide_password_icon.png"
                                             class="image-7" id="register-hide-password" /></div><input type="password"
                                         class="text-field-2 textfieldpassword w-input" maxlength="256"
                                         name="signup-password" data-name="signup-password" placeholder=""
                                         id="signup-password" required="" />
                                     <div class="div-block-22"><label for="email-4" class="field-label2">Potvrdite
                                             lozinku
-                                            *</label><img width="20" loading="lazy" alt="Show Password Icon"
+                                            *</label><img width="20" loading="lazy" alt="Prikazi lozinku"
                                             src="../public/src/show_password_icon.png" class="image-8"
                                             id="register-show-repeated-password" /><img width="20" loading="lazy"
-                                            alt="Hide Password Icon" src="../public/src/hide_password_icon.png"
+                                            alt="Sakrij lozinku" src="../public/src/hide_password_icon.png"
                                             class="image-7" id="reqister-hide-repeated-password" /></div><input
                                         type="password" class="text-field-2 textfieldpassword w-input" maxlength="256"
                                         name="signup-repeaterpassword" data-name="signup-repeaterpassword"
