@@ -4,7 +4,7 @@ http_response_code(404);
 
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <?php
 require_once "../inc/headTag.php";
@@ -23,7 +23,7 @@ require_once "../inc/headTag.php";
     <section class="mainpageselection">
         <div class="mainpagediv">
             <div class="not-found-main-div">
-                <img src="../public/src/404.svg" alt="Not Found">
+                <img src="../public/src/404.svg" alt="Stranica nije pronadjena">
                 <h1>Stranica nije pronađena!</h1>
                 <p>Izvinjavamo se, stranica koju tražite nije pronađena.</p>
                 <button onclick="window.location.href = '../views'">Vrati se na početnu</button>

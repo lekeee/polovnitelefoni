@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
-    if (isset ($data['action'])) {
+    if (isset($data['action'])) {
         $phone = new Phone();
         if ($data['action'] === 'getUserAds') {
             $userID = $data['userID'];
@@ -95,7 +95,7 @@ function showListWidget($ad, $putanja)
     ob_start();
     ?>
     <div class="user-widget">
-        <img src="<?php echo $putanja ?>" alt="" class="widget-image">
+        <img src="<?php echo $putanja ?>" alt="<?php echo $ad['brand'] ?> <?php echo $ad['model'] ?>" class="widget-image">
         <div class="widget-info-container">
             <a href="../views/ad.php?ad_id=<?php echo $ad['ad_id'] ?>">
                 <?php
@@ -110,28 +110,28 @@ function showListWidget($ad, $putanja)
                 <?php
                 if ($ad['state'] == 1) {
                     ?>
-                    <img src="../public/src/start-rating5.png" style="width: 100px">
+                    <img src="../public/src/start-rating5.png" alt="Nov telefon" style="width: 100px">
                     <?php
                 } else {
                     if ($ad['stateRange'] < 2) {
                         ?>
-                        <img src="../public/src/start-rating1.png" style="width: 100px">
+                        <img src="../public/src/start-rating1.png" alt="Telefon u losem stanju" style="width: 100px">
                         <?php
                     } else if ($ad['stateRange'] < 4) {
                         ?>
-                            <img src="../public/src/start-rating2.png" style="width: 100px">
+                            <img src="../public/src/start-rating2.png" alt="Telefon u solidnom stanju" style="width: 100px">
                         <?php
                     } else if ($ad['stateRange'] < 6) {
                         ?>
-                                <img src="../public/src/start-rating3.png" style="width: 100px">
+                                <img src="../public/src/start-rating3.png" alt="Telefon u solidnom stanju" style="width: 100px">
                         <?php
                     } else if ($ad['stateRange'] < 8) {
                         ?>
-                                    <img src="../public/src/start-rating4.png" style="width: 100px">
+                                    <img src="../public/src/start-rating4.png" alt="Telefon u dobrom stanju" style="width: 100px">
                         <?php
                     } else {
                         ?>
-                                    <img src="../public/src/start-rating5.png" style="width: 100px">
+                                    <img src="../public/src/start-rating5.png" alt="Telefon kao nov" style="width: 100px">
                         <?php
                     }
                     ?>
@@ -223,7 +223,7 @@ function showListWidget($ad, $putanja)
             </div>
             <div class="action-compare-container">
                 <div class="content-container">
-                    <img src="../public/src/compare-icon.svg" alt="">
+                    <img src="../public/src/compare-icon.svg" alt="Uporedi telefone">
                 </div>
             </div>
         </div>

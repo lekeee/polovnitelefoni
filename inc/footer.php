@@ -70,26 +70,27 @@
 </section>
 <section class="section-4">
     <div class="div-block-41">
-        <div class="div-block-42"><img src="../public/src/polovnitelefoni.svg" loading="lazy" alt="" class="image-14" />
+        <div class="div-block-42"><img src="../public/src/polovnitelefoni.svg" loading="lazy" alt="Polovni telefoni"
+                class="image-14" />
             <div class="div-block-43">
                 <div class="div-block-44" style="background-color: #ed6969; cursor: pointer"
                     onclick="window.location.href = 'https://www.instagram.com/polovni_telefoni.rs/'">
-                    <img src="../public/src/instagram_icon.png" loading="lazy" alt="Instagram Icon" />
+                    <img src="../public/src/instagram_icon.png" loading="lazy" alt="Polovni telefoni instagram" />
                 </div>
                 <div class="div-block-44" title="Uskoro!">
-                    <img src="../public/src/facebook_icon.png" loading="lazy" alt="Facebook Icon" />
+                    <img src="../public/src/facebook_icon.png" loading="lazy" alt="polovni telefoni facebook" />
                 </div>
                 <div class="div-block-44" title="Uskoro!">
-                    <img src="../public/src/x_icon.png" loading="lazy" alt="X Icon" />
+                    <img src="../public/src/x_icon.png" loading="lazy" alt="Polovni telefoni x" />
                 </div>
                 <div class="div-block-44" title="Uskoro!">
-                    <img src="../public/src/in_icon.png" loading="lazy" alt="LinkedIn Icon" />
+                    <img src="../public/src/in_icon.png" loading="lazy" alt="Polovni telefoni linkedin" />
                 </div>
                 <div class="div-block-44" title="Uskoro!">
-                    <img src="../public/src/pinterest_icon.png" loading="lazy" alt="Pinterest Icon" />
+                    <img src="../public/src/pinterest_icon.png" loading="lazy" alt="Polovni telefoni pinterest" />
                 </div>
                 <div class="div-block-44" title="Uskoro!">
-                    <img src="../public/src/youtube_icon.png" loading="lazy" alt="Youtube Icon" />
+                    <img src="../public/src/youtube_icon.png" loading="lazy" alt="Polovni telefoni youtube" />
                 </div>
             </div>
         </div>
@@ -103,13 +104,13 @@
             <div class="div-block-51">
                 <div class="div-block-48" style="display: none;">
                     <div class="div-block-50">
-                        <img src="../public/src/visa_icon.png" loading="lazy" height="" alt="" width="40"
+                        <img src="../public/src/visa_icon.png" loading="lazy" height="" alt="Visa kartica" width="40"
                             class="image-12" />
                     </div>
                     <div class="div-block-50"><img src="../public/src/mastercard_icon.png" loading="lazy" height=""
-                            alt="" width="40" class="image-12" /></div>
-                    <div class="div-block-50"><img src="../public/src/paypal_icon.png" loading="lazy" height="" alt=""
-                            width="40" class="image-12" /></div>
+                            alt="Mastercard kartica" width="40" class="image-12" /></div>
+                    <div class="div-block-50"><img src="../public/src/paypal_icon.png" loading="lazy" height=""
+                            alt="Paypal placanje" width="40" class="image-12" /></div>
                 </div>
             </div>
         </div>

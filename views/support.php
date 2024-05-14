@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <?php
 require_once "../inc/headTag.php";
@@ -33,7 +33,7 @@ require_once "../inc/headTag.php";
             <div class="support-main-div">
                 <div class="support-header">
                     <div class="logo-problem">
-                        <img src="../public/src/polovnitelefoni.svg" alt="">
+                        <img src="../public/src/polovnitelefoni.svg" alt="Polovni telefoni">
                     </div>
                 </div>
                 <div class="support-name-lastname">
@@ -83,7 +83,7 @@ require_once "../inc/headTag.php";
     <div class="report-backgound-container">
         <div class="report-main-container" style="max-width: 400px">
             <div class="image-report-container">
-                <img src="../public/src/polovnitelefoni-only-logo.svg">
+                <img src="../public/src/polovnitelefoni-only-logo.svg" alt="Polovni telefoni">
                 <p><b>Obaveštenje</b></p>
             </div>
             <div class="report-content">

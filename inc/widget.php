@@ -96,7 +96,7 @@ function showWidget($ads)
                             ?>
                             <div class="addtosavedcontainer" title="Oštećenje"
                                 style="padding: 5px; margin-top: 5px; background-color: #ed6969; border-color: #ed6969; cursor: default">
-                                <img src="../public/src/broken-phone.svg?v=<?php echo time(); ?>" alt="Broken Phone Icon"
+                                <img src="../public/src/broken-phone.svg?v=<?php echo time(); ?>" alt="Ostecen telefon"
                                     style="height: 100%" />
                             </div>
                         <?php } ?>
@@ -106,7 +106,7 @@ function showWidget($ads)
                             src="../public/src/star-icon.svg" loading="lazy" alt="Star Icon"
                             style="width: 20px;" /></div> -->
                         <div data-w-id="47c839af-029e-d9bb-4594-b731a5f956f9" class="addtocomparecontainer"><img
-                                src="../public/src/compare-icon.svg" loading="lazy" alt="Compare Icon" style="width: 20px;" />
+                                src="../public/src/compare-icon.svg" loading="lazy" alt="Uporedi telefone" style="width: 20px;" />
                         </div>
                         <div data-w-id="3e330f58-2da6-4705-f661-2e6804eb87a4" class="quickviewicon"
                             onclick="openQuickView(this)" main-image="<?php echo $putanja ?>" ad-id="<?php echo $ads[$i]['ad_id'] ?>"
@@ -119,7 +119,7 @@ function showWidget($ads)
                             lastname="<?php echo $ownerData['lastname'] ?>" city="<?php echo $ownerData['city'] ?>"
                             address="<?php echo $ownerData['address'] ?>" phone="<?php echo $ownerData['phone'] ?>"
                             owner-id="<?php echo $ownerData['user_id'] ?>">
-                            <img src="../public/src/eye-icon.svg" loading="lazy" alt="Quick View Icon" style="width: 20px;" />
+                            <img src="../public/src/eye-icon.svg" loading="lazy" alt="Pogledaj telefon" style="width: 20px;" />
                         </div>
                     </div>
                     <div class="saleandstate">
@@ -198,7 +198,7 @@ function showWidget($ads)
                                 }
                                 ?>
 
-                            </div><img src="../public/src/eye-icon.svg" loading="lazy" alt="Views Icon" class="viewsicon" />
+                            </div><img src="../public/src/eye-icon.svg" loading="lazy" alt="Pogledaj telefon" class="viewsicon" />
                         </div>
                         <div class="savescontainer">
                             <div class="saveslabel">
@@ -210,7 +210,7 @@ function showWidget($ads)
                                 }
                                 ?>
 
-                            </div><img src="../public/src/love-icon.svg?v=<?php echo time() ?>" loading="lazy" alt="Heart Icon" class="savesicon" />
+                            </div><img src="../public/src/love-icon.svg?v=<?php echo time() ?>" loading="lazy" alt="Omiljeni telefon" class="savesicon" />
                         </div>
                     </div>
                     <div class="pricecontainer">
@@ -246,7 +246,7 @@ function showWidget($ads)
                             </div>
                         </div>
                         <div class="callcontainere callcontainer"><img src="../public/src/phone-call.svg" loading="lazy"
-                                alt="Send Message Icon" class="callicon" /></div>
+                                alt="Posalji poruku" class="callicon" /></div>
                     </div>
                     <div class="userdataandbroken">
                         <div class="citycontainer" style="margin-top: 20px">

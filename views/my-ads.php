@@ -3,7 +3,7 @@ include_once "../app/auth/checkAuthState.php";
 ?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <?php
 require_once "../inc/headTag.php";
@@ -31,7 +31,8 @@ require_once "../inc/headTag.php";
                     <div class="saved-ads-main-container">
                         <div class="no-saved-ads" style="display: none;">
                             <div class="no-saved-ads-main-container">
-                                <img src="../public/src/not-found.svg?v=<?php echo time(); ?>">
+                                <img src="../public/src/not-found.svg?v=<?php echo time(); ?>"
+                                    alt="Nemate jos nijedan oglas">
                                 <p>NEMATE JOŠ NIJEDAN OGLAS</p>
                                 <button onclick="window.location.href='add-new-ad.php'">Dodaj novi oglas</button>
                             </div>
@@ -66,11 +67,11 @@ require_once "../inc/headTag.php";
                 <strong id="delete-title">Na prodaju novi iPhone 15 Pro Max</strong>
             </p>
             <div class="delete-confirm" onclick="deleteAd()" style="background-color: #ed6969">
-                <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obriši" id="delete-btn">
+                <img src="../public/src/delete-icon.svg?v=<?php echo time(); ?>" alt="Obrisi oglas" id="delete-btn">
                 Obriši oglas
             </div>
             <div class="delete-confirm" onclick="hideDeleteConfirm()">
-                <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Obriši" ">
+                <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Otkazi">
                 Otkaži
             </div>
         </div>
@@ -83,9 +84,9 @@ require_once "../inc/headTag.php";
     ?>
 
     <script src=" ../public/js-public/jquery.js"></script>
-                <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
-                <script src="../public/js/my-ads.js?v=<?php echo time() ?>"></script>
-                <script type="module" src="../public/js/index.js?v=<?php echo time() ?>"></script>
+    <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
+    <script src="../public/js/my-ads.js?v=<?php echo time() ?>"></script>
+    <script type="module" src="../public/js/index.js?v=<?php echo time() ?>"></script>
 </body>
 
 </html>

@@ -36,7 +36,7 @@ if (!isset($phoneAd)) {
 ?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <?php
 require_once "../inc/headTag.php";
@@ -88,31 +88,31 @@ require_once "../inc/headTag.php";
                                                     alt="<?php echo $adData['brand'] . $adData['model'] ?>"
                                                     class="image-41" />
                                                 <script type="application/json" class="w-json">
-                                                                                                                        {
-                                                                                                                            "items": [{
-                                                                                                                                "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
-                                                                                                                                "origFileName": "<?php echo $file; ?>",
-                                                                                                                                "fileName": "<?php echo $file; ?>",
-                                                                                                                                "fileSize": <?php echo filesize($putanja); ?>,
-                                                                                                                                "height": <?php echo $height; ?>,
-                                                                                                                                "url": "<?php echo $putanja; ?>",
-                                                                                                                                "width": <?php echo $width; ?>,
-                                                                                                                                "type": "image"
-                                                                                                                            }],
-                                                                                                                            "group": "phoneImage"
-                                                                                                                        }
-                                                                                                                    </script>
+                                                                                {
+                                                                                    "items": [{
+                                                                                        "_id": "656ed08ea98a280693a4f870<?php echo $adId ?>",
+                                                                                        "origFileName": "<?php echo $file; ?>",
+                                                                                        "fileName": "<?php echo $file; ?>",
+                                                                                        "fileSize": <?php echo filesize($putanja); ?>,
+                                                                                        "height": <?php echo $height; ?>,
+                                                                                        "url": "<?php echo $putanja; ?>",
+                                                                                        "width": <?php echo $width; ?>,
+                                                                                        "type": "image"
+                                                                                    }],
+                                                                                    "group": "phoneImage"
+                                                                                }
+                                                                            </script>
                                             </a>
                                         </div>
 
                                     <?php } ?>
                                 </div>
                                 <div class="prev">
-                                    <img src="../public/src/arrow_left_icon.svg" alt="Arrow Left"
+                                    <img src="../public/src/arrow_left_icon.svg" alt="Prethodna slika"
                                         srcset="../public/src/arrow_left_icon.svg" style="fill: #000">
                                 </div>
                                 <div class="next">
-                                    <img src="../public/src/arrow_right_icon.svg" alt="Right Left"
+                                    <img src="../public/src/arrow_right_icon.svg" alt="Sledeca slika"
                                         srcset="../public/src/arrow_right_icon.svg">
                                 </div>
 
@@ -120,7 +120,7 @@ require_once "../inc/headTag.php";
                                 if ($adData['damage'] !== NULL) {
                                     ?>
                                     <div class="damage-identificator" title="Uređaj je oštećen">
-                                        <img src="../public/src/broken-phone.svg" alt="" srcset="">
+                                        <img src="../public/src/broken-phone.svg" alt="Ostecen uredjaj">
                                     </div>
 
                                     <?php
@@ -140,11 +140,13 @@ require_once "../inc/headTag.php";
                                 if ($counter == 0) {
                                     ?>
                                     <div class="thumbnail selected" data-index="<?php echo $counter ?>">
-                                        <img src="<?php echo $putanja; ?>" alt="Thumbnail 1">
+                                        <img src="<?php echo $putanja; ?>"
+                                            alt="<?php echo $adData['brand'] . $adData['model'] ?> slika <?php $counter + 1 ?>">
                                     </div>
                                 <?php } else { ?>
                                     <div class="thumbnail" data-index="<?php echo $counter ?>">
-                                        <img src="<?php echo $putanja; ?>" alt="Thumbnail 1">
+                                        <img src="<?php echo $putanja; ?>"
+                                            alt="<?php echo $adData['brand'] . $adData['model'] ?> slika <?php $counter + 1 ?>">
                                     </div>
                                 <?php } ?>
                                 <?php $counter++;
@@ -188,7 +190,7 @@ require_once "../inc/headTag.php";
                                             <?php
                                             echo '<p>' . $visitorsData . '</p>';
                                             ?>
-                                            <img src="../public/src/eye-icon.svg" alt="Eye" srcset="">
+                                            <img src="../public/src/eye-icon.svg" alt="Pogledaj oglas">
                                         </div>
                                     </div>
                                     <div class="div-block-696">
@@ -196,14 +198,14 @@ require_once "../inc/headTag.php";
                                             <?php
                                             echo '<p>' . $savesCount . '</p>';
                                             ?>
-                                            <img src="../public/src/favourite_icon.png" alt="Eye" srcset=""
+                                            <img src="../public/src/favourite_icon.png" alt="Omiljeni oglas" srcset=""
                                                 style="width: 20px">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="div-block-700">
                                     <div class="div-block-697"><img src="../public/src/done-icon.png" loading="lazy"
-                                            alt="Available" class="image-31" />
+                                            alt="Uredjaj na stanju" class="image-31" />
                                         <div class="text-block-48">Na stanju</div>
                                     </div>
 
@@ -232,7 +234,7 @@ require_once "../inc/headTag.php";
 
                             <div data-w-id="0eacc543-0b81-e5be-a1e1-d7c3709a619c" class="div-block-719"
                                 onclick="window.location.href='user.php?id=<?php echo $adData['user_id'] ?>'">
-                                <img src="../public/src/userShow2.svg" loading="lazy" alt="User Profile Image"
+                                <img src="../public/src/userShow2.svg" loading="lazy" alt="Korisnikova profilna slika"
                                     class="image-39" style="width: 64px; height: 64px" />
                                 <h1 class="heading-10">
                                     <?php echo $adOwner['name'] . ' ' . $adOwner['lastname'] ?>
@@ -311,7 +313,7 @@ require_once "../inc/headTag.php";
                                                             myid="<?php echo $user->getId(); ?>"
                                                             onclick="openMessages(this)">
                                                             <img src="../public/src/message-icon.png" loading="lazy"
-                                                                alt="Message" class="image-32 messagebtn" />
+                                                                alt="Kontaktiraj vlasnika" class="image-32 messagebtn" />
                                                             <div class="text-block-50">Kontaktiraj vlasnika</div>
                                                         </div>
                                                         <?php
@@ -320,7 +322,7 @@ require_once "../inc/headTag.php";
                                                         <div class="div-block-716"
                                                             onclick="window.location.href = '../views/login.php'">
                                                             <img src="../public/src/message-icon.png" loading="lazy"
-                                                                alt="Message" class="image-32 messagebtn" />
+                                                                alt="Kontaktiraj vlasnika" class="image-32 messagebtn" />
                                                             <div class="text-block-50">Kontaktiraj vlasnika</div>
                                                         </div>
                                                         <?php
@@ -329,11 +331,11 @@ require_once "../inc/headTag.php";
                                                 </div>
                                             </div>
                                             <div data-w-id="3a24efa4-af9d-9de5-42c6-e9ec9ee2e77d" class="div-block-713">
-                                                <img src="../public/src/call-icon.png" loading="lazy" alt="Call User"
-                                                    class="image-37" />
+                                                <img src="../public/src/call-icon.png" loading="lazy"
+                                                    alt="Pozovi korisnika" class="image-37" />
                                             </div>
                                             <div data-w-id="6938d356-7183-26a9-3423-51e3d414b225" class="div-block-715">
-                                                <img src="../public/src/close_icon.png" loading="lazy" alt="Close Icon"
+                                                <img src="../public/src/close_icon.png" loading="lazy" alt="Zatvori"
                                                     class="image-38" />
                                             </div>
                                         </div>
@@ -368,19 +370,19 @@ require_once "../inc/headTag.php";
                                     </div>
                                     <div class="div-block-722">
                                         <div class="div-block-705"><img src="../public/src/compare.png" loading="lazy"
-                                                alt="Compare" class="image-33" />
+                                                alt="Uporedi telefone" class="image-33" />
                                             <div class="text-block-51">Uporedi</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="div-block-706"><img src="../public/src/delivery.png" loading="lazy"
-                                    alt="Delivery" class="image-34" />
+                                    alt="Nacin isporuke telefona" class="image-34" />
                                 <div class="text-block-52">Način isporuke u dogovoru sa vlasnikom</div>
                             </div>
                         </div>
                         <div class="div-block-707" style="margin-top: 10px;"><img src="../public/src/bag-orange.png"
-                                loading="lazy" alt="Bag Icon" class="image-40" />
+                                loading="lazy" alt="Dodaj u korpu" class="image-40" />
                             <div>
                                 <div class="text-block-53">Drugi ljudi žele ovaj proizvod. </div>
                                 <div class="text-block-54">
