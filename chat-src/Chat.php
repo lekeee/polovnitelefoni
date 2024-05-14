@@ -115,7 +115,6 @@ class Chat implements MessageComponentInterface
                     }
                     $this->user->sendNotificationEmail($data['receiverId']);
                     $_SESSION['last_run'] = time();
-                    
                 }
             }
         }
