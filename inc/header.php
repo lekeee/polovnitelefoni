@@ -24,7 +24,6 @@ if ($user->isLogged()) {
 
 <link rel="stylesheet" href="../public/css/list-widget.css?v=<?php echo time(); ?>">
 <?php if(basename($_SERVER['SCRIPT_FILENAME']) != 'messages.php') {
-        echo $_SERVER['SCRIPT_FILENAME'];
     ?>
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script src="../pusher/notify.js?v=<?php echo time(); ?>"></script>
