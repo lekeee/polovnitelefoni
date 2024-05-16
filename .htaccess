@@ -1,2 +1,4 @@
 RewriteEngine On
 ErrorDocument 404 https://polovni-telefoni.rs/views/404.php
+Options -Indexes
+ErrorDocument 403 https://polovni-telefoni.rs/views/404.php
