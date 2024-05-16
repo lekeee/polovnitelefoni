@@ -166,7 +166,6 @@ export async function showMessages(div) {
                     //update seen
                     if (klasa == "receiver-div") {
                         sendSeenNotification(receiverId, user_id, data.msg_id);
-                        console.log('odje duva1')
                     }
                     showDeliveredOrSeenIcon();
 
@@ -178,7 +177,6 @@ export async function showMessages(div) {
                     // });
                 }
                 else{
-                    console.log('dodaj')
                     let count = $(`.count-unread-div.unread-msg-div-${data.user_id}`).text();
                     if (count == '') {
                         count = 0;
