@@ -348,7 +348,7 @@ senderContainers.forEach(container => {
 searchBar.addEventListener("input", e => {
     const value = e.target.value;
     userElements.forEach(p => {
-        const isVisible = p.username.includes(value);
+        const isVisible = p.username.includes(value.toLowerCase());
         p.element.classList.toggle("hide", !isVisible);
     })
 });
