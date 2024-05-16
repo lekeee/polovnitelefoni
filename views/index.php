@@ -36,10 +36,9 @@ require_once "../inc/headTag.php";
 ?>
 <script>localStorage.removeItem('limitData');</script>
 
-
 <body class="body">
-    <div class="temporary-container">
-        <!--<div class="main-temp-container">
+    <!-- <div class="temporary-container">
+        <div class="main-temp-container">
             <img src="../public/src/polovnitelefoni.svg" alt="PolovniTelefoni Logo">
             <h1>Sajt je u izradi</h1>
             <p>Hvala Vam što ste posetili našu stranicu! Trenutno radimo na unapređenju i optimizaciji sadržaja kako
