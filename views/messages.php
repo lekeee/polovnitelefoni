@@ -3,7 +3,7 @@ require_once "../app/auth/checkAuthState.php";
 ?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <?php
 require_once "../inc/headTag.php";
@@ -25,7 +25,7 @@ require_once "../inc/headTag.php";
             <div class="messages-left-container">
                 <div class="messages-search-container">
                     <div class="search-icon-container">
-                        <img src="../public/src/search-icon.svg" width="24">
+                        <img src="../public/src/search-icon.svg" width="24" alt="Pretrazi telefone">
                     </div>
                     <input id="search-bar" type="text" placeholder="Pretraži">
                 </div>
@@ -38,7 +38,7 @@ require_once "../inc/headTag.php";
                     $br = 0;
                     $notEmptyUsersDiv = false;
 
-                    if (isset ($_GET['id'])) {
+                    if (isset($_GET['id'])) {
                         $messagesExist = false;
                         $receiver_id = $_GET['id'];
                         if ($users !== NULL) {
@@ -63,6 +63,7 @@ require_once "../inc/headTag.php";
                                 <div class="sender-container needClick">
                                     <input type="hidden" name="" id="user-id" value="<?php echo $receiver_id ?>">
                                     <div class="profile-image-status">
+
                                         <img src="../public/src/userShow2.svg">
                                         <!-- <div id="status-div-<?php //echo $receiver_id ?>" class="
                                         <?php
@@ -111,7 +112,7 @@ require_once "../inc/headTag.php";
                             }
                             $notEmptyUsersDiv = true;
                             $klasa = '';
-                            if (isset ($_GET['id']) && $userData[0] == $receiver_id) {
+                            if (isset($_GET['id']) && $userData[0] == $receiver_id) {
                                 $klasa = 'needClick';
                             }
                             ?>
@@ -123,6 +124,7 @@ require_once "../inc/headTag.php";
                             <div class="sender-container <?php echo $klasa ?>">
                                 <input type="hidden" name="" id="user-id" value="<?php echo $userData[0] ?>">
                                 <div class="profile-image-status">
+
                                     <img src="../public/src/userShow2.svg">
                                     <!-- <div id="status-div-<?php //echo $userData[0] ?>" class="
                                             <?php
@@ -180,7 +182,7 @@ require_once "../inc/headTag.php";
 
                     } else if (!$notEmptyUsersDiv) { ?>
                             <div class="no-user-selected">
-                                <img src="../public/src/begin-chat.svg" style="width: 60%">
+                                <img src="../public/src/begin-chat.svg" style="width: 60%" alt="Nema poruka">
                                 <h4>Nemate poruke nisakim</h4>
                             </div>
                     <?php } ?>
@@ -189,7 +191,7 @@ require_once "../inc/headTag.php";
             <div class="messages-right-container">
                 <div class="main-chat-div">
                     <div class="no-user-selected">
-                        <img src="../public/src/no-message-selected.svg">
+                        <img src="../public/src/no-message-selected.svg" alt="Izaberi korisnika">
                         <h4>Izaberite korisnika sa kojim želite da razmenjujete poruke</h4>
                     </div>
                 </div>

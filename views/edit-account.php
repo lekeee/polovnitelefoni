@@ -3,7 +3,7 @@
 ?>
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 <?php
     require_once "../inc/headTag.php";
 ?>
@@ -84,10 +84,10 @@
                                         ukoliko ne želite da
                                         promenite lozinku)
                                     </label>
-                                    <img width="20" loading="lazy" alt="Show Password Icon"
+                                    <img width="20" loading="lazy" alt="Prikazi lozinku"
                                         src="../public/src/show_password_icon.png" class="image-8"
                                         onclick="showPassword(1)" input-id="UserOldPassword" id="show1" />
-                                    <img width="20" loading="lazy" alt="Hide Password Icon"
+                                    <img width="20" loading="lazy" alt="Sakrij lozinku"
                                         src="../public/src/hide_password_icon.png" class="image-7"
                                         onclick="hidePassword(1)" input-id="UserOldPassword" id="hide1" />
                                 </div>
@@ -101,10 +101,10 @@
                                         ukoliko
                                         ne želite da promenite
                                         lozinku)</label>
-                                    <img width="20" loading="lazy" alt="Show Password Icon"
+                                    <img width="20" loading="lazy" alt="Prikazi lozinku"
                                         src="../public/src/show_password_icon.png" class="image-8"
                                         onclick="showPassword(2)" input-id="UserNewPassword" id="show2" />
-                                    <img width="20" loading="lazy" alt="Hide Password Icon"
+                                    <img width="20" loading="lazy" alt="Sakrij lozinku"
                                         src="../public/src/hide_password_icon.png" class="image-7"
                                         onclick="hidePassword(2)" input-id="UserNewPassword" id="hide2" />
                                 </div>
@@ -118,10 +118,10 @@
                                 <div class="passwordLabel">
                                     <label for="UserConfirmedNewPassword" class="field-label-3">Potvrdite novu
                                         lozinku</label>
-                                    <img width="20" loading="lazy" alt="Show Password Icon"
+                                    <img width="20" loading="lazy" alt="Prikazi lozinku"
                                         src="../public/src/show_password_icon.png" class="image-8"
                                         onclick="showPassword(3)" input-id="UserConfirmedNewPassword" id="show3" />
-                                    <img width="20" loading="lazy" alt="Hide Password Icon"
+                                    <img width="20" loading="lazy" alt="Sakrij lozinku"
                                         src="../public/src/hide_password_icon.png" class="image-7"
                                         onclick="hidePassword(3)" input-id="UserConfirmedNewPassword" id="hide3" />
                                 </div>

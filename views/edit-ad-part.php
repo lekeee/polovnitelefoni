@@ -123,7 +123,7 @@ if (isset($adId)) {
                     <input type="file" id="fileInput" multiple hidden>
                     <label for="fileInput" id="dropArea" class="inputtext">
                         <div class="upload-icon">
-                            <img src="../public/src/upload-icon.png" alt="Upload Icon">
+                            <img src="../public/src/upload-icon.png" alt="Dodaj sliku">
                             <div>
                                 <p>Prevucite i pustite da bi ste otpremili slike</p>
                                 <p>Ili pretražite <span style="color: #ed6969; font-weight: bold">Pretraži</span></p>

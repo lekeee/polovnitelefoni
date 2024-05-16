@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
 
 <!DOCTYPE html>
 <html data-wf-domain="polovni-telefoni.webflow.io" data-wf-page="655506e07faa7f82a5f25613"
-    data-wf-site="655506e07faa7f82a5f25610">
+    data-wf-site="655506e07faa7f82a5f25610" lang="sr">
 
 <?php
 require_once "../inc/headTag.php";
@@ -42,7 +42,7 @@ require_once "../inc/headTag.php";
         <div class="mainpagediv">
             <div class="user-image-short-container">
                 <div class="user-image-container">
-                    <img src="../public/src/userShow2.svg" alt="" srcset="">
+                    <img src="../public/src/userShow2.svg" alt="Profilna Slika">
                     <div class="user-rates">
                         <div class="rate-label">
                             <!-- <h5>3.9</h5><img src="../public/src/start-rating4.png" alt="" srcset=""> -->
@@ -90,7 +90,7 @@ require_once "../inc/headTag.php";
                             ?>
                         </h3>
                         <div class="loc-img-p">
-                            <img src="../public/src/location.svg?v=<?php echo time() ?>" alt="">
+                            <img src="../public/src/location.svg?v=<?php echo time() ?>" alt="Lokacija korisnika">
                             <p>
                                 <?php
                                 if ($profileData['city'] != null) {
@@ -186,11 +186,11 @@ require_once "../inc/headTag.php";
                 <div class="user-short-container" style="padding-top: 0px">
                     <div class="navigation">
                         <div class="user-ads-info user-ads-ident">
-                            <img src="../public/src/ads.svg?v=<?php echo time(); ?>">
+                            <img src="../public/src/ads.svg?v=<?php echo time(); ?>" alt="Korisnikovi oglasi">
                             <a href="#">Korisnikovi oglasi</a>
                         </div>
                         <div class="user-ads-info user-info-ident" style="margin-left: 20px;">
-                            <img src="../public/src/user_icon.png">
+                            <img src="../public/src/user_icon.png" alt="Osnovni podaci">
                             <a href="#">Osnovni podaci</a>
                         </div>
                     </div>
@@ -311,7 +311,7 @@ require_once "../inc/headTag.php";
                                     ?>
                                 </div>
                                 <div class="not-found-container">
-                                    <img src="../public/src/not-found.svg" alt="Nema rezultata">
+                                    <img src="../public/src/not-found.svg" alt="Korisnik nema ni jedan aktivni oglas">
                                     <p>Korisnik nema ni jedan aktivni oglas</p>
                                 </div>
                             </div>
@@ -325,7 +325,7 @@ require_once "../inc/headTag.php";
     <div class="report-backgound-container">
         <div class="report-main-container">
             <div class="image-report-container">
-                <img src="../public/src/polovnitelefoni-only-logo.svg">
+                <img src="../public/src/polovnitelefoni-only-logo.svg" alt="Polovni telefoni">
                 <p><b>Prijava korisnika</b></p>
             </div>
             <div class="report-content">
@@ -355,7 +355,8 @@ require_once "../inc/headTag.php";
                 <div class="report-confirm report"
                     onclick="reportUser(<?php echo $myId ?>, <?php echo $userID ?>, this)"
                     style="background-color: #ed6969">
-                    <img src="../public/src/report-icon.svg?v=<?php echo time(); ?>" alt="Obriši" id="delete-btn">
+                    <img src="../public/src/report-icon.svg?v=<?php echo time(); ?>" alt="Prijavi korisnika"
+                        id="delete-btn">
                     Prijavi korisnika
                 </div>
             </div>
@@ -365,7 +366,7 @@ require_once "../inc/headTag.php";
                         vremeću će vas obavestiti o ishodu.</b></p>
             </div>
             <div class="report-confirm exit" onclick="hiddeReportUser()">
-                <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Obriši">
+                <img src="../public/src/close-icon-white.svg?v=<?php echo time(); ?>" alt="Otkazi">
                 <label>Otkaži</label>
             </div>
         </div>

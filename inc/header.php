@@ -82,9 +82,10 @@ if ($user->isLogged()) {
         </div>
     </div>
     <div class="div-block"><a data-w-id="dececed3-f170-003e-2db2-631e28dd94b9" href="#" class="w-inline-block"><img
-                src="../public/src/hamburger_menu.svg" id='mobile-menu-open' width="30" height="30" alt="Hamburger Menu"
+                src="../public/src/hamburger_menu.svg" id='mobile-menu-open' width="30" height="30" alt="Otvori menu"
                 class="image-6" /></a>
-        <div class="div-block-57" style="cursor: pointer;" onclick="window.location.href='/polovnitelefoni'"><img
+
+        <div class="div-block-57" style="cursor: pointer;" onclick="window.location.href='https://polovni-telefoni.rs'"><img
                 src="../public/src/polovnitelefoni.svg" loading="lazy" height="60" alt="Logo" class="image" /></div>
         <!-- <div class="div-block-2">
             <div class="div-block-3">
@@ -120,15 +121,15 @@ if ($user->isLogged()) {
         <div class="div-block-2 search-cont" style="position: relative">
             <input type="text" placeholder="Pretraži..." id="searchtext">
             <button class="searchbutton">
-                <img src="../public/src/search-icon.svg" loading="lazy" width="22" alt="Search Icon" />
+                <img src="../public/src/search-icon.svg" loading="lazy" width="22" alt="Pretrazi telefone" />
             </button>
             <div class="search-result-container">
                 <div class="search-tutorial-container">
-                    <img src="../public/src/search-identificator.svg" alt="Search Identificator">
+                    <img src="../public/src/search-identificator.svg" alt="Pretrazi telefone">
                     <p>Pretražujte oglase na osnovu njihovog naslova ili unosom ključnih reči</p>
                 </div>
                 <div class="search-tutorial-container search-not-found">
-                    <img src="../public/src/not-found.svg" alt="Not Found">
+                    <img src="../public/src/not-found.svg" alt="Rezultat nije pronadjen">
                     <p>Nije pronađen nijedan rezultat</p>
                 </div>
                 <div class="search-result">
@@ -140,8 +141,8 @@ if ($user->isLogged()) {
             <div class="div-block-6 div-block-7">
                 <div class="div-block-8"
                     onclick="window.location.href='<?php echo $user->isLogged() ? '../views/dashboard.php' : '../views/login.php' ?>'">
-                    <img src="../public/src/user_icon.png" loading="lazy" height="35" alt="User Icon" width="35"
-                        class="image-27" />
+                    <img src="../public/src/user_icon.png" loading="lazy" height="35" alt="Korisnikova profilna slika"
+                        width="35" class="image-27" />
                     <div>
                         <div class="text-block-7" style="color: grey">
                             <?php echo $user !== NULL && $user->isLogged() ? "Dobrodošli" : "Prijavi se na" ?>
@@ -172,13 +173,14 @@ if ($user->isLogged()) {
                 </div>
                 <div class="div-block-9">
                     <a href="../views/add-new-ad.php" class="link-block-3 w-inline-block">
-                        <img src="../public/src/add_new_ad_icon.png" width="20" alt="Add New Ad" class="image-2" />
+                        <img src="../public/src/add_new_ad_icon.png" width="20" alt="Dodaj novi oglas"
+                            class="image-2" />
                         <div class="text-block-9">Dodaj Oglas</div>
                     </a>
                 </div>
                 <div class="div-block-10" onclick="window.location.href='../views/saved-ads.php'">
                     <img src="../public/src/love-icon.svg?v=<?php echo time(); ?>" style="width: 30px"
-                        alt="Favourite Ads Icon" class="image-3" />
+                        alt="Omiljeni telefon" class="image-3" />
                     <div class="div-block-11" id="mySavesContainer"
                         style="display: <?php echo $mySaves > 0 ? 'flex' : 'none' ?>">
                         <div class="text-block-10" id="mySavesCount">
@@ -193,12 +195,12 @@ if ($user->isLogged()) {
         <div class="div-block-14">
             <div data-hover="false" data-delay="0" data-w-id="d9013978-067d-ce1a-92bf-79873730cf28"
                 class="dropdown-5 w-dropdown">
-                <div class="dropdown-toggle-5 w-dropdown-toggle"><img width="30" height="30" alt="Hamburger Menu"
+                <div class="dropdown-toggle-5 w-dropdown-toggle"><img width="30" height="30" alt="Otvori meni"
                         src="../public/src/hamburger_menu.svg" loading="lazy" />
                     <div class="text-block-12">Sve kategorije</div>
                     <div class="div-block-74">
-                        <div class="div-block-73"><img width="14" loading="lazy" alt="Arrow Down Icon"
-                                src="../public/src/arrow_down.png" /><img width="14" loading="lazy" alt="Arrow Above"
+                        <div class="div-block-73"><img width="14" loading="lazy" alt="Otvori"
+                                src="../public/src/arrow_down.png" /><img width="14" loading="lazy" alt="Zatvori"
                                 src="../public/src/arrow_up.png" />
                         </div>
                     </div>
@@ -206,15 +208,15 @@ if ($user->isLogged()) {
                 <nav class="dropdown-list-4 w-dropdown-list">
                     <div class="div-block-69" onclick="showHeaderMobileCategories()">
                         <div class="div-block-70">
-                            <img width="30" loading="lazy" alt="Mobile Phone Icon"
+                            <img width="30" loading="lazy" alt="Mobilni telefon"
                                 src="../public/src/mobile_phone_icon.png" />
                             <div class="text-block-39">Mobilni Telefoni</div>
                         </div>
                         <div class="div-block-76">
                             <div class="div-block-75">
-                                <img width="16" loading="lazy" alt="Arrow Above" src="../public/src/arrow_right.png"
+                                <img width="16" loading="lazy" alt="Sledece" src="../public/src/arrow_right.png"
                                     class="image-24" />
-                                <img width="14" loading="lazy" alt="Arrow Back" src="../public/src/arrow_left.png"
+                                <img width="14" loading="lazy" alt="Prethodno" src="../public/src/arrow_left.png"
                                     class="image-26" />
                             </div>
                         </div>
@@ -282,14 +284,14 @@ if ($user->isLogged()) {
                         </div>
                     </div>
                     <div class="div-block-69" style="cursor: default">
-                        <div class="div-block-70"><img width="30" loading="lazy" alt="Headphones Icon"
+                        <div class="div-block-70"><img width="30" loading="lazy" alt="Slusalice za telefon"
                                 src="../public/src/headphones_icon.png" />
                             <div class="text-block-39">Slušalice <span style="color: #ed6969">(Uskoro!)</span></div>
                         </div>
                     </div>
                     <div class="div-block-69" style="cursor: default">
-                        <div class="div-block-70" sryle><img width="30" loading="lazy" alt="Share Icon"
-                                src="../public/src/other_icon.png" />
+                        <div class="div-block-70" sryle><img width="30" loading="lazy"
+                                alt="Oprema i delovi za mobilne telefone" src="../public/src/other_icon.png" />
                             <div class="text-block-39">Oprema i Delovi <span style="color: #ed6969">(Uskoro!)</span>
                             </div>
                         </div>
@@ -299,44 +301,44 @@ if ($user->isLogged()) {
         </div>
         <div class="div-block-15">
             <a href="../views/index.php" class="link-block-4 w-inline-block">
-                <img src="../public/src/home-navigator.svg" loading="lazy" width="20" height="20" alt="Home Icon"
-                    class="image-4" />
+                <img src="../public/src/home-navigator.svg" loading="lazy" width="20" height="20"
+                    alt="Polovni telefoni pocetna" class="image-4" />
                 <div class="text-block-13">Početna</div>
             </a>
             <a href="#" class="shopTrigger link-block-4 w-inline-block">
-                <img src="../public/src/shop-icon.svg" loading="lazy" width="20" height="20" alt="Shop Icon"
-                    class="image-4" />
+                <img src="../public/src/shop-icon.svg" loading="lazy" width="20" height="20"
+                    alt="Polovni telefoni prodavnica" class="image-4" />
                 <div class="text-block-13">Šop</div>
             </a>
             <a href="#" class="subscribeTrigger link-block-4 w-inline-block">
-                <img src="../public/src/subscribe-icon.svg" loading="lazy" width="16" height="16" alt="Subscribe Icon"
-                    class="image-4" />
+                <img src="../public/src/subscribe-icon.svg" loading="lazy" width="16" height="16"
+                    alt="Polovni telefoni pretplati se" class="image-4" />
                 <div class="text-block-13">Pretplati se</div>
             </a>
             <a href="#" class="link-block-4 w-inline-block">
-                <img src="../public/src/contact-navigator.svg" loading="lazy" width="18" height="18" alt="Contact Icon"
-                    class="image-4" />
+                <img src="../public/src/contact-navigator.svg" loading="lazy" width="18" height="18"
+                    alt="Polovni telefoni kontakt" class="image-4" />
                 <div class="text-block-13">Kontakt</div>
             </a>
             <a href="#" class="link-block-4 w-inline-block" title="Uskoro!">
-                <img src="../public/src/blog-icon.svg" loading="lazy" width="20" height="20" alt="Blog Icon"
+                <img src="../public/src/blog-icon.svg" loading="lazy" width="20" height="20" alt="Polovni telefoni blog"
                     class="image-4" />
                 <div class="text-block-13" title="Uskoro!">Blog</div>
             </a>
             <a href="../views/support.php" class="link-block-4 w-inline-block">
-                <img src="../public/src/support-navigator.svg" loading="lazy" width="20" height="20" alt="Support Icon"
-                    class="image-4" />
+                <img src="../public/src/support-navigator.svg" loading="lazy" width="20" height="20"
+                    alt="Polovni telefoni podrska" class="image-4" />
                 <div class="text-block-13">Podrška</div>
             </a>
         </div>
         <div class="div-block-16">
             <div data-hover="false" data-delay="0" class="dropdown-3 w-dropdown">
                 <div class="dropdown-toggle-4 w-dropdown-toggle"><img src="../public/src/onsale_icon.jpg" loading="lazy"
-                        width="33" alt="On Sale Icon" class="image-5" />
+                        width="33" alt="Snizeni telefoni" class="image-5" />
                     <div class="div-block-17">
                         <div class="text-block-14">Samo ovog vikenda</div>
                         <div class="text-block-15">Super sniženja</div>
-                    </div><img width="14" loading="lazy" alt="Arrow Down Icon" src="../public/src/arrow_down.png" />
+                    </div><img width="14" loading="lazy" alt="Otvori" src="../public/src/arrow_down.png" />
                 </div>
                 <nav class="w-dropdown-list">
                     <a href="#" class="w-dropdown-link">Uskoro!</a>
