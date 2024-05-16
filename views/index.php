@@ -37,8 +37,8 @@ require_once "../inc/headTag.php";
 ?>
 <script>localStorage.removeItem('limitData');</script>
 
-<body class="body active">
-    <div class="temporary-container">
+<body class="body">
+    <!-- <div class="temporary-container">
         <div class="main-temp-container">
             <img src="../public/src/polovnitelefoni.svg" alt="PolovniTelefoni Logo">
             <h1>Sajt je u izradi!</h1>
@@ -47,7 +47,7 @@ require_once "../inc/headTag.php";
                 vam pružili bolje korisničko iskustvo. Molimo vas za strpljenje dok radimo na tome.</p>
             <p>Vaš <b>PolovniTelefoni Tim</b></p>
         </div>
-    </div>
+    </div> -->
 
     <?php
     require_once "../inc/header.php";

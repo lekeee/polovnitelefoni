@@ -15,4 +15,3 @@ $user = new User();
 $support = new Support();
 $message = new Messages();
 $newsleter = new Newsletter();
-

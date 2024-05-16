@@ -23,19 +23,24 @@ if ($user->isLogged()) {
 ?>
 
 <link rel="stylesheet" href="../public/css/list-widget.css?v=<?php echo time(); ?>">
+<?php if(basename($_SERVER['SCRIPT_FILENAME']) != 'messages.php') {?>
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+<script src="../pusher/notify.js?v=<?php echo time(); ?>"></script>
+<?php } ?>
+<script src="../pusher/status.js?v=<?php echo time(); ?>"></script>
 <?php
-if ($user->isLogged()) {
-    $token = $user->getToken($_SESSION['user_id']);
-    echo "
-      <script type='module'>
-          localStorage.setItem('token', '" . $token . "');
-      </script>
-      ";
+// if ($user->isLogged()) {
+//     $token = $user->getToken($_SESSION['user_id']);
+//     echo "
+//       <script type='module'>
+//           localStorage.setItem('token', '" . $token . "');
+//       </script>
+//       ";
     ?>
-    <script src="../public/js/websocket.js" type="module"></script>
+    <!-- <script src="../public/js/websocket.js" type="module"></script> -->
     <audio src="../public/audio/alert_tone.mp3" id="audio-tag" muted style="display:none"></audio>
     <?php
-}
+//}
 ?>
 <section class="header">
     <div class="w-layout-blockcontainer container firstnavbar w-container">

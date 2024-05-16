@@ -64,18 +64,18 @@ require_once "../inc/headTag.php";
                                     <input type="hidden" name="" id="user-id" value="<?php echo $receiver_id ?>">
                                     <div class="profile-image-status">
                                         <img src="../public/src/userShow2.svg">
-                                        <div id="status-div-<?php echo $receiver_id ?>" class="
+                                        <!-- <div id="status-div-<?php //echo $receiver_id ?>" class="
                                         <?php
-                                        if ($notExistUser['login_status'] == 1) {
-                                            if ($notExistUser['online_status'] == 1) {
-                                                echo 'online';
-                                            } else
-                                                echo 'offline';
-                                        } else
-                                            echo 'offline';
+                                        // if ($notExistUser['login_status'] == 1) {
+                                        //     if ($notExistUser['online_status'] == 1) {
+                                        //         echo 'online';
+                                        //     } else
+                                        //         echo 'offline';
+                                        // } else
+                                        //     echo 'offline';
                                         ?>-status-div
                                     ">
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="sender-info-container">
                                         <h4 class="user-name">
@@ -124,18 +124,18 @@ require_once "../inc/headTag.php";
                                 <input type="hidden" name="" id="user-id" value="<?php echo $userData[0] ?>">
                                 <div class="profile-image-status">
                                     <img src="../public/src/userShow2.svg">
-                                    <div id="status-div-<?php echo $userData[0] ?>" class="
+                                    <!-- <div id="status-div-<?php //echo $userData[0] ?>" class="
                                             <?php
-                                            if ($userData[16] == 1) {
-                                                if ($userData[17] == 1) {
-                                                    echo 'online';
-                                                } else
-                                                    echo 'offline';
-                                            } else
-                                                echo 'offline';
+                                            // if ($userData[16] == 1) {
+                                            //     if ($userData[17] == 1) {
+                                            //         echo 'online';
+                                            //     } else
+                                            //         echo 'offline';
+                                            // } else
+                                            //     echo 'offline';
                                             ?>-status-div
                                         ">
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="sender-info-container">
                                     <h4 class="user-name">
@@ -201,8 +201,9 @@ require_once "../inc/headTag.php";
     require_once "../inc/subscribeForm.php";
     require_once "../inc/footer.php";
     ?>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script src="../pusher/pusher.js?v=<?php echo time(); ?>" type="module"></script>
     <script src="../public/js-public/jquery.js"></script>
-    <script src="../public/js/messages.js?=<?php echo time(); ?>" type="module"></script>
     <script src="../public/js/login-script.js?v=<?php echo time(); ?>" type="text/javascript"></script>
 </body>
 

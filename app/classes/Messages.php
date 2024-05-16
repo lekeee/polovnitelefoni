@@ -137,13 +137,17 @@ class Messages
     {
         try{
             $query = "UPDATE messages 
-                    SET status = 1
-                    WHERE sender_id = ?
-                    AND receiver_id = ?
-                    AND status = 0";
+            SET status = 1
+            WHERE sender_id = ?
+            AND receiver_id = ?
+            AND status = 0";
             $statement = $this->con->prepare($query);
             $statement->bind_param("ii", $this->sender_id, $this->receiver_id);
             $statement->execute();
+
+            $affected_rows = $statement->affected_rows;
+
+            return $affected_rows;
         }
         catch(Exception $e){
             echo $e->getMessage();
