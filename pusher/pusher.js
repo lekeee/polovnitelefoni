@@ -135,7 +135,7 @@ export async function showMessages(div) {
             id1 = user_id; id2 = receiverId;
             [id1, id2] = compareIds(id1, id2);
 
-            console.log('channel-' + id1 + id2)
+            //console.log('channel-' + id1 + id2)
             let channel = pusher.subscribe('channel-' + id1 + id2);
 
             channel.bind('sendmessage', function(data){
