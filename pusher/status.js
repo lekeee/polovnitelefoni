@@ -29,9 +29,20 @@ window.addEventListener('DOMContentLoaded', async function() {
 var isOnIOS = navigator.userAgent.match(/iPad/i)|| navigator.userAgent.match(/iPhone/i);
 var eventName = isOnIOS ? "pagehide" : "beforeunload";
 
-window.addEventListener(eventName, function (event) { 
-    event.stopPropagation();
-    navigator.sendBeacon('../pusher/pusherController.php', JSON.stringify({action: 'status', status: 'offline' }));
-} );
+window.addEventListener(eventName, async function (event) { 
+    event.preventDefault();
+    try {
+        await fetch('../pusher/pusherController.php', {
+            method: 'POST',
+            body: JSON.stringify({action: 'status', status: 'offline' }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+});
+
 
 
