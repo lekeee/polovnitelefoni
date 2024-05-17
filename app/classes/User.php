@@ -400,6 +400,7 @@ class User
             //$client->revokeToken(); 
         } else if (isset($_SESSION['user_id'])) {
             $this->updateLoginStatus($this->getId(), 0);
+            $this->updateOnlineStatus($this->getId(), 0);
             unset($_SESSION['user_id']);
         }
 
