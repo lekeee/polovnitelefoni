@@ -25,9 +25,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 //     });;
 // });
 
-document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'hidden') {
-        navigator.sendBeacon('../pusher/pusherController.php', JSON.stringify({action: 'status', status: 'offline' }));
-    }
-});
+window.onunload = window.onbeforeunload = function(){
+    navigator.sendBeacon('../pusher/pusherController.php', JSON.stringify({action: 'status', status: 'offline' }));
+}
 
