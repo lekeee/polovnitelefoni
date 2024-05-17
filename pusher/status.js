@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 //     });;
 // });
 
-window.onunload = window.onbeforeunload = function(){
+window.onpagehide = window.onbeforeunload = function(){
     navigator.sendBeacon('../pusher/pusherController.php', JSON.stringify({action: 'status', status: 'offline' }));
 }
 
