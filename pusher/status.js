@@ -5,7 +5,10 @@ window.addEventListener('DOMContentLoaded', async function() {
         headers: {
             "Content-Type": "application/json"
         }
-    });
+    })
+    .catch(function(error) {
+        console.error('Fetch error:', error);
+    });;
 });
 
 window.addEventListener('beforeunload', function() {
@@ -16,5 +19,8 @@ window.addEventListener('beforeunload', function() {
             'Content-Type': 'application/json'
         },
         async: false // Ovo je važno kako biste osigurali da se zahtev za ažuriranje statusa korisnika završi pre nego što korisnik napusti stranicu
-    });
+    })
+    .catch(function(error) {
+        console.error('Fetch error:', error);
+    });;
 });
