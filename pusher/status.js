@@ -29,10 +29,10 @@ window.addEventListener('DOMContentLoaded', async function() {
 var isOnIOS = navigator.userAgent.match(/iPad/i)|| navigator.userAgent.match(/iPhone/i);
 var eventName = isOnIOS ? "pagehide" : "beforeunload";
 
-window.addEventListener(eventName, async function (event) { 
+window.addEventListener(eventName, function (event) { 
     event.preventDefault();
     try {
-        await fetch('../pusher/pusherController.php', {
+        fetch('../pusher/pusherController.php', {
             method: 'POST',
             body: JSON.stringify({action: 'status', status: 'offline' }),
             headers: {
