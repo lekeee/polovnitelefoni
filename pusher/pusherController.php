@@ -100,13 +100,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             );
             echo json_encode($response);
         }
-        else{
-            $response = array(
-                'status' => 'error',
-                'message' => 'Korisnik nije ulogovan'
-            );
-            echo json_encode($response);
-        }
     }
 }
 
